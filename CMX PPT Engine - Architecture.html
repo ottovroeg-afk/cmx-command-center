@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMX PPT Engine — Proposed Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#0f0b07;color:#e8e0d4;min-height:100vh}
+
+.page{max-width:1200px;margin:0 auto;padding:3rem 2rem}
+
+/* Header */
+.header{margin-bottom:3rem;border-bottom:3px solid #F9A13A;padding-bottom:2rem}
+.header .logo{font-size:1.5rem;font-weight:800;color:#F9A13A;letter-spacing:1.5px;margin-bottom:.5rem}
+.header h1{font-family:Georgia,serif;font-size:2.2rem;color:#fff;margin-bottom:.5rem}
+.header p{font-size:.95rem;color:#b5ab9e;max-width:700px;line-height:1.7}
+
+/* Section */
+.section{margin-bottom:3.5rem}
+.section-label{font-size:.65rem;text-transform:uppercase;letter-spacing:2px;color:#F9A13A;font-weight:700;margin-bottom:.8rem}
+.section h2{font-family:Georgia,serif;font-size:1.5rem;color:#fff;margin-bottom:.5rem}
+.section .desc{font-size:.88rem;color:#b5ab9e;margin-bottom:2rem;max-width:800px;line-height:1.7}
+
+/* ─── FLOW DIAGRAM ─── */
+.flow{display:flex;align-items:stretch;gap:0;margin-bottom:2rem;overflow-x:auto;padding-bottom:1rem}
+.flow-stage{flex:1;min-width:200px;position:relative}
+.flow-box{background:#1e1810;border:1px solid #3d3228;border-radius:12px;padding:1.4rem;min-height:260px;margin:0 .3rem;transition:border-color .3s}
+.flow-box:hover{border-color:#F9A13A}
+.flow-box .tag{font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:.2rem .6rem;border-radius:4px;display:inline-block;margin-bottom:.8rem}
+.flow-box h3{font-size:1rem;color:#fff;margin-bottom:.6rem;font-weight:600}
+.flow-box ul{list-style:none;font-size:.78rem;color:#b5ab9e;line-height:2}
+.flow-box ul li::before{content:'→';color:#F9A13A;margin-right:.5rem;font-weight:600}
+.flow-arrow{display:flex;align-items:center;justify-content:center;flex:0 0 30px;color:#F9A13A;font-size:1.5rem;font-weight:300}
+
+.tag-collect{background:#1a3a5a;color:#6ab4f5}
+.tag-analyze{background:#3a2a10;color:#F9A13A}
+.tag-generate{background:#1a3a20;color:#6abf7b}
+.tag-deliver{background:#3a1a30;color:#d48fb5}
+
+/* ─── SLIDE MAP ─── */
+.slide-map{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem}
+.slide-card{background:#1e1810;border:1px solid #3d3228;border-radius:10px;padding:1rem;transition:all .25s;position:relative;overflow:hidden}
+.slide-card:hover{border-color:#F9A13A;transform:translateY(-2px)}
+.slide-card .slide-num{font-size:.6rem;font-weight:700;color:#F9A13A;margin-bottom:.4rem;letter-spacing:1px}
+.slide-card h4{font-size:.85rem;color:#fff;margin-bottom:.4rem;line-height:1.3}
+.slide-card p{font-size:.72rem;color:#8a7e6e;line-height:1.5}
+.slide-card .data-source{margin-top:.6rem;font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.8px;padding:.15rem .5rem;border-radius:3px;display:inline-block}
+.ds-survey{background:#1a3a5a;color:#6ab4f5}
+.ds-analysis{background:#3a2a10;color:#F9A13A}
+.ds-static{background:#2a2a2a;color:#888}
+.ds-cascade{background:#3a1a30;color:#d48fb5}
+
+/* ─── DATA FLOW TABLE ─── */
+.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.data-table th{text-align:left;padding:.8rem;font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:#8a7e6e;border-bottom:2px solid #3d3228;font-weight:600}
+.data-table td{padding:.7rem .8rem;border-bottom:1px solid #1e1810;color:#c4b8a4;vertical-align:top}
+.data-table tr:hover td{background:#1e1810}
+.data-table .field{font-family:'SF Mono',Consolas,monospace;font-size:.72rem;color:#F9A13A;background:#2a2018;padding:.15rem .4rem;border-radius:3px}
+
+/* ─── PER-WORKSHOP BREAKDOWN ─── */
+.ws-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.ws-card{background:#1e1810;border:1px solid #3d3228;border-radius:12px;overflow:hidden}
+.ws-card-header{padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between}
+.ws-card-header h3{font-size:1rem;color:#fff}
+.ws-card-header .badge{font-size:.6rem;font-weight:700;padding:.2rem .6rem;border-radius:4px;text-transform:uppercase;letter-spacing:1px}
+.ws-card-body{padding:0 1.2rem 1.2rem}
+.ws-card-body .sub{font-size:.72rem;color:#8a7e6e;margin-bottom:.8rem}
+.ws-slide-list{list-style:none}
+.ws-slide-list li{font-size:.78rem;color:#c4b8a4;padding:.35rem 0;border-bottom:1px solid #2a2018;display:flex;align-items:center;gap:.5rem}
+.ws-slide-list li:last-child{border-bottom:none}
+.ws-slide-list .sn{font-size:.6rem;font-weight:700;color:#F9A13A;width:24px;flex-shrink:0}
+
+.accent-ws1{border-top:3px solid #F9A13A}
+.accent-ws2{border-top:3px solid #1a73b5}
+.accent-ws3{border-top:3px solid #006462}
+.accent-ws4{border-top:3px solid #2e8540}
+.accent-dw1{border-top:3px solid #7b3fa0}
+.accent-dw2{border-top:3px solid #c73e1d}
+
+.badge-ws1{background:#3a2a10;color:#F9A13A}
+.badge-ws2{background:#0e2a4a;color:#6ab4f5}
+.badge-ws3{background:#003030;color:#00a896}
+.badge-ws4{background:#0a2a10;color:#6abf7b}
+.badge-dw1{background:#2a1a3a;color:#b88fd4}
+.badge-dw2{background:#3a1410;color:#e8775a}
+
+/* ─── KEY PRINCIPLE BOXES ─── */
+.principles{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:2rem}
+.principle{background:#1e1810;border-left:3px solid #F9A13A;padding:1.2rem;border-radius:0 10px 10px 0}
+.principle h4{font-size:.85rem;color:#F9A13A;margin-bottom:.4rem}
+.principle p{font-size:.78rem;color:#b5ab9e;line-height:1.6}
+
+.footer{text-align:center;padding:2rem;font-size:.7rem;color:#5a4e3e;border-top:1px solid #2a2018;margin-top:3rem}
+
+@media(max-width:900px){.flow{flex-direction:column}.flow-arrow{transform:rotate(90deg)}.ws-grid{grid-template-columns:1fr}.principles{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">akt</div>
+  <h1>CMX Workshop Deck Engine — Proposed Architecture</h1>
+  <p>How pre-workshop survey results and analysis outcomes get integrated into each workshop's PowerPoint deck. This document shows the data flow, slide map, and per-workshop content structure for your review before we build.</p>
+</div>
+
+<!-- ═══ SECTION 1: THE PIPELINE ═══ -->
+<div class="section">
+  <div class="section-label">Section 1</div>
+  <h2>End-to-End Data Pipeline</h2>
+  <div class="desc">Survey responses flow through four stages before becoming slides. Each stage adds intelligence — the deck is never a static template.</div>
+
+  <div class="flow">
+    <div class="flow-stage">
+      <div class="flow-box">
+        <div class="tag tag-collect">1 · Collect</div>
+        <h3>Pre-Workshop Questionnaire</h3>
+        <ul>
+          <li>Role-adaptive survey (33 Qs for WS1)</li>
+          <li>Branches by Executive / Ops / Tech / Regional</li>
+          <li>Exports as Qualtrics CSV</li>
+          <li>12+ respondents per workshop</li>
+          <li>Open-ended fields (Q31–Q33)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-stage">
+      <div class="flow-box">
+        <div class="tag tag-analyze">2 · Analyze</div>
+        <h3>Intelligence Engine</h3>
+        <ul>
+          <li>Role-weighted consensus (1.5× for domain owners)</li>
+          <li>6 pairwise role divergence scores</li>
+          <li>ADKAR stage mapping per decision</li>
+          <li>6 risk categories: Sponsorship, Fatigue, Capacity, Data, Alignment, Adoption</li>
+          <li>Open point extraction + auto-categorization</li>
+          <li>Facilitator playbooks per decision</li>
+          <li>Cascade impact analysis</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-stage">
+      <div class="flow-box">
+        <div class="tag tag-generate">3 · Generate</div>
+        <h3>PPT Deck Engine</h3>
+        <ul>
+          <li>Slide master templates per workshop type</li>
+          <li>Data-bound chart generation (bar, radar, heatmap)</li>
+          <li>Conditional formatting (consensus ≥75% green, 50–75% amber, &lt;50% red)</li>
+          <li>Per-decision slide with full intelligence</li>
+          <li>Risk dashboard with severity badges</li>
+          <li>Stakeholder verbatim quotes injected</li>
+          <li>Facilitator notes in speaker notes</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-stage">
+      <div class="flow-box">
+        <div class="tag tag-deliver">4 · Deliver</div>
+        <h3>Workshop-Ready Deck</h3>
+        <ul>
+          <li>AKT branded, client-specific</li>
+          <li>25–30 slides per workshop</li>
+          <li>Pre-populated discussion points</li>
+          <li>Facilitator can add/remove slides</li>
+          <li>Speaker notes with talking points</li>
+          <li>Matching XLSX tracker + HTML briefing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 2: SLIDE MAP FOR WS1 ═══ -->
+<div class="section">
+  <div class="section-label">Section 2</div>
+  <h2>WS1 Slide Map — What Goes Where</h2>
+  <div class="desc">Each slide pulls from specific data sources. Blue = direct survey data, Orange = engine analysis, Gray = static methodology, Purple = cascade from previous workshop.</div>
+
+  <div class="slide-map">
+    <div class="slide-card">
+      <div class="slide-num">SLIDE 1–2</div>
+      <h4>Title + Confidentiality</h4>
+      <p>Client name, program name, date, AKT branding. Confidentiality disclaimer.</p>
+      <div class="data-source ds-static">Static</div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-num">SLIDE 3</div>
+      <h4>Agenda (Data-Adjusted)</h4>
+      <p>Time allocations shift based on which decisions have low consensus — more time for contentious topics.</p>
+      <div class="data-source ds-analysis">Analysis</div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-num">SLIDE 4</div>
+      <h4>Workshop Objectives</h4>
+      <p>Standard objectives refined with specific stakeholder concerns surfaced from Q32.</p>
+      <div class="data-source ds-analysis">Analysis + Static</div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-num">SLIDE 5</div>
+      <h4>CMX Methodology Overview</h4>
+      <p>8-step delivery process. Current workshop highlighted. Connection to ADKAR.</p>
+      <div class="data-source ds-static">Static</div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-num">SLIDE 6</div>
+      <h4>Stakeholder Intelligence Overview</h4>
+      <p>4 hero stats: Readiness Score, Avg Consensus, Risk Count, Open Points. Role distribution chart.</p>
+      <div class="data-source ds-analysis">Analysis</div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-num">SLIDE 7</div>
+      <h4>Readiness Radar</h4>
+      <p>5-dimension bar chart: Leadership Alignment, Process Maturity, Data Readiness, Change Capacity, Regional Coordination.</p>
+      <div class="data-source ds-analysis">Analysis</div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-num">SLIDE 8</div>
+      <h4>Top Risks Dashboard</h4>
+      <p>Top 3–5 risks with severity, category, affected decisions, and recommended mitigations.</p>
+      <div class="data-source ds-analysis">Analysis</div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-num">SLIDE 9</div>
+      <h4>Top Wins & Alignment</h4>
+      <p>Decisions with ≥80% consensus highlighted as wins. Strong sponsorship signals. Quick-win opportunities.</p>
+      <div class="data-source ds-analysis">Analysis</div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-num">SLIDES 10–17</div>
+      <h4>Per-Decision Deep Dives (×8)</h4>
+      <p>Each decision gets a full slide: consensus %, ADKAR stage, role divergence, risk signals, majority position, key quotes, facilitator prompts.</p>
+      <div class="data-source ds-analysis">Analysis + Survey</div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-num">SLIDE 18</div>
+      <h4>Role Alignment Heatmap</h4>
+      <p>6×8 matrix showing alignment % for each role pair across all 8 decisions. Color-coded cells.</p>
+      <div class="data-source ds-analysis">Analysis</div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-num">SLIDE 19</div>
+      <h4>Per-Stakeholder Summary</h4>
+      <p>Key respondents with their role, primary concerns, alignment with majority, and influence weight.</p>
+      <div class="data-source ds-survey">Survey Data</div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-num">SLIDE 20</div>
+      <h4>Open Points & Next Steps</h4>
+      <p>Auto-extracted from Q31–Q33. Categorized, prioritized, with suggested owners. Links to XLSX tracker.</p>
+      <div class="data-source ds-analysis">Analysis</div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-num">SLIDE 21</div>
+      <h4>Cascade Preview</h4>
+      <p>How today's decisions will impact WS2, WS3, WS4. Primes stakeholders for the next stage.</p>
+      <div class="data-source ds-analysis">Analysis</div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-num">SLIDE 22</div>
+      <h4>Facilitator Appendix</h4>
+      <p>Per-decision warm-ups, watch-outs, alignment exercises. Hidden during presentation, visible in edit mode.</p>
+      <div class="data-source ds-analysis">Analysis</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 3: DATA BINDING TABLE ═══ -->
+<div class="section">
+  <div class="section-label">Section 3</div>
+  <h2>Data Binding — What Feeds Each Slide Element</h2>
+  <div class="desc">Every chart, number, quote, and badge in the deck traces back to a specific computation from the engine.</div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>Slide Element</th><th>Data Source</th><th>Engine Field</th><th>Visual Treatment</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Overall Readiness %</td><td>Computed from Q6, Q8, Q9, Q16, Q27</td><td><span class="field">readinessScore</span></td><td>Large stat callout (60pt) with color ring</td></tr>
+      <tr><td>Consensus badges</td><td>Role-weighted answer frequency per decision</td><td><span class="field">decisionScores[d].consensus</span></td><td>Green ≥75%, Amber 50–75%, Red &lt;50%</td></tr>
+      <tr><td>ADKAR stage badges</td><td>Static mapping per decision</td><td><span class="field">adkarMappings[d]</span></td><td>Colored pills (A=blue, D=teal, K=orange, Ab=green, R=purple)</td></tr>
+      <tr><td>Role divergence heatmap</td><td>Pairwise alignment computation</td><td><span class="field">roleDivergence[d][pair]</span></td><td>6×8 grid, color-coded cells</td></tr>
+      <tr><td>Risk severity badges</td><td>Threshold-based scoring (Q7, Q9, Q13, Q17)</td><td><span class="field">riskSignals[].severity</span></td><td>Red = Critical, Orange = High</td></tr>
+      <tr><td>Stakeholder quotes</td><td>Open-ended Q31, Q32, Q33</td><td><span class="field">openPoints[].text</span></td><td>Italic quote boxes with respondent attribution</td></tr>
+      <tr><td>Distribution charts</td><td>Answer frequency per question</td><td><span class="field">decisionScores[d].details[].distribution</span></td><td>Horizontal bar charts per decision</td></tr>
+      <tr><td>Facilitator prompts</td><td>Template + analysis-driven</td><td><span class="field">facilitatorIntelligence[d]</span></td><td>Speaker notes (warm-up, watch-out, alignment)</td></tr>
+      <tr><td>Cascade impacts</td><td>Decision-to-workshop mapping</td><td><span class="field">cascadeImpacts[d]</span></td><td>Arrow flow diagram on cascade slide</td></tr>
+      <tr><td>Per-stakeholder view</td><td>Respondent demographics + answers</td><td><span class="field">DEMO_DATA[].role, .name, .Q*</span></td><td>Table with role badges, concern summaries</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══ SECTION 4: PER-WORKSHOP BREAKDOWN ═══ -->
+<div class="section">
+  <div class="section-label">Section 4</div>
+  <h2>Per-Workshop Deck Structure</h2>
+  <div class="desc">Each workshop gets a tailored deck. Content types shift as we move through the cascade.</div>
+
+  <div class="ws-grid">
+    <div class="ws-card accent-ws1">
+      <div class="ws-card-header"><h3>WS1: Governance</h3><span class="badge badge-ws1">22 Slides</span></div>
+      <div class="ws-card-body">
+        <div class="sub">Foundation workshop. All intelligence starts here.</div>
+        <ul class="ws-slide-list">
+          <li><span class="sn">1–2</span>Title + Confidentiality</li>
+          <li><span class="sn">3</span>Data-adjusted agenda</li>
+          <li><span class="sn">4–5</span>Objectives + CMX methodology</li>
+          <li><span class="sn">6–7</span>Stakeholder overview + Readiness radar</li>
+          <li><span class="sn">8–9</span>Top risks + Top wins dashboards</li>
+          <li><span class="sn">10–17</span>8× decision deep-dive slides</li>
+          <li><span class="sn">18</span>Role alignment heatmap</li>
+          <li><span class="sn">19</span>Per-stakeholder summary</li>
+          <li><span class="sn">20–21</span>Open points + Cascade preview</li>
+          <li><span class="sn">22</span>Facilitator appendix (hidden)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ws-card accent-ws2">
+      <div class="ws-card-header"><h3>WS2: Stakeholders</h3><span class="badge badge-ws2">20 Slides</span></div>
+      <div class="ws-card-body">
+        <div class="sub">Inherits WS1 governance decisions. Adds stakeholder mapping depth.</div>
+        <ul class="ws-slide-list">
+          <li><span class="sn">1–2</span>Title + WS1 Decision Recap (cascade)</li>
+          <li><span class="sn">3</span>Agenda (adjusted for WS2 data)</li>
+          <li><span class="sn">4</span>Impacted groups model (6 tiers)</li>
+          <li><span class="sn">5</span>Stakeholder coverage heat map</li>
+          <li><span class="sn">6–7</span>Communication channel analysis + preferences</li>
+          <li><span class="sn">8–9</span>Champion network proposal + gaps</li>
+          <li><span class="sn">10–14</span>5× stakeholder group deep-dives</li>
+          <li><span class="sn">15</span>Union / works council considerations</li>
+          <li><span class="sn">16–17</span>Risk dashboard + alignment matrix</li>
+          <li><span class="sn">18–19</span>Open points + cascade to WS3</li>
+          <li><span class="sn">20</span>Facilitator appendix</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ws-card accent-ws3">
+      <div class="ws-card-header"><h3>WS3: Survey Design</h3><span class="badge badge-ws3">20 Slides</span></div>
+      <div class="ws-card-body">
+        <div class="sub">Inherits WS1 governance + WS2 stakeholder map. Designs the survey.</div>
+        <ul class="ws-slide-list">
+          <li><span class="sn">1–2</span>Title + WS1/WS2 decision recap</li>
+          <li><span class="sn">3</span>Agenda</li>
+          <li><span class="sn">4–5</span>Template selection (NPS / ADKAR / BEST NPS)</li>
+          <li><span class="sn">6–7</span>Survey length + fatigue guardrails analysis</li>
+          <li><span class="sn">8–9</span>ADKAR segmentation design</li>
+          <li><span class="sn">10</span>Field worker experience (SMS/QR strategy)</li>
+          <li><span class="sn">11–14</span>4× content block deep-dives</li>
+          <li><span class="sn">15–16</span>Language + regional adaptation needs</li>
+          <li><span class="sn">17–18</span>Risk + alignment</li>
+          <li><span class="sn">19–20</span>Open points + cascade to WS4</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ws-card accent-ws4">
+      <div class="ws-card-header"><h3>WS4: Platform</h3><span class="badge badge-ws4">18 Slides</span></div>
+      <div class="ws-card-body">
+        <div class="sub">Technical-weighted. Inherits all prior decisions.</div>
+        <ul class="ws-slide-list">
+          <li><span class="sn">1–2</span>Title + full cascade recap (WS1→WS3)</li>
+          <li><span class="sn">3</span>Agenda</li>
+          <li><span class="sn">4–5</span>Qualtrics structure + hierarchy design</li>
+          <li><span class="sn">6–7</span>Dashboard role views + access matrix</li>
+          <li><span class="sn">8–9</span>Contact Directory + HRIS integration</li>
+          <li><span class="sn">10–11</span>Metadata model + field mapping</li>
+          <li><span class="sn">12–13</span>Security + SSO + data retention</li>
+          <li><span class="sn">14–15</span>Risk + alignment</li>
+          <li><span class="sn">16–17</span>Open points + cascade to DW1</li>
+          <li><span class="sn">18</span>Facilitator appendix</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ws-card accent-dw1">
+      <div class="ws-card-header"><h3>DW1: E2E Process</h3><span class="badge badge-dw1">15 Slides</span></div>
+      <div class="ws-card-body">
+        <div class="sub">Decision-mode. Every slide drives toward a concrete decision.</div>
+        <ul class="ws-slide-list">
+          <li><span class="sn">1–2</span>Title + full cascade recap</li>
+          <li><span class="sn">3</span>Decision framework + voting rules</li>
+          <li><span class="sn">4–9</span>6× decision slides (pre-populated options + data)</li>
+          <li><span class="sn">10</span>Parking lot / deferred items</li>
+          <li><span class="sn">11–12</span>Action items + owners</li>
+          <li><span class="sn">13–14</span>Implementation timeline</li>
+          <li><span class="sn">15</span>Cascade to DW2</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ws-card accent-dw2">
+      <div class="ws-card-header"><h3>DW2: Dashboards</h3><span class="badge badge-dw2">15 Slides</span></div>
+      <div class="ws-card-body">
+        <div class="sub">Final cascade stage. All prior intelligence converges.</div>
+        <ul class="ws-slide-list">
+          <li><span class="sn">1–2</span>Title + complete program decisions recap</li>
+          <li><span class="sn">3</span>Decision framework</li>
+          <li><span class="sn">4–8</span>5× decision slides (dashboards, ticketing, alerts)</li>
+          <li><span class="sn">9</span>Manager enablement + training plan</li>
+          <li><span class="sn">10–11</span>Ticketing SLAs + escalation paths</li>
+          <li><span class="sn">12–13</span>Action items + owners</li>
+          <li><span class="sn">14</span>Full program summary</li>
+          <li><span class="sn">15</span>Closing + next steps</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 5: DESIGN PRINCIPLES ═══ -->
+<div class="section">
+  <div class="section-label">Section 5</div>
+  <h2>Design Principles</h2>
+  <div class="desc">Three rules that govern how data becomes slides.</div>
+
+  <div class="principles">
+    <div class="principle">
+      <h4>Intelligence, Not Information</h4>
+      <p>Never dump raw data. Every number on a slide has a "so what" — a recommendation, a risk signal, or a comparison that tells the facilitator exactly where to focus.</p>
+    </div>
+    <div class="principle">
+      <h4>Cascade Continuity</h4>
+      <p>Every workshop deck opens with a recap of prior decisions. Nothing starts from zero. The stakeholders always see how today's session connects to what came before and what comes next.</p>
+    </div>
+    <div class="principle">
+      <h4>Facilitator-First</h4>
+      <p>Speaker notes contain the real intelligence: warm-up exercises, watch-outs, alignment techniques. The visible slide is for stakeholders; the notes are for the consultant running the session.</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">CMX PPT Engine Architecture — AKT Global — February 2026 — For Review</div>
+
+</body>
+</html>

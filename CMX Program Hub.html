@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMX Program Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#2D2015;--navy-light:#3a2c1c;--navy-deep:#1e1508;
+  --orange:#F9A13A;--orange-hover:#e8911a;--orange-glow:rgba(249,161,58,.15);
+  --cream:#FEF0DB;--off-white:#F7F5F2;
+  --text:#3A3028;--text-light:#8a7e6e;--text-muted:#b5ab9e;
+  --border:#e4ddd4;--border-light:#ece7e0;
+  --card:#ffffff;--card-hover:#fffcf7;
+  --green:#2e8540;--green-bg:#e8f5eb;
+  --blue:#1a73b5;--blue-bg:#e3f0fa;
+  --purple:#7b3fa0;--purple-bg:#f3e8fa;
+  --red:#c73e1d;--red-bg:#fce8e4;
+  --teal:#006462;--teal-bg:#e0f2f1;
+  --shadow-sm:0 1px 3px rgba(45,32,21,.06);
+  --shadow-md:0 4px 12px rgba(45,32,21,.08);
+  --shadow-lg:0 8px 24px rgba(45,32,21,.12);
+  --radius:10px;--radius-lg:14px;
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--off-white);color:var(--text);line-height:1.55;min-height:100vh}
+
+/* ─── HEADER ─── */
+.header{background:var(--navy);position:sticky;top:0;z-index:100;border-bottom:3px solid var(--orange)}
+.header-inner{max-width:1320px;margin:0 auto;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
+.header-brand{display:flex;align-items:center;gap:1.2rem}
+.akt-mark{font-size:1.6rem;font-weight:800;color:var(--orange);letter-spacing:1.5px;line-height:1}
+.header-title{font-family:Georgia,serif;font-size:1.25rem;color:#fff;font-weight:600;letter-spacing:-.3px}
+.header-divider{width:1px;height:28px;background:rgba(255,255,255,.15)}
+.header-engagement{display:flex;flex-direction:column}
+.header-engagement .label{font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted)}
+.header-engagement .value{font-size:.9rem;color:var(--orange);font-weight:600}
+.header-metrics{display:flex;gap:2rem;align-items:center}
+.h-metric{text-align:center}
+.h-metric .num{font-size:1.5rem;font-weight:700;color:var(--orange);line-height:1.1}
+.h-metric .lbl{font-size:.6rem;text-transform:uppercase;letter-spacing:.8px;color:rgba(255,255,255,.5)}
+
+/* ─── NAV ─── */
+.nav{background:var(--navy-deep);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-inner{max-width:1320px;margin:0 auto;padding:0 2rem;display:flex;gap:0;overflow-x:auto}
+.nav-btn{background:none;border:none;color:rgba(255,255,255,.45);font-size:.82rem;font-weight:500;padding:.85rem 1.4rem;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;font-family:inherit}
+.nav-btn:hover{color:rgba(255,255,255,.8)}
+.nav-btn.active{color:var(--orange);border-bottom-color:var(--orange)}
+
+/* ─── MAIN ─── */
+.main{max-width:1320px;margin:0 auto;padding:2rem}
+.tab{display:none}.tab.active{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── SECTION TITLES ─── */
+.section-title{font-family:Georgia,serif;font-size:1.4rem;color:var(--navy);margin-bottom:.3rem}
+.section-sub{font-size:.88rem;color:var(--text-light);margin-bottom:1.8rem}
+
+/* ─── DASHBOARD ─── */
+.dash-hero{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem;margin-bottom:2rem}
+.hero-card{background:var(--card);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:1.5rem;box-shadow:var(--shadow-sm);transition:box-shadow .2s}
+.hero-card:hover{box-shadow:var(--shadow-md)}
+.hero-card.engagement{border-left:4px solid var(--orange)}
+.hero-card .card-label{font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:.8rem}
+.hero-card .engagement-name{font-family:Georgia,serif;font-size:1.3rem;color:var(--navy);margin-bottom:.5rem}
+.hero-card .engagement-meta{font-size:.82rem;color:var(--text-light);line-height:1.8}
+.hero-card .engagement-meta strong{color:var(--text)}
+
+/* Progress ring */
+.progress-ring-wrap{display:flex;align-items:center;gap:1.5rem}
+.progress-ring{position:relative;width:90px;height:90px;flex-shrink:0}
+.progress-ring svg{transform:rotate(-90deg)}
+.progress-ring .bg{fill:none;stroke:var(--border-light);stroke-width:8}
+.progress-ring .fg{fill:none;stroke:var(--orange);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .6s ease}
+.progress-ring .pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:700;color:var(--navy)}
+.progress-detail{font-size:.85rem;color:var(--text-light);line-height:1.8}
+.progress-detail .done{color:var(--green)}
+.progress-detail .active{color:var(--blue)}
+.progress-detail .waiting{color:var(--text-muted)}
+
+/* Stakeholder stats */
+.stakeholder-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.s-stat{text-align:center;padding:.8rem;background:var(--off-white);border-radius:var(--radius)}
+.s-stat .val{font-size:1.6rem;font-weight:700;color:var(--orange)}
+.s-stat .lbl{font-size:.7rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text-light)}
+
+/* ─── QUICK ACTIONS ─── */
+.actions-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2.5rem}
+.action-card{background:var(--card);border:1px solid var(--border-light);border-radius:var(--radius);padding:1.2rem;text-decoration:none;color:var(--text);display:flex;align-items:center;gap:1rem;transition:all .2s;cursor:pointer}
+.action-card:hover{border-color:var(--orange);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.action-icon{width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:700;color:#fff;flex-shrink:0}
+.action-icon.engine{background:var(--navy)}
+.action-icon.quest{background:var(--blue)}
+.action-icon.demo{background:var(--teal)}
+.action-icon.deck{background:var(--orange)}
+.action-card .action-label{font-size:.85rem;font-weight:600;line-height:1.3}
+.action-card .action-desc{font-size:.72rem;color:var(--text-light)}
+
+/* ─── PIPELINE CASCADE ─── */
+.cascade{display:flex;align-items:flex-start;gap:0;overflow-x:auto;padding-bottom:1rem;margin-bottom:2rem}
+.cascade-stage{flex:1;min-width:190px;position:relative}
+.cascade-stage:not(:last-child)::after{content:'';position:absolute;right:-12px;top:42px;width:24px;height:2px;background:var(--border);z-index:1}
+.cascade-stage:not(:last-child)::before{content:'›';position:absolute;right:-8px;top:33px;font-size:1.2rem;color:var(--text-muted);z-index:2}
+.stage-card{background:var(--card);border:1px solid var(--border-light);border-radius:var(--radius);padding:1.2rem;margin:0 .4rem;position:relative;overflow:hidden;transition:all .25s}
+.stage-card:hover{box-shadow:var(--shadow-md);border-color:var(--orange)}
+.stage-accent{position:absolute;top:0;left:0;right:0;height:4px}
+.stage-code{font-size:.7rem;font-weight:700;letter-spacing:1px;color:var(--text-light);margin-bottom:.3rem}
+.stage-name{font-family:Georgia,serif;font-size:.95rem;color:var(--navy);margin-bottom:.6rem;line-height:1.3}
+.status-badge{display:inline-flex;align-items:center;gap:.35rem;font-size:.68rem;font-weight:600;padding:.25rem .65rem;border-radius:20px;margin-bottom:.8rem;letter-spacing:.3px}
+.status-badge .dot{width:6px;height:6px;border-radius:50%}
+.status-badge.s-not-started{background:#f0ede8;color:var(--text-muted)}.status-badge.s-not-started .dot{background:var(--text-muted)}
+.status-badge.s-questionnaire-sent{background:var(--blue-bg);color:var(--blue)}.status-badge.s-questionnaire-sent .dot{background:var(--blue)}
+.status-badge.s-responses-collected{background:#fff4e0;color:#c07600}.status-badge.s-responses-collected .dot{background:#c07600}
+.status-badge.s-analysis-complete{background:var(--orange-glow);color:var(--orange-hover)}.status-badge.s-analysis-complete .dot{background:var(--orange)}
+.status-badge.s-artifacts-generated{background:var(--purple-bg);color:var(--purple)}.status-badge.s-artifacts-generated .dot{background:var(--purple)}
+.status-badge.s-workshop-delivered{background:var(--green-bg);color:var(--green)}.status-badge.s-workshop-delivered .dot{background:var(--green)}
+.stage-meta{display:flex;gap:.8rem;font-size:.78rem;color:var(--text-light);margin-bottom:.8rem}
+.stage-meta strong{color:var(--text)}
+.mini-bar{height:4px;background:var(--border-light);border-radius:2px;overflow:hidden}
+.mini-bar-fill{height:100%;border-radius:2px;transition:width .4s ease}
+.stage-pct{font-size:.7rem;color:var(--text-muted);margin-top:.4rem;text-align:right}
+
+/* Status change dropdown */
+.status-select{margin-top:.6rem;width:100%;padding:.4rem .5rem;font-size:.72rem;font-family:inherit;border:1px solid var(--border);border-radius:6px;background:var(--off-white);color:var(--text);cursor:pointer}
+.status-select:focus{outline:none;border-color:var(--orange)}
+
+/* ─── PROGRESS CHECKLISTS ─── */
+.checklist-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.cl-card{background:var(--card);border:1px solid var(--border-light);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);border-top:3px solid var(--border)}
+.cl-header{padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-light);flex-wrap:wrap;gap:.5rem}
+.cl-header h3{font-family:Georgia,serif;font-size:.95rem;color:var(--navy)}
+.cl-header .cl-pct{font-size:.8rem;font-weight:600;color:var(--orange)}
+.cl-header .cl-bar{width:100%;height:3px;background:var(--border-light);border-radius:2px;overflow:hidden;margin-top:.3rem}
+.cl-header .cl-bar-fill{height:100%;border-radius:2px;transition:width .4s}
+.cl-group-title{font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);padding:1rem 1.2rem .4rem;font-weight:600}
+.cl-item{display:flex;align-items:center;padding:.55rem 1.2rem;border-bottom:1px solid var(--border-light);transition:background .15s}
+.cl-item:hover{background:var(--off-white)}
+.cl-item:last-child{border-bottom:none}
+.cl-item input[type=checkbox]{width:16px;height:16px;margin-right:.8rem;accent-color:var(--orange);cursor:pointer;flex-shrink:0}
+.cl-item label{font-size:.82rem;cursor:pointer;flex:1;user-select:none;color:var(--text)}
+.cl-item input:checked+label{color:var(--text-muted);text-decoration:line-through}
+
+/* ─── ASSET MANAGER ─── */
+.asset-category{margin-bottom:2rem}
+.asset-cat-title{font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-light);font-weight:600;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid var(--border-light)}
+.asset-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.8rem}
+.asset-row{background:var(--card);border:1px solid var(--border-light);border-radius:var(--radius);padding:.8rem 1rem;display:flex;align-items:center;gap:.8rem;transition:all .2s;text-decoration:none;color:inherit}
+.asset-row:hover{border-color:var(--orange);box-shadow:var(--shadow-sm)}
+.file-icon{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:#fff;flex-shrink:0;letter-spacing:.5px}
+.file-icon.html{background:var(--teal)}.file-icon.pptx{background:var(--red)}.file-icon.xlsx{background:var(--green)}.file-icon.csv{background:var(--purple)}
+.asset-info{flex:1;min-width:0}
+.asset-info .name{font-size:.82rem;font-weight:500;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.asset-info .meta{font-size:.68rem;color:var(--text-muted)}
+.open-arrow{color:var(--text-muted);font-size:.9rem;transition:color .2s}
+.asset-row:hover .open-arrow{color:var(--orange)}
+
+/* ─── TIMELINE ─── */
+.timeline-wrap{padding:2rem 0}
+.tl-track{position:relative;display:flex;align-items:flex-start;gap:0;padding:0 1rem}
+.tl-track::before{content:'';position:absolute;top:18px;left:1rem;right:1rem;height:3px;background:var(--border-light);border-radius:2px}
+.tl-node{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;min-width:100px;z-index:1}
+.tl-dot{width:36px;height:36px;border-radius:50%;border:3px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--text-muted);margin-bottom:.6rem;transition:all .3s}
+.tl-node.s-not-started .tl-dot{border-color:var(--border);color:var(--text-muted)}
+.tl-node.s-questionnaire-sent .tl-dot{border-color:var(--blue);background:var(--blue);color:#fff}
+.tl-node.s-responses-collected .tl-dot{border-color:#c07600;background:#c07600;color:#fff}
+.tl-node.s-analysis-complete .tl-dot{border-color:var(--orange);background:var(--orange);color:#fff}
+.tl-node.s-artifacts-generated .tl-dot{border-color:var(--purple);background:var(--purple);color:#fff}
+.tl-node.s-workshop-delivered .tl-dot{border-color:var(--green);background:var(--green);color:#fff}
+.tl-label{font-size:.72rem;font-weight:600;color:var(--navy);text-align:center;margin-bottom:.2rem}
+.tl-sublabel{font-size:.65rem;color:var(--text-muted);text-align:center;max-width:110px}
+.tl-status{font-size:.6rem;font-weight:600;color:var(--text-light);margin-top:.3rem;text-align:center}
+.tl-connector{flex:0 0 20px;display:flex;align-items:center;justify-content:center;padding-top:8px;color:var(--text-muted);font-size:.8rem}
+
+/* ─── FOOTER ─── */
+.footer{text-align:center;padding:2rem;font-size:.72rem;color:var(--text-muted);border-top:1px solid var(--border-light);margin-top:2rem}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .dash-hero{grid-template-columns:1fr}.actions-row{grid-template-columns:1fr 1fr}
+  .checklist-grid{grid-template-columns:1fr}.cascade{flex-wrap:wrap;gap:.8rem}
+  .cascade-stage::after,.cascade-stage::before{display:none}
+}
+@media print{
+  body{background:#fff;color:#222}.header{position:relative;background:#2D2015;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .nav{display:none}.tab{display:block!important;page-break-inside:avoid;margin-bottom:2rem}
+  .action-card:hover,.hero-card:hover,.stage-card:hover{transform:none;box-shadow:none}
+  .status-select{display:none}
+}
+@media(max-width:640px){
+  .header-inner{flex-direction:column;align-items:flex-start;padding:1rem}
+  .header-metrics{width:100%;justify-content:space-between}
+  .actions-row{grid-template-columns:1fr}.asset-grid{grid-template-columns:1fr}
+  .main{padding:1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="akt-mark">akt</div>
+      <div class="header-divider"></div>
+      <div style="display:flex;flex-direction:column"><div class="header-title">CMX Program Hub</div><span style="font-size:.6rem;color:rgba(255,255,255,.35);letter-spacing:.5px">Change Management Experience</span></div>
+    </div>
+    <div class="header-engagement">
+      <span class="label">Active Engagement</span>
+      <span class="value" id="hEngagement">Nextera Energy — GMTP</span>
+    </div>
+    <div class="header-metrics">
+      <div class="h-metric"><div class="num" id="hProgress">—</div><div class="lbl">Progress</div></div>
+      <div class="h-metric"><div class="num" id="hStages">—</div><div class="lbl">Stages</div></div>
+      <div class="h-metric"><div class="num" id="hRespondents">—</div><div class="lbl">Respondents</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
+    <button class="nav-btn" data-tab="pipeline">Pipeline</button>
+    <button class="nav-btn" data-tab="progress">Progress</button>
+    <button class="nav-btn" data-tab="assets">Assets</button>
+    <button class="nav-btn" data-tab="timeline">Timeline</button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ═══ DASHBOARD TAB ═══ -->
+  <div id="tab-dashboard" class="tab active">
+    <div class="section-title">Program Overview</div>
+    <div class="section-sub">Nextera Energy — Global Modernization & Transformation Program</div>
+
+    <div class="dash-hero">
+      <!-- Engagement Card -->
+      <div class="hero-card engagement">
+        <div class="card-label">Current Engagement</div>
+        <div class="engagement-name">Nextera Energy GMTP</div>
+        <div class="engagement-meta">
+          <strong>Program:</strong> Global Modernization & Transformation<br>
+          <strong>Methodology:</strong> CMX — Change Management Experience<br>
+          <strong>Region:</strong> North America (Hub & Spoke)<br>
+          <strong>Sponsor:</strong> Patricia Chen, SVP Employee Experience
+        </div>
+      </div>
+
+      <!-- Progress Ring Card -->
+      <div class="hero-card">
+        <div class="card-label">Overall Completion</div>
+        <div class="progress-ring-wrap">
+          <div class="progress-ring">
+            <svg width="90" height="90" viewBox="0 0 90 90">
+              <circle class="bg" cx="45" cy="45" r="38"/>
+              <circle class="fg" id="progressArc" cx="45" cy="45" r="38" stroke-dasharray="238.76" stroke-dashoffset="238.76"/>
+            </svg>
+            <div class="pct" id="ringPct">—</div>
+          </div>
+          <div class="progress-detail" id="progressDetail"></div>
+        </div>
+      </div>
+
+      <!-- Stakeholder Card -->
+      <div class="hero-card">
+        <div class="card-label">Stakeholder Coverage</div>
+        <div class="stakeholder-grid">
+          <div class="s-stat"><div class="val" id="sResp">—</div><div class="lbl">Respondents</div></div>
+          <div class="s-stat"><div class="val" id="sQuestions">—</div><div class="lbl">Questions</div></div>
+          <div class="s-stat"><div class="val" id="sDecisions">—</div><div class="lbl">Decisions</div></div>
+          <div class="s-stat"><div class="val" id="sArtifacts">—</div><div class="lbl">Artifacts</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="section-title" style="font-size:1.1rem;margin-bottom:1rem">Quick Actions</div>
+    <div class="actions-row">
+      <a href="CMX Intelligence Engine.html" class="action-card">
+        <div class="action-icon engine">IE</div>
+        <div><div class="action-label">Intelligence Engine</div><div class="action-desc">Import data, run analysis, generate artifacts</div></div>
+      </a>
+      <a href="CMX Pre-Workshop Questionnaire.html" class="action-card">
+        <div class="action-icon quest">Q1</div>
+        <div><div class="action-label">WS1 Questionnaire</div><div class="action-desc">33 questions, 12 Nextera respondents</div></div>
+      </a>
+      <a href="CMX Demo Guide.html" class="action-card">
+        <div class="action-icon demo">DG</div>
+        <div><div class="action-label">Demo Guide</div><div class="action-desc">Step-by-step walkthrough for senior team</div></div>
+      </a>
+      <a href="CMX Intelligence Engine - Senior Team Introduction.pptx" class="action-card">
+        <div class="action-icon deck">ID</div>
+        <div><div class="action-label">Introduction Deck</div><div class="action-desc">11-slide executive overview</div></div>
+      </a>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="hero-card" style="margin-top:.5rem">
+      <div class="card-label">Pipeline Snapshot</div>
+      <div id="dashSnapshot" style="margin-top:.5rem"></div>
+    </div>
+  </div>
+
+  <!-- ═══ PIPELINE TAB ═══ -->
+  <div id="tab-pipeline" class="tab">
+    <div class="section-title">Workshop Pipeline</div>
+    <div class="section-sub">Each workshop's outputs seed the next workshop's inputs. Update status as you progress through each stage.</div>
+    <div class="cascade" id="cascadeContainer"></div>
+    <div class="hero-card">
+      <div class="card-label">Cascade Intelligence Flow</div>
+      <div style="font-size:.84rem;color:var(--text-light);line-height:2;margin-top:.5rem" id="cascadeDesc">
+        <span style="color:var(--orange);font-weight:600">WS1 →</span> Governance model & roles feed into stakeholder mapping<br>
+        <span style="color:var(--orange);font-weight:600">WS2 →</span> Impacted groups & comms plan shape survey content design<br>
+        <span style="color:var(--orange);font-weight:600">WS3 →</span> Template selection & ADKAR logic guide platform configuration<br>
+        <span style="color:var(--orange);font-weight:600">WS4 →</span> Dashboard architecture & metadata model enable decision workshops<br>
+        <span style="color:var(--orange);font-weight:600">DW1–2</span> Concrete decisions (SLAs, ticketing rules, intake fields) ready for build
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PROGRESS TAB ═══ -->
+  <div id="tab-progress" class="tab">
+    <div class="section-title">Progress Tracking</div>
+    <div class="section-sub">Check off tasks as you complete them. Progress automatically updates across the hub.</div>
+    <div class="checklist-grid" id="checklistContainer"></div>
+  </div>
+
+  <!-- ═══ ASSETS TAB ═══ -->
+  <div id="tab-assets" class="tab">
+    <div class="section-title">Asset Manager</div>
+    <div class="section-sub">All questionnaires, tools, and generated artifacts organized by workflow stage.</div>
+    <div id="assetContainer"></div>
+  </div>
+
+  <!-- ═══ TIMELINE TAB ═══ -->
+  <div id="tab-timeline" class="tab">
+    <div class="section-title">Program Timeline</div>
+    <div class="section-sub">Visual cascade of all workshop stages showing current progression.</div>
+    <div class="timeline-wrap">
+      <div class="tl-track" id="tlTrack"></div>
+    </div>
+    <div class="hero-card" style="margin-top:2rem">
+      <div class="card-label">Status Legend</div>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:.8rem;font-size:.78rem" id="legendBox"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">CMX Program Hub — AKT Global — Change Management Experience — Confidential</div>
+
+<script>
+// ════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════
+const STATUSES = [
+  {key:'not-started',label:'Not Started',color:'#b5ab9e'},
+  {key:'questionnaire-sent',label:'Questionnaire Sent',color:'#1a73b5'},
+  {key:'responses-collected',label:'Responses Collected',color:'#c07600'},
+  {key:'analysis-complete',label:'Analysis Complete',color:'#F9A13A'},
+  {key:'artifacts-generated',label:'Artifacts Generated',color:'#7b3fa0'},
+  {key:'workshop-delivered',label:'Workshop Delivered',color:'#2e8540'}
+];
+
+const STATUS_PROGRESS = {
+  'not-started':0,'questionnaire-sent':17,'responses-collected':33,
+  'analysis-complete':50,'artifacts-generated':75,'workshop-delivered':100
+};
+
+const STATE = {
+  engagement:'Nextera Energy — GMTP',
+  stages:[
+    {id:'ws1',code:'WS1',name:'Governance & Decision Framework',type:'workshop',questions:33,respondents:12,
+     status:'analysis-complete',
+     checklist:[
+       {group:'Collection',items:[{t:'Questionnaire configured',done:true},{t:'Distributed to stakeholders',done:true},{t:'Responses collected (12/12)',done:true},{t:'CSV exported from Qualtrics',done:true}]},
+       {group:'Analysis',items:[{t:'Imported into Intelligence Engine',done:true},{t:'Analysis reviewed by lead',done:true},{t:'Artifacts generated (PPTX + XLSX + Briefing)',done:false}]},
+       {group:'Delivery',items:[{t:'Workshop session delivered',done:false},{t:'Decisions documented & signed off',done:false}]}
+     ]},
+    {id:'ws2',code:'WS2',name:'Stakeholder Mapping & Communications',type:'workshop',questions:25,respondents:10,
+     status:'questionnaire-sent',
+     checklist:[
+       {group:'Collection',items:[{t:'Questionnaire configured',done:true},{t:'Distributed to stakeholders',done:true},{t:'Responses collected (0/10)',done:false},{t:'CSV exported from Qualtrics',done:false}]},
+       {group:'Analysis',items:[{t:'Imported into Intelligence Engine',done:false},{t:'Analysis reviewed by lead',done:false},{t:'Artifacts generated',done:false}]},
+       {group:'Delivery',items:[{t:'Workshop session delivered',done:false},{t:'Decisions documented & signed off',done:false}]}
+     ]},
+    {id:'ws3',code:'WS3',name:'Survey Content & Design',type:'workshop',questions:28,respondents:10,
+     status:'questionnaire-sent',
+     checklist:[
+       {group:'Collection',items:[{t:'Questionnaire configured',done:true},{t:'Distributed to stakeholders',done:true},{t:'Responses collected (0/10)',done:false},{t:'CSV exported from Qualtrics',done:false}]},
+       {group:'Analysis',items:[{t:'Imported into Intelligence Engine',done:false},{t:'Analysis reviewed by lead',done:false},{t:'Artifacts generated',done:false}]},
+       {group:'Delivery',items:[{t:'Workshop session delivered',done:false},{t:'Decisions documented & signed off',done:false}]}
+     ]},
+    {id:'ws4',code:'WS4',name:'Platform & Metadata Architecture',type:'workshop',questions:26,respondents:8,
+     status:'questionnaire-sent',
+     checklist:[
+       {group:'Collection',items:[{t:'Questionnaire configured',done:true},{t:'Distributed to stakeholders',done:true},{t:'Responses collected (0/8)',done:false},{t:'CSV exported from Qualtrics',done:false}]},
+       {group:'Analysis',items:[{t:'Imported into Intelligence Engine',done:false},{t:'Analysis reviewed by lead',done:false},{t:'Artifacts generated',done:false}]},
+       {group:'Delivery',items:[{t:'Workshop session delivered',done:false},{t:'Decisions documented & signed off',done:false}]}
+     ]},
+    {id:'dw1',code:'DW1',name:'E2E Process Decisions',type:'decision',decisions:12,
+     status:'not-started',
+     checklist:[
+       {group:'Preparation',items:[{t:'Briefing materials prepared',done:false},{t:'Stakeholders invited',done:false}]},
+       {group:'Execution',items:[{t:'Session conducted',done:false},{t:'Decisions captured (0/12)',done:false}]},
+       {group:'Follow-up',items:[{t:'Follow-ups assigned',done:false},{t:'Documentation complete',done:false}]}
+     ]},
+    {id:'dw2',code:'DW2',name:'Dashboards & Ticketing Decisions',type:'decision',decisions:10,
+     status:'not-started',
+     checklist:[
+       {group:'Preparation',items:[{t:'Briefing materials prepared',done:false},{t:'Stakeholders invited',done:false}]},
+       {group:'Execution',items:[{t:'Session conducted',done:false},{t:'Decisions captured (0/10)',done:false}]},
+       {group:'Follow-up',items:[{t:'Follow-ups assigned',done:false},{t:'Documentation complete',done:false}]}
+     ]}
+  ]
+};
+
+const ASSETS = [
+  {cat:'Workshop Questionnaires',items:[
+    {name:'CMX Pre-Workshop Questionnaire',ext:'html',file:'CMX Pre-Workshop Questionnaire.html',stage:'WS1',desc:'33 questions, 12 respondents'},
+    {name:'CMX WS2 Pre-Workshop Questionnaire',ext:'html',file:'CMX WS2 Pre-Workshop Questionnaire.html',stage:'WS2',desc:'25 questions, 10 respondents'},
+    {name:'CMX WS3 Pre-Workshop Questionnaire',ext:'html',file:'CMX WS3 Pre-Workshop Questionnaire.html',stage:'WS3',desc:'28 questions, 10 respondents'},
+    {name:'CMX WS4 Pre-Workshop Questionnaire',ext:'html',file:'CMX WS4 Pre-Workshop Questionnaire.html',stage:'WS4',desc:'26 questions, 8 respondents'}
+  ]},
+  {cat:'Decision Workshop Outputs',items:[
+    {name:'CMX DW1 Session Outputs',ext:'html',file:'CMX DW1 Session Outputs.html',stage:'DW1',desc:'12 decisions — E2E process'},
+    {name:'CMX DW2 Session Outputs',ext:'html',file:'CMX DW2 Session Outputs.html',stage:'DW2',desc:'10 decisions — Dashboards & ticketing'}
+  ]},
+  {cat:'Intelligence & Analysis',items:[
+    {name:'CMX Intelligence Engine',ext:'html',file:'CMX Intelligence Engine.html',stage:'Core',desc:'4,900+ line analysis engine'},
+    {name:'Qualtrics Test Export — CMX WS1',ext:'csv',file:'Qualtrics Test Export - CMX WS1.csv',stage:'WS1',desc:'12 respondents, 33 questions'},
+    {name:'CMX WS1 Qualtrics Spec',ext:'xlsx',file:'CMX WS1 Pre-Workshop Questionnaire - Qualtrics Spec.xlsx',stage:'WS1',desc:'Survey specification for Qualtrics build'}
+  ]},
+  {cat:'Presentations & Guides',items:[
+    {name:'Senior Team Introduction Deck',ext:'pptx',file:'CMX Intelligence Engine - Senior Team Introduction.pptx',stage:'—',desc:'11-slide executive overview'},
+    {name:'Demo Guide',ext:'html',file:'CMX Demo Guide.html',stage:'—',desc:'Step-by-step walkthrough (~12 min)'},
+    {name:'CMX Program Hub',ext:'html',file:'CMX Program Hub.html',stage:'—',desc:'This application'}
+  ]}
+];
+
+// ════════════════════════════════════════════════════
+// COMPUTED HELPERS
+// ════════════════════════════════════════════════════
+function getProgress(stage){
+  const total = stage.checklist.reduce((s,g)=>s+g.items.length,0);
+  const done = stage.checklist.reduce((s,g)=>s+g.items.filter(i=>i.done).length,0);
+  return total?Math.round(done/total*100):0;
+}
+function overallPct(){return Math.round(STATE.stages.reduce((s,st)=>s+getProgress(st),0)/STATE.stages.length)}
+function countByStatus(key){return STATE.stages.filter(s=>s.status===key).length}
+function stageColor(status){return (STATUSES.find(s=>s.key===status)||{}).color||'#999'}
+function statusLabel(status){return (STATUSES.find(s=>s.key===status)||{}).label||status}
+function totalResp(){return STATE.stages.filter(s=>s.type==='workshop').reduce((a,s)=>a+s.respondents,0)}
+function totalQ(){return STATE.stages.filter(s=>s.type==='workshop').reduce((a,s)=>a+s.questions,0)}
+function totalDec(){return STATE.stages.filter(s=>s.type==='decision').reduce((a,s)=>a+(s.decisions||0),0)}
+
+// ════════════════════════════════════════════════════
+// RENDERERS
+// ════════════════════════════════════════════════════
+function renderAll(){renderHeader();renderDashboard();renderCascade();renderChecklists();renderAssets();renderTimeline()}
+
+function renderHeader(){
+  const pct = overallPct();
+  document.getElementById('hProgress').textContent = pct+'%';
+  const done = countByStatus('workshop-delivered');
+  const inProg = STATE.stages.length - done - countByStatus('not-started');
+  document.getElementById('hStages').textContent = done+'/'+STATE.stages.length;
+  document.getElementById('hRespondents').textContent = totalResp();
+}
+
+function renderDashboard(){
+  // Ring
+  const pct = overallPct();
+  const circ = 2*Math.PI*38; // ~238.76
+  document.getElementById('progressArc').setAttribute('stroke-dashoffset', circ - (circ*pct/100));
+  document.getElementById('ringPct').textContent = pct+'%';
+  // Detail
+  const done = countByStatus('workshop-delivered');
+  const notStarted = countByStatus('not-started');
+  const inProg = STATE.stages.length - done - notStarted;
+  document.getElementById('progressDetail').innerHTML =
+    `<span class="done">● ${done} delivered</span><br><span class="active">● ${inProg} in progress</span><br><span class="waiting">● ${notStarted} not started</span>`;
+  // Stats
+  document.getElementById('sResp').textContent = totalResp();
+  document.getElementById('sQuestions').textContent = totalQ();
+  document.getElementById('sDecisions').textContent = totalDec();
+  document.getElementById('sArtifacts').textContent = '3'; // PPTX, XLSX, HTML per generation
+  // Snapshot
+  let snap = '';
+  STATE.stages.forEach(s=>{
+    const p = getProgress(s);
+    const col = stageColor(s.status);
+    snap += `<div style="display:flex;align-items:center;gap:.8rem;padding:.55rem 0;border-bottom:1px solid var(--border-light)">
+      <span style="width:8px;height:8px;border-radius:50%;background:${col};flex-shrink:0"></span>
+      <span style="font-weight:600;font-size:.8rem;color:var(--navy);width:36px">${s.code}</span>
+      <span style="font-size:.8rem;flex:1;color:var(--text)">${s.name}</span>
+      <span style="font-size:.68rem;font-weight:600;color:${col};white-space:nowrap">${statusLabel(s.status)}</span>
+      <div style="width:90px;height:5px;background:var(--border-light);border-radius:3px;overflow:hidden;flex-shrink:0"><div style="width:${p}%;height:100%;background:${col};border-radius:3px"></div></div>
+      <span style="font-size:.72rem;font-weight:600;color:var(--text-muted);width:32px;text-align:right">${p}%</span>
+    </div>`;
+  });
+  document.getElementById('dashSnapshot').innerHTML = snap;
+}
+
+function renderCascade(){
+  const c = document.getElementById('cascadeContainer');
+  c.innerHTML = '';
+  STATE.stages.forEach((s,i)=>{
+    const p = getProgress(s);
+    const col = stageColor(s.status);
+    const stage = document.createElement('div');
+    stage.className = 'cascade-stage';
+    const stats = s.type==='workshop'
+      ? `<span><strong>${s.questions}</strong> questions</span><span><strong>${s.respondents}</strong> respondents</span>`
+      : `<span><strong>${s.decisions}</strong> decisions</span>`;
+    stage.innerHTML = `
+      <div class="stage-card">
+        <div class="stage-accent" style="background:${col}"></div>
+        <div class="stage-code">${s.code}</div>
+        <div class="stage-name">${s.name}</div>
+        <div class="status-badge s-${s.status}"><span class="dot"></span>${statusLabel(s.status)}</div>
+        <div class="stage-meta">${stats}</div>
+        <div class="mini-bar"><div class="mini-bar-fill" style="width:${p}%;background:${col}"></div></div>
+        <div class="stage-pct">${p}%</div>
+        <select class="status-select" data-stage="${i}" onchange="changeStatus(${i},this.value)">
+          ${STATUSES.map(st=>`<option value="${st.key}" ${s.status===st.key?'selected':''}>${st.label}</option>`).join('')}
+        </select>
+      </div>`;
+    c.appendChild(stage);
+  });
+}
+
+function renderChecklists(){
+  const c = document.getElementById('checklistContainer');
+  c.innerHTML = '';
+  STATE.stages.forEach((s,si)=>{
+    const p = getProgress(s);
+    const card = document.createElement('div');
+    card.className = 'cl-card';
+    const col = stageColor(s.status);
+    card.style.borderTopColor = col;
+    let inner = `<div class="cl-header"><h3>${s.code}: ${s.name}</h3><span class="cl-pct">${p}%</span><div class="cl-bar"><div class="cl-bar-fill" style="width:${p}%;background:${col}"></div></div></div>`;
+    s.checklist.forEach((g,gi)=>{
+      inner += `<div class="cl-group-title">${g.group}</div>`;
+      g.items.forEach((item,ii)=>{
+        const uid = `cl-${si}-${gi}-${ii}`;
+        inner += `<div class="cl-item">
+          <input type="checkbox" id="${uid}" ${item.done?'checked':''} onchange="toggleCheck(${si},${gi},${ii},this.checked)">
+          <label for="${uid}">${item.t}</label>
+        </div>`;
+      });
+    });
+    card.innerHTML = inner;
+    c.appendChild(card);
+  });
+}
+
+function renderAssets(){
+  const c = document.getElementById('assetContainer');
+  c.innerHTML = '';
+  ASSETS.forEach(cat=>{
+    let html = `<div class="asset-category"><div class="asset-cat-title">${cat.cat}</div><div class="asset-grid">`;
+    cat.items.forEach(a=>{
+      html += `<a href="${a.file}" class="asset-row">
+        <div class="file-icon ${a.ext}">${a.ext.toUpperCase()}</div>
+        <div class="asset-info">
+          <div class="name">${a.name}</div>
+          <div class="meta">${a.stage} · ${a.desc}</div>
+        </div>
+        <span class="open-arrow">→</span>
+      </a>`;
+    });
+    html += '</div></div>';
+    c.innerHTML += html;
+  });
+}
+
+function renderTimeline(){
+  const t = document.getElementById('tlTrack');
+  t.innerHTML = '';
+  STATE.stages.forEach((s,i)=>{
+    if(i>0){
+      const conn = document.createElement('div');
+      conn.className = 'tl-connector';
+      conn.textContent = '›';
+      t.appendChild(conn);
+    }
+    const node = document.createElement('div');
+    node.className = `tl-node s-${s.status}`;
+    node.innerHTML = `
+      <div class="tl-dot">${s.code.replace('WS','').replace('DW','D')}</div>
+      <div class="tl-label">${s.code}</div>
+      <div class="tl-sublabel">${s.name}</div>
+      <div class="tl-status">${statusLabel(s.status)}</div>`;
+    t.appendChild(node);
+  });
+  // Legend
+  const leg = document.getElementById('legendBox');
+  leg.innerHTML = STATUSES.map(s=>`<span style="display:flex;align-items:center;gap:.35rem"><span style="width:8px;height:8px;border-radius:50%;background:${s.color}"></span>${s.label}</span>`).join('');
+}
+
+// ════════════════════════════════════════════════════
+// INTERACTION
+// ════════════════════════════════════════════════════
+function changeStatus(si,newStatus){
+  STATE.stages[si].status = newStatus;
+  renderAll();
+}
+
+function toggleCheck(si,gi,ii,val){
+  STATE.stages[si].checklist[gi].items[ii].done = val;
+  renderAll();
+}
+
+// Tab switching
+document.querySelectorAll('.nav-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('tab-'+this.dataset.tab).classList.add('active');
+  });
+});
+
+// Init
+renderAll();
+</script>
+</body>
+</html>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMX Decision Workshop 1 - Session Outputs - AKT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #F7F5F2;
+            color: #2D2015;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2D2015 0%, #1a120c 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 4px solid #F9A13A;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #F9A13A;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 0.25rem;
+        }
+
+        .client-bar {
+            background: white;
+            padding: 1.25rem 2rem;
+            border-bottom: 1px solid #E0D8CE;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .client-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .client-info strong {
+            color: #2D2015;
+            font-weight: 600;
+        }
+
+        .client-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .session-meta {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .session-meta strong {
+            color: #2D2015;
+            display: block;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .stats-bar {
+            background: #F7F5F2;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #E0D8CE;
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #F9A13A;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
+        .toolbar {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #E0D8CE;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #E0D8CE;
+            background: white;
+            color: #2D2015;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: #F9A13A;
+            color: #F9A13A;
+        }
+
+        .filter-btn.active {
+            background: #F9A13A;
+            color: white;
+            border-color: #F9A13A;
+        }
+
+        .export-button {
+            background: #F9A13A;
+            color: #2D2015;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .export-button:hover {
+            background: #E89121;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(249, 161, 58, 0.3);
+        }
+
+        .content {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .decision-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .decision-card {
+            background: white;
+            border: 1px solid #E0D8CE;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .decision-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            border-color: #F9A13A;
+        }
+
+        .decision-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .decision-id-title {
+            flex: 1;
+        }
+
+        .decision-id {
+            color: #F9A13A;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+
+        .decision-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2D2015;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .status-decided {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .status-deferred {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .status-escalated {
+            background: #FFEBEE;
+            color: #C62828;
+        }
+
+        .decision-outcome {
+            background: #F7F5F2;
+            padding: 1rem;
+            border-left: 3px solid #F9A13A;
+            border-radius: 2px;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            color: #2D2015;
+            line-height: 1.6;
+        }
+
+        .decision-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-item {
+            font-size: 0.85rem;
+        }
+
+        .detail-label {
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.75rem;
+        }
+
+        .detail-value {
+            color: #2D2015;
+            font-weight: 500;
+        }
+
+        .rationale-dependencies {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #E0D8CE;
+            display: none;
+        }
+
+        .rationale-dependencies.expanded {
+            display: block;
+        }
+
+        .expand-button {
+            background: none;
+            border: none;
+            color: #F9A13A;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 0.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .expand-button:hover {
+            color: #E89121;
+        }
+
+        .rationale-block, .dependencies-block {
+            margin-bottom: 1rem;
+        }
+
+        .rationale-block:last-child, .dependencies-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .block-title {
+            color: #2D2015;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .block-content {
+            color: #2D2015;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .export-section {
+            background: white;
+            border: 1px solid #E0D8CE;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .export-section h3 {
+            color: #2D2015;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .csv-preview {
+            background: #2D2015;
+            color: #E0D8CE;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            overflow-x: auto;
+            margin: 1rem 0;
+            max-height: 200px;
+        }
+
+        .preview-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .export-buttons-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .decision-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .decision-details {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                gap: 1.5rem;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .export-buttons-group {
+                flex-direction: column;
+            }
+
+            .export-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">AKT <span>INTELLIGENCE</span></div>
+        <h1>Decision Workshop 1: Session Outputs</h1>
+        <p>E2E Survey Process, Intake Form & Platform Setup</p>
+    </div>
+
+    <!-- Client Bar -->
+    <div class="client-bar">
+        <div class="client-info">
+            <strong>Nextera Energy Inc. — Grid Modernization Transformation Program (GMTP)</strong>
+            <p>Customer Managed Experience (CMX) Implementation</p>
+        </div>
+        <div class="session-meta">
+            <strong>March 26, 2026</strong>
+            <span>3-hour working session</span>
+        </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-value">12</div>
+            <div class="stat-label">Decisions Made</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">8</div>
+            <div class="stat-label">Attendees</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">8</div>
+            <div class="stat-label">Decided</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Deferred</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">1</div>
+            <div class="stat-label">Escalated</div>
+        </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterByStatus('all')">All Decisions</button>
+            <button class="filter-btn" onclick="filterByStatus('Decided')">Decided (8)</button>
+            <button class="filter-btn" onclick="filterByStatus('Deferred')">Deferred (3)</button>
+            <button class="filter-btn" onclick="filterByStatus('Escalated')">Escalated (1)</button>
+        </div>
+        <button class="export-button" onclick="exportCSV()">Export CSV for Intelligence Engine</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="decision-grid" id="decisionGrid"></div>
+
+        <!-- Export Section -->
+        <div class="export-section">
+            <h3>Export All Decisions</h3>
+            <div class="preview-label">CSV Preview (first 3 decisions):</div>
+            <div class="csv-preview" id="csvPreview"></div>
+            <div class="export-buttons-group">
+                <button class="export-button" onclick="exportCSV()">Download CSV</button>
+                <button class="filter-btn" onclick="exportJSON()">Download JSON</button>
+                <button class="filter-btn" onclick="copyPreviewToClipboard()">Copy Preview to Clipboard</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const decisions = [
+            {
+                id: "DW1-001",
+                title: "E2E Survey Process Design",
+                status: "Decided",
+                outcome: "9-stage process adopted: Intake → Approval → Participant Extract → Survey Build → Launch → Dashboard Access → Reminders → Close → Final Dashboard. Standard SLAs per stage.",
+                owner: "Program Management Office",
+                rationale: "Aligns with AKT standard methodology. Approved by all stakeholders.",
+                dependencies: "Depends on approval routing (DW1-003) and intake form fields (DW1-002)",
+                dueDate: null
+            },
+            {
+                id: "DW1-002",
+                title: "Survey Intake Form Fields",
+                status: "Decided",
+                outcome: "Moderate complexity (15 fields): Requestor, Program, Survey Type, Target Audience, ADKAR Segments, Launch Date, Language, Region, Estimated Population, History Flag, Sponsor, Priority, Duration Cap, Blackout Check, Special Requirements.",
+                owner: "Sophia Martinez (Qualtrics Admin)",
+                rationale: "Compromise between Exec preference for detailed and Ops preference for simple.",
+                dependencies: "Feeds into approval routing (DW1-003) and ticketing integration (DW2-006)",
+                dueDate: null
+            },
+            {
+                id: "DW1-003",
+                title: "Intake Form Routing",
+                status: "Decided",
+                outcome: "Two-tier approval: Regional requests → Regional Lead → CMX Program Lead. Cross-regional → CMX Program Lead → Sponsor (Patricia Chen).",
+                owner: "Patricia Chen",
+                rationale: "Balances regional autonomy with centralized governance.",
+                dependencies: "Requires intake form fields (DW1-002). Integrates with approval SLAs (DW1-009)",
+                dueDate: null
+            },
+            {
+                id: "DW1-004",
+                title: "Survey Templates Selected",
+                status: "Decided",
+                outcome: "MVP: NPS + ADKAR templates. BEST NPS deferred to Phase 2. Custom surveys require separate SOW.",
+                owner: "AKT (James Whitford)",
+                rationale: "MVP scope keeps complexity manageable while delivering core value.",
+                dependencies: "Informs dashboard design (DW2-003, DW2-004). Dashboard role views depend on template selection (DW2-001)",
+                dueDate: null
+            },
+            {
+                id: "DW1-005",
+                title: "Platform Access Matrix",
+                status: "Decided",
+                outcome: "Brand Admin: Sophia Martinez + IT Security. Division Admin: CMX Program Lead + 3 Regional Leads (FPL, NEER, Corporate). User access by role matrix approved.",
+                owner: "Vikram Gupta",
+                rationale: "Role-based access controls with clear escalation chain.",
+                dependencies: "Requires IT security approval. Feeds into platform setup (DW1-006)",
+                dueDate: null
+            },
+            {
+                id: "DW1-006",
+                title: "Contact Directory Source",
+                status: "Decided",
+                outcome: "Workday SFTP nightly extract. NEER supplemented by SAP SuccessFactors manual export monthly. Field worker SMS numbers sourced from regional HR.",
+                owner: "Robert Kim",
+                rationale: "Leverages existing data sources. NEER exception due to different system landscape.",
+                dependencies: "Requires Workday API approval (DW1-011). SMS/QR strategy depends on this (DW1-007)",
+                dueDate: null
+            },
+            {
+                id: "DW1-007",
+                title: "SMS/QR Distribution Strategy",
+                status: "Decided",
+                outcome: "Twilio selected as SMS provider. QR code posters at 47 depots and service centers. Dual-channel: SMS + QR for all field workers. Email for salaried workforce.",
+                owner: "Thomas Jackson + Sophia Martinez",
+                rationale: "Addresses field worker accessibility constraints. Twilio chosen for reliability and regional coverage.",
+                dependencies: "Requires contact directory source (DW1-006). SMS provider selection required.",
+                dueDate: null
+            },
+            {
+                id: "DW1-008",
+                title: "Survey Modification Window",
+                status: "Decided",
+                outcome: "5 business days post-approval to modify. After that, locked. One modification opportunity only. Emergency changes require Sponsor approval.",
+                owner: "CMX Program Lead",
+                rationale: "Balances agility with data integrity. Prevents mid-survey drift.",
+                dependencies: "Builds on approval SLAs (DW1-009). Coordinates with intake form routing (DW1-003)",
+                dueDate: null
+            },
+            {
+                id: "DW1-009",
+                title: "Approval SLAs",
+                status: "Decided",
+                outcome: "Standard request: 3 business days. Cross-regional: 5 business days. Emergency: 24 hours (Sponsor override). Auto-escalation after SLA breach.",
+                owner: "Program Management Office",
+                rationale: "Clear timelines reduce intake bottlenecks. Sponsor override for business-critical surveys.",
+                dependencies: "Integrates with intake form routing (DW1-003) and modification window (DW1-008)",
+                dueDate: null
+            },
+            {
+                id: "DW1-010",
+                title: "Spanish Translation Process",
+                status: "Deferred",
+                outcome: "Professional translation vendor TBD. AKT to provide 3 vendor options by April 10. Decision at next SteerCo.",
+                owner: "Angela Ramirez",
+                rationale: "Requires external vendor evaluation. FPL and other regions depend on this decision.",
+                dependencies: "Affects intake form fields (DW1-002) and survey launch readiness",
+                dueDate: "2026-04-10"
+            },
+            {
+                id: "DW1-011",
+                title: "NERC CIP Data Classification",
+                status: "Escalated",
+                outcome: "Legal review required. Survey data may be classified as operational data under NERC CIP. Vikram to schedule Legal review.",
+                owner: "Vikram Gupta + Legal",
+                rationale: "Regulatory compliance risk. Cannot proceed without Legal clarity on data handling requirements.",
+                dependencies: "Blocks data retention policy (technical enablement). May affect ticketing rules (DW2-006)",
+                dueDate: "2026-04-15"
+            },
+            {
+                id: "DW1-012",
+                title: "Glint Blackout Integration",
+                status: "Deferred",
+                outcome: "Blackout periods identified: Dec 15 - Jan 15 (holidays), September (Glint annual), Budget season (March). Calendar integration mechanism TBD.",
+                owner: "Michael Rothstein",
+                rationale: "Integration approach requires IT and Glint vendor coordination. Data validation needed before full implementation.",
+                dependencies: "Affects survey intake blackout check field (DW1-002). Coordinates with launch date selection",
+                dueDate: "2026-04-05"
+            }
+        ];
+
+        let currentFilter = "all";
+
+        function getStatusClass(status) {
+            const classes = {
+                "Decided": "status-decided",
+                "Deferred": "status-deferred",
+                "Escalated": "status-escalated"
+            };
+            return classes[status] || "";
+        }
+
+        function renderDecisions() {
+            const grid = document.getElementById("decisionGrid");
+            grid.innerHTML = "";
+
+            const filtered = currentFilter === "all"
+                ? decisions
+                : decisions.filter(d => d.status === currentFilter);
+
+            filtered.forEach(decision => {
+                const card = document.createElement("div");
+                card.className = "decision-card";
+                card.id = `card-${decision.id}`;
+
+                const dueDate = decision.dueDate ? `<span>${decision.dueDate}</span>` : '';
+                const dueDateHTML = decision.dueDate ? `<div class="detail-item"><div class="detail-label">Due Date</div><div class="detail-value">${dueDate}</div></div>` : '';
+
+                card.innerHTML = `
+                    <div class="decision-header">
+                        <div class="decision-id-title">
+                            <div class="decision-id">${decision.id}</div>
+                            <div class="decision-title">${decision.title}</div>
+                        </div>
+                        <div class="status-badge ${getStatusClass(decision.status)}">${decision.status}</div>
+                    </div>
+                    <div class="decision-outcome">${decision.outcome}</div>
+                    <div class="decision-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Owner</div>
+                            <div class="detail-value">${decision.owner}</div>
+                        </div>
+                        ${dueDateHTML}
+                    </div>
+                    <button class="expand-button" onclick="toggleExpanded('${decision.id}')">+ Details & Dependencies</button>
+                    <div class="rationale-dependencies" id="expand-${decision.id}">
+                        <div class="rationale-block">
+                            <div class="block-title">Rationale</div>
+                            <div class="block-content">${decision.rationale}</div>
+                        </div>
+                        <div class="dependencies-block">
+                            <div class="block-title">Dependencies</div>
+                            <div class="block-content">${decision.dependencies}</div>
+                        </div>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+
+            updateCSVPreview();
+        }
+
+        function toggleExpanded(decisionId) {
+            const expandDiv = document.getElementById(`expand-${decisionId}`);
+            const button = document.querySelector(`#card-${decisionId} .expand-button`);
+
+            expandDiv.classList.toggle("expanded");
+            button.textContent = expandDiv.classList.contains("expanded") ? "- Hide Details" : "+ Details & Dependencies";
+        }
+
+        function filterByStatus(status) {
+            currentFilter = status;
+
+            document.querySelectorAll(".filter-btn").forEach(btn => {
+                btn.classList.remove("active");
+            });
+            event.target.classList.add("active");
+
+            renderDecisions();
+        }
+
+        function generateCSVData() {
+            const headers = ["DecisionID", "Title", "Status", "Outcome", "Owner", "Rationale", "Dependencies", "DueDate"];
+            const rows = [];
+            rows.push(headers.join(","));
+
+            decisions.forEach(decision => {
+                const row = [
+                    decision.id,
+                    decision.title,
+                    decision.status,
+                    `"${decision.outcome.replace(/"/g, '""')}"`,
+                    decision.owner,
+                    `"${decision.rationale.replace(/"/g, '""')}"`,
+                    `"${decision.dependencies.replace(/"/g, '""')}"`,
+                    decision.dueDate || ""
+                ];
+                rows.push(row.join(","));
+            });
+
+            return rows;
+        }
+
+        function updateCSVPreview() {
+            const csvData = generateCSVData();
+            const preview = [csvData[0], csvData[1], csvData[2], csvData[3]].join("\n");
+            document.getElementById("csvPreview").textContent = preview + "\n...";
+        }
+
+        function exportCSV() {
+            const csvData = generateCSVData();
+            const csvContent = csvData.join("\n");
+
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "CMX_DW1_Session_Outputs.csv";
+            link.click();
+        }
+
+        function exportJSON() {
+            const jsonContent = JSON.stringify(decisions, null, 2);
+            const blob = new Blob([jsonContent], { type: "application/json;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "CMX_DW1_Session_Outputs.json";
+            link.click();
+        }
+
+        function copyPreviewToClipboard() {
+            const csvData = generateCSVData();
+            const fullCSV = csvData.join("\n");
+            navigator.clipboard.writeText(fullCSV).then(() => {
+                alert("Full CSV copied to clipboard!");
+            });
+        }
+
+        // Initialize
+        renderDecisions();
+    </script>
+</body>
+</html>

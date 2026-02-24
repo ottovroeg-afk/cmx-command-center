@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMX Pre-Workshop Questionnaire - AKT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #F7F5F2;
+            color: #2D2015;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2D2015 0%, #1a120c 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 4px solid #F9A13A;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #F9A13A;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 0.25rem;
+        }
+
+        .client-bar {
+            background: white;
+            padding: 1.25rem 2rem;
+            border-bottom: 1px solid #E0D8CE;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .client-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .client-info strong {
+            color: #2D2015;
+            font-weight: 600;
+        }
+
+        .client-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .status-badge {
+            background: #E8F5E9;
+            color: #2E7D32;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-badge::before {
+            content: "✓";
+            font-weight: bold;
+        }
+
+        .stats-bar {
+            background: #F7F5F2;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #E0D8CE;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #F9A13A;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
+        .toolbar {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #E0D8CE;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #E0D8CE;
+            background: white;
+            color: #2D2015;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: #F9A13A;
+            color: #F9A13A;
+        }
+
+        .filter-btn.active {
+            background: #F9A13A;
+            color: white;
+            border-color: #F9A13A;
+        }
+
+        .export-button {
+            background: #F9A13A;
+            color: #2D2015;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .export-button:hover {
+            background: #E89121;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(249, 161, 58, 0.3);
+        }
+
+        .content {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .response-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .respondent-card {
+            background: white;
+            border: 1px solid #E0D8CE;
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .respondent-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            border-color: #F9A13A;
+        }
+
+        .respondent-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2D2015;
+            margin-bottom: 0.75rem;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .role-executive {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .role-operational {
+            background: #E3F2FD;
+            color: #1565C0;
+        }
+
+        .role-technical {
+            background: #F3E5F5;
+            color: #6A1B9A;
+        }
+
+        .role-regional {
+            background: #E0F2F1;
+            color: #00695C;
+        }
+
+        .respondent-meta {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .respondent-meta strong {
+            color: #2D2015;
+        }
+
+        .completion-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #E0D8CE;
+            font-size: 0.85rem;
+        }
+
+        .completion-checkmark {
+            color: #2E7D32;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin-top: 2rem;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #2D2015 0%, #1a120c 100%);
+            color: white;
+            padding: 2rem;
+            border-bottom: 4px solid #F9A13A;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .modal-title {
+            flex: 1;
+        }
+
+        .modal-title h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .question-block {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #E0D8CE;
+        }
+
+        .question-block:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .block-title {
+            color: #F9A13A;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.25rem;
+        }
+
+        .question {
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: #2D2015;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .question-type {
+            font-size: 0.75rem;
+            color: #999;
+            margin-bottom: 0.35rem;
+            font-style: italic;
+        }
+
+        .answer {
+            background: #F7F5F2;
+            padding: 0.75rem 1rem;
+            border-left: 3px solid #F9A13A;
+            border-radius: 2px;
+            font-size: 0.9rem;
+            color: #2D2015;
+            word-break: break-word;
+        }
+
+        .na-answer {
+            background: #F5F5F5;
+            color: #999;
+            border-left-color: #CCC;
+            font-style: italic;
+        }
+
+        .export-section {
+            background: white;
+            border: 1px solid #E0D8CE;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .export-section h3 {
+            color: #2D2015;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .csv-preview {
+            background: #2D2015;
+            color: #E0D8CE;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            overflow-x: auto;
+            margin: 1rem 0;
+            max-height: 200px;
+        }
+
+        .preview-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .export-buttons-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .response-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .client-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .stats-bar {
+                gap: 1rem;
+            }
+
+            .modal {
+                padding: 1rem;
+            }
+
+            .modal-content {
+                max-height: 95vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">AKT <span>INTELLIGENCE</span></div>
+        <h1>CMX Pre-Workshop Questionnaire</h1>
+        <p>Foundations Workshop 4: Platform & Metadata Architecture</p>
+    </div>
+
+    <!-- Client Bar -->
+    <div class="client-bar">
+        <div class="client-info">
+            <strong>Nextera Energy Inc. — Grid Modernization Transformation Program (GMTP)</strong>
+            <p>Customer Managed Experience (CMX) Implementation</p>
+        </div>
+        <div class="status-badge">8 of 8 responses collected</div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-value">8</div>
+            <div class="stat-label">Total Responses</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Role Segments</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Completion Rate</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">26</div>
+            <div class="stat-label">Questions</div>
+        </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterByRole('all')">All Respondents</button>
+            <button class="filter-btn" onclick="filterByRole('Executive')">Executives (2)</button>
+            <button class="filter-btn" onclick="filterByRole('Operational')">Operational (1)</button>
+            <button class="filter-btn" onclick="filterByRole('Technical')">Technical (3)</button>
+            <button class="filter-btn" onclick="filterByRole('Regional')">Regional (2)</button>
+        </div>
+        <button class="export-button" onclick="exportCSV()">Export CSV for Intelligence Engine</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="response-grid" id="responseGrid"></div>
+
+        <!-- Export Section -->
+        <div class="export-section">
+            <h3>Export All Responses</h3>
+            <div class="preview-label">CSV Preview (first 3 data rows):</div>
+            <div class="csv-preview" id="csvPreview"></div>
+            <div class="export-buttons-group">
+                <button class="export-button" onclick="exportCSV()">Download CSV</button>
+                <button class="filter-btn" onclick="copyPreviewToClipboard()">Copy Preview to Clipboard</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Individual Responses -->
+    <div class="modal" id="responseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <h2 id="modalName"></h2>
+                    <p id="modalRole"></p>
+                </div>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // All respondent data
+        const respondents = [
+            {
+                id: "R_0001",
+                name: "Patricia Chen",
+                role: "Executive",
+                department: "Chief Transformation Officer Office",
+                title: "VP, Chief Transformation Officer Office",
+                responses: {
+                    Q1: "Patricia Chen",
+                    Q2: "Executive",
+                    Q3: "Chief Transformation Officer Office",
+                    Q4: "patricia.chen@nextera.com",
+                    Q5: "Single brand instance",
+                    Q6: "GTO;CMX Program Lead;IT Security;Qualtrics Admin",
+                    Q7: "Program leads;Regional leads",
+                    Q8: "By program",
+                    Q9: "16-30 surveys",
+                    Q10: "Executive/COMEX;CTO Portfolio;Program Lead",
+                    Q11: "Real-time",
+                    Q12: "Yes",
+                    Q13: "Enterprise;Region;Country;Department;Team;Individual manager",
+                    Q14: "Yes — full breakdown",
+                    Q15: null,
+                    Q16: null,
+                    Q17: null,
+                    Q18: null,
+                    Q19: null,
+                    Q20: null,
+                    Q21: null,
+                    Q22: null,
+                    Q23: "Region;Business Unit;Impacted Group;ADKAR Stage;Program;Wave;Moment;Manager hierarchy",
+                    Q24: "Auto-sync from HRIS",
+                    Q25: "Cross-program comparison dashboards must show trend over time. COMEX needs monthly refresh cadence. Need clear governance on who can create new surveys.",
+                    Q26: "Executive sponsorship solid. Ensure IT Security clears authentication approach before we commit platform spending."
+                }
+            },
+            {
+                id: "R_0002",
+                name: "Michael Rothstein",
+                role: "Executive",
+                department: "Human Resources",
+                title: "CHRO, Human Resources",
+                responses: {
+                    Q1: "Michael Rothstein",
+                    Q2: "Executive",
+                    Q3: "Human Resources",
+                    Q4: "michael.rothstein@nextera.com",
+                    Q5: "Shared tenant with access controls",
+                    Q6: "GTO;CMX Program Lead;IT Security",
+                    Q7: "HR directors;Nobody — centralized only",
+                    Q8: "By program",
+                    Q9: "16-30 surveys",
+                    Q10: "Executive/COMEX;Program Lead;Regional Manager;HR Director;All Managers",
+                    Q11: "Daily",
+                    Q12: "Yes",
+                    Q13: "Enterprise;Region;Country;Department;Team;Individual manager",
+                    Q14: "Yes — summary only",
+                    Q15: null,
+                    Q16: null,
+                    Q17: null,
+                    Q18: null,
+                    Q19: null,
+                    Q20: null,
+                    Q21: null,
+                    Q22: null,
+                    Q23: "Region;Business Unit;Impacted Group;Manager hierarchy",
+                    Q24: "Auto-sync from HRIS",
+                    Q25: "Dashboard must show individual manager scores with transparency threshold (e.g., show only if 5+ respondents). Glint integration needed to avoid duplicative surveys.",
+                    Q26: "CHRO commitment high. Keep contact center informed on survey windows — cannot compete with peak call volume."
+                }
+            },
+            {
+                id: "R_0003",
+                name: "Angela Ramirez",
+                role: "Operational",
+                department: "Operations — Florida Power & Light",
+                title: "Regional Manager, Operations — Florida Power & Light",
+                responses: {
+                    Q1: "Angela Ramirez",
+                    Q2: "Operational",
+                    Q3: "Operations — Florida Power & Light",
+                    Q4: "angela.ramirez@nextera.com",
+                    Q5: "Multi-division",
+                    Q6: "Program leads;Regional leads",
+                    Q7: "Regional leads;HR directors",
+                    Q8: "By survey type",
+                    Q9: "16-30 surveys",
+                    Q10: "Program Lead;Regional Manager",
+                    Q11: "Daily",
+                    Q12: "Not in MVP",
+                    Q13: "Region;Country;Department;Team;Individual manager",
+                    Q14: "Yes — summary only",
+                    Q15: "Workday",
+                    Q16: "Hybrid",
+                    Q17: "Email;Employee ID;Department;Region;Manager;Role level;Tenure;Language preference;Phone/SMS",
+                    Q18: "10000+",
+                    Q19: "3",
+                    Q20: null,
+                    Q21: null,
+                    Q22: null,
+                    Q23: "Region;Business Unit;Impacted Group;ADKAR Stage;Wave;Moment",
+                    Q24: "Hybrid",
+                    Q25: "FPL has 11000+ employees across distributed sites. 60% field workers no email. Must support SMS/QR code intake. Spanish language critical (union workforce). Regional dashboard drill-down to team level mandatory.",
+                    Q26: "FPL is ready to pilot. Strong regional leadership. Can handle early feedback and iterate fast."
+                }
+            },
+            {
+                id: "R_0004",
+                name: "Vikram Gupta",
+                role: "Technical",
+                department: "IT",
+                title: "Enterprise Architect, IT",
+                responses: {
+                    Q1: "Vikram Gupta",
+                    Q2: "Technical",
+                    Q3: "IT",
+                    Q4: "vikram.gupta@nextera.com",
+                    Q5: "Single brand instance",
+                    Q6: "GTO;CMX Program Lead;IT Security",
+                    Q7: "Program leads;Regional leads",
+                    Q8: "By program",
+                    Q9: "16-30 surveys",
+                    Q10: null,
+                    Q11: null,
+                    Q12: null,
+                    Q13: null,
+                    Q14: null,
+                    Q15: "Workday",
+                    Q16: "SFTP nightly batch",
+                    Q17: "Email;Employee ID;Department;Region;Manager;Role level;Tenure;Language preference;Phone/SMS",
+                    Q18: "10000+",
+                    Q19: "2",
+                    Q20: "Azure AD SSO",
+                    Q21: "API rate limits: 1000 calls/day. Firewall: NERC CIP compliance required. SAP S/4HANA backend with limited API exposure. Workday data export via SFTP only — no direct API access yet.",
+                    Q22: "Security review 4-6 weeks minimum. NERC CIP team must validate survey data classification. SOC2 controls audit required before production access.",
+                    Q23: "Region;Business Unit;Manager hierarchy",
+                    Q24: "Hybrid",
+                    Q25: "Workday SFTP extracts nightly with 1000 API call/day limit on Qualtrics side. Contact Directory deduplication needed (11000+ employees but inconsistent IDs). Azure AD SSO required for corporate access.",
+                    Q26: "Contact data quality is CRITICAL blocker. Workday extract has inconsistencies. Need data governance framework before go-live. NERC CIP compliance adds 4-6 weeks to security review."
+                }
+            },
+            {
+                id: "R_0005",
+                name: "Sophia Martinez",
+                role: "Technical",
+                department: "Platform Administration",
+                title: "Qualtrics Admin, Platform Administration",
+                responses: {
+                    Q1: "Sophia Martinez",
+                    Q2: "Technical",
+                    Q3: "Platform Administration",
+                    Q4: "sophia.martinez@nextera.com",
+                    Q5: "Multi-division",
+                    Q6: "CMX Program Lead;Qualtrics Admin",
+                    Q7: "Program leads;Regional leads;HR directors",
+                    Q8: "By program",
+                    Q9: "16-30 surveys",
+                    Q10: null,
+                    Q11: null,
+                    Q12: null,
+                    Q13: null,
+                    Q14: null,
+                    Q15: "Workday",
+                    Q16: "API real-time",
+                    Q17: "Email;Employee ID;Department;Region;Manager;Role level;Language preference",
+                    Q18: "5000-10000",
+                    Q19: "3",
+                    Q20: "Azure AD SSO",
+                    Q21: "Qualtrics XM API supports real-time distribution but webhook latency up to 5 minutes. Batch exports only for large Contact Directory syncs. No streaming.",
+                    Q22: "Security review 2-3 weeks for platform controls. Must align with IT's NERC CIP timeline.",
+                    Q23: "Region;Impacted Group;ADKAR Stage;Program;Wave;Moment;Manager hierarchy",
+                    Q24: "Auto-sync from HRIS",
+                    Q25: "Platform can handle 16-30 surveys Y1 but multi-division setup requires clear Brand Admin vs. Division Admin role definitions. Metadata maintenance should be automated from HRIS. Manual dedup overhead is unsustainable.",
+                    Q26: "Recommend centralized Brand Admin with Division-level access controls. Automate metadata sync to avoid manual updates."
+                }
+            },
+            {
+                id: "R_0006",
+                name: "Robert Kim",
+                role: "Technical",
+                department: "Data & Analytics",
+                title: "Data Engineer, Data & Analytics",
+                responses: {
+                    Q1: "Robert Kim",
+                    Q2: "Technical",
+                    Q3: "Data & Analytics",
+                    Q4: "robert.kim@nextera.com",
+                    Q5: "Shared tenant with access controls",
+                    Q6: "GTO;IT Security",
+                    Q7: "Program leads",
+                    Q8: "Flat structure",
+                    Q9: "16-30 surveys",
+                    Q10: null,
+                    Q11: null,
+                    Q12: null,
+                    Q13: null,
+                    Q14: null,
+                    Q15: "Workday",
+                    Q16: "SFTP nightly batch",
+                    Q17: "Email;Employee ID;Department;Region;Manager;Role level;Tenure",
+                    Q18: "10000+",
+                    Q19: "2",
+                    Q20: "Azure AD SSO",
+                    Q21: "SFTP pulls nightly but dedup logic needed. Employee IDs change (rehires, role changes). Region codes inconsistent (FPL vs NEER vs Corporate). No real-time sync.",
+                    Q22: "Data governance review required. Legal team needs 3-4 weeks for data retention/purge policy.",
+                    Q23: "Business Unit;ADKAR Stage;Program",
+                    Q24: "Manual quarterly update",
+                    Q25: "HRIS data quality is 2/5 — severe dedup and consistency issues. Workday extracts have duplicate employee records. Region codes don't standardize across systems. Metadata model must account for manual cleanup overhead.",
+                    Q26: "Cannot automate metadata sync without fixing source data quality first. Recommend manual quarterly audit cycle and staged automation."
+                }
+            },
+            {
+                id: "R_0007",
+                name: "Nathan Powell",
+                role: "Regional",
+                department: "NextEra Energy Resources (NEER)",
+                title: "Regional HR Lead, NextEra Energy Resources (NEER)",
+                responses: {
+                    Q1: "Nathan Powell",
+                    Q2: "Regional",
+                    Q3: "NextEra Energy Resources (NEER)",
+                    Q4: "nathan.powell@nextera.com",
+                    Q5: "Multi-division",
+                    Q6: "Regional leads;HR directors",
+                    Q7: "Regional leads",
+                    Q8: "By region",
+                    Q9: "6-15 surveys",
+                    Q10: "Regional Manager",
+                    Q11: "Weekly",
+                    Q12: "Not in MVP",
+                    Q13: "Region;Country;Team",
+                    Q14: "Yes — summary only",
+                    Q15: "SAP SuccessFactors",
+                    Q16: "API real-time",
+                    Q17: "Email;Employee ID;Region;Manager;Language preference;Phone/SMS",
+                    Q18: "5000-10000",
+                    Q19: "2",
+                    Q20: "Okta SSO",
+                    Q21: "NEER runs SAP SuccessFactors (not Workday). Fast-growing, distributed workforce (wind/solar sites). Transient worker population with high turnover. SMS critical for contractor/temporary staff without corporate email.",
+                    Q22: "Security review 3 weeks. Regional compliance varies by site.",
+                    Q23: "Region;Impacted Group;Wave",
+                    Q24: "Hybrid",
+                    Q25: "NEER is different beast — SAP SuccessFactors, not Workday. Transient worker data problems. Regional dashboard critical. Low data quality (2/5) for field operations.",
+                    Q26: "Recommend phased rollout: NEER corporate first, then field operations. Need regional autonomy in timing."
+                }
+            },
+            {
+                id: "R_0008",
+                name: "Sarah Chen",
+                role: "Regional",
+                department: "Corporate Services (Midwest + East)",
+                title: "Regional HR Lead, Corporate Services (Midwest + East)",
+                responses: {
+                    Q1: "Sarah Chen",
+                    Q2: "Regional",
+                    Q3: "Corporate Services (Midwest + East)",
+                    Q4: "sarah.chen@nextera.com",
+                    Q5: "Shared tenant with access controls",
+                    Q6: "GTO;Qualtrics Admin",
+                    Q7: "HR directors",
+                    Q8: "By program",
+                    Q9: "6-15 surveys",
+                    Q10: "Program Lead;All Managers",
+                    Q11: "Weekly",
+                    Q12: "Not in MVP",
+                    Q13: "Region;Country;Team",
+                    Q14: "No — NPS only",
+                    Q15: "Workday",
+                    Q16: "API real-time",
+                    Q17: "Email;Employee ID;Department;Region;Manager;Language preference",
+                    Q18: "1000-5000",
+                    Q19: "3",
+                    Q20: "Azure AD SSO",
+                    Q21: "Corporate Services is small, strategic (legal, finance, HR, CTO). Virtual teams across Midwest + East (CST, EST). No NERC CIP constraints.",
+                    Q22: "Security review 2 weeks. Standard corporate compliance.",
+                    Q23: "Business Unit;Program;Manager hierarchy",
+                    Q24: "Auto-sync from HRIS",
+                    Q25: "Corporate is low complexity. Small Contact Directory, high email penetration, standard Workday sync. Time-zone filtering for virtual teams would be nice.",
+                    Q26: "Happily align with global cadence once Platform & Dashboard architecture is finalized."
+                }
+            }
+        ];
+
+        // Question definitions for modal display
+        const questionDefinitions = {
+            blocks: [
+                {
+                    title: "Welcome & Demographics",
+                    questions: [
+                        { id: "Q1", text: "Full name", type: "text" },
+                        { id: "Q2", text: "Role segment", type: "single" },
+                        { id: "Q3", text: "Department", type: "text" },
+                        { id: "Q4", text: "Email", type: "text" }
+                    ]
+                },
+                {
+                    title: "Platform Architecture",
+                    questions: [
+                        { id: "Q5", text: "How should Qualtrics be structured?", type: "single" },
+                        { id: "Q6", text: "Who should have Brand Admin access?", type: "multi" },
+                        { id: "Q7", text: "Who should have Division Admin access?", type: "multi" },
+                        { id: "Q8", text: "How should surveys be organized in the platform?", type: "single" },
+                        { id: "Q9", text: "What is the expected survey volume in Year 1?", type: "single" }
+                    ]
+                },
+                {
+                    title: "Dashboard Architecture",
+                    questions: [
+                        { id: "Q10", text: "Which dashboard role views are needed?", type: "multi" },
+                        { id: "Q11", text: "What dashboard refresh frequency is acceptable?", type: "single" },
+                        { id: "Q12", text: "Should dashboards include cross-program comparison?", type: "single" },
+                        { id: "Q13", text: "What drill-down levels are needed?", type: "multi" },
+                        { id: "Q14", text: "Should dashboard include ADKAR stage visualization?", type: "single" }
+                    ]
+                },
+                {
+                    title: "Contact Directory & Data",
+                    questions: [
+                        { id: "Q15", text: "What is the primary HRIS source?", type: "single" },
+                        { id: "Q16", text: "How will contact data be delivered to Qualtrics?", type: "single" },
+                        { id: "Q17", text: "What employee attributes are available in HRIS?", type: "multi" },
+                        { id: "Q18", text: "How many employees are in the target Contact Directory?", type: "single" },
+                        { id: "Q19", text: "What data quality score would you give your current HRIS data? (1-5)", type: "scale" }
+                    ]
+                },
+                {
+                    title: "Integration & Security",
+                    questions: [
+                        { id: "Q20", text: "What authentication method is required?", type: "single" },
+                        { id: "Q21", text: "Are there API rate limits or firewall restrictions?", type: "text" },
+                        { id: "Q22", text: "What security review process is required before go-live?", type: "text" }
+                    ]
+                },
+                {
+                    title: "Metadata Model",
+                    questions: [
+                        { id: "Q23", text: "What metadata attributes are critical for filtering dashboards?", type: "multi" },
+                        { id: "Q24", text: "How should metadata be maintained over time?", type: "single" }
+                    ]
+                },
+                {
+                    title: "Open Points & Close",
+                    questions: [
+                        { id: "Q25", text: "What platform or technical concerns do you have?", type: "text" },
+                        { id: "Q26", text: "Additional comments?", type: "text" }
+                    ]
+                }
+            ]
+        };
+
+        let currentFilter = "all";
+
+        function getRoleColor(role) {
+            const colors = {
+                Executive: "role-executive",
+                Operational: "role-operational",
+                Technical: "role-technical",
+                Regional: "role-regional"
+            };
+            return colors[role] || "";
+        }
+
+        function renderResponses() {
+            const grid = document.getElementById("responseGrid");
+            grid.innerHTML = "";
+
+            const filtered = currentFilter === "all"
+                ? respondents
+                : respondents.filter(r => r.role === currentFilter);
+
+            filtered.forEach(respondent => {
+                const card = document.createElement("div");
+                card.className = "respondent-card";
+                card.onclick = () => openModal(respondent);
+
+                card.innerHTML = `
+                    <div class="respondent-name">${respondent.name}</div>
+                    <div class="role-badge ${getRoleColor(respondent.role)}">${respondent.role}</div>
+                    <div class="respondent-meta">
+                        <strong>Department:</strong><br>${respondent.department}
+                    </div>
+                    <div class="completion-status">
+                        <span class="completion-checkmark">✓</span>
+                        <span>100% Complete</span>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+
+            updateCSVPreview();
+        }
+
+        function filterByRole(role) {
+            currentFilter = role;
+
+            document.querySelectorAll(".filter-btn").forEach(btn => {
+                btn.classList.remove("active");
+            });
+            event.target.classList.add("active");
+
+            renderResponses();
+        }
+
+        function openModal(respondent) {
+            const modal = document.getElementById("responseModal");
+            document.getElementById("modalName").textContent = respondent.name;
+            document.getElementById("modalRole").textContent = `${respondent.role} • ${respondent.department}`;
+
+            const modalBody = document.getElementById("modalBody");
+            modalBody.innerHTML = "";
+
+            questionDefinitions.blocks.forEach(block => {
+                const blockDiv = document.createElement("div");
+                blockDiv.className = "question-block";
+
+                const blockTitle = document.createElement("div");
+                blockTitle.className = "block-title";
+                blockTitle.textContent = block.title;
+                blockDiv.appendChild(blockTitle);
+
+                block.questions.forEach(question => {
+                    const questionDiv = document.createElement("div");
+                    questionDiv.className = "question";
+
+                    const response = respondent.responses[question.id];
+                    const isNA = response === null;
+
+                    const questionText = document.createElement("div");
+                    questionText.className = "question-text";
+                    questionText.textContent = `${question.id}: ${question.text}`;
+                    questionDiv.appendChild(questionText);
+
+                    const answer = document.createElement("div");
+                    answer.className = `answer ${isNA ? 'na-answer' : ''}`;
+                    answer.textContent = isNA ? "Not applicable to this role" : response;
+                    questionDiv.appendChild(answer);
+
+                    blockDiv.appendChild(questionDiv);
+                });
+
+                modalBody.appendChild(blockDiv);
+            });
+
+            modal.classList.add("active");
+        }
+
+        function closeModal() {
+            document.getElementById("responseModal").classList.remove("active");
+        }
+
+        document.getElementById("responseModal").addEventListener("click", function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        function generateCSVData() {
+            const headers = ["ResponseID", "StartDate", "EndDate"];
+            for (let i = 1; i <= 26; i++) {
+                headers.push(`Q${i}`);
+            }
+
+            const rows = [];
+            rows.push(headers.join(","));
+
+            respondents.forEach((respondent, index) => {
+                const row = [
+                    respondent.id,
+                    `2026-02-${String(15 + index).padStart(2, '0')}T08:00:00Z`,
+                    `2026-02-${String(15 + index).padStart(2, '0')}T16:30:00Z`
+                ];
+
+                for (let i = 1; i <= 26; i++) {
+                    const qId = `Q${i}`;
+                    let value = respondent.responses[qId] || "";
+
+                    // Escape quotes in CSV
+                    if (value && typeof value === 'string' && (value.includes(",") || value.includes('"') || value.includes("\n"))) {
+                        value = `"${value.replace(/"/g, '""')}"`;
+                    }
+                    row.push(value);
+                }
+
+                rows.push(row.join(","));
+            });
+
+            return rows;
+        }
+
+        function updateCSVPreview() {
+            const csvData = generateCSVData();
+            const preview = [csvData[0], csvData[1], csvData[2], csvData[3]].join("\n");
+            document.getElementById("csvPreview").textContent = preview + "\n...";
+        }
+
+        function exportCSV() {
+            const csvData = generateCSVData();
+            const csvContent = csvData.join("\n");
+
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "CMX_WS4_PreWorkshop_Responses.csv";
+            link.click();
+        }
+
+        function copyPreviewToClipboard() {
+            const preview = document.getElementById("csvPreview").textContent.replace("\n...", "");
+            const fullCSV = generateCSVData().join("\n");
+            navigator.clipboard.writeText(fullCSV).then(() => {
+                alert("Full CSV copied to clipboard!");
+            });
+        }
+
+        // Initialize
+        renderResponses();
+    </script>
+</body>
+</html>

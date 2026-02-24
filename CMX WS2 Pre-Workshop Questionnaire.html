@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMX WS2 Pre-Workshop Questionnaire - AKT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #F7F5F2;
+            color: #2D2015;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2D2015 0%, #1a120c 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 4px solid #F9A13A;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #F9A13A;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 0.25rem;
+        }
+
+        .client-bar {
+            background: white;
+            padding: 1.25rem 2rem;
+            border-bottom: 1px solid #E0D8CE;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .client-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .client-info strong {
+            color: #2D2015;
+            font-weight: 600;
+        }
+
+        .client-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .status-badge {
+            background: #E8F5E9;
+            color: #2E7D32;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-badge::before {
+            content: "✓";
+            font-weight: bold;
+        }
+
+        .stats-bar {
+            background: #F7F5F2;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #E0D8CE;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #F9A13A;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
+        .toolbar {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #E0D8CE;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #E0D8CE;
+            background: white;
+            color: #2D2015;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: #F9A13A;
+            color: #F9A13A;
+        }
+
+        .filter-btn.active {
+            background: #F9A13A;
+            color: white;
+            border-color: #F9A13A;
+        }
+
+        .export-button {
+            background: #F9A13A;
+            color: #2D2015;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .export-button:hover {
+            background: #E89121;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(249, 161, 58, 0.3);
+        }
+
+        .content {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .response-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .respondent-card {
+            background: white;
+            border: 1px solid #E0D8CE;
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .respondent-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            border-color: #F9A13A;
+        }
+
+        .respondent-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2D2015;
+            margin-bottom: 0.75rem;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .role-executive {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .role-operational {
+            background: #E3F2FD;
+            color: #1565C0;
+        }
+
+        .role-technical {
+            background: #F3E5F5;
+            color: #6A1B9A;
+        }
+
+        .role-regional {
+            background: #E0F2F1;
+            color: #00695C;
+        }
+
+        .respondent-meta {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .respondent-meta strong {
+            color: #2D2015;
+        }
+
+        .completion-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #E0D8CE;
+            font-size: 0.85rem;
+        }
+
+        .completion-checkmark {
+            color: #2E7D32;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin-top: 2rem;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #2D2015 0%, #1a120c 100%);
+            color: white;
+            padding: 2rem;
+            border-bottom: 4px solid #F9A13A;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .modal-title {
+            flex: 1;
+        }
+
+        .modal-title h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .question-block {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #E0D8CE;
+        }
+
+        .question-block:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .block-title {
+            color: #F9A13A;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.25rem;
+        }
+
+        .question {
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: #2D2015;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .question-type {
+            font-size: 0.75rem;
+            color: #999;
+            margin-bottom: 0.35rem;
+            font-style: italic;
+        }
+
+        .answer {
+            background: #F7F5F2;
+            padding: 0.75rem 1rem;
+            border-left: 3px solid #F9A13A;
+            border-radius: 2px;
+            font-size: 0.9rem;
+            color: #2D2015;
+            word-break: break-word;
+        }
+
+        .na-answer {
+            background: #F5F5F5;
+            color: #999;
+            border-left-color: #CCC;
+            font-style: italic;
+        }
+
+        .export-section {
+            background: white;
+            border: 1px solid #E0D8CE;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .export-section h3 {
+            color: #2D2015;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .csv-preview {
+            background: #2D2015;
+            color: #E0D8CE;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            overflow-x: auto;
+            margin: 1rem 0;
+            max-height: 200px;
+        }
+
+        .preview-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .export-buttons-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .response-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .client-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .stats-bar {
+                gap: 1rem;
+            }
+
+            .modal {
+                padding: 1rem;
+            }
+
+            .modal-content {
+                max-height: 95vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">AKT <span>INTELLIGENCE</span></div>
+        <h1>CMX Pre-Workshop Questionnaire</h1>
+        <p>Workshop 2: Stakeholder Mapping & Communications</p>
+    </div>
+
+    <!-- Client Bar -->
+    <div class="client-bar">
+        <div class="client-info">
+            <strong>Nextera Energy Inc. — Grid Modernization Transformation Program (GMTP)</strong>
+            <p>Customer Managed Experience (CMX) Implementation</p>
+        </div>
+        <div class="status-badge">10 of 10 responses collected</div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-value">10</div>
+            <div class="stat-label">Total Responses</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Role Segments</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Completion Rate</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">25</div>
+            <div class="stat-label">Questions</div>
+        </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterByRole('all')">All Respondents</button>
+            <button class="filter-btn" onclick="filterByRole('Executive')">Executives (2)</button>
+            <button class="filter-btn" onclick="filterByRole('Operational')">Operational (3)</button>
+            <button class="filter-btn" onclick="filterByRole('Technical')">Technical (2)</button>
+            <button class="filter-btn" onclick="filterByRole('Regional')">Regional (3)</button>
+        </div>
+        <button class="export-button" onclick="exportCSV()">Export CSV for Intelligence Engine</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="response-grid" id="responseGrid"></div>
+
+        <!-- Export Section -->
+        <div class="export-section">
+            <h3>Export All Responses</h3>
+            <div class="preview-label">CSV Preview (first 3 data rows):</div>
+            <div class="csv-preview" id="csvPreview"></div>
+            <div class="export-buttons-group">
+                <button class="export-button" onclick="exportCSV()">Download CSV</button>
+                <button class="filter-btn" onclick="copyPreviewToClipboard()">Copy Preview to Clipboard</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Individual Responses -->
+    <div class="modal" id="responseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <h2 id="modalName"></h2>
+                    <p id="modalRole"></p>
+                </div>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // All respondent data for WS2
+        const respondents = [
+            {
+                id: "R_WS2_0001",
+                name: "Patricia Chen",
+                role: "Executive",
+                department: "Chief Transformation Officer Office",
+                title: "VP, Chief Transformation Officer Office",
+                responses: {
+                    Q1: "Patricia Chen",
+                    Q2: "Executive",
+                    Q3: "Chief Transformation Officer Office",
+                    Q4: "patricia.chen@nextera.com",
+                    Q5: "Core Team; Extended Core Team; Leaders",
+                    Q6: "5000+",
+                    Q7: "75-100%",
+                    Q8: "3",
+                    Q9: "Email; Teams; Town halls; Manager cascade; Intranet",
+                    Q10: "Yes active",
+                    Q11: "CFO visible, CTO office sponsoring. CEO will attend all-hands only.",
+                    Q12: "2",
+                    Q13: "Board concerns about change fatigue. CFO worried about customer impact timeline. Need reassurance messaging.",
+                    Q14: "ExCo; SteerCo; Monthly ops review",
+                    Q15: null,
+                    Q16: null,
+                    Q17: null,
+                    Q18: null,
+                    Q19: null,
+                    Q20: null,
+                    Q21: null,
+                    Q22: null,
+                    Q23: "External contractors and consultants who are part of change teams but not on payroll.",
+                    Q24: "Stakeholder fatigue and fragmented messaging to different groups.",
+                    Q25: "WS1 governance is solid. Now we need to map who actually needs what communication."
+                }
+            },
+            {
+                id: "R_WS2_0002",
+                name: "Michael Rothstein",
+                role: "Executive",
+                department: "Human Resources",
+                title: "CHRO, Human Resources",
+                responses: {
+                    Q1: "Michael Rothstein",
+                    Q2: "Executive",
+                    Q3: "Human Resources",
+                    Q4: "michael.rothstein@nextera.com",
+                    Q5: "Core Team; Extended Core Team; Directly Impacted Managers; Directly Impacted Workers",
+                    Q6: "2000-5000",
+                    Q7: "75-100%",
+                    Q8: "3",
+                    Q9: "Email; Teams; Manager cascade",
+                    Q10: "Yes active",
+                    Q11: "CHRO visible but stretched across multiple initiatives. VP of Talent reports but is quiet.",
+                    Q12: "2",
+                    Q13: "Union leadership in FPL concerned about job security messaging. Need coordinated labor relations approach.",
+                    Q14: "ExCo; SteerCo; Quarterly business review",
+                    Q15: null,
+                    Q16: null,
+                    Q17: null,
+                    Q18: null,
+                    Q19: null,
+                    Q20: null,
+                    Q21: null,
+                    Q22: null,
+                    Q23: "Union representatives and works councils in FPL and NEER regions.",
+                    Q24: "Labor relations coordination—cannot make missteps in union communication.",
+                    Q25: "Champion network is critical. We have union shop stewards who can be messengers if handled carefully."
+                }
+            },
+            {
+                id: "R_WS2_0003",
+                name: "Angela Ramirez",
+                role: "Operational",
+                department: "Operations — Florida Power & Light",
+                title: "HR Director, Operations — Florida Power & Light",
+                responses: {
+                    Q1: "Angela Ramirez",
+                    Q2: "Operational",
+                    Q3: "Operations — Florida Power & Light",
+                    Q4: "angela.ramirez@nextera.com",
+                    Q5: "Core Team; Extended Core Team; Leaders; Directly Impacted Managers; Directly Impacted Workers; Indirectly Impacted Workers",
+                    Q6: "5000+",
+                    Q7: "50-75%",
+                    Q8: "3",
+                    Q9: "Email; Teams; Manager cascade; SMS; Physical posters",
+                    Q10: "Yes active",
+                    Q11: "FPL VP of Operations visible. HR Director present. Union stewards engaged.",
+                    Q12: "3",
+                    Q13: "Union asking hard questions about automation and job losses. Field workers worried about shift changes. Safety messaging must be clear.",
+                    Q14: "Monthly ops review; Quarterly business review",
+                    Q15: "Managers use town halls (monthly), email, WhatsApp groups. Field teams rely on huddles before shifts and shift supervisors.",
+                    Q16: "2",
+                    Q17: "Yes active",
+                    Q18: "Large union workforce with stewards at major depots. Shift-based work makes synchronous communication hard.",
+                    Q19: "3",
+                    Q20: "Spanish-speaking communities (60%+ of workforce). Dialect variations across Gulf Coast.",
+                    Q21: "2",
+                    Q22: "Field worker huddles (15-min pre-shift), in-person town halls at major centers quarterly, SMS for urgent updates.",
+                    Q23: "Transient contractors and seasonal workers (hurricane response, vegetation management).",
+                    Q24: "Reaching 5000+ field workers with inconsistent email access and shift diversity.",
+                    Q25: "FPL is the pilot—we can move fast and translate Spanish. Just need approval authority and clear escalation paths."
+                }
+            },
+            {
+                id: "R_WS2_0004",
+                name: "David Park",
+                role: "Operational",
+                department: "Enterprise Transformation Office",
+                title: "Program Manager, Enterprise Transformation Office",
+                responses: {
+                    Q1: "David Park",
+                    Q2: "Operational",
+                    Q3: "Enterprise Transformation Office",
+                    Q4: "david.park@nextera.com",
+                    Q5: "Core Team; Extended Core Team; Leaders; Directly Impacted Managers",
+                    Q6: "5000+",
+                    Q7: "25-50%",
+                    Q8: "3",
+                    Q9: "Email; Teams; Manager cascade; Intranet",
+                    Q10: "Yes dormant",
+                    Q11: "ETO leadership visible. 14 regional VPs vary in sponsorship intensity.",
+                    Q12: "2",
+                    Q13: "Some regions (Carolinas, Illinois) skeptical. FPL and NEER most receptive. Rural areas fear centralization.",
+                    Q14: "Monthly ops review; Quarterly business review",
+                    Q15: "Regional managers cascade via email and monthly operations reviews. Quality varies—some regions add local context, others broadcast as-is.",
+                    Q16: "2",
+                    Q17: "Unsure",
+                    Q18: "Manager cascade is broken in 3 regions. Frontline doesn't know that change is coming. Field workers find out via customer calls.",
+                    Q19: "10+",
+                    Q20: "Regional cultural differences. Rural Midwest vs. urban Florida vs. NEER corporate. Language needs vary.",
+                    Q21: "2",
+                    Q22: "Regional ops forums (monthly) work when in-person, virtual attendance drops 40%.",
+                    Q23: "Executive advisors from customer org and board-appointed change advocates.",
+                    Q24: "Manager cascade breakdown across 14 regions with inconsistent maturity.",
+                    Q25: "Need regional leads who own stakeholder mapping by sub-region. Cannot be one-size-fits-all."
+                }
+            },
+            {
+                id: "R_WS2_0005",
+                name: "Thomas Jackson",
+                role: "Operational",
+                department: "Program Management Office",
+                title: "PMO Lead, Program Management Office",
+                responses: {
+                    Q1: "Thomas Jackson",
+                    Q2: "Operational",
+                    Q3: "Program Management Office",
+                    Q4: "thomas.jackson@nextera.com",
+                    Q5: "Core Team; Extended Core Team; Directly Impacted Workers",
+                    Q6: "2000-5000",
+                    Q7: "50-75%",
+                    Q8: "4",
+                    Q9: "Email; SMS; Physical posters; Teams",
+                    Q10: "Yes dormant",
+                    Q11: "PMO Director is sponsor. Program leadership is visible but program-specific messaging often overshadows CMX.",
+                    Q12: "3",
+                    Q13: "Field workers think this is another survey tool. Skepticism about who reads feedback and if it matters.",
+                    Q14: "Monthly ops review",
+                    Q15: "PMO sends weekly email updates. Field supervisors print and post at depots. Some use SMS for critical alerts.",
+                    Q16: "3",
+                    Q17: "Yes manageable",
+                    Q18: "Field workers unreachable via email. Peak productivity hours conflict with comms windows. Night shift crews see nothing.",
+                    Q19: "4-6",
+                    Q20: "Spanish needed. Some regional accents. Night shift comms gap.",
+                    Q21: "1",
+                    Q22: "Physical posters at depots (daily check-in areas), SMS alerts, shift supervisor verbal huddles, in-person town halls (quarterly).",
+                    Q23: "Contractors, on-call field workers, seasonal vegetation management crews.",
+                    Q24: "Night shift and field worker engagement—cannot reach them via email-first approach.",
+                    Q25: "SMS and physical comms are non-negotiable. Consider partnering with union stewards for credibility at field level."
+                }
+            },
+            {
+                id: "R_WS2_0006",
+                name: "Sophia Martinez",
+                role: "Technical",
+                department: "Platform Administration",
+                title: "Qualtrics Admin, Platform Administration",
+                responses: {
+                    Q1: "Sophia Martinez",
+                    Q2: "Technical",
+                    Q3: "Platform Administration",
+                    Q4: "sophia.martinez@nextera.com",
+                    Q5: null,
+                    Q6: null,
+                    Q7: null,
+                    Q8: null,
+                    Q9: null,
+                    Q10: null,
+                    Q11: null,
+                    Q12: null,
+                    Q13: null,
+                    Q14: null,
+                    Q15: null,
+                    Q16: null,
+                    Q17: null,
+                    Q18: null,
+                    Q19: null,
+                    Q20: null,
+                    Q21: "5",
+                    Q22: "Platform can send SMS notifications, email, and embedded web. Notification latency ~2 minutes.",
+                    Q23: "Metadata quality is biggest issue. Respondent contact info incomplete or outdated in 15% of records.",
+                    Q24: null,
+                    Q25: "Platform stakeholders: CTO office (visibility), HR (data privacy), IT (access controls), regional teams (reporting)."
+                }
+            },
+            {
+                id: "R_WS2_0007",
+                name: "Robert Kim",
+                role: "Technical",
+                department: "Data & Analytics",
+                title: "Data Engineer, Data & Analytics",
+                responses: {
+                    Q1: "Robert Kim",
+                    Q2: "Technical",
+                    Q3: "Data & Analytics",
+                    Q4: "robert.kim@nextera.com",
+                    Q5: null,
+                    Q6: null,
+                    Q7: null,
+                    Q8: null,
+                    Q9: null,
+                    Q10: null,
+                    Q11: null,
+                    Q12: null,
+                    Q13: null,
+                    Q14: null,
+                    Q15: null,
+                    Q16: null,
+                    Q17: null,
+                    Q18: null,
+                    Q19: null,
+                    Q20: null,
+                    Q21: "3",
+                    Q22: "Data team needs stakeholder segmentation for targeting. Contact directory integration pending.",
+                    Q23: "Employee ID consistency across regions. Regional systems use different ID schemes.",
+                    Q24: null,
+                    Q25: "Analytics team depends on clean respondent metadata. Current state is messy and manual cleanup is a blocker."
+                }
+            },
+            {
+                id: "R_WS2_0008",
+                name: "Linda Santos",
+                role: "Regional",
+                department: "Florida Power & Light",
+                title: "Regional HR Lead, Florida Power & Light",
+                responses: {
+                    Q1: "Linda Santos",
+                    Q2: "Regional",
+                    Q3: "Florida Power & Light",
+                    Q4: "linda.santos@nextera.com",
+                    Q5: "Core Team; Extended Core Team; Leaders; Directly Impacted Managers; Directly Impacted Workers; Indirectly Impacted Workers",
+                    Q6: "5000+",
+                    Q7: "50-75%",
+                    Q8: "4",
+                    Q9: "Email; SMS; Physical posters; Manager cascade",
+                    Q10: "Yes active",
+                    Q11: "FPL leadership team (VP Ops, HR Director) visible. Union stewards engaged as co-messengers.",
+                    Q12: "4",
+                    Q13: "Union is cautiously optimistic. Concerns about job automation but receptive if messaging emphasizes skill evolution and job security.",
+                    Q14: "Monthly ops review; Quarterly business review",
+                    Q15: "Monthly manager huddles (in-person at 6 major centers). Field supervisor cascades to crew huddles. Union stewards present for context.",
+                    Q16: "4",
+                    Q17: "Yes active",
+                    Q18: "Union shop stewards are credible messengers. Workforce organized and communicative. Spanish speakers (60%) prefer bilingual everything.",
+                    Q19: "1-3",
+                    Q20: "Spanish-speaking workforce dominant. Regional Spanish dialect differs from corporate translation (Spain Spanish). Need Florida-Spanish experts.",
+                    Q21: "5",
+                    Q22: "In-person manager huddles (monthly at 6 centers), union steward forums (monthly), SMS alerts for urgent updates, shift huddles (daily).",
+                    Q23: "None—FPL has tight integration and visibility.",
+                    Q24: "Translation quality and union buy-in on messaging.",
+                    Q25: "FPL is pilot-ready. We have active champion network (union stewards), mature comms infrastructure, and stable workforce. Let's go."
+                }
+            },
+            {
+                id: "R_WS2_0009",
+                name: "Nathan Powell",
+                role: "Regional",
+                department: "NextEra Energy Resources (NEER)",
+                title: "Regional HR Lead, NextEra Energy Resources (NEER)",
+                responses: {
+                    Q1: "Nathan Powell",
+                    Q2: "Regional",
+                    Q3: "NextEra Energy Resources (NEER)",
+                    Q4: "nathan.powell@nextera.com",
+                    Q5: "Core Team; Extended Core Team; Leaders; Directly Impacted Managers",
+                    Q6: "2000-5000",
+                    Q7: "75-100%",
+                    Q8: "2",
+                    Q9: "Email; Teams; Manager cascade; Intranet",
+                    Q10: "No but planned",
+                    Q11: "NEER COO visible in corporate meetings. Regional leadership sparse and inconsistent.",
+                    Q12: "2",
+                    Q13: "Transient workforce distrusts corporate messaging. High turnover means new hires never hear context. Skepticism about survey value.",
+                    Q14: "Quarterly business review",
+                    Q15: "Site managers use email. Wind/solar sites are remote—relies on monthly site visits or recorded videos. Consistency varies widely.",
+                    Q16: "2",
+                    Q17: "No",
+                    Q18: "Frontline worker turnover is 25%+ annually. By the time onboarding message reaches them, they're already forming opinions. Gap is timing and channel.",
+                    Q19: "7-10",
+                    Q20: "Wind sites in Texas/Oklahoma (English). Solar sites in Arizona (Spanish). Native American considerations in some Southwest locations.",
+                    Q21: "2",
+                    Q22: "Email to site managers (they're responsible for cascade), quarterly all-hands (mostly corporate), annual regional summit.",
+                    Q23: "Transient/contract labor at remote sites. Seasonal workers. New hires in first 30 days.",
+                    Q24: "High turnover and geographically dispersed sites make stakeholder mapping unstable.",
+                    Q25: "NEER needs phased rollout by site maturity. Consider pilot in stable corporate operations before field sites. Transient workforce may not be viable until we stabilize hiring."
+                }
+            },
+            {
+                id: "R_WS2_0010",
+                name: "Sarah Chen",
+                role: "Regional",
+                department: "Corporate Services (Midwest + East)",
+                title: "Regional HR Lead, Corporate Services (Midwest + East)",
+                responses: {
+                    Q1: "Sarah Chen",
+                    Q2: "Regional",
+                    Q3: "Corporate Services (Midwest + East)",
+                    Q4: "sarah.chen@nextera.com",
+                    Q5: "Core Team; Extended Core Team; Leaders",
+                    Q6: "100-500",
+                    Q7: "100%",
+                    Q8: "4",
+                    Q9: "Email; Teams; Intranet",
+                    Q10: "Yes active",
+                    Q11: "Corporate services leadership engaged. Strategic importance recognized even though headcount is small.",
+                    Q12: "4",
+                    Q13: "No resistance. Concern is about info asymmetry—want to be seen as partners in strategy, not just recipients of broadcasts.",
+                    Q14: "ExCo; SteerCo; Monthly ops review; Quarterly business review",
+                    Q15: "Virtual team meetings (twice weekly). Digital-first org. Slack for async comms. Managers actively discuss transformation context.",
+                    Q16: "5",
+                    Q17: "No",
+                    Q18: "None meaningful. Corporate service teams already engaged and informed.",
+                    Q19: "1-3",
+                    Q20: "Virtual teams across CST, EST, PST. Asynchronous communication is norm. Schedule meetings require creative time zones.",
+                    Q21: "4",
+                    Q22: "Weekly Slack updates, monthly strategy calls, quarterly review meetings, Intranet articles.",
+                    Q23: "Board-appointed advisors and external consultants embedded in transformation.",
+                    Q24: "Managing information asymmetry—keeping them engaged without overloading.",
+                    Q25: "Corporate services is mature and engaged. Can be quick turnaround. Consider them as change advocates for other regions."
+                }
+            }
+        ];
+
+        // Question definitions for modal display
+        const questionDefinitions = {
+            blocks: [
+                {
+                    title: "Demographics",
+                    questions: [
+                        { id: "Q1", text: "Full name", type: "text" },
+                        { id: "Q2", text: "Role segment", type: "single" },
+                        { id: "Q3", text: "Department", type: "text" },
+                        { id: "Q4", text: "Email", type: "text" }
+                    ]
+                },
+                {
+                    title: "Impacted Groups Identification",
+                    questions: [
+                        { id: "Q5", text: "Which impacted groups exist in your area of responsibility?", type: "multi" },
+                        { id: "Q6", text: "How many employees are in your largest impacted group?", type: "single" },
+                        { id: "Q7", text: "What percentage of impacted workers have corporate email?", type: "single" },
+                        { id: "Q8", text: "How would you rate current stakeholder engagement with the transformation?", type: "scale" },
+                        { id: "Q9", text: "What communication channels work best in your area?", type: "multi" },
+                        { id: "Q10", text: "Are there existing change champion networks we can leverage?", type: "single" }
+                    ]
+                },
+                {
+                    title: "Executive Stakeholder View",
+                    questions: [
+                        { id: "Q11", text: "Which executive sponsors are actively visible?", type: "text" },
+                        { id: "Q12", text: "How effective is current executive communication about the transformation?", type: "scale" },
+                        { id: "Q13", text: "What resistance patterns have you observed at the leadership level?", type: "text" },
+                        { id: "Q14", text: "What decision-making forums should CMX insights feed into?", type: "multi" }
+                    ],
+                    roleFilter: "Executive"
+                },
+                {
+                    title: "Operational Stakeholder View",
+                    questions: [
+                        { id: "Q15", text: "How do managers currently communicate change to their teams?", type: "text" },
+                        { id: "Q16", text: "What manager enablement exists for change communication?", type: "scale" },
+                        { id: "Q17", text: "Are there union or works council considerations?", type: "single" },
+                        { id: "Q18", text: "What is the biggest communication gap between leadership and frontline?", type: "text" }
+                    ],
+                    roleFilter: "Operational"
+                },
+                {
+                    title: "Regional Stakeholder View",
+                    questions: [
+                        { id: "Q19", text: "How many distinct stakeholder segments exist in your region?", type: "single" },
+                        { id: "Q20", text: "What cultural or language barriers affect communication?", type: "text" },
+                        { id: "Q21", text: "Do you have dedicated regional change leads?", type: "scale" },
+                        { id: "Q22", text: "What local engagement events work best?", type: "text" }
+                    ],
+                    roleFilter: "Regional"
+                },
+                {
+                    title: "Technical Stakeholder View",
+                    questions: [
+                        { id: "Q21", text: "Platform readiness for multi-channel communications (scale 1-5)", type: "scale" },
+                        { id: "Q22", text: "Key technical stakeholder communication needs", type: "text" },
+                        { id: "Q23", text: "Data quality concerns for stakeholder targeting", type: "text" }
+                    ],
+                    roleFilter: "Technical"
+                },
+                {
+                    title: "Open Points & Close",
+                    questions: [
+                        { id: "Q23", text: "What stakeholder groups are we missing or underserving?", type: "text" },
+                        { id: "Q24", text: "What is your biggest concern about stakeholder engagement?", type: "text" },
+                        { id: "Q25", text: "Additional comments?", type: "text" }
+                    ]
+                }
+            ]
+        };
+
+        let currentFilter = "all";
+
+        function getRoleColor(role) {
+            const colors = {
+                Executive: "role-executive",
+                Operational: "role-operational",
+                Technical: "role-technical",
+                Regional: "role-regional"
+            };
+            return colors[role] || "";
+        }
+
+        function renderResponses() {
+            const grid = document.getElementById("responseGrid");
+            grid.innerHTML = "";
+
+            const filtered = currentFilter === "all"
+                ? respondents
+                : respondents.filter(r => r.role === currentFilter);
+
+            filtered.forEach(respondent => {
+                const card = document.createElement("div");
+                card.className = "respondent-card";
+                card.onclick = () => openModal(respondent);
+
+                card.innerHTML = `
+                    <div class="respondent-name">${respondent.name}</div>
+                    <div class="role-badge ${getRoleColor(respondent.role)}">${respondent.role}</div>
+                    <div class="respondent-meta">
+                        <strong>Department:</strong><br>${respondent.department}
+                    </div>
+                    <div class="completion-status">
+                        <span class="completion-checkmark">✓</span>
+                        <span>100% Complete</span>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+
+            updateCSVPreview();
+        }
+
+        function filterByRole(role) {
+            currentFilter = role;
+
+            document.querySelectorAll(".filter-btn").forEach(btn => {
+                btn.classList.remove("active");
+            });
+            event.target.classList.add("active");
+
+            renderResponses();
+        }
+
+        function openModal(respondent) {
+            const modal = document.getElementById("responseModal");
+            document.getElementById("modalName").textContent = respondent.name;
+            document.getElementById("modalRole").textContent = `${respondent.role} • ${respondent.department}`;
+
+            const modalBody = document.getElementById("modalBody");
+            modalBody.innerHTML = "";
+
+            questionDefinitions.blocks.forEach(block => {
+                if (block.roleFilter && block.roleFilter !== respondent.role) {
+                    return;
+                }
+
+                const blockDiv = document.createElement("div");
+                blockDiv.className = "question-block";
+
+                const blockTitle = document.createElement("div");
+                blockTitle.className = "block-title";
+                blockTitle.textContent = block.title;
+                blockDiv.appendChild(blockTitle);
+
+                block.questions.forEach(question => {
+                    const questionDiv = document.createElement("div");
+                    questionDiv.className = "question";
+
+                    const response = respondent.responses[question.id];
+                    const isNA = response === null;
+
+                    const questionText = document.createElement("div");
+                    questionText.className = "question-text";
+                    questionText.textContent = `${question.id}: ${question.text}`;
+                    questionDiv.appendChild(questionText);
+
+                    const answer = document.createElement("div");
+                    answer.className = `answer ${isNA ? 'na-answer' : ''}`;
+                    answer.textContent = isNA ? "Not applicable to this role" : response;
+                    questionDiv.appendChild(answer);
+
+                    blockDiv.appendChild(questionDiv);
+                });
+
+                modalBody.appendChild(blockDiv);
+            });
+
+            modal.classList.add("active");
+        }
+
+        function closeModal() {
+            document.getElementById("responseModal").classList.remove("active");
+        }
+
+        document.getElementById("responseModal").addEventListener("click", function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        function generateCSVData() {
+            const headers = ["ResponseID", "StartDate", "EndDate"];
+            for (let i = 1; i <= 25; i++) {
+                headers.push(`Q${i}`);
+            }
+
+            const rows = [];
+            rows.push(headers.join(","));
+
+            respondents.forEach((respondent, index) => {
+                const row = [
+                    respondent.id,
+                    `2026-04-${String((index + 1) * 3).padStart(2, '0')}T08:00:00Z`,
+                    `2026-04-${String((index + 1) * 3).padStart(2, '0')}T17:00:00Z`
+                ];
+
+                for (let i = 1; i <= 25; i++) {
+                    const qId = `Q${i}`;
+                    let value = respondent.responses[qId] || "";
+
+                    // Escape quotes in CSV
+                    if (value && typeof value === 'string' && value.includes(",")) {
+                        value = `"${value.replace(/"/g, '""')}"`;
+                    }
+                    row.push(value);
+                }
+
+                rows.push(row.join(","));
+            });
+
+            return rows;
+        }
+
+        function updateCSVPreview() {
+            const csvData = generateCSVData();
+            const preview = [csvData[0], csvData[1], csvData[2], csvData[3]].join("\n");
+            document.getElementById("csvPreview").textContent = preview + "\n...";
+        }
+
+        function exportCSV() {
+            const csvData = generateCSVData();
+            const csvContent = csvData.join("\n");
+
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "CMX_WS2_PreWorkshop_Responses.csv";
+            link.click();
+        }
+
+        function copyPreviewToClipboard() {
+            const preview = document.getElementById("csvPreview").textContent.replace("\n...", "");
+            const fullCSV = generateCSVData().join("\n");
+            navigator.clipboard.writeText(fullCSV).then(() => {
+                alert("Full CSV copied to clipboard!");
+            });
+        }
+
+        // Initialize
+        renderResponses();
+    </script>
+</body>
+</html>

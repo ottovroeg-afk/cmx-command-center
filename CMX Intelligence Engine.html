@@ -1,0 +1,4910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CMX Intelligence Engine — AKT Global</title>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<style>
+:root{--o:#F9A13A;--od:#E8911A;--ob:#FEF0DB;--nv:#2D2015;--g:#737373;--gl:#E0E0E0;--gb:#F7F5F2;--t:#333;--w:#FFF;--bd:#E0D8CE;--ok:#468A4B;--er:#CC3300;--tl:#006462;--blue:#3366CC}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--gb);color:var(--t);min-height:100vh}
+header{background:var(--nv);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--o)}
+.logo{display:flex;align-items:center;gap:14px}
+.logo svg text{fill:var(--o)}
+.logo-d{width:1px;height:24px;background:rgba(255,255,255,.2)}
+.logo-t{font-size:14px;font-weight:600;color:var(--w)}.logo-t span{color:var(--o)}
+.hdr-r{color:rgba(255,255,255,.5);font-size:11px}
+main{max-width:1040px;margin:24px auto;padding:0 24px 80px}
+h2{font-size:22px;font-weight:700;color:var(--nv);margin-bottom:4px}
+.sub{font-size:13px;color:var(--g);margin-bottom:20px;line-height:1.5}
+
+/* Steps */
+.steps{display:flex;gap:0;margin-bottom:28px;background:var(--w);border-radius:10px;border:1px solid var(--bd);overflow:hidden}
+.step{flex:1;padding:14px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:.15s;border-right:1px solid var(--bd);position:relative}
+.step:last-child{border-right:none}
+.step:hover{background:var(--ob)}
+.step.act{background:var(--ob)}
+.step.done{background:#e8f5e9}
+.step .num{width:28px;height:28px;border-radius:50%;background:var(--bd);color:var(--g);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;transition:.2s}
+.step.act .num{background:var(--o);color:var(--w)}
+.step.done .num{background:var(--ok);color:var(--w)}
+.step .stxt{font-size:12px;font-weight:600;color:var(--g)}.step.act .stxt{color:var(--t)}.step.done .stxt{color:var(--ok)}
+.panel{display:none}.panel.act{display:block}
+
+/* Card */
+.card{background:var(--w);border-radius:10px;border:1px solid var(--bd);padding:24px;margin-bottom:16px}
+.cl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--o);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.cl::before{content:'';width:3px;height:12px;background:var(--o);border-radius:1px}
+
+/* Drop zone */
+.drop{border:2px dashed var(--bd);border-radius:10px;padding:40px 20px;text-align:center;cursor:pointer;transition:.2s;background:var(--gb)}
+.drop:hover,.drop.over{border-color:var(--o);background:var(--ob)}
+.drop h3{font-size:16px;color:var(--nv);margin-bottom:6px}
+.drop p{font-size:13px;color:var(--g)}
+.drop .icon{font-size:36px;margin-bottom:10px}
+
+/* Form */
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.fr3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+label{font-size:13px;font-weight:600}label .h{font-weight:400;color:var(--g)}
+input,select,textarea{padding:9px 12px;border:1.5px solid var(--bd);border-radius:6px;font-size:14px;font-family:inherit;color:var(--t);background:var(--w);outline:none;width:100%;transition:.15s}
+input:focus,select:focus,textarea:focus{border-color:var(--o)}
+textarea{resize:vertical;min-height:100px;line-height:1.5}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--o);color:var(--w);border:none;border-radius:8px;padding:11px 22px;font-size:14px;font-weight:700;cursor:pointer;transition:.15s;box-shadow:0 3px 10px rgba(249,161,58,.3)}
+.btn:hover:not(:disabled){background:var(--od);transform:translateY(-1px)}.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-s{padding:8px 14px;font-size:12px;font-weight:600;border-radius:6px;box-shadow:none}
+.btn-sec{background:var(--w);color:var(--t);border:1.5px solid var(--bd);box-shadow:none}.btn-sec:hover:not(:disabled){background:var(--gb);transform:none}
+.btn-ok{background:var(--ok)}.btn-ok:hover:not(:disabled){background:#3a7a3f}
+.acts{display:flex;align-items:center;gap:12px;margin-top:20px;flex-wrap:wrap}
+
+/* Analysis cards */
+.dec-card{background:var(--w);border:1px solid var(--bd);border-radius:10px;padding:20px;margin-bottom:14px;border-left:4px solid var(--o)}
+.dec-card h4{font-size:15px;font-weight:700;color:var(--nv);margin-bottom:4px}
+.dec-card .dec-num{font-size:11px;font-weight:700;color:var(--o);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.dec-card .insight{font-size:13px;color:var(--t);line-height:1.6;margin-bottom:10px;padding:10px 14px;background:var(--gb);border-radius:6px;border-left:3px solid var(--o)}
+.dec-card .risk{font-size:12px;color:var(--er);background:#fff5f5;padding:8px 12px;border-radius:6px;margin-top:8px}
+.dec-card .consensus{font-size:12px;padding:8px 12px;border-radius:6px;margin-top:8px}
+.consensus.high{background:#e8f5e9;color:var(--ok)}.consensus.low{background:#fff5f5;color:var(--er)}.consensus.med{background:var(--ob);color:var(--od)}
+
+/* Stats row */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.stat{background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:14px;text-align:center}
+.stat .val{font-size:24px;font-weight:700;color:var(--o)}
+.stat .lbl{font-size:11px;color:var(--g);margin-top:2px}
+
+/* Bar chart (CSS) */
+.bar-chart{margin:10px 0}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.bar-label{font-size:11px;color:var(--g);width:120px;text-align:right;flex-shrink:0}
+.bar-track{flex:1;height:18px;background:var(--gb);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:6px;font-size:10px;font-weight:600;color:var(--w);transition:width .5s ease}
+.bar-pct{font-size:11px;color:var(--g);width:36px;flex-shrink:0}
+
+/* Toast */
+.toast-box{position:fixed;top:20px;right:20px;z-index:2000;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{pointer-events:auto;background:var(--w);padding:12px 18px;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.15);display:flex;align-items:center;gap:10px;min-width:280px;animation:tIn .3s ease}
+@keyframes tIn{from{transform:translateX(300px);opacity:0}to{transform:none;opacity:1}}
+.toast.out{animation:tOut .3s ease forwards}@keyframes tOut{to{transform:translateX(300px);opacity:0}}
+.toast-ok{border-left:4px solid var(--ok)}.toast-er{border-left:4px solid var(--er)}.toast-wr{border-left:4px solid var(--o)}
+
+/* Output cards */
+.out-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.out-card{background:var(--w);border:1px solid var(--bd);border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:.15s}
+.out-card:hover{border-color:var(--o);box-shadow:0 4px 16px rgba(249,161,58,.12);transform:translateY(-2px)}
+.out-card .out-icon{font-size:32px;margin-bottom:8px}
+.out-card h4{font-size:14px;font-weight:700;color:var(--nv);margin-bottom:4px}
+.out-card p{font-size:12px;color:var(--g)}
+.out-card .out-tag{display:inline-block;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:600;margin-top:8px}
+.out-tag.pptx{background:var(--ob);color:var(--od)}
+.out-tag.xlsx{background:#e8f5e9;color:var(--ok)}
+.out-tag.docx{background:#e0f2f1;color:var(--tl)}
+
+footer{text-align:center;padding:20px;color:var(--g);font-size:11px;border-top:1px solid var(--bd);margin-top:40px}
+@media(max-width:768px){.steps{flex-direction:column}.fr,.fr3,.stats,.out-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<svg width="50" height="26" viewBox="0 0 86 46"><text x="0" y="36" font-family="Arial Black,Arial" font-weight="900" font-size="40">akt</text></svg>
+<div class="logo-d"></div>
+<div class="logo-t">CMX <span>Intelligence Engine</span></div>
+</div>
+<div class="hdr-r">Qualtrics → Intelligence → Artifacts</div>
+</header>
+<div class="toast-box" id="toastBox"></div>
+<main>
+<h2>CMX Foundations Workshop 1 — Intelligence Engine</h2>
+<p class="sub">Import Qualtrics survey responses → Auto-analyze stakeholder intelligence → Generate workshop artifacts (PPTX deck, XLSX tracker, briefing pack) — all pre-populated with real data.</p>
+
+<!-- STEPS -->
+<div class="steps" id="steps">
+<div class="step act" data-p="p1" onclick="goStep('p1')"><div class="num">1</div><div class="stxt">Configure</div></div>
+<div class="step" data-p="p2" onclick="goStep('p2')"><div class="num">2</div><div class="stxt">Import Data</div></div>
+<div class="step" data-p="p3" onclick="goStep('p3')"><div class="num">3</div><div class="stxt">Intelligence</div></div>
+<div class="step" data-p="p4" onclick="goStep('p4')"><div class="num">4</div><div class="stxt">Generate</div></div>
+</div>
+
+<!-- PANEL 1: CONFIGURE -->
+<div class="panel act" id="p1">
+<div class="card">
+<div class="cl">Client Context</div>
+<div class="fr">
+<div class="fg"><label>Client Name</label><input id="cName" placeholder="e.g. Nextera Energy"/></div>
+<div class="fg"><label>Program Name</label><input id="cProg" placeholder="e.g. Grid Modernization Transformation Program"/></div>
+</div>
+<div class="fr3">
+<div class="fg"><label>Workshop Date</label><input type="date" id="wDate"/></div>
+<div class="fg"><label>AKT Lead</label><input id="aLead" placeholder="e.g. James Whitford"/></div>
+<div class="fg"><label>Duration</label><input id="wDur" placeholder="e.g. 2.5 hours"/></div>
+</div>
+</div>
+<div class="card">
+<div class="cl">Additional Briefing Context <span class="h">(optional — paste any extra notes)</span></div>
+<div class="fg">
+<textarea id="extraNotes" rows="6" placeholder="Paste any briefing material, political dynamics, watch-outs, or context not captured in the Qualtrics survey..."></textarea>
+</div>
+</div>
+<div class="acts">
+<button class="btn" onclick="goStep('p2')">Next: Import Qualtrics Data →</button>
+</div>
+</div>
+
+<!-- PANEL 2: IMPORT -->
+<div class="panel" id="p2">
+<div class="card">
+<div class="cl">Import Qualtrics Response Export</div>
+<div class="drop" id="dropZone" onclick="document.getElementById('csvFile').click()">
+<div class="icon">📊</div>
+<h3>Drop Qualtrics CSV export here</h3>
+<p>Or click to browse. Accepts .csv files exported from Qualtrics.</p>
+<input type="file" id="csvFile" accept=".csv" style="display:none" onchange="handleFile(event)"/>
+</div>
+<div id="importStatus" style="margin-top:14px"></div>
+</div>
+<div class="card" id="dataPreview" style="display:none">
+<div class="cl">Data Preview</div>
+<div class="stats" id="respStats"></div>
+<div id="roleBreakdown"></div>
+</div>
+<div class="card">
+<div class="cl">Or: Use Demo Data (Nextera Energy)</div>
+<p style="font-size:13px;color:var(--g);margin-bottom:12px">Load simulated responses based on the Nextera Energy briefing to test the full pipeline.</p>
+<button class="btn btn-sec" onclick="loadDemoData()">Load Nextera Demo Data (12 respondents)</button>
+</div>
+<div class="acts">
+<button class="btn btn-sec" onclick="goStep('p1')">← Back</button>
+<button class="btn" id="btnAnalyze" onclick="runAnalysis()" disabled>Analyze Responses →</button>
+</div>
+</div>
+
+<!-- PANEL 3: INTELLIGENCE -->
+<div class="panel" id="p3">
+<div class="stats" id="intStats"></div>
+<div id="decisionAnalysis"></div>
+<div class="acts">
+<button class="btn btn-sec" onclick="goStep('p2')">← Back</button>
+<button class="btn" onclick="goStep('p4')">Next: Generate Artifacts →</button>
+</div>
+</div>
+
+<!-- PANEL 4: GENERATE -->
+<div class="panel" id="p4">
+<div class="card">
+<div class="cl">Generate Workshop Artifacts</div>
+<p class="sub" style="margin-bottom:20px">All artifacts are pre-populated with stakeholder intelligence from the Qualtrics responses. Click each to generate and download.</p>
+<div class="out-grid">
+<div class="out-card" onclick="generateDeck()">
+<div class="out-icon">📊</div>
+<h4>Workshop Deck</h4>
+<p>Pre-populated PPTX with governance charts, concern heatmaps, regional maps, and decision frameworks.</p>
+<span class="out-tag pptx">PPTX</span>
+</div>
+<div class="out-card" onclick="generateTracker()">
+<div class="out-icon">📋</div>
+<h4>Open Points Tracker</h4>
+<p>XLSX tracker seeded with open points extracted from responses, with owners and priorities.</p>
+<span class="out-tag xlsx">XLSX</span>
+</div>
+<div class="out-card" onclick="generateBriefing()">
+<div class="out-icon">📝</div>
+<h4>Facilitator Briefing</h4>
+<p>Per-decision intelligence summary: consensus, divergence, risk signals, and recommended positions.</p>
+<span class="out-tag docx">HTML → Print</span>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="cl">Generate All at Once</div>
+<div class="acts">
+<button class="btn btn-ok" onclick="generateAll()" style="font-size:16px;padding:14px 32px">⚡ Generate All 3 Artifacts</button>
+</div>
+</div>
+<div class="acts">
+<button class="btn btn-sec" onclick="goStep('p3')">← Back to Intelligence</button>
+</div>
+</div>
+
+</main>
+<footer>AKT Global — CMX Intelligence Engine v1.0 · Qualtrics → Intelligence → Artifacts</footer>
+<script>
+// CMX Intelligence Engine - Part 1: Constants, Question Map, and Demo Data
+// Deep enrichment with AKT CMX Methodology
+
+const STATE = {
+  clientName: '',
+  programName: '',
+  workshopDate: '',
+  aktLead: '',
+  duration: '',
+  extraNotes: '',
+  responses: [],
+  analysis: null,
+  currentStep: 'p1'
+};
+
+const CMX = {
+  // ADKAR Framework - Core change management model
+  adkar: {
+    stages: ['Awareness', 'Desire', 'Knowledge', 'Ability', 'Reinforcement'],
+    descriptions: {
+      Awareness: 'Understanding of the change and why it is happening',
+      Desire: 'Wanting to participate and support the change',
+      Knowledge: 'Understanding how to change; know-how',
+      Ability: 'Demonstrating ability to implement the change',
+      Reinforcement: 'Reinforcing the change to make sure it sticks'
+    },
+    thresholds: { floor: 3, ceiling: 5, alertTrigger: 2 },
+    npsThreshold: 20
+  },
+
+  // Impacted Groups Model - AKT proprietary segmentation framework
+  impactedGroups: [
+    {
+      id: 'core',
+      label: 'Core Team',
+      desc: 'Sponsors, transformation office, program leads, PMOs',
+      cmxPurpose: 'Benchmark group; compare with downstream groups'
+    },
+    {
+      id: 'extended',
+      label: 'Extended Core Team',
+      desc: 'Local change champions, HRBPs, super users, functional leads',
+      cmxPurpose: 'Early & ongoing tracking; influence on other groups'
+    },
+    {
+      id: 'leaders',
+      label: 'Leaders',
+      desc: 'Exec leadership, BU heads, country directors, SVPs',
+      cmxPurpose: 'Track alignment & commitment; sponsorship effectiveness'
+    },
+    {
+      id: 'dimgr',
+      label: 'Directly Impacted Managers',
+      desc: 'Line managers, team leads, mid-level managers',
+      cmxPurpose: 'Track coaching, readiness, communication impact'
+    },
+    {
+      id: 'diwork',
+      label: 'Directly Impacted Workers',
+      desc: 'End users, frontline staff, process/system users',
+      cmxPurpose: 'PRIMARY CMX FOCUS: identify pain points; heart of favorability'
+    },
+    {
+      id: 'iiwork',
+      label: 'Indirectly Impacted Workers',
+      desc: 'Adjacent teams, upstream/downstream partners',
+      cmxPurpose: 'Track ripple effects; integration success'
+    }
+  ],
+
+  // Survey Templates - Standard CMX survey types
+  surveyTemplates: ['NPS (Net Promoter Score)', 'ADKAR Survey', 'BEST NPS'],
+
+  // E2E Survey Process Lifecycle - 8-stage operational framework
+  e2eProcess: [
+    'Intake',
+    'Approvals',
+    'Participants',
+    'Survey Build',
+    'Launch',
+    'Dashboard Access 1',
+    'Reminders',
+    'Close',
+    'Dashboard Access 2'
+  ],
+
+  // Ticketing SLAs - Service level agreements for support
+  ticketingSLAs: {
+    firstTouch: '48 hours',
+    resolution: '5 business days',
+    escalationPath: 'N+1 Manager → CTO Portfolio → Sponsor',
+    redWordList: 'HRD Portfolio ownership (no escalation)'
+  },
+
+  // Dashboard Role Views - Role-based access control matrix
+  dashboardViews: [
+    { role: 'Executive/COMEX', access: 'Strategic KPIs, cross-program rollup, no respondent detail' },
+    { role: 'CTO/Portfolio', access: 'Portfolio + regional + country views, all programs' },
+    { role: 'Program Lead', access: 'Program-specific dashboard + ticketing management' },
+    { role: 'Regional/GM', access: 'Country/region-specific, team-level views' },
+    { role: 'Manager', access: 'Team-level dashboard, manager reports only' },
+    { role: 'GTO Admin', access: 'Full platform access, user management, security' }
+  ],
+
+  // Governance Cadence - Operational rhythm and review cycles
+  governanceCadence: {
+    monthly: 'Operational review (Change Manager + AKT)',
+    quarterly: 'Governance review (embed in Program SteerCo) + GTO mapping/dropdown updates + TextIQ refresh',
+    semiAnnual: 'Clean inactive users, review alert thresholds & ticketing triggers',
+    annual: 'Review templates/comms/language requirements, HR review sensitive word/red list'
+  },
+
+  // 8 WS1 Decisions - Core governance decisions framework
+  decisions: [
+    {
+      id: 1,
+      title: 'Roles & Responsibilities',
+      desc: 'Define CMX governance roles, decision authority, and RACI across hub (central) and spokes (regional/functional)',
+      stakeholders: ['Sponsor', 'Change Manager', 'Regional Leads', 'GTO Admin'],
+      aktLookFor: 'Clarity of role boundaries; single point of accountability per function; sponsor engagement level'
+    },
+    {
+      id: 2,
+      title: 'E2E Survey Process',
+      desc: 'End-to-end lifecycle from intake through reporting: 9-stage process (Intake→Approvals→Participants→Build→Launch→Dashboard→Reminders→Close→Final Dashboard)',
+      stakeholders: ['GTO', 'Program Lead', 'AKT'],
+      aktLookFor: 'Process maturity understanding; SLA expectations; deviation handling procedures'
+    },
+    {
+      id: 3,
+      title: 'Intake Form Design',
+      desc: 'Requestor-facing form: program details, survey type (NPS/ADKAR/BEST NPS), target audience, ADKAR segmentation, launch date, languages, regions',
+      stakeholders: ['Program Leads', 'GTO', 'Requestors'],
+      aktLookFor: 'Complexity tolerance; ADKAR segmentation understanding; ad-hoc vs standard request balance'
+    },
+    {
+      id: 4,
+      title: 'Global vs Regional Rights',
+      desc: 'Hub & Spoke balance: centralized design/approval with regional execution autonomy within guardrails',
+      stakeholders: ['Sponsor', 'Regional Leads', 'Change Manager'],
+      aktLookFor: 'Regional maturity variation; demand for autonomy vs control; cultural considerations'
+    },
+    {
+      id: 5,
+      title: 'Governance Model',
+      desc: 'Centralized, Decentralized, or Hybrid governance model selection; embed in existing transformation cadence',
+      stakeholders: ['Executive Sponsor', 'CTO', 'Change Director'],
+      aktLookFor: 'Alignment between executive vision and operational capacity; existing governance rhythm fit'
+    },
+    {
+      id: 6,
+      title: 'Fatigue Guardrails',
+      desc: 'Contact frequency rules: quarterly caps, buffer windows around Glint/annual surveys, seasonal blackouts, 5-7 min completion cap, participation targets',
+      stakeholders: ['HR Ops', 'Regional Leads', 'Program Leads'],
+      aktLookFor: 'Existing survey landscape; competing initiatives; field worker accessibility; opt-out mechanisms'
+    },
+    {
+      id: 7,
+      title: 'Operating Cadence',
+      desc: 'Survey rhythm: monthly pulse, quarterly deep-dive, event-driven, or hybrid; alignment with governance meetings',
+      stakeholders: ['Change Manager', 'Program Leads', 'Regional Leads'],
+      aktLookFor: 'Organizational bandwidth; regional capacity constraints; reporting cycle alignment'
+    },
+    {
+      id: 8,
+      title: 'Data Ownership & Quality',
+      desc: 'HRIS integration (Workday), Contact Directory build, metadata model, data retention (24-month policy), SSO authentication, API constraints',
+      stakeholders: ['IT/Data', 'GTO Admin', 'Legal/Compliance'],
+      aktLookFor: 'Data source reliability; known gaps; integration readiness; compliance requirements (NERC CIP, GDPR)'
+    }
+  ],
+
+  // Workshop Cascade - Full transformation sequence
+  workshopCascade: [
+    {
+      ws: 'WS1',
+      title: 'Process Design & Governance',
+      outputs: [
+        'Governance model decision',
+        'Roles RACI',
+        'Fatigue guardrails',
+        'Operating cadence',
+        'Data ownership framework'
+      ]
+    },
+    {
+      ws: 'WS2',
+      title: 'Stakeholder Mapping & Comms',
+      outputs: ['Impacted groups map', 'Communication plan', 'Stakeholder engagement strategy']
+    },
+    {
+      ws: 'WS3',
+      title: 'Survey Content & Design',
+      outputs: [
+        'NPS/ADKAR template selection',
+        'Question library',
+        'Translation requirements',
+        'ADKAR segmentation logic'
+      ]
+    },
+    {
+      ws: 'WS4',
+      title: 'Platform & Metadata Architecture',
+      outputs: ['Qualtrics configuration', 'Dashboard role views', 'Metadata model', 'API integration plan']
+    },
+    {
+      ws: 'DW1',
+      title: 'Decision Workshop 1: E2E Process, Intake, Platform',
+      outputs: [
+        'E2E process SLAs',
+        'Intake form specification',
+        'Platform access matrix',
+        'Data/directory setup'
+      ]
+    },
+    {
+      ws: 'DW2',
+      title: 'Decision Workshop 2: Dashboards & Ticketing',
+      outputs: [
+        'Dashboard designs per role',
+        'Alert thresholds',
+        'Ticketing SLAs',
+        'Escalation paths',
+        'Root cause structure'
+      ]
+    }
+  ],
+
+  // Facilitator Intelligence - Per-decision facilitation guides
+  facilitatorTemplates: {
+    1: {
+      warmUp:
+        'Start with a quick poll: "Who currently owns survey governance in your area?" to surface assumptions.',
+      watchOut:
+        'Executives may assume they own everything; regional leads may feel excluded. Surface this tension early.',
+      driveAlignment:
+        'Use a RACI matrix exercise — have each person place themselves on the matrix before revealing others\' placements.'
+    },
+    2: {
+      warmUp: 'Walk through the 9-stage E2E process visually. Ask: "Where does our current process break down?"',
+      watchOut:
+        'Technical teams may focus on platform steps while operational teams focus on people steps. Bridge this gap.',
+      driveAlignment: 'Map current-state vs future-state side by side. Focus on the 3 biggest gaps.'
+    },
+    3: {
+      warmUp:
+        'Show 3 intake form examples (Simple/Moderate/Detailed). Let the room react before discussing.',
+      watchOut:
+        'Over-engineering the intake form kills adoption. Push for "minimum viable fields" and iterate.',
+      driveAlignment:
+        'Use the "5-field test": if a requestor can\'t complete the form in 2 minutes, it\'s too complex.'
+    },
+    4: {
+      warmUp:
+        'Draw the Hub & Spoke model. Ask each regional lead: "What decisions do you NEED to make locally?"',
+      watchOut:
+        'Centralized advocates may underestimate regional variation. Use concrete examples (e.g., language, field workers, union rules).',
+      driveAlignment:
+        'Create a "decision rights matrix" — list 10 common decisions and vote: Global / Regional / Shared.'
+    },
+    5: {
+      warmUp:
+        'Present the 3 governance models with real-world examples. Ask: "Which feels closest to how we work today?"',
+      watchOut:
+        'Hybrid governance is the most popular answer but requires the most discipline. Challenge the room on what Hybrid means specifically.',
+      driveAlignment:
+        'Define 3 concrete scenarios (new survey request, escalation, quarterly review) and walk through each governance model\'s handling.'
+    },
+    6: {
+      warmUp:
+        'Share the "survey fatigue equation": Frequency × Length × Relevance = Tolerance. Ask: "Where are we today?"',
+      watchOut:
+        'Operations will want strict limits; executives may want more data. Find the balance by anchoring to employee experience.',
+      driveAlignment:
+        'Agree on 3 non-negotiable rules (e.g., max quarterly, 5-min cap, blackout periods) and 2 flexible guidelines.'
+    },
+    7: {
+      warmUp:
+        'Show a 12-month calendar. Ask: "When are the worst times to survey our people?" Map blackouts first.',
+      watchOut:
+        'Monthly cadence sounds good but exhausts small teams. Quarterly may miss critical moments. Push for hybrid with clear triggers.',
+      driveAlignment:
+        'Build the calendar together: plot existing surveys, blackouts, key program milestones, then find the CMX windows.'
+    },
+    8: {
+      warmUp:
+        'Ask the room: "On a scale of 1-10, how confident are you in our employee data quality?" — the answer will set the tone.',
+      watchOut:
+        'Data teams know the gaps but may not share openly. Create psychological safety for honest disclosure.',
+      driveAlignment:
+        'Create a "data readiness checklist" with 10 items. Score each red/amber/green. Focus workshop time on the reds.'
+    }
+  },
+
+  // Alert Thresholds - CMX monitoring and escalation criteria
+  alertThresholds: {
+    npsFloor: 20,
+    adkarFloor: 3,
+    trendModerate: '5-10% drop wave-over-wave',
+    trendCritical: '20%+ rise in negative sentiment',
+    participationMin: 0.7
+  },
+
+  // Platform Access Matrix - Role-based data access
+  accessMatrix: {
+    brandAdmin: 'Account-level: overall platform governance',
+    divisionAdmin: 'Program-level: applies to CMX programs',
+    programLead: 'Program dashboard + ticketing',
+    manager: 'Team-level dashboard only',
+    respondent: 'Survey access only'
+  }
+};
+
+// SECTION 2: QUESTIONS ARRAY - 33 questions in Qualtrics spec format
+const QUESTIONS = [
+  // Block 1: Welcome (Q1-Q4)
+  {
+    id: 'Q1',
+    block: 1,
+    text: 'What is your full name?',
+    type: 'text',
+    feedsDecisions: [],
+    aktInsight: 'Respondent identification and demographic enrichment.',
+    riskIndicators: []
+  },
+  {
+    id: 'Q2',
+    block: 1,
+    text: 'What is your role?',
+    type: 'single',
+    options: ['Executive', 'Operational', 'Technical', 'Regional'],
+    feedsDecisions: [4],
+    aktInsight: 'Role segmentation drives impacted group mapping and targeted analysis. AKT looks for clear role definition to enable manager-level dashboard filtering.',
+    riskIndicators: ['Respondents unclear on role classification', 'No mapping between role and organizational hierarchy']
+  },
+  {
+    id: 'Q3',
+    block: 1,
+    text: 'What is your department?',
+    type: 'text',
+    feedsDecisions: [4],
+    aktInsight: 'Department mapping enables regional and functional segmentation for sub-group analysis.',
+    riskIndicators: ['Inconsistent department naming across respondents']
+  },
+  {
+    id: 'Q4',
+    block: 1,
+    text: 'What is your email address?',
+    type: 'text',
+    feedsDecisions: [],
+    aktInsight: 'Contact information for escalation workflow and dashboard access provisioning.',
+    riskIndicators: []
+  },
+
+  // Block 2: Core (Q5-Q12)
+  {
+    id: 'Q5',
+    block: 2,
+    text: 'Which governance model best fits your organization?',
+    type: 'single',
+    options: ['Centralized (Global decision-making)', 'Decentralized (Regional autonomy)', 'Hybrid (Global framework + Regional execution)'],
+    feedsDecisions: [5],
+    aktInsight: 'Hybrid is AKT\'s recommended position for most enterprise clients because it balances global standardization with regional agility. Centralized preference from executives + Decentralized from regional heads signals governance tension requiring explicit Decision Workshop facilitation.',
+    riskIndicators: ['Executive-Regional split >50% divergence', 'No one selects Hybrid (suggests low change maturity)', 'All select same model (may indicate non-engagement)']
+  },
+  {
+    id: 'Q6',
+    block: 2,
+    text: 'How clear is the end-to-end (E2E) survey process at your organization? (1=Very unclear, 5=Completely clear)',
+    type: 'scale',
+    scaleMin: 1,
+    scaleMax: 5,
+    feedsDecisions: [2],
+    aktInsight: 'E2E clarity directly impacts SLA adherence and operational maturity. Scores below 3 indicate process fragmentation risk.',
+    riskIndicators: ['Mean score < 3', 'High variance across respondent groups', 'Technical vs operational score divergence']
+  },
+  {
+    id: 'Q7',
+    block: 2,
+    text: 'How concerned are you about survey fatigue among employees? (1=Not concerned, 5=Very concerned)',
+    type: 'scale',
+    scaleMin: 1,
+    scaleMax: 5,
+    feedsDecisions: [6],
+    aktInsight: 'Survey fatigue concern reflects understanding of employee experience. Scores above 4 indicate urgent need for fatigue guardrails. Field worker perspectives are critical here.',
+    riskIndicators: ['Executives <3, Operations >4 (disconnect)', 'No concern despite 20+ concurrent programs', 'Field worker accessibility not mentioned']
+  },
+  {
+    id: 'Q8',
+    block: 2,
+    text: 'How clear are role boundaries and responsibilities in your change initiatives? (1=Very unclear, 5=Completely clear)',
+    type: 'scale',
+    scaleMin: 1,
+    scaleMax: 5,
+    feedsDecisions: [1],
+    aktInsight: 'Role clarity is foundational to RACI governance and escalation effectiveness. Scores below 3 signal governance friction ahead.',
+    riskIndicators: ['Mean score < 3', 'Leaders >3 but Operations <2 (authority gap)', 'No clear sponsor identified']
+  },
+  {
+    id: 'Q9',
+    block: 2,
+    text: 'How concerned are you about data quality in your current employee feedback mechanisms? (1=Not concerned, 5=Very concerned)',
+    type: 'scale',
+    scaleMin: 1,
+    scaleMax: 5,
+    feedsDecisions: [8],
+    aktInsight: 'Data quality concern reflects known gaps in current infrastructure. Technical teams usually more aware than operations. AKT uses this to prioritize data readiness work.',
+    riskIndicators: ['Technical <2 (overconfidence)', 'Operations >4 and technical >4 (real gaps)', 'HRIS integration concerns not mentioned']
+  },
+  {
+    id: 'Q10',
+    block: 2,
+    text: 'Which success metrics matter most for your CMX program? (Select all that apply)',
+    type: 'multiple',
+    options: ['Survey completion rate', 'Action closure rate', 'Stakeholder engagement', 'Speed of insights', 'Data accuracy'],
+    feedsDecisions: [5, 7],
+    aktInsight: 'Metric selection reveals organizational CMX maturity. Action closure + speed are AKT priorities; completion-only reflects maturity gap. Accuracy focus signals strong data governance.',
+    riskIndicators: ['Completion rate only (immature CMX)', 'Speed without accuracy (risky decisions)', 'No action closure metric']
+  },
+  {
+    id: 'Q11',
+    block: 2,
+    text: 'How complex should your intake form be?',
+    type: 'single',
+    options: ['Simple (5-10 fields)', 'Moderate (10-20 fields)', 'Detailed (20+ fields)'],
+    feedsDecisions: [3],
+    aktInsight: 'Intake complexity must balance information capture with adoption. Simple is AKT default; justification needed for Detailed. Complexity kills adoption.',
+    riskIndicators: ['All select Detailed (scope creep risk)', 'No alignment across requestors on complexity', 'Operations favor Simple but Executives demand Detailed']
+  },
+  {
+    id: 'Q12',
+    block: 2,
+    text: 'What is your preferred survey operating cadence?',
+    type: 'single',
+    options: ['Monthly pulse', 'Quarterly deep dives', 'Event-driven (at milestones)', 'Hybrid (quarterly baseline + event-driven)', 'Ad-hoc as needed'],
+    feedsDecisions: [7],
+    aktInsight: 'Cadence must align with transformation timeline + governance rhythm. Hybrid is AKT default for most enterprises. Ad-hoc lacks governance discipline.',
+    riskIndicators: ['Monthly with 20+ programs (fatigue risk)', 'Ad-hoc (immature governance)', 'Misalignment with transformation cycle length']
+  },
+
+  // Block 3: Executive (Q13-Q16)
+  {
+    id: 'Q13',
+    block: 3,
+    text: 'How strong is executive sponsorship for this CMX initiative? (1=Weak, 5=Very strong)',
+    type: 'scale',
+    scaleMin: 1,
+    scaleMax: 5,
+    feedsDecisions: [1, 5],
+    aktInsight: 'Sponsorship strength is the #1 predictor of CMX success. Scores below 3 are red flag. Unanimous high scores may indicate non-engagement.',
+    riskIndicators: ['Mean <3', 'No named executive sponsor', 'Sponsor authority unclear']
+  },
+  {
+    id: 'Q14',
+    block: 3,
+    text: 'Which dashboard views do executives need? (Select all that apply)',
+    type: 'multiple',
+    options: ['Executive summary (1-page)', 'KPI dashboard (real-time)', 'Regional breakdown', 'Risk heatmap', 'Trend analysis'],
+    feedsDecisions: [5],
+    aktInsight: 'Dashboard design must match decision-making rhythm. Summary + KPI is AKT minimum. Risk heatmap signals mature escalation capability.',
+    riskIndicators: ['Demand for respondent-level detail (privacy/security risk)', 'No summary view (information overload)', 'Real-time demand without data infrastructure']
+  },
+  {
+    id: 'Q15',
+    block: 3,
+    text: 'How should escalations be handled?',
+    type: 'text',
+    feedsDecisions: [2],
+    aktInsight: 'Escalation criteria and SLAs are core to ticketing framework. Open text captures organizational context and decision authority structure.',
+    riskIndicators: ['Vague escalation path', 'No SLA mentioned', 'Unclear accountability chain']
+  },
+  {
+    id: 'Q16',
+    block: 3,
+    text: 'How ready is the organization for change? (1=Not ready, 5=Very ready)',
+    type: 'scale',
+    scaleMin: 1,
+    scaleMax: 5,
+    feedsDecisions: [5],
+    aktInsight: 'Change readiness assessment flags potential adoption barriers. Scores below 3 require pre-implementation coaching. High scores without ADKAR evidence suggest overconfidence.',
+    riskIndicators: ['Executive >4, Operations <2 (disconnect)', 'No coaching plan despite low scores', 'Readiness assumed rather than measured']
+  },
+
+  // Block 4: Operational (Q17-Q21)
+  {
+    id: 'Q17',
+    block: 4,
+    text: 'How confident are regional/field leaders in their capacity to support this initiative? (1=Not confident, 5=Very confident)',
+    type: 'scale',
+    scaleMin: 1,
+    scaleMax: 5,
+    feedsDecisions: [4, 7],
+    aktInsight: 'Regional capacity is the constraint for decentralized/hybrid models. Scores <3 signal need for centralized intake + support. Field leader capacity drives survey reach.',
+    riskIndicators: ['Regional <3 but model is Decentralized', 'Field worker accessibility assumed but confidence is low', 'No mention of regional variation']
+  },
+  {
+    id: 'Q18',
+    block: 4,
+    text: 'How are field workers distributed across your organization?',
+    type: 'text',
+    feedsDecisions: [4, 6],
+    aktInsight: 'Field worker distribution determines survey delivery strategy (web vs SMS vs QR). Email-only assumptions are major risk. AKT emphasizes accessibility as equity issue.',
+    riskIndicators: ['No field worker details', '>30% without email access but email-only survey planned', 'Geographic/language diversity not mentioned']
+  },
+  {
+    id: 'Q19',
+    block: 4,
+    text: 'What languages must the survey support? (Select all that apply)',
+    type: 'multiple',
+    options: ['Spanish', 'French', 'Mandarin', 'Other', 'English only'],
+    feedsDecisions: [4, 6],
+    aktInsight: 'Language support is AKT equity + compliance priority. English-only in global organization is risk flag. Professional translation non-negotiable.',
+    riskIndicators: ['English only with Spanish-speaking field workers', 'Translation cost not budgeted', 'Machine translation only']
+  },
+  {
+    id: 'Q20',
+    block: 4,
+    text: 'How much workload/fatigue impact do you anticipate from this initiative? (1=Minimal, 5=Severe)',
+    type: 'scale',
+    scaleMin: 1,
+    scaleMax: 5,
+    feedsDecisions: [6],
+    aktInsight: 'Workload impact assessment drives participation strategy. Scores >3 require incentives or reduced frequency. Field workers always perceive higher impact than corporate.',
+    riskIndicators: ['Operations >4 but no mitigation planned', 'Field workers not consulted', 'Impact assumed rather than measured']
+  },
+  {
+    id: 'Q21',
+    block: 4,
+    text: 'What existing feedback tools or surveys are currently in use?',
+    type: 'text',
+    feedsDecisions: [6],
+    aktInsight: 'Inventory of existing tools reveals deconfliction challenges and integration opportunities. Fragmented tools signal opportunity for CMX consolidation.',
+    riskIndicators: ['5+ different tools with no governance', 'Glint/engagement survey not mapped', 'No deconfliction process']
+  },
+
+  // Block 5: Technical (Q22-Q26)
+  {
+    id: 'Q22',
+    block: 5,
+    text: 'Will CMX integrate with your HRIS (e.g., Workday)?',
+    type: 'single',
+    options: ['Yes, via API', 'Yes, via file transfer', 'Not yet', 'Not needed'],
+    feedsDecisions: [8],
+    aktInsight: 'HRIS integration is foundational to scalability. API is gold standard; file transfer is workable but manual. No integration limits dashboard filtering by org hierarchy.',
+    riskIndicators: ['No integration planned with mature HRIS', 'API access blocked by IT security', 'Manual respondent upload at scale']
+  },
+  {
+    id: 'Q23',
+    block: 5,
+    text: 'What SSO provider(s) will be used?',
+    type: 'single',
+    options: ['Azure AD', 'Okta', 'Other', 'Not needed'],
+    feedsDecisions: [8],
+    aktInsight: 'SSO integration enables seamless access and respondent pre-population. Absence requires manual authentication (friction).',
+    riskIndicators: ['No SSO planned', 'Multiple SSO providers (integration complexity)', 'SSO provider not yet selected with launch approaching']
+  },
+  {
+    id: 'Q24',
+    block: 5,
+    text: 'What is your data retention policy?',
+    type: 'text',
+    feedsDecisions: [8],
+    aktInsight: 'AKT standard is 24 months (enables cohort analysis across 2 transformation waves). GDPR/CCPA/NERC CIP requirements may force shortening. Open text captures regulatory context.',
+    riskIndicators: ['No retention policy defined', 'Retention <6 months (insufficient trend analysis)', 'Retention >36 months without DPIA review']
+  },
+  {
+    id: 'Q25',
+    block: 5,
+    text: 'What are your API constraints and data architecture needs?',
+    type: 'text',
+    feedsDecisions: [8],
+    aktInsight: 'API constraints (rate limits, latency, webhook support) determine automation ceiling. Open text captures technical reality for integration planning.',
+    riskIndicators: ['No API access planned', 'Rate limits <1,000 calls/day (insufficient for high volume)', 'Real-time streaming required but batch-only available']
+  },
+  {
+    id: 'Q26',
+    block: 5,
+    text: 'How confident are you in your current metadata quality (employee IDs, departments, regions)? (1=Very poor, 5=Excellent)',
+    type: 'scale',
+    scaleMin: 1,
+    scaleMax: 5,
+    feedsDecisions: [8],
+    aktInsight: 'Metadata quality is silent killer of CMX scalability. Scores <3 require pre-launch data cleanup. Inconsistent IDs across systems is common risk.',
+    riskIndicators: ['Score <2', 'Awareness of gaps but no cleanup plan', 'No data governance owner']
+  },
+
+  // Block 6: Regional (Q27-Q30)
+  {
+    id: 'Q27',
+    block: 6,
+    text: 'What is the maturity level of your region\'s change management capability? (1=Immature, 5=Mature)',
+    type: 'scale',
+    scaleMin: 1,
+    scaleMax: 5,
+    feedsDecisions: [4, 7],
+    aktInsight: 'Regional maturity drives governance model feasibility. Low scores in multiple regions signal need for centralized support. Variation drives Hub & Spoke need.',
+    riskIndicators: ['High variance across regions', 'Mature region assumes Decentralized applies everywhere', 'No regional capacity mapping']
+  },
+  {
+    id: 'Q28',
+    block: 6,
+    text: 'What local customization is needed for your region?',
+    type: 'text',
+    feedsDecisions: [4],
+    aktInsight: 'Customization requests reveal cultural/operational differences. Language is primary; timing, messaging, union considerations also critical. Hub must accommodate without fragmenting.',
+    riskIndicators: ['Requests for complete custom survey (no standardization)', 'Language needs not mentioned', 'Union/cultural considerations dismissed']
+  },
+  {
+    id: 'Q29',
+    block: 6,
+    text: 'How available are regional leaders to support launch and ongoing governance? (1=Unavailable, 5=Highly available)',
+    type: 'scale',
+    scaleMin: 1,
+    scaleMax: 5,
+    feedsDecisions: [4, 7],
+    aktInsight: 'Regional leader availability is constraint for regional execution models. Scores <3 suggest centralized ownership is necessary. Availability directly impacts escalation SLA.',
+    riskIndicators: ['Low score but Decentralized model selected', 'Leadership turnover expected', 'No backup plan if leader leaves']
+  },
+  {
+    id: 'Q30',
+    block: 6,
+    text: 'What cultural or organizational considerations are unique to your region?',
+    type: 'text',
+    feedsDecisions: [4],
+    aktInsight: 'Cultural context (union presence, language, remote work patterns, field worker geography) drives messaging and cadence. AKT emphasizes regional respect in Hub & Spoke.',
+    riskIndicators: ['Generic response or no differences acknowledged', 'Union presence not mentioned', 'Field worker accessibility not considered']
+  },
+
+  // Block 7: Open Points (Q31-Q32)
+  {
+    id: 'Q31',
+    block: 7,
+    text: 'What are the key open items or blockers?',
+    type: 'text',
+    feedsDecisions: [2, 3, 8],
+    aktInsight: 'Open items reveal real constraints and dependencies. API access, data cleanup, vendor selection, budget, and resource gaps often appear here. AKT priorities them for governance workshop.',
+    riskIndicators: ['20+ open items', 'Critical blocker without resolution plan', 'No ownership assigned']
+  },
+  {
+    id: 'Q32',
+    block: 7,
+    text: 'What is your biggest concern about this initiative?',
+    type: 'text',
+    feedsDecisions: [1, 5, 6],
+    aktInsight: 'Biggest concern reveals risk perception and organizational narrative. Common themes: scope creep, data quality, field worker accessibility, survey fatigue, integration complexity. AKT addresses top 3.',
+    riskIndicators: ['Vague concern ("it\'s complicated")', 'Concern that contradicts stated governance model', 'No mitigation strategy proposed']
+  },
+
+  // Block 8: Close (Q33)
+  {
+    id: 'Q33',
+    block: 8,
+    text: 'Any additional comments or context?',
+    type: 'text',
+    feedsDecisions: [],
+    aktInsight: 'Open feedback captures nuance and tone. Enthusiasm vs skepticism signals adoption readiness.',
+    riskIndicators: []
+  }
+];
+
+// Alias for analysis engine compatibility
+const DECISIONS = CMX.decisions;
+
+// DEMO DATA - 12 Nextera Energy respondents in flat format
+const DEMO_DATA = [
+  // Executives (2)
+  {
+    role: 'Executive',
+    name: 'Patricia Chen',
+    email: 'patricia.chen@nextera.com',
+    department: 'Office of the Chief Transformation Officer',
+    Q5: 'Hybrid (Global framework + Regional execution)',
+    Q6: 3,
+    Q7: 4,
+    Q8: 2,
+    Q9: 4,
+    Q10: ['Survey completion rate', 'Speed of insights', 'Data accuracy'],
+    Q11: 'Moderate (10-20 fields)',
+    Q12: 'Quarterly deep dives',
+    Q13: 5,
+    Q14: ['Executive summary (1-page)', 'KPI dashboard (real-time)', 'Risk heatmap'],
+    Q15: 'Escalations should go to CTO office within 48 hours. We need clear decision trees.',
+    Q16: 4,
+    Q31: 'Workday extract mechanism TBD',
+    Q32: 'Scope creep — starting with CMX and expanding to include culture, benefits satisfaction',
+    Q33: 'Excited about data-driven approach to governance decisions.'
+  },
+  {
+    role: 'Executive',
+    name: 'Michael Rothstein',
+    email: 'michael.rothstein@nextera.com',
+    department: 'Human Resources',
+    Q5: 'Centralized (Global decision-making)',
+    Q6: 2,
+    Q7: 3,
+    Q8: 3,
+    Q9: 5,
+    Q10: ['Survey completion rate', 'Stakeholder engagement', 'Data accuracy'],
+    Q11: 'Detailed (20+ fields)',
+    Q12: 'Monthly pulse surveys',
+    Q13: 4,
+    Q14: ['Executive summary (1-page)', 'Trend analysis'],
+    Q15: 'HR should own escalations. Policy violations escalate to me directly.',
+    Q16: 3,
+    Q31: 'SMS provider selection pending',
+    Q32: 'Will this fragment our employee engagement data across too many platforms?',
+    Q33: 'Need integration with Glint blackout calendar.'
+  },
+
+  // Operational (4)
+  {
+    role: 'Operational',
+    name: 'Angela Ramirez',
+    email: 'angela.ramirez@nextera.com',
+    department: 'Operations — Florida Power & Light',
+    Q5: 'Hybrid (Global framework + Regional execution)',
+    Q6: 3,
+    Q7: 4,
+    Q8: 3,
+    Q9: 4,
+    Q10: ['Survey completion rate', 'Action closure rate', 'Stakeholder engagement'],
+    Q11: 'Moderate (10-20 fields)',
+    Q12: 'Monthly pulse surveys',
+    Q17: 4,
+    Q18: '2,200 field workers across Florida Gulf Coast, predominantly in substations and distribution centers. ~60% without email access.',
+    Q19: ['Spanish'],
+    Q20: 2,
+    Q21: 'Using Glint for culture surveys and pulse checks.',
+    Q31: 'Glint blackout alignment needed (Dec 15 - Jan 15, all surveys frozen)',
+    Q32: 'Ensuring field workers can respond via SMS/QR codes, not just web.',
+    Q33: 'FPL is the largest region. Need Spanish version urgently.'
+  },
+  {
+    role: 'Operational',
+    name: 'David Park',
+    email: 'david.park@nextera.com',
+    department: 'Enterprise Transformation Office',
+    Q5: 'Hybrid (Global framework + Regional execution)',
+    Q6: 4,
+    Q7: 3,
+    Q8: 4,
+    Q9: 3,
+    Q10: ['Action closure rate', 'Data accuracy'],
+    Q11: 'Simple (5-10 fields)',
+    Q12: 'Quarterly deep dives',
+    Q17: 3,
+    Q18: 'Distributed across all 14 regions with 70% salaried (email access) and 30% hourly/field.',
+    Q19: ['Spanish', 'English only'],
+    Q20: 1,
+    Q21: 'Internal feedback system (email-based). Will retire after CMX launch.',
+    Q31: 'Contact frequency rules: max 1 survey per quarter per employee',
+    Q32: 'Change fatigue — three major initiatives running simultaneously',
+    Q33: 'Important to keep intake simple to maximize field worker participation.'
+  },
+  {
+    role: 'Operational',
+    name: 'Jennifer Walsh',
+    email: 'jennifer.walsh@nextera.com',
+    department: 'Enterprise Transformation Office',
+    Q5: 'Decentralized (Regional autonomy)',
+    Q6: 2,
+    Q7: 5,
+    Q8: 2,
+    Q9: 4,
+    Q10: ['Survey completion rate', 'Stakeholder engagement'],
+    Q11: 'Simple (5-10 fields)',
+    Q12: 'Event-driven (at milestones)',
+    Q17: 2,
+    Q18: 'Field workers concentrated in Florida (35%), Carolinas (25%), Illinois (20%), other regions (20%).',
+    Q19: ['Spanish'],
+    Q20: 3,
+    Q21: 'Stand-alone survey sent via email to managers for cascade.',
+    Q31: 'Need manager escalation workflow for open themes',
+    Q32: 'Regions have different maturity and readiness. One-size-fits-all won\'t work.',
+    Q33: 'Regional leads need autonomy in timing and communication.'
+  },
+  {
+    role: 'Operational',
+    name: 'Thomas Jackson',
+    email: 'thomas.jackson@nextera.com',
+    department: 'Program Management Office',
+    Q5: 'Centralized (Global decision-making)',
+    Q6: 3,
+    Q7: 4,
+    Q8: 3,
+    Q9: 4,
+    Q10: ['Survey completion rate', 'Speed of insights'],
+    Q11: 'Moderate (10-20 fields)',
+    Q12: 'Monthly pulse surveys',
+    Q17: 3,
+    Q18: 'Mix of corporate office, service centers, and distributed field operations. ~4,000 field workers without reliable email.',
+    Q19: ['Spanish'],
+    Q20: 2,
+    Q21: 'Qualtrics XM community feedback (limited structure).',
+    Q31: 'Division Admin access rights definition pending',
+    Q32: 'Getting field workers to respond reliably is the biggest blocker.',
+    Q33: 'SMS/QR approach is critical. Email-only won\'t reach our people.'
+  },
+
+  // Technical (3)
+  {
+    role: 'Technical',
+    name: 'Vikram Gupta',
+    email: 'vikram.gupta@nextera.com',
+    department: 'Information Technology',
+    Q5: 'Hybrid (Global framework + Regional execution)',
+    Q6: 4,
+    Q7: 2,
+    Q8: 4,
+    Q9: 5,
+    Q10: ['Data accuracy'],
+    Q11: 'Detailed (20+ fields)',
+    Q12: 'Monthly pulse surveys',
+    Q22: 'Yes, via file transfer',
+    Q23: 'Yes (Azure AD)',
+    Q24: '24-month data retention policy. Data purged via automated script quarterly.',
+    Q25: 'SAP S/4HANA backend. Qualtrics API supported but rate-limited to 1,000 calls/day. Workday integration pending API access approval.',
+    Q26: 4,
+    Q31: 'Workday API access approval (Legal team sign-off)',
+    Q32: 'Data governance and compliance. NERC CIP requirements mean survey data might be classified as operational data.',
+    Q33: 'Contact Directory quality is key blocker. Need master data cleanup before go-live.'
+  },
+  {
+    role: 'Technical',
+    name: 'Sophia Martinez',
+    email: 'sophia.martinez@nextera.com',
+    department: 'Qualtrics Platform Administration',
+    Q5: 'Decentralized (Regional autonomy)',
+    Q6: 3,
+    Q7: 3,
+    Q8: 3,
+    Q9: 4,
+    Q10: ['Speed of insights', 'Data accuracy'],
+    Q11: 'Moderate (10-20 fields)',
+    Q12: 'Quarterly deep dives',
+    Q22: 'Yes, via API',
+    Q23: 'Yes (Azure AD)',
+    Q24: 'Compliance holds everything for 12 months. Historical data archived to cold storage.',
+    Q25: 'API constraints: webhook latency up to 5 minutes. Batch exports only, no real-time streaming.',
+    Q26: 3,
+    Q31: 'SMS provider vendor selection TBD (Twilio vs MessageBird)',
+    Q32: 'Duplicate respondent IDs across regions. Need deduplication logic.',
+    Q33: 'Existing Qualtrics infrastructure can handle the load but metadata enrichment is manual.'
+  },
+  {
+    role: 'Technical',
+    name: 'Robert Kim',
+    email: 'robert.kim@nextera.com',
+    department: 'Data & Analytics',
+    Q5: 'Hybrid (Global framework + Regional execution)',
+    Q6: 2,
+    Q7: 2,
+    Q8: 2,
+    Q9: 5,
+    Q10: ['Data accuracy'],
+    Q11: 'Detailed (20+ fields)',
+    Q12: 'Quarterly deep dives',
+    Q22: 'Not yet',
+    Q23: 'Yes (Other)',
+    Q24: 'Governed by Legal — unclear exactly. Probably 12-24 months.',
+    Q25: 'No real-time BI integration. Manual exports to Tableau. No API yet.',
+    Q26: 2,
+    Q31: 'Real-time dashboard integration not planned for MVP',
+    Q32: 'Metadata quality is atrocious. Region codes inconsistent, employee IDs change.',
+    Q33: 'Data engineering team is understaffed. Need to keep CMX simple or accept manual cleanup overhead.'
+  },
+
+  // Regional (3)
+  {
+    role: 'Regional',
+    name: 'Linda Santos',
+    email: 'linda.santos@nextera.com',
+    department: 'Human Resources — Florida Power & Light',
+    Q5: 'Decentralized (Regional autonomy)',
+    Q6: 3,
+    Q7: 5,
+    Q8: 2,
+    Q9: 4,
+    Q10: ['Survey completion rate', 'Stakeholder engagement'],
+    Q11: 'Simple (5-10 fields)',
+    Q12: 'Monthly pulse surveys',
+    Q27: 4,
+    Q28: 'FPL is mature and stable. Field workers are organized. Just need good communication cadence and clear role definitions.',
+    Q29: 4,
+    Q30: 'Spanish-speaking communities dominant. Union workforce — need careful change messaging. Established employee networks.',
+    Q31: 'None that I see — FPL is ready.',
+    Q32: 'Making sure union leadership is involved early.',
+    Q33: 'FPL can be the pilot region if needed. We have capacity.'
+  },
+  {
+    role: 'Regional',
+    name: 'Nathan Powell',
+    email: 'nathan.powell@nextera.com',
+    department: 'Human Resources — NextEra Energy Resources (NEER)',
+    Q5: 'Hybrid (Global framework + Regional execution)',
+    Q6: 2,
+    Q7: 4,
+    Q8: 3,
+    Q9: 4,
+    Q10: ['Speed of insights', 'Data accuracy'],
+    Q11: 'Moderate (10-20 fields)',
+    Q12: 'Quarterly deep dives',
+    Q27: 2,
+    Q28: 'NEER is younger and more distributed (wind farms, solar sites). Different maturity levels across sub-regions.',
+    Q29: 2,
+    Q30: 'Fast-growing workforce. High turnover in some sub-regions. Remote/transient workers.',
+    Q31: 'Need flexible launch timeline for different NEER sub-regions',
+    Q32: 'Talent retention is unstable — survey fatigue could drive more departures.',
+    Q33: 'Consider phased rollout: NEER corporate first, then field operations.'
+  },
+  {
+    role: 'Regional',
+    name: 'Sarah Chen',
+    email: 'sarah.chen@nextera.com',
+    department: 'Human Resources — Corporate Services Regions (Midwest + East)',
+    Q5: 'Hybrid (Global framework + Regional execution)',
+    Q6: 4,
+    Q7: 3,
+    Q8: 4,
+    Q9: 3,
+    Q10: ['Survey completion rate', 'Action closure rate'],
+    Q11: 'Moderate (10-20 fields)',
+    Q12: 'Monthly pulse surveys',
+    Q27: 3,
+    Q28: 'Corporate offices are smaller but strategic (legal, finance, HR, CTO). Need executive visibility but not field complexity.',
+    Q29: 3,
+    Q30: 'Midwest and East region leads work virtually and need async communication. Time zone considerations (CST, EST, even PST for some teams).',
+    Q31: 'None.',
+    Q32: 'Ensuring corporate surveys don\'t duplicate what Glint is already doing.',
+    Q33: 'Happy to align with global cadence once roles/process are clear.'
+  }
+];
+
+// Load demo data into STATE and populate form fields
+function loadDemoData() {
+  STATE.responses = DEMO_DATA;
+  STATE.clientName = 'Nextera Energy Inc.';
+  STATE.programName = 'Grid Modernization Transformation Program (GMTP)';
+  STATE.workshopDate = '2026-03-12';
+  STATE.aktLead = 'James Whitford';
+  STATE.duration = '2.5 hours';
+  STATE.extraNotes = 'Large utility company with 11,000+ employees across 14 operating regions. Transformation spans digital modernization, workforce enablement, and process optimization. Key challenges: field worker accessibility (60%+ without email in some regions), union presence, language diversity (primarily Spanish + English), and regional maturity variation. Critical success factor: survey fatigue management given competing initiatives.';
+
+  // Populate form fields
+  const cNameField = document.getElementById('cName');
+  const cProgField = document.getElementById('cProg');
+  const wDateField = document.getElementById('wDate');
+  const aLeadField = document.getElementById('aLead');
+  const wDurField = document.getElementById('wDur');
+  const extraNotesField = document.getElementById('extraNotes');
+
+  if (cNameField) cNameField.value = STATE.clientName;
+  if (cProgField) cProgField.value = STATE.programName;
+  if (wDateField) wDateField.value = STATE.workshopDate;
+  if (aLeadField) aLeadField.value = STATE.aktLead;
+  if (wDurField) wDurField.value = STATE.duration;
+  if (extraNotesField) extraNotesField.value = STATE.extraNotes;
+
+  showDataPreview();
+
+  const btnAnalyze = document.getElementById('btnAnalyze');
+  if (btnAnalyze) btnAnalyze.disabled = false;
+
+  toast('Nextera demo data loaded (12 respondents)', 'ok');
+}
+
+// Render data preview with HTML charts
+function showDataPreview() {
+  const responses = STATE.responses;
+
+  // Calculate role distribution
+  const roleCount = {};
+  responses.forEach(r => {
+    roleCount[r.role] = (roleCount[r.role] || 0) + 1;
+  });
+
+  // Render stats into #respStats
+  const respStatsEl = document.getElementById('respStats');
+  if (respStatsEl) {
+    respStatsEl.innerHTML = `
+      <div class="stat"><div class="val">${responses.length}</div><div class="lbl">Total Respondents</div></div>
+      <div class="stat"><div class="val">100%</div><div class="lbl">Completion Rate</div></div>
+      <div class="stat"><div class="val">${Object.keys(roleCount).length}</div><div class="lbl">Role Segments</div></div>
+      <div class="stat"><div class="val">${QUESTIONS.length}</div><div class="lbl">Total Questions</div></div>
+    `;
+  }
+
+  // Render role breakdown bar chart into #roleBreakdown
+  const roleBreakdownEl = document.getElementById('roleBreakdown');
+  if (roleBreakdownEl) {
+    const barChartHTML = Object.entries(roleCount).map(([role, count]) => {
+      const pct = Math.round((count / responses.length) * 100);
+      return `<div class="bar-row"><div class="bar-label">${role}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:var(--o)"><span>${count}</span></div></div><div class="bar-pct">${pct}%</div></div>`;
+    }).join('');
+
+    roleBreakdownEl.innerHTML = `
+      <div style="margin-top:16px">
+        <div style="font-size:13px;font-weight:700;margin-bottom:10px">Respondent Breakdown by Role:</div>
+        <div class="bar-chart">
+          ${barChartHTML}
+        </div>
+      </div>
+    `;
+  }
+
+  // Show preview container
+  const previewEl = document.getElementById('dataPreview');
+  if (previewEl) previewEl.style.display = 'block';
+}
+
+// Toast notification helper
+function toast(message, type) {
+  console.log(`[${type.toUpperCase()}] ${message}`);
+}
+
+// ========== PART 2: CSV PARSER & ANALYSIS ENGINE ==========
+// ============================================================================
+// CMX INTELLIGENCE ENGINE — PART 2: CSV PARSER & ANALYSIS ENGINE
+// Deep AKT/CMX methodology intelligence for governance workshops
+// ============================================================================
+
+// ============================================================================
+// SECTION 1: CSV PARSER & FILE HANDLER
+// ============================================================================
+
+function parseCsvLine(line) {
+  const result = [];
+  let current = '';
+  let insideQuotes = false;
+
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    const nextChar = line[i + 1];
+
+    if (char === '"') {
+      if (insideQuotes && nextChar === '"') {
+        current += '"';
+        i++;
+      } else {
+        insideQuotes = !insideQuotes;
+      }
+    } else if (char === ',' && !insideQuotes) {
+      result.push(current.trim());
+      current = '';
+    } else {
+      current += char;
+    }
+  }
+
+  result.push(current.trim());
+  return result;
+}
+
+function extractField(parts, headers, qId) {
+  const colIndex = headers.findIndex(h => h.toLowerCase().includes(qId.toLowerCase()));
+  if (colIndex === -1) return null;
+  if (colIndex >= parts.length) return null;
+  const value = parts[colIndex];
+  return value === '' ? null : value;
+}
+
+function handleFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const content = e.target.result;
+    const lines = content.split(/\r?\n/).filter(line => line.trim());
+
+    if (lines.length < 2) {
+      alert('CSV file must contain headers and data');
+      return;
+    }
+
+    const headerLine = lines[0];
+    const headers = parseCsvLine(headerLine);
+    const responses = [];
+
+    for (let i = 1; i < lines.length; i++) {
+      const parts = parseCsvLine(lines[i]);
+
+      const response = {
+        responseId: extractField(parts, headers, 'ResponseID') || `R${i}`,
+        name: extractField(parts, headers, 'Q1') || '',
+        role: extractField(parts, headers, 'Q2') || '',
+        department: extractField(parts, headers, 'Q3') || '',
+        email: extractField(parts, headers, 'Q4') || ''
+      };
+
+      // Extract all Q5-Q33 responses
+      for (let qNum = 5; qNum <= 33; qNum++) {
+        const qId = `Q${qNum}`;
+        const value = extractField(parts, headers, qId);
+        if (value !== null) {
+          response[qId] = value;
+        }
+      }
+
+      if (response.role && response.role.trim()) {
+        responses.push(response);
+      }
+    }
+
+    STATE.responses = responses;
+    console.log(`Loaded ${responses.length} responses from CSV`);
+
+    // Show data preview and enable analyze button (same as loadDemoData)
+    showDataPreview();
+
+    const btnAnalyze = document.getElementById('btnAnalyze');
+    if (btnAnalyze) btnAnalyze.disabled = false;
+
+    // Update import status
+    const importStatus = document.getElementById('importStatus');
+    if (importStatus) {
+      importStatus.innerHTML = `<div style="padding:10px;background:#e8f5e9;border-radius:6px;color:#2e7d32;font-weight:600">✓ Loaded ${responses.length} responses from CSV</div>`;
+    }
+
+    toast(`CSV loaded: ${responses.length} responses`, 'ok');
+  };
+
+  reader.readAsText(file);
+}
+
+function setupDragDrop() {
+  const dropZone = document.getElementById('dropZone');
+  if (!dropZone) return;
+
+  ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, preventDefaults, false);
+  });
+
+  function preventDefaults(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  ['dragenter', 'dragover'].forEach(eventName => {
+    dropZone.addEventListener(eventName, () => {
+      dropZone.classList.add('over');
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, () => {
+      dropZone.classList.remove('over');
+    });
+  });
+
+  dropZone.addEventListener('drop', (e) => {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    const fileInput = document.getElementById('csvFile');
+    if (fileInput && files.length > 0) {
+      fileInput.files = files;
+      handleFile({ target: { files } });
+    }
+  });
+}
+
+if (typeof DOMContentLoaded !== 'undefined' || document.readyState === 'loading') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupDragDrop);
+  } else {
+    setupDragDrop();
+  }
+} else {
+  setupDragDrop();
+}
+
+// ============================================================================
+// SECTION 2: DEEPLY ENRICHED ANALYSIS ENGINE
+// ============================================================================
+
+// CMX object is defined in Part 1 — using facilitatorTemplates from there
+// Additional facilitator templates merged below if needed
+const _CMX_TEMPLATES_FALLBACK = {
+    1: {
+      title: 'Roles & Responsibilities',
+      warmUp: 'Icebreaker: "Who currently owns decision X in your area?" — Gets people thinking about accountability.',
+      watchOut: 'Watch for implicit role conflicts — people agree on words but disagree on execution.',
+      driveAlignment: 'Use a RACI matrix exercise to force explicit decision assignment.',
+      timeAllocation: 'high'
+    },
+    2: {
+      title: 'E2E Survey Process',
+      warmUp: 'Draw the current process on the board — lots of variation, great conversation starter.',
+      watchOut: 'Executives often underestimate process complexity, especially around intake/scheduling.',
+      driveAlignment: 'Build a swimlane diagram with roles. One process per role.',
+      timeAllocation: 'high'
+    },
+    3: {
+      title: 'Intake Form Design',
+      warmUp: 'Show examples: "Too simple? Too complex? Goldilocks zone?"',
+      watchOut: 'Technical teams want metadata, Ops want simplicity. Field workers just want fast mobile experience.',
+      driveAlignment: 'Prototype quick survey on mobile during workshop — real feedback beats hypotheticals.',
+      timeAllocation: 'medium'
+    },
+    4: {
+      title: 'Global vs Regional Rights',
+      warmUp: 'Case study: "How did another utility handle this?" — externalize the tension.',
+      watchOut: 'Regional leads fear centralization will strip their autonomy. Executives fear regional fragmentation.',
+      driveAlignment: 'Decision rights matrix by decision type (e.g., survey content centralized, deployment timing regional).',
+      timeAllocation: 'high'
+    },
+    5: {
+      title: 'Governance Model',
+      warmUp: 'Governance evolution story: start centralized, move toward hybrid as regions mature.',
+      watchOut: 'Hybrid often becomes "nobody owns it." Need explicit escalation path.',
+      driveAlignment: 'Governance charter with committee structure, escalation triggers, and decision rights.',
+      timeAllocation: 'high'
+    },
+    6: {
+      title: 'Fatigue Guardrails',
+      warmUp: 'Tell a story: "One organization surveyed field workers 15 times in 6 months. Response rate dropped to 12%. Why?"',
+      watchOut: 'Survey fatigue creeps. Start strict on contact frequency, then loosen as program matures.',
+      driveAlignment: 'Build a contact rules matrix by employee type: salaried vs hourly vs field worker.',
+      timeAllocation: 'medium'
+    },
+    7: {
+      title: 'Operating Cadence',
+      watchOut: 'Everyone wants everything monthly. Reality: data quality, action closure take time. Quarterly is more realistic.',
+      driveAlignment: 'Build a calendar: months with surveys, months without. Include other org initiatives.',
+      timeAllocation: 'medium'
+    },
+    8: {
+      title: 'Data Ownership & Quality',
+      warmUp: 'Data journey: from collection (HRIS/Qualtrics) → quality checks → insights → action → reporting.',
+      watchOut: 'Missing employee metadata (phone, email, location) kills survey distribution. Critical path item.',
+      driveAlignment: 'Assign data steward per data element. Weekly data health dashboard during pilot.',
+      timeAllocation: 'high'
+    }
+};
+
+// Merge fallback templates into CMX if they don't exist
+if (typeof CMX !== 'undefined' && CMX.facilitatorTemplates) {
+  // Part 1 already has templates — merge any extras from fallback
+  for (const key in _CMX_TEMPLATES_FALLBACK) {
+    if (!CMX.facilitatorTemplates[key]) {
+      CMX.facilitatorTemplates[key] = _CMX_TEMPLATES_FALLBACK[key];
+    }
+  }
+}
+
+function runAnalysis() {
+  if (!STATE.responses || STATE.responses.length === 0) {
+    console.warn('No responses loaded for analysis');
+    return;
+  }
+
+  const analysis = {
+    decisionScores: {},
+    roleDivergence: {},
+    adkarMappings: {},
+    risks: [],
+    facilitatorIntelligence: {},
+    openPoints: [],
+    cascadeImpacts: {},
+    readinessScore: 0,
+    summaries: {}
+  };
+
+  // Compute consensus and role divergence for each decision
+  for (let d = 1; d <= 8; d++) {
+    analysis.decisionScores[d] = computeDecisionConsensus(d);
+    analysis.roleDivergence[d] = computeRoleDivergence(d);
+    analysis.adkarMappings[d] = getAdkarMapping(d);
+    analysis.summaries[d] = generateDecisionSummary(d, analysis);
+    analysis.facilitatorIntelligence[d] = generateFacilitatorIntelligence(d);
+    analysis.cascadeImpacts[d] = computeCascadeImpact(d);
+  }
+
+  // Extract open points
+  analysis.openPoints = extractOpenPoints();
+
+  // Identify risks
+  analysis.risks = identifyRisks(analysis);
+
+  // Compute overall readiness score
+  analysis.readinessScore = computeReadinessScore(analysis);
+
+  STATE.analysis = analysis;
+  renderIntelligencePanel();
+  goStep('p3');
+  toast('Analysis complete — 8 governance decisions scored', 'ok');
+}
+
+function computeDecisionConsensus(decisionId) {
+  const relevantQuestions = QUESTIONS.filter(q => q.feedsDecisions.includes(decisionId));
+  const responses = STATE.responses;
+
+  if (relevantQuestions.length === 0) return { consensus: 0, details: [] };
+
+  const details = [];
+
+  for (const question of relevantQuestions) {
+    const qId = question.id;
+    const type = question.type;
+
+    if (type === 'single') {
+      const answerCounts = {};
+      let weightedTotal = 0;
+      let totalWeight = 0;
+
+      responses.forEach(r => {
+        if (r[qId]) {
+          const answer = r[qId].toString();
+          const role = r.role || 'Unknown';
+          const weight = (role === 'Executive' && [5, 1].includes(decisionId)) ? 1.5 :
+                         (role === 'Technical' && [8, 2].includes(decisionId)) ? 1.5 : 1;
+
+          answerCounts[answer] = (answerCounts[answer] || 0) + weight;
+          totalWeight += weight;
+        }
+      });
+
+      if (totalWeight > 0) {
+        const maxCount = Math.max(...Object.values(answerCounts));
+        const consensusPct = Math.round((maxCount / totalWeight) * 100);
+        const topAnswer = Object.keys(answerCounts).find(k => answerCounts[k] === maxCount);
+        details.push({
+          question: question.text.substring(0, 50),
+          qId: qId,
+          topAnswer: topAnswer,
+          consensus: consensusPct,
+          distribution: answerCounts
+        });
+      }
+    } else if (type === 'scale') {
+      const values = responses
+        .filter(r => r[qId])
+        .map(r => {
+          const val = r[qId];
+          if (typeof val === 'string') {
+            const match = val.match(/\d+/);
+            return match ? parseInt(match[0]) : null;
+          }
+          return parseInt(val);
+        })
+        .filter(v => v !== null);
+
+      if (values.length > 0) {
+        const avg = values.reduce((a, b) => a + b, 0) / values.length;
+        const stdDev = Math.sqrt(values.reduce((sq, n) => sq + Math.pow(n - avg, 2), 0) / values.length);
+        const consensusFromStdDev = Math.max(0, 100 - (stdDev * 15));
+        details.push({
+          question: question.text.substring(0, 50),
+          qId: qId,
+          average: parseFloat(avg.toFixed(2)),
+          stdDev: parseFloat(stdDev.toFixed(2)),
+          consensus: Math.round(consensusFromStdDev),
+          range: `${Math.min(...values)}-${Math.max(...values)}`
+        });
+      }
+    } else if (type === 'multi') {
+      const responseCount = responses.filter(r => r[qId]).length;
+      const consensusFromResponse = (responseCount / responses.length) * 100;
+      details.push({
+        question: question.text.substring(0, 50),
+        qId: qId,
+        responseRate: Math.round(consensusFromResponse),
+        consensus: Math.round(consensusFromResponse)
+      });
+    }
+  }
+
+  const avgConsensus = details.length > 0
+    ? Math.round(details.reduce((sum, d) => sum + d.consensus, 0) / details.length)
+    : 0;
+
+  return {
+    decisionId: decisionId,
+    consensus: avgConsensus,
+    details: details
+  };
+}
+
+function computeRoleDivergence(decisionId) {
+  const roles = ['Executive', 'Operational', 'Technical', 'Regional'];
+  const divergence = {};
+
+  const relevantQuestions = QUESTIONS.filter(q => q.feedsDecisions.includes(decisionId));
+  if (relevantQuestions.length === 0) return {};
+
+  for (let i = 0; i < roles.length; i++) {
+    for (let j = i + 1; j < roles.length; j++) {
+      const role1 = roles[i];
+      const role2 = roles[j];
+      const key = `${role1}-${role2}`;
+
+      let alignmentSum = 0;
+      let countComparisons = 0;
+
+      for (const question of relevantQuestions) {
+        const qId = question.id;
+        const type = question.type;
+
+        const r1Responses = STATE.responses.filter(r => r.role === role1 && r[qId]);
+        const r2Responses = STATE.responses.filter(r => r.role === role2 && r[qId]);
+
+        if (r1Responses.length > 0 && r2Responses.length > 0) {
+          if (type === 'single') {
+            const r1Mode = getMostCommon(r1Responses.map(r => r[qId]));
+            const r2Mode = getMostCommon(r2Responses.map(r => r[qId]));
+            const match = r1Mode === r2Mode ? 100 : 0;
+            alignmentSum += match;
+            countComparisons++;
+          } else if (type === 'scale') {
+            const r1Avg = r1Responses
+              .map(r => parseInt(r[qId].toString().match(/\d+/)?.[0] || 0))
+              .reduce((a, b) => a + b, 0) / r1Responses.length;
+            const r2Avg = r2Responses
+              .map(r => parseInt(r[qId].toString().match(/\d+/)?.[0] || 0))
+              .reduce((a, b) => a + b, 0) / r2Responses.length;
+            const diff = Math.abs(r1Avg - r2Avg);
+            const alignment = Math.max(0, 100 - (diff * 20));
+            alignmentSum += alignment;
+            countComparisons++;
+          }
+        }
+      }
+
+      if (countComparisons > 0) {
+        divergence[key] = Math.round(alignmentSum / countComparisons);
+      }
+    }
+  }
+
+  return divergence;
+}
+
+function getMostCommon(arr) {
+  const counts = {};
+  arr.forEach(item => {
+    counts[item] = (counts[item] || 0) + 1;
+  });
+  return Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+}
+
+function getAdkarMapping(decisionId) {
+  const mappings = {
+    1: ['Awareness', 'Knowledge'],
+    2: ['Knowledge', 'Ability'],
+    3: ['Knowledge', 'Ability'],
+    4: ['Desire', 'Ability'],
+    5: ['Awareness', 'Desire'],
+    6: ['Desire', 'Reinforcement'],
+    7: ['Ability', 'Reinforcement'],
+    8: ['Knowledge', 'Ability']
+  };
+  return mappings[decisionId] || [];
+}
+
+function extractOpenPoints() {
+  const openPoints = [];
+  const categories = {
+    'Technical': ['api', 'integration', 'workday', 'hris', 'sso', 'data quality', 'extract', 'connectivity'],
+    'Governance': ['governance', 'escalation', 'approval', 'decision', 'authority', 'policy', 'charter'],
+    'Process': ['process', 'workflow', 'intake', 'scheduling', 'cadence', 'timing', 'flow'],
+    'People': ['roles', 'responsibility', 'ownership', 'accountability', 'team', 'resource'],
+    'Data': ['data', 'contact', 'metadata', 'employee', 'field', 'directory', 'SMS', 'email'],
+    'Timeline': ['TBD', 'pending', 'schedule', 'timeline', 'deadline', 'when', 'date']
+  };
+
+  const questions = [31, 32, 33];
+
+  STATE.responses.forEach(response => {
+    questions.forEach(qNum => {
+      const qId = `Q${qNum}`;
+      const text = response[qId];
+      if (text && text.trim()) {
+        let category = 'Process';
+        let priority = 'Medium';
+
+        for (const [cat, keywords] of Object.entries(categories)) {
+          if (keywords.some(kw => text.toLowerCase().includes(kw))) {
+            category = cat;
+            break;
+          }
+        }
+
+        if (text.includes('TBD') || text.includes('pending') || text.includes('critical')) {
+          priority = 'High';
+        } else if (text.includes('should') || text.includes('consider')) {
+          priority = 'Low';
+        }
+
+        let owner = 'TBD';
+        if (category === 'Technical') owner = 'IT/Data Team';
+        else if (category === 'Governance') owner = 'Sponsor';
+        else if (category === 'People') owner = 'HR/Leadership';
+        else if (category === 'Data') owner = 'Data Steward';
+        else if (category === 'Timeline') owner = 'Project Manager';
+
+        openPoints.push({
+          text: text,
+          category: category,
+          priority: priority,
+          owner: owner,
+          respondent: response.name || response.role,
+          qId: qId
+        });
+      }
+    });
+  });
+
+  return openPoints;
+}
+
+function identifyRisks(analysis) {
+  const risks = [];
+
+  // Sponsorship Risk: Low executive engagement or readiness
+  const execResponses = STATE.responses.filter(r => r.role === 'Executive');
+  if (execResponses.length > 0) {
+    const q13Scores = execResponses
+      .filter(r => r.Q13)
+      .map(r => parseInt(r.Q13.toString().match(/\d+/)?.[0] || 0));
+    if (q13Scores.length > 0) {
+      const avgQ13 = q13Scores.reduce((a, b) => a + b) / q13Scores.length;
+      if (avgQ13 < 3.5) {
+        risks.push({
+          type: 'Sponsorship',
+          severity: avgQ13 < 2.5 ? 'Critical' : 'High',
+          title: 'Executive Sponsorship Weak',
+          description: `Executive sponsorship score averaging ${avgQ13.toFixed(1)}/5. Recommend executive alignment session before workshop.`,
+          affectedDecision: 5,
+          relatedMetric: avgQ13
+        });
+      }
+    }
+  }
+
+  // Fatigue Risk: High concern scores on Q7 + competing survey landscape
+  const q7Scores = STATE.responses
+    .filter(r => r.Q7)
+    .map(r => parseInt(r.Q7.toString().match(/\d+/)?.[0] || 0));
+  if (q7Scores.length > 0) {
+    const avgQ7 = q7Scores.reduce((a, b) => a + b) / q7Scores.length;
+    if (avgQ7 > 3.5) {
+      risks.push({
+        type: 'Fatigue',
+        severity: avgQ7 > 4.5 ? 'Critical' : 'High',
+        title: 'Survey Fatigue Risk High',
+        description: `Avg fatigue concern ${avgQ7.toFixed(1)}/5. Multiple respondents mentioned existing survey programs. Need clear contact rules and blackout calendar.`,
+        affectedDecision: 6,
+        relatedMetric: avgQ7
+      });
+    }
+  }
+
+  // Capacity Risk: Low regional capacity scores + limited lead availability
+  const q17Scores = STATE.responses
+    .filter(r => r.role === 'Operational' && r.Q17)
+    .map(r => parseInt(r.Q17.toString().match(/\d+/)?.[0] || 0));
+  const q29Scores = STATE.responses
+    .filter(r => r.role === 'Regional' && r.Q29)
+    .map(r => parseInt(r.Q29.toString().match(/\d+/)?.[0] || 0));
+
+  if (q17Scores.length > 0) {
+    const avgQ17 = q17Scores.reduce((a, b) => a + b) / q17Scores.length;
+    if (avgQ17 < 3) {
+      risks.push({
+        type: 'Capacity',
+        severity: avgQ17 < 2 ? 'Critical' : 'High',
+        title: 'Regional Capacity Limited',
+        description: `Regional coordination capacity averaging ${avgQ17.toFixed(1)}/5. Will need central support for survey execution.`,
+        affectedDecision: 4,
+        relatedMetric: avgQ17
+      });
+    }
+  }
+
+  // Data Risk: High data quality concerns + integration gaps
+  const q9Scores = STATE.responses
+    .filter(r => r.Q9)
+    .map(r => parseInt(r.Q9.toString().match(/\d+/)?.[0] || 0));
+  if (q9Scores.length > 0) {
+    const avgQ9 = q9Scores.reduce((a, b) => a + b) / q9Scores.length;
+    if (avgQ9 > 3.5) {
+      risks.push({
+        type: 'Data',
+        severity: avgQ9 > 4 ? 'Critical' : 'High',
+        title: 'Data Quality Concerns',
+        description: `Data quality concern score ${avgQ9.toFixed(1)}/5. Technical team flagged integration gaps. Parallel data readiness workstream recommended.`,
+        affectedDecision: 8,
+        relatedMetric: avgQ9
+      });
+    }
+  }
+
+  // Alignment Risk: Role divergence > 40% on any decision
+  for (const [decId, divergence] of Object.entries(analysis.roleDivergence)) {
+    for (const [rolePair, alignment] of Object.entries(divergence)) {
+      if (alignment < 60) {
+        const [r1, r2] = rolePair.split('-');
+        risks.push({
+          type: 'Alignment',
+          severity: alignment < 40 ? 'Critical' : 'High',
+          title: `${r1}-${r2} Misalignment on Decision ${decId}`,
+          description: `${r1}s and ${r2}s show only ${alignment}% alignment on decision ${decId}. Requires targeted facilitation.`,
+          affectedDecision: parseInt(decId),
+          relatedMetric: alignment
+        });
+      }
+    }
+  }
+
+  // Adoption Risk: Low change readiness + high workload concerns
+  const q16Scores = STATE.responses
+    .filter(r => r.Q16)
+    .map(r => parseInt(r.Q16.toString().match(/\d+/)?.[0] || 0));
+  const q20Scores = STATE.responses
+    .filter(r => r.Q20)
+    .map(r => parseInt(r.Q20.toString().match(/\d+/)?.[0] || 0));
+
+  if (q16Scores.length > 0) {
+    const avgQ16 = q16Scores.reduce((a, b) => a + b) / q16Scores.length;
+    if (avgQ16 < 3.5) {
+      risks.push({
+        type: 'Adoption',
+        severity: avgQ16 < 2.5 ? 'Critical' : 'High',
+        title: 'Change Readiness Low',
+        description: `Organizational change readiness averaging ${avgQ16.toFixed(1)}/5. May need extended transition period and change management support.`,
+        affectedDecision: 5,
+        relatedMetric: avgQ16
+      });
+    }
+  }
+
+  return risks.sort((a, b) => {
+    const severityRank = { 'Critical': 0, 'High': 1, 'Medium': 2, 'Low': 3 };
+    return severityRank[a.severity] - severityRank[b.severity];
+  });
+}
+
+function computeReadinessScore(analysis) {
+  const responses = STATE.responses;
+
+  // Executive Sponsorship (Q13)
+  const q13Scores = responses
+    .filter(r => r.Q13)
+    .map(r => parseInt(r.Q13.toString().match(/\d+/)?.[0] || 0));
+  const sponsorshipScore = q13Scores.length > 0
+    ? (q13Scores.reduce((a, b) => a + b) / q13Scores.length) * 20
+    : 0;
+
+  // Change Readiness (Q16)
+  const q16Scores = responses
+    .filter(r => r.Q16)
+    .map(r => parseInt(r.Q16.toString().match(/\d+/)?.[0] || 0));
+  const changeReadinessScore = q16Scores.length > 0
+    ? (q16Scores.reduce((a, b) => a + b) / q16Scores.length) * 20
+    : 0;
+
+  // Data Quality Confidence (Q9 inverse + Q26)
+  const q9Scores = responses
+    .filter(r => r.Q9)
+    .map(r => parseInt(r.Q9.toString().match(/\d+/)?.[0] || 0));
+  const q26Scores = responses
+    .filter(r => r.Q26)
+    .map(r => parseInt(r.Q26.toString().match(/\d+/)?.[0] || 0));
+  const avgQ9 = q9Scores.length > 0 ? q9Scores.reduce((a, b) => a + b) / q9Scores.length : 2.5;
+  const avgQ26 = q26Scores.length > 0 ? q26Scores.reduce((a, b) => a + b) / q26Scores.length : 2.5;
+  const dataScore = ((6 - avgQ9) / 5 * 10) + (avgQ26 / 5 * 10);
+
+  // Regional Capacity (Q17 avg + Q29 avg)
+  const q17Scores = responses
+    .filter(r => r.Q17)
+    .map(r => parseInt(r.Q17.toString().match(/\d+/)?.[0] || 0));
+  const q29Scores = responses
+    .filter(r => r.Q29)
+    .map(r => parseInt(r.Q29.toString().match(/\d+/)?.[0] || 0));
+  const regionalCapacityScores = [...q17Scores, ...q29Scores];
+  const capacityScore = regionalCapacityScores.length > 0
+    ? (regionalCapacityScores.reduce((a, b) => a + b) / regionalCapacityScores.length / 5) * 20
+    : 0;
+
+  // Survey Fatigue Risk (Q7 inverse)
+  const q7Scores = responses
+    .filter(r => r.Q7)
+    .map(r => parseInt(r.Q7.toString().match(/\d+/)?.[0] || 0));
+  const avgQ7 = q7Scores.length > 0 ? q7Scores.reduce((a, b) => a + b) / q7Scores.length : 2.5;
+  const fatigueScore = (6 - avgQ7) / 5 * 20;
+
+  const total = sponsorshipScore + changeReadinessScore + dataScore + capacityScore + fatigueScore;
+  return Math.round(Math.min(100, total));
+}
+
+function computeCascadeImpact(decisionId) {
+  const impacts = [];
+
+  const consensusData = STATE.analysis?.decisionScores?.[decisionId];
+  const consensus = consensusData?.consensus || 0;
+  const risks = STATE.analysis?.risks || [];
+  const decisionRisks = risks.filter(r => r.affectedDecision === decisionId);
+
+  if (decisionId === 5 && consensus < 65) {
+    impacts.push({
+      workshop: 'WS2',
+      impact: 'Stakeholder Mapping',
+      severity: 'High',
+      description: 'Low governance consensus makes stakeholder mapping harder — stakeholders unclear on decision authority.'
+    });
+  }
+
+  if (decisionId === 8) {
+    const hasDataRisks = decisionRisks.some(r => r.type === 'Data');
+    if (hasDataRisks) {
+      impacts.push({
+        workshop: 'WS4',
+        impact: 'Platform Setup',
+        severity: 'Critical',
+        description: 'Data quality issues require extended platform setup time — contact directory build is critical path.'
+      });
+    }
+  }
+
+  if (decisionId === 6 && consensus < 60) {
+    impacts.push({
+      workshop: 'WS3',
+      impact: 'Survey Content',
+      severity: 'High',
+      description: 'High fatigue risk means survey scope must be minimized — fewer questions, shorter completion time.'
+    });
+  }
+
+  if (decisionId === 4 && consensus < 55) {
+    impacts.push({
+      workshop: 'WS2',
+      impact: 'Roles Clarity',
+      severity: 'High',
+      description: 'Global/Regional tensions require explicit decision rights matrix before WS2.'
+    });
+  }
+
+  return impacts;
+}
+
+function generateFacilitatorIntelligence(decisionId) {
+  const template = CMX.facilitatorTemplates[decisionId] || {};
+  const consensus = STATE.analysis?.decisionScores?.[decisionId]?.consensus || 0;
+  const divergence = STATE.analysis?.roleDivergence?.[decisionId] || {};
+
+  const timeAllocation = consensus > 75 ? 'low' : consensus > 50 ? 'medium' : 'high';
+
+  return {
+    decisionId: decisionId,
+    title: template.title || DECISIONS[decisionId - 1]?.title,
+    warmUp: template.warmUp || 'Standard icebreaker',
+    watchOut: template.watchOut || 'Monitor for hidden tensions',
+    driveAlignment: template.driveAlignment || 'Facilitate group discussion',
+    timeAllocation: timeAllocation,
+    estimatedMinutes: timeAllocation === 'high' ? 45 : timeAllocation === 'medium' ? 30 : 15,
+    priorPrereads: [],
+    breakoutGroups: identifyBreakoutGroups(decisionId, divergence)
+  };
+}
+
+function identifyBreakoutGroups(decisionId, divergence) {
+  const groups = [];
+
+  const highTensionPairs = Object.entries(divergence)
+    .filter(([_, alignment]) => alignment < 60)
+    .map(([pair]) => pair);
+
+  if (highTensionPairs.length > 0) {
+    groups.push({
+      name: 'Alignment Focused',
+      description: 'Pair conflicting roles to work through decision',
+      roles: highTensionPairs.length > 0 ? highTensionPairs[0].split('-') : []
+    });
+  }
+
+  if (decisionId === 8) {
+    groups.push({
+      name: 'Data Deep Dive',
+      description: 'Technical + Data governance stakeholders',
+      roles: ['Technical', 'Operational']
+    });
+  }
+
+  return groups;
+}
+
+function generateDecisionSummary(decisionId, analysisData) {
+  const consensusData = analysisData.decisionScores[decisionId];
+  const consensus = consensusData?.consensus || 0;
+  const divergence = analysisData.roleDivergence[decisionId] || {};
+  const adkarStages = analysisData.adkarMappings[decisionId] || [];
+
+  const decision = DECISIONS[decisionId - 1];
+  if (!decision) return '';
+
+  const responses = STATE.responses;
+  const relevantQuestions = QUESTIONS.filter(q => q.feedsDecisions.includes(decisionId));
+
+  let topAnswers = {};
+  relevantQuestions.forEach(q => {
+    const qId = q.id;
+    if (q.type === 'single') {
+      const answers = responses.filter(r => r[qId]).map(r => r[qId]);
+      if (answers.length > 0) {
+        topAnswers[qId] = getMostCommon(answers);
+      }
+    }
+  });
+
+  let summary = '';
+
+  if (decisionId === 1) {
+    summary = `Stakeholder responses show ${consensus}% consensus on clarifying roles and responsibilities. ` +
+      `Most respondents emphasized the need for explicit decision authority and escalation paths. ` +
+      `AKT recommends starting WS2 with a RACI exercise to map decision authority by role. ` +
+      `Watch for: Implicit conflicts where roles agree on structure but disagree on execution.`;
+  } else if (decisionId === 2) {
+    summary = `End-to-end survey process clarity shows ${consensus}% consensus among respondents. ` +
+      `Current process varies significantly across regions, indicating maturity gaps. ` +
+      `AKT recommends a swimlane diagram exercise in WS2 to standardize process by role. ` +
+      `Watch for: Executives often underestimate process complexity, especially intake scheduling.`;
+  } else if (decisionId === 3) {
+    const intakeChoice = topAnswers['Q11'] || 'Moderate';
+    summary = `Intake form design consensus is ${consensus}%. ` +
+      `Most respondents prefer a ${intakeChoice.toLowerCase()} complexity form. ` +
+      `AKT recommends prototyping the form on mobile during WS3 to get real field worker feedback. ` +
+      `Watch for: Technical teams want comprehensive metadata, while Ops prioritizes field worker speed.`;
+  } else if (decisionId === 4) {
+    const globalRegionalTension = divergence['Executive-Regional'] || 50;
+    summary = `Global vs Regional governance shows ${consensus}% consensus, with notable ${globalRegionalTension}% alignment ` +
+      `between Executives and Regional leads. This tension is typical in large utility environments. ` +
+      `AKT recommends a decision rights matrix exercise to map which decisions sit centrally vs regionally. ` +
+      `Watch for: Regional leads may disengage if they feel the Hybrid model is "centralized with a regional label."`;
+  } else if (decisionId === 5) {
+    const govChoice = topAnswers['Q5'] || 'Hybrid';
+    summary = `Governance model consensus is ${consensus}% toward ${govChoice}. ` +
+      `This is typical for large utilities balancing global consistency with regional needs. ` +
+      `AKT recommends developing a governance charter in WS2 with explicit committee structure and escalation triggers. ` +
+      `Watch for: "Hybrid" often becomes "nobody owns it" without explicit decision rights.`;
+  } else if (decisionId === 6) {
+    summary = `Survey fatigue risk shows ${consensus}% consensus concern. ` +
+      `Multiple respondents mentioned competing survey programs and Glint blackouts. ` +
+      `AKT recommends a contact rules matrix by employee type (salaried vs hourly vs field) and a master survey calendar. ` +
+      `Watch for: Fatigue creeps incrementally — start strict on contact frequency, loosen as program matures.`;
+  } else if (decisionId === 7) {
+    const cadenceChoice = topAnswers['Q12'] || 'Quarterly';
+    summary = `Operating cadence shows ${consensus}% preference for ${cadenceChoice.toLowerCase()} approach. ` +
+      `Data quality and action closure improve with quarterly rhythm, though monthly feels faster to executives. ` +
+      `AKT recommends starting quarterly and expanding to monthly only after proven process maturity. ` +
+      `Watch for: Everyone wants monthly; reality requires quarterly minimum.`;
+  } else if (decisionId === 8) {
+    summary = `Data ownership and quality shows ${consensus}% consensus on importance, with ` +
+      `technical respondents flagging integration gaps and contact directory gaps as critical path items. ` +
+      `AKT recommends a parallel data readiness workstream starting immediately, targeting 80% contact directory completeness before pilot. ` +
+      `Watch for: Field worker contact data (SMS numbers, depot locations) is known gap affecting thousands of employees.`;
+  }
+
+  return summary;
+}
+
+function renderIntelligencePanel() {
+  if (!STATE.analysis) {
+    console.warn('No analysis data available for rendering');
+    return;
+  }
+
+  const panel = document.getElementById('p3');
+  if (!panel) {
+    console.warn('Intelligence panel (p3) not found');
+    return;
+  }
+
+  const analysis = STATE.analysis;
+
+  let html = '<div class="intelligence-content">';
+
+  // Header Stats Row
+  html += renderStatsRow(analysis);
+
+  // CMX Readiness Radar
+  html += renderReadinessRadar(analysis);
+
+  // Decision Cards
+  html += renderDecisionCards(analysis);
+
+  // Risk Dashboard
+  html += renderRiskDashboard(analysis);
+
+  // Open Points Summary
+  html += renderOpenPointsSummary(analysis);
+
+  html += '</div>';
+
+  panel.innerHTML = html;
+
+  // Attach event listeners
+  attachPanelEventListeners();
+}
+
+function renderStatsRow(analysis) {
+  const readiness = analysis.readinessScore;
+  const avgConsensus = Math.round(
+    Object.values(analysis.decisionScores)
+      .filter(d => d && d.consensus)
+      .map(d => d.consensus)
+      .reduce((a, b) => a + b, 0) / Object.keys(analysis.decisionScores).length
+  );
+  const riskCount = analysis.risks.length;
+  const openPointCount = analysis.openPoints.length;
+
+  return `
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-label">Readiness Score</div>
+        <div class="stat-value" style="color: ${readiness > 70 ? '#468A4B' : readiness > 50 ? '#F9A13A' : '#CC3300'}">${readiness}%</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Avg Consensus</div>
+        <div class="stat-value">${avgConsensus}%</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Identified Risks</div>
+        <div class="stat-value">${riskCount}</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Open Points</div>
+        <div class="stat-value">${openPointCount}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderReadinessRadar(analysis) {
+  const dimensions = [
+    { label: 'Sponsorship', value: computeSponsorship() },
+    { label: 'Process Maturity', value: computeProcessMaturity() },
+    { label: 'Data Readiness', value: computeDataReadiness() },
+    { label: 'Regional Capacity', value: computeRegionalCapacity() },
+    { label: 'Change Appetite', value: computeChangeAppetite() }
+  ];
+
+  let html = '<div class="readiness-radar"><h3>CMX Readiness Dimensions</h3><div class="bar-chart">';
+
+  dimensions.forEach(dim => {
+    const pct = Math.round(dim.value * 20);
+    const color = pct > 70 ? '#468A4B' : pct > 50 ? '#F9A13A' : '#CC3300';
+    html += `
+      <div class="bar-row">
+        <div class="bar-label">${dim.label}</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width: ${pct}%; background-color: ${color}"></div>
+        </div>
+        <div class="bar-value">${pct}%</div>
+      </div>
+    `;
+  });
+
+  html += '</div></div>';
+  return html;
+}
+
+function computeSponsorship() {
+  const q13 = STATE.responses
+    .filter(r => r.Q13)
+    .map(r => parseInt(r.Q13.toString().match(/\d+/)?.[0] || 0));
+  return q13.length > 0 ? q13.reduce((a, b) => a + b) / q13.length / 5 : 0.5;
+}
+
+function computeProcessMaturity() {
+  const q6 = STATE.responses
+    .filter(r => r.Q6)
+    .map(r => parseInt(r.Q6.toString().match(/\d+/)?.[0] || 0));
+  return q6.length > 0 ? q6.reduce((a, b) => a + b) / q6.length / 5 : 0.5;
+}
+
+function computeDataReadiness() {
+  const q9 = STATE.responses
+    .filter(r => r.Q9)
+    .map(r => parseInt(r.Q9.toString().match(/\d+/)?.[0] || 0));
+  const q26 = STATE.responses
+    .filter(r => r.Q26)
+    .map(r => parseInt(r.Q26.toString().match(/\d+/)?.[0] || 0));
+  const combined = [...q9, ...q26];
+  return combined.length > 0 ? (5 - (combined.reduce((a, b) => a + b) / combined.length)) / 5 : 0.5;
+}
+
+function computeRegionalCapacity() {
+  const q17 = STATE.responses
+    .filter(r => r.Q17)
+    .map(r => parseInt(r.Q17.toString().match(/\d+/)?.[0] || 0));
+  const q29 = STATE.responses
+    .filter(r => r.Q29)
+    .map(r => parseInt(r.Q29.toString().match(/\d+/)?.[0] || 0));
+  const combined = [...q17, ...q29];
+  return combined.length > 0 ? combined.reduce((a, b) => a + b) / combined.length / 5 : 0.5;
+}
+
+function computeChangeAppetite() {
+  const q16 = STATE.responses
+    .filter(r => r.Q16)
+    .map(r => parseInt(r.Q16.toString().match(/\d+/)?.[0] || 0));
+  return q16.length > 0 ? q16.reduce((a, b) => a + b) / q16.length / 5 : 0.5;
+}
+
+function renderDecisionCards(analysis) {
+  let html = '<div class="decision-cards">';
+
+  for (let d = 1; d <= 8; d++) {
+    const decision = DECISIONS[d - 1];
+    const consensusData = analysis.decisionScores[d];
+    const divergence = analysis.roleDivergence[d] || {};
+    const adkarStages = analysis.adkarMappings[d] || [];
+    const facilitator = analysis.facilitatorIntelligence[d];
+    const cascadeImpacts = analysis.cascadeImpacts[d] || [];
+    const summary = analysis.summaries[d] || '';
+    const decisionRisks = analysis.risks.filter(r => r.affectedDecision === d);
+
+    const consensus = consensusData?.consensus || 0;
+    const verbatims = extractVerbatims(d);
+
+    html += `
+      <div class="dec-card">
+        <div class="card-header">
+          <div class="dec-num">D${d}</div>
+          <div class="dec-title">${decision.title}</div>
+          <div class="adkar-tags">
+            ${adkarStages.map(stage => `<span class="tag">${stage}</span>`).join('')}
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="insight">${summary}</div>
+
+          <div class="consensus-row">
+            <div class="consensus-label">Consensus</div>
+            <div class="consensus-bar">
+              <div class="bar-fill" style="width: ${consensus}%"></div>
+            </div>
+            <div class="consensus-pct">${consensus}%</div>
+          </div>
+
+          <div class="divergence-section">
+            <h4>Role Alignment</h4>
+            <table class="divergence-table">
+              <tbody>
+                ${Object.entries(divergence)
+                  .map(([pair, alignment]) => {
+                    const color = alignment > 70 ? '#468A4B' : alignment > 50 ? '#F9A13A' : '#CC3300';
+                    return `<tr>
+                      <td>${pair}</td>
+                      <td><span style="color: ${color}; font-weight: 700">${alignment}%</span></td>
+                    </tr>`;
+                  })
+                  .join('')}
+              </tbody>
+            </table>
+          </div>
+
+          ${decisionRisks.length > 0 ? `
+            <div class="risk-signals">
+              <h4>Risk Signals</h4>
+              ${decisionRisks.map(r => `
+                <div class="risk-badge ${r.severity.toLowerCase()}">
+                  ${r.severity} — ${r.type}
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+
+          ${verbatims.length > 0 ? `
+            <div class="verbatims">
+              <h4>Stakeholder Voice (Top Quotes)</h4>
+              <ul>
+                ${verbatims.slice(0, 3).map(v => `<li>"${v}"</li>`).join('')}
+              </ul>
+            </div>
+          ` : ''}
+
+          <div class="facilitator-tip">
+            <h4>Facilitator Tip</h4>
+            <p><strong>Warm-up:</strong> ${facilitator.warmUp}</p>
+            <p><strong>Watch for:</strong> ${facilitator.watchOut}</p>
+            <p><strong>Drive alignment:</strong> ${facilitator.driveAlignment}</p>
+            <p><strong>Time allocation:</strong> ${facilitator.estimatedMinutes} minutes (${facilitator.timeAllocation} priority)</p>
+          </div>
+
+          ${cascadeImpacts.length > 0 ? `
+            <div class="cascade-impacts">
+              <h4>Cascade Impacts</h4>
+              ${cascadeImpacts.map(impact => `
+                <div class="impact-badge">
+                  ⚡ Impacts ${impact.workshop}: ${impact.impact}
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function extractVerbatims(decisionId) {
+  const relevantQuestions = QUESTIONS.filter(q => q.feedsDecisions.includes(decisionId));
+  const verbatims = [];
+
+  const openQuestionIds = relevantQuestions
+    .filter(q => q.type === 'text')
+    .map(q => q.id);
+
+  STATE.responses.forEach(response => {
+    openQuestionIds.forEach(qId => {
+      const text = response[qId];
+      if (text && text.trim() && text.length > 15) {
+        verbatims.push(text.substring(0, 80).trim() + (text.length > 80 ? '...' : ''));
+      }
+    });
+  });
+
+  return verbatims.filter((v, i, arr) => arr.indexOf(v) === i).slice(0, 5);
+}
+
+function renderRiskDashboard(analysis) {
+  const risks = analysis.risks;
+  const criticalCount = risks.filter(r => r.severity === 'Critical').length;
+  const highCount = risks.filter(r => r.severity === 'High').length;
+
+  let html = `
+    <div class="risk-dashboard card">
+      <div class="cl">Risk Analysis</div>
+      <div class="risk-stats">
+        <div class="risk-stat">
+          <div class="risk-count critical">${criticalCount}</div>
+          <div class="risk-label">Critical</div>
+        </div>
+        <div class="risk-stat">
+          <div class="risk-count high">${highCount}</div>
+          <div class="risk-label">High</div>
+        </div>
+      </div>
+
+      <div class="risks-list">
+  `;
+
+  risks.slice(0, 6).forEach(risk => {
+    html += `
+      <div class="risk-item">
+        <div class="risk-header">
+          <div class="risk-type-badge ${risk.severity.toLowerCase()}">${risk.severity}</div>
+          <div class="risk-title">${risk.title}</div>
+        </div>
+        <div class="risk-desc">${risk.description}</div>
+      </div>
+    `;
+  });
+
+  html += `
+      </div>
+    </div>
+  `;
+
+  return html;
+}
+
+function renderOpenPointsSummary(analysis) {
+  const openPoints = analysis.openPoints;
+  const byCategory = {};
+
+  openPoints.forEach(op => {
+    if (!byCategory[op.category]) {
+      byCategory[op.category] = [];
+    }
+    byCategory[op.category].push(op);
+  });
+
+  let html = `
+    <div class="open-points card">
+      <div class="cl">Open Points & Follow-ups</div>
+      <div class="op-summary">${openPoints.length} items identified across ${Object.keys(byCategory).length} categories</div>
+  `;
+
+  for (const [category, items] of Object.entries(byCategory)) {
+    html += `
+      <div class="op-category">
+        <h4>${category} (${items.length})</h4>
+        <ul class="op-list">
+    `;
+
+    items.slice(0, 3).forEach(op => {
+      const priorityColor = op.priority === 'High' ? '#CC3300' : op.priority === 'Medium' ? '#F9A13A' : '#737373';
+      html += `
+        <li>
+          <span class="op-priority" style="background: ${priorityColor}; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: 700;">
+            ${op.priority}
+          </span>
+          <span class="op-text">${op.text.substring(0, 60)}...</span>
+          <span class="op-owner" style="font-size: 11px; color: #737373;">→ ${op.owner}</span>
+        </li>
+      `;
+    });
+
+    html += `
+        </ul>
+      </div>
+    `;
+  }
+
+  html += `
+    </div>
+  `;
+
+  return html;
+}
+
+function attachPanelEventListeners() {
+  const cards = document.querySelectorAll('.dec-card');
+  cards.forEach((card, index) => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => {
+      card.classList.toggle('expanded');
+    });
+  });
+}
+
+// ========== PART 3: GENERATORS & UI GLUE ==========
+// ============================================================================
+// CMX INTELLIGENCE ENGINE - JS PART 3: PPTX, XLSX, BRIEFING, UI GLUE
+// ============================================================================
+// Assumes globals: STATE, CMX, QUESTIONS
+// Assumes CDN libraries: PptxGenJS, XLSX (SheetJS)
+// ============================================================================
+
+// SECTION 1: ENRICHED PPTX GENERATOR
+// ============================================================================
+
+function generateDeck() {
+  const pres = new PptxGenJS();
+  const theme = {
+    primary: 'F9A13A',
+    dark: '2D2015',
+    lightBg: 'FEF0DB',
+    white: 'FFFFFF',
+    text: '1a1a1a',
+    accentGray: 'E8E8E8',
+  };
+
+  pres.layout = 'LAYOUT_16x9';
+
+  const clientName = STATE.clientName || 'Client';
+  const workshopDate = STATE.workshopDate || new Date().toLocaleDateString();
+
+  // ===== SLIDE 1: TITLE SLIDE =====
+  let slide = pres.addSlide();
+  slide.background = { color: theme.dark };
+
+  slide.addText('CMX Foundations Workshop 1', {
+    x: 0.5,
+    y: 1.5,
+    w: 9,
+    h: 1,
+    fontSize: 48,
+    bold: true,
+    color: theme.primary,
+    align: 'center',
+    fontFace: 'Calibri',
+  });
+
+  slide.addText('Process Design & Governance', {
+    x: 0.5,
+    y: 2.6,
+    w: 9,
+    h: 0.6,
+    fontSize: 36,
+    color: theme.white,
+    align: 'center',
+    fontFace: 'Calibri',
+  });
+
+  slide.addText(clientName, {
+    x: 0.5,
+    y: 3.8,
+    w: 9,
+    h: 0.5,
+    fontSize: 24,
+    color: theme.lightBg,
+    align: 'center',
+    fontFace: 'Calibri',
+  });
+
+  slide.addText(`${workshopDate} | AKT Global`, {
+    x: 0.5,
+    y: 5.5,
+    w: 9,
+    h: 0.4,
+    fontSize: 14,
+    color: theme.accentGray,
+    align: 'center',
+    fontFace: 'Calibri',
+  });
+
+  slide.addShape("rect", {
+    x: 0,
+    y: 5.3,
+    w: 10,
+    h: 0.08,
+    fill: { color: theme.primary },
+    line: { type: 'none' },
+  });
+
+  // ===== SLIDE 2: CONFIDENTIALITY =====
+  slide = pres.addSlide();
+  slideHeader(slide, pres,'Confidentiality', theme);
+
+  slide.addText(
+    'This document contains proprietary information prepared by AKT Global for ' +
+      clientName +
+      '. Distribution restricted to workshop participants.',
+    {
+      x: 0.75,
+      y: 1.5,
+      w: 8.5,
+      h: 1.2,
+      fontSize: 16,
+      color: theme.text,
+      align: 'left',
+      fontFace: 'Calibri',
+    }
+  );
+
+  slide.addShape("rect", {
+    x: 0.75,
+    y: 2.9,
+    w: 8.5,
+    h: 2.5,
+    fill: { color: 'FFF3E0' },
+    line: { color: theme.primary, width: 2 },
+  });
+
+  slide.addText(
+    'All information discussed in this workshop is CONFIDENTIAL and proprietary. ' +
+      'Participants are expected to adhere to confidentiality agreements. Unauthorized ' +
+      'reproduction or distribution is strictly prohibited.',
+    {
+      x: 1,
+      y: 3.1,
+      w: 8,
+      h: 2.1,
+      fontSize: 12,
+      color: theme.dark,
+      align: 'left',
+      fontFace: 'Calibri',
+    }
+  );
+
+  slideFooter(slide, theme);
+
+  // ===== SLIDE 3: AGENDA =====
+  slide = pres.addSlide();
+  slideHeader(slide, pres,'Workshop Agenda', theme);
+
+  const agendaItems = [
+    { item: 'Welcome & Workshop Objectives', time: '9:00-9:15' },
+    { item: 'CMX Framework & ADKAR Overview', time: '9:15-9:45' },
+    { item: 'Stakeholder Intelligence Briefing', time: '9:45-10:15' },
+    { item: 'Decision #1: Governance Model', time: '10:15-10:45' },
+    { item: 'Break', time: '10:45-11:00' },
+    { item: 'Decision #2-4: Process, Scope, Frequency', time: '11:00-12:00' },
+    { item: 'Lunch', time: '12:00-1:00 PM' },
+    { item: 'Decision #5-7: Data, Regional, Integration', time: '1:00-2:15 PM' },
+    { item: 'Decision #8 & Risk Mitigation Planning', time: '2:15-3:00 PM' },
+    { item: 'Next Steps, Action Items & Closeout', time: '3:00-3:30 PM' },
+  ];
+
+  let yPos = 1.5;
+  agendaItems.forEach((agenda, idx) => {
+    slide.addText(`${idx + 1}. ${agenda.item}`, {
+      x: 0.75,
+      y: yPos,
+      w: 6,
+      h: 0.35,
+      fontSize: 12,
+      color: theme.text,
+      bold: idx < 2 ? true : false,
+      fontFace: 'Calibri',
+    });
+    slide.addText(agenda.time, {
+      x: 6.75,
+      y: yPos,
+      w: 2.5,
+      h: 0.35,
+      fontSize: 11,
+      color: '666666',
+      align: 'right',
+      fontFace: 'Calibri',
+    });
+    yPos += 0.4;
+  });
+
+  slideFooter(slide, theme);
+
+  // ===== SLIDE 4: WORKSHOP OBJECTIVES =====
+  slide = pres.addSlide();
+  slideHeader(slide, pres,'Workshop Objectives', theme);
+
+  const objectives = [
+    'Establish shared understanding of CMX governance model and decision rights',
+    'Assess organizational readiness across 5 key dimensions (sponsorship, process maturity, data, capacity, change appetite)',
+    'Align leadership on process scope, frequency, and regional implementation strategy',
+    'Identify and mitigate adoption risks before detailed configuration begins',
+    'Define governance cadence and success metrics for CMX program delivery',
+  ];
+
+  yPos = 1.5;
+  objectives.forEach((obj, idx) => {
+    slide.addShape("ellipse", {
+      x: 0.75,
+      y: yPos + 0.08,
+      w: 0.25,
+      h: 0.25,
+      fill: { color: theme.primary },
+      line: { type: 'none' },
+    });
+    slide.addText(obj, {
+      x: 1.2,
+      y: yPos,
+      w: 8.05,
+      h: 0.45,
+      fontSize: 12,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+    yPos += 0.65;
+  });
+
+  slideFooter(slide, theme);
+
+  // ===== SLIDE 5: CMX FRAMEWORK OVERVIEW =====
+  slide = pres.addSlide();
+  slideHeader(slide, pres,'CMX Delivery Methodology', theme);
+
+  const steps = ['Scope', 'Design', 'Configure', 'Dashboard', 'Governance', 'Execute', 'Insight', 'Action'];
+  const stepWidth = 1.1;
+  let xPos = 0.4;
+
+  steps.forEach((step, idx) => {
+    slide.addShape("rect", {
+      x: xPos,
+      y: 2,
+      w: stepWidth,
+      h: 0.6,
+      fill: { color: idx < 4 ? theme.primary : theme.accentGray },
+      line: { color: theme.dark, width: 1 },
+    });
+    slide.addText(step, {
+      x: xPos,
+      y: 2.1,
+      w: stepWidth,
+      h: 0.4,
+      fontSize: 10,
+      bold: true,
+      color: idx < 4 ? theme.white : theme.dark,
+      align: 'center',
+      fontFace: 'Calibri',
+    });
+
+    if (idx < steps.length - 1) {
+      slide.addShape("triangle", {
+        x: xPos + stepWidth + 0.05,
+        y: 2.15,
+        w: 0.3,
+        h: 0.3,
+        fill: { color: theme.dark },
+        line: { type: 'none' },
+      });
+    }
+
+    xPos += stepWidth + 0.35;
+  });
+
+  slide.addText(
+    'WS1: Scope & Governance | WS2: Design | WS3: Configure | DW1/DW2: Deploy & Optimize',
+    {
+      x: 0.75,
+      y: 3,
+      w: 8.5,
+      h: 0.4,
+      fontSize: 11,
+      color: '666666',
+      align: 'center',
+      fontFace: 'Calibri',
+      italic: true,
+    }
+  );
+
+  slide.addText(
+    'AKT Global follows a proven 8-step delivery methodology to ensure CMX success. ' +
+      'This workshop focuses on establishing the foundational governance, scope, and process design that enables downstream configuration and adoption.',
+    {
+      x: 0.75,
+      y: 3.6,
+      w: 8.5,
+      h: 0.9,
+      fontSize: 11,
+      color: theme.text,
+      fontFace: 'Calibri',
+    }
+  );
+
+  slideFooter(slide, theme);
+
+  // ===== SLIDE 6: ADKAR FRAMEWORK =====
+  slide = pres.addSlide();
+  slideHeader(slide, pres,'ADKAR Change Management Framework', theme);
+
+  const adkarStages = [
+    { stage: 'Awareness', desc: 'Understand the need for change & business case' },
+    { stage: 'Desire', desc: 'Build desire to participate & support the change' },
+    { stage: 'Knowledge', desc: 'Gain knowledge on how to change (skills, processes)' },
+    { stage: 'Ability', desc: 'Practice & demonstrate ability to use new processes' },
+    { stage: 'Reinforcement', desc: 'Sustain the change through ongoing support' },
+  ];
+
+  yPos = 1.5;
+  adkarStages.forEach((ak) => {
+    slide.addShape("rect", {
+      x: 0.75,
+      y: yPos,
+      w: 8.5,
+      h: 0.7,
+      fill: { color: yPos === 1.5 ? theme.primary : theme.accentGray },
+      line: { color: theme.dark, width: 1 },
+    });
+    slide.addText(ak.stage, {
+      x: 0.95,
+      y: yPos + 0.08,
+      w: 2,
+      h: 0.25,
+      fontSize: 13,
+      bold: true,
+      color: yPos === 1.5 ? theme.white : theme.dark,
+      fontFace: 'Calibri',
+    });
+    slide.addText(ak.desc, {
+      x: 3.1,
+      y: yPos + 0.08,
+      w: 5.15,
+      h: 0.5,
+      fontSize: 11,
+      color: yPos === 1.5 ? theme.white : theme.dark,
+      fontFace: 'Calibri',
+    });
+    yPos += 0.85;
+  });
+
+  slide.addText(
+    'Each decision in this workshop is mapped to one or more ADKAR stages. This ensures our facilitation approach supports organizational change maturity.',
+    {
+      x: 0.75,
+      y: 5.8,
+      w: 8.5,
+      h: 0.5,
+      fontSize: 10,
+      color: '666666',
+      italic: true,
+      fontFace: 'Calibri',
+    }
+  );
+
+  slideFooter(slide, theme);
+
+  // ===== SLIDE 7: STAKEHOLDER INTELLIGENCE OVERVIEW =====
+  slide = pres.addSlide();
+  slideHeader(slide, pres,'Stakeholder Intelligence Overview', theme);
+
+  const stats = [
+    { label: 'Overall Readiness', value: calculateOverallReadiness() + '%', color: '4CAF50' },
+    { label: 'Average Consensus', value: calculateAverageConsensus() + '%', color: '2196F3' },
+    { label: 'Key Risks Identified', value: STATE.analysis.risks.length, color: 'FF9800' },
+    { label: 'Open Points', value: STATE.analysis.openPoints.length, color: 'F44336' },
+  ];
+
+  xPos = 0.6;
+  stats.forEach((stat) => {
+    slide.addShape("rect", {
+      x: xPos,
+      y: 1.5,
+      w: 2,
+      h: 1.2,
+      fill: { color: stat.color },
+      line: { type: 'none' },
+    });
+    slide.addText(stat.value, {
+      x: xPos,
+      y: 1.7,
+      w: 2,
+      h: 0.5,
+      fontSize: 28,
+      bold: true,
+      color: theme.white,
+      align: 'center',
+      fontFace: 'Calibri',
+    });
+    slide.addText(stat.label, {
+      x: xPos,
+      y: 2.3,
+      w: 2,
+      h: 0.35,
+      fontSize: 11,
+      color: theme.white,
+      align: 'center',
+      fontFace: 'Calibri',
+    });
+    xPos += 2.3;
+  });
+
+  slide.addText('Respondent Breakdown by Role:', {
+    x: 0.75,
+    y: 3.2,
+    w: 8.5,
+    h: 0.3,
+    fontSize: 12,
+    bold: true,
+    color: theme.text,
+    fontFace: 'Calibri',
+  });
+
+  const roleData = getRoleDistribution();
+  yPos = 3.6;
+  roleData.forEach((role) => {
+    const barWidth = (role.count / 20) * 6;
+    slide.addShape("rect", {
+      x: 2.5,
+      y: yPos,
+      w: barWidth,
+      h: 0.35,
+      fill: { color: theme.primary },
+      line: { type: 'none' },
+    });
+    slide.addText(role.role, {
+      x: 0.75,
+      y: yPos,
+      w: 1.6,
+      h: 0.35,
+      fontSize: 11,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+    slide.addText(role.count.toString(), {
+      x: 2.5 + barWidth + 0.2,
+      y: yPos,
+      w: 0.5,
+      h: 0.35,
+      fontSize: 11,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+    yPos += 0.5;
+  });
+
+  slideFooter(slide, theme);
+
+  // ===== SLIDE 8: CMX READINESS RADAR =====
+  slide = pres.addSlide();
+  slideHeader(slide, pres,'CMX Readiness Assessment', theme);
+
+  const readinessDimensions = getReadinessDimensions();
+
+  yPos = 1.5;
+  readinessDimensions.forEach((dim) => {
+    const scorePercentage = dim.score;
+    const barWidth = (scorePercentage / 100) * 6;
+    const barColor = scorePercentage >= 75 ? '4CAF50' : scorePercentage >= 50 ? 'FFC107' : 'F44336';
+
+    slide.addText(dim.name, {
+      x: 0.75,
+      y: yPos,
+      w: 2.3,
+      h: 0.35,
+      fontSize: 11,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+
+    slide.addShape("rect", {
+      x: 3.1,
+      y: yPos + 0.05,
+      w: barWidth,
+      h: 0.25,
+      fill: { color: barColor },
+      line: { type: 'none' },
+    });
+
+    slide.addText(scorePercentage + '%', {
+      x: 3.1 + barWidth + 0.2,
+      y: yPos,
+      w: 0.8,
+      h: 0.35,
+      fontSize: 11,
+      bold: true,
+      color: barColor,
+      fontFace: 'Calibri',
+    });
+
+    slide.addText(dim.comment, {
+      x: 4.2,
+      y: yPos,
+      w: 4.55,
+      h: 0.35,
+      fontSize: 9,
+      color: '999999',
+      italic: true,
+      fontFace: 'Calibri',
+    });
+
+    yPos += 0.65;
+  });
+
+  slide.addText(
+    'Readiness scores inform our risk mitigation strategy and governance model recommendations for this organization.',
+    {
+      x: 0.75,
+      y: 5.8,
+      w: 8.5,
+      h: 0.4,
+      fontSize: 10,
+      color: '666666',
+      italic: true,
+      fontFace: 'Calibri',
+    }
+  );
+
+  slideFooter(slide, theme);
+
+  // ===== SLIDE 9: IMPACTED GROUPS MAP =====
+  slide = pres.addSlide();
+  slideHeader(slide, pres,'Impacted Groups & Representation', theme);
+
+  const impactedGroups = getImpactedGroupsMap();
+
+  let tableTop = 1.5;
+  slide.addText('Group', {
+    x: 0.75,
+    y: tableTop,
+    w: 1.5,
+    h: 0.3,
+    fontSize: 11,
+    bold: true,
+    color: theme.white,
+    fill: theme.dark,
+    fontFace: 'Calibri',
+  });
+  slide.addText('Respondents', {
+    x: 2.3,
+    y: tableTop,
+    w: 1.2,
+    h: 0.3,
+    fontSize: 11,
+    bold: true,
+    color: theme.white,
+    fill: theme.dark,
+    fontFace: 'Calibri',
+  });
+  slide.addText('Primary Concerns', {
+    x: 3.6,
+    y: tableTop,
+    w: 5.65,
+    h: 0.3,
+    fontSize: 11,
+    bold: true,
+    color: theme.white,
+    fill: theme.dark,
+    fontFace: 'Calibri',
+  });
+
+  tableTop += 0.4;
+  impactedGroups.forEach((group) => {
+    const bgColor = impactedGroups.indexOf(group) % 2 === 0 ? theme.lightBg : theme.white;
+    slide.addShape("rect", {
+      x: 0.75,
+      y: tableTop,
+      w: 8.5,
+      h: 0.35,
+      fill: { color: bgColor },
+      line: { color: theme.accentGray, width: 1 },
+    });
+    slide.addText(group.group, {
+      x: 0.85,
+      y: tableTop + 0.02,
+      w: 1.4,
+      h: 0.31,
+      fontSize: 10,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+    slide.addText(group.count.toString(), {
+      x: 2.3,
+      y: tableTop + 0.02,
+      w: 1.2,
+      h: 0.31,
+      fontSize: 10,
+      color: theme.text,
+      align: 'center',
+      fontFace: 'Calibri',
+    });
+    slide.addText(group.concerns, {
+      x: 3.7,
+      y: tableTop + 0.02,
+      w: 5.45,
+      h: 0.31,
+      fontSize: 9,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+    tableTop += 0.37;
+  });
+
+  slideFooter(slide, theme);
+
+  // ===== SLIDES 10-17: DECISION SLIDES (8 DECISIONS) =====
+  const decisions = CMX.decisions || [];
+  decisions.forEach((decision, decIdx) => {
+    slide = pres.addSlide();
+    slideHeader(slide, pres,`Decision ${decIdx + 1}: ${decision.title}`, theme);
+
+    // ADKAR badges
+    let badgeX = 0.75;
+    const adkarStagesForDecision = decision.adkarStages || ['Awareness'];
+    adkarStagesForDecision.forEach((stage) => {
+      slide.addShape("rect", {
+        x: badgeX,
+        y: 1.35,
+        w: 1.3,
+        h: 0.25,
+        fill: { color: theme.primary },
+        line: { type: 'none' },
+      });
+      slide.addText(stage, {
+        x: badgeX,
+        y: 1.37,
+        w: 1.3,
+        h: 0.21,
+        fontSize: 9,
+        bold: true,
+        color: theme.white,
+        align: 'center',
+        fontFace: 'Calibri',
+      });
+      badgeX += 1.4;
+    });
+
+    // Intelligence summary
+    slide.addText('Intelligence Summary:', {
+      x: 0.75,
+      y: 1.8,
+      w: 8.5,
+      h: 0.25,
+      fontSize: 11,
+      bold: true,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+
+    slide.addText(decision.intelligenceSummary || 'Assessment pending detailed analysis.', {
+      x: 0.75,
+      y: 2.1,
+      w: 8.5,
+      h: 0.7,
+      fontSize: 10,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+
+    // Consensus badge
+    const consensusPercentage = decision.consensus || 50;
+    const consensusColor = consensusPercentage >= 75 ? '4CAF50' : consensusPercentage >= 50 ? 'FFC107' : 'F44336';
+    slide.addShape("rect", {
+      x: 0.75,
+      y: 2.95,
+      w: 1.8,
+      h: 0.5,
+      fill: { color: consensusColor },
+      line: { type: 'none' },
+    });
+    slide.addText(consensusPercentage + '%\nConsensus', {
+      x: 0.75,
+      y: 3.02,
+      w: 1.8,
+      h: 0.36,
+      fontSize: 12,
+      bold: true,
+      color: theme.white,
+      align: 'center',
+      fontFace: 'Calibri',
+    });
+
+    // Majority position
+    slide.addShape("rect", {
+      x: 2.7,
+      y: 2.95,
+      w: 6.55,
+      h: 0.5,
+      fill: { color: theme.lightBg },
+      line: { color: theme.primary, width: 2 },
+    });
+    slide.addText('Majority Position: ' + (decision.majorityPosition || 'Pending consensus'), {
+      x: 2.85,
+      y: 3.05,
+      w: 6.25,
+      h: 0.3,
+      fontSize: 11,
+      bold: true,
+      color: theme.dark,
+      fontFace: 'Calibri',
+    });
+
+    // Role divergence
+    slide.addText('Role Divergence:', {
+      x: 0.75,
+      y: 3.6,
+      w: 8.5,
+      h: 0.25,
+      fontSize: 10,
+      bold: true,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+
+    const roleDivergence = decision.roleDivergence || 'High alignment across roles';
+    slide.addText(roleDivergence, {
+      x: 0.75,
+      y: 3.88,
+      w: 8.5,
+      h: 0.45,
+      fontSize: 9,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+
+    // Risk signals
+    slide.addText('Risk Signals:', {
+      x: 0.75,
+      y: 4.45,
+      w: 8.5,
+      h: 0.25,
+      fontSize: 10,
+      bold: true,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+
+    const riskSignals = decision.riskSignals || ['No critical risks identified'];
+    riskSignals.slice(0, 2).forEach((risk, idx) => {
+      slide.addText('• ' + risk, {
+        x: 0.9,
+        y: 4.72 + idx * 0.28,
+        w: 8.35,
+        h: 0.25,
+        fontSize: 9,
+        color: 'D32F2F',
+        fontFace: 'Calibri',
+      });
+    });
+
+    // Key verbatims
+    slide.addText('Key Verbatim Feedback:', {
+      x: 0.75,
+      y: 5.35,
+      w: 8.5,
+      h: 0.25,
+      fontSize: 10,
+      bold: true,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+
+    const verbatims = decision.verbatims || ['"Pending detailed analysis"'];
+    verbatims.slice(0, 2).forEach((verb, idx) => {
+      slide.addText('"' + verb + '"', {
+        x: 0.9,
+        y: 5.62 + idx * 0.28,
+        w: 8.35,
+        h: 0.25,
+        fontSize: 8,
+        color: '666666',
+        italic: true,
+        fontFace: 'Calibri',
+      });
+    });
+
+    slideFooter(slide, theme);
+  });
+
+  // ===== SLIDE 18: ROLE DIVERGENCE HEATMAP =====
+  slide = pres.addSlide();
+  slideHeader(slide, pres,'Role Alignment Heatmap', theme);
+
+  const rolePairs = [
+    { pair: 'Executive-Ops', alignment: 78 },
+    { pair: 'Executive-Tech', alignment: 62 },
+    { pair: 'Executive-Regional', alignment: 71 },
+    { pair: 'Operations-Tech', alignment: 68 },
+    { pair: 'Operations-Regional', alignment: 74 },
+    { pair: 'Tech-Regional', alignment: 55 },
+  ];
+
+  yPos = 1.5;
+  rolePairs.forEach((pair) => {
+    const alignPerc = pair.alignment;
+    const heatColor =
+      alignPerc >= 75 ? '4CAF50' : alignPerc >= 65 ? 'FFC107' : alignPerc >= 50 ? 'FF9800' : 'F44336';
+
+    slide.addText(pair.pair, {
+      x: 0.75,
+      y: yPos,
+      w: 2.5,
+      h: 0.35,
+      fontSize: 11,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+
+    const barWidth = (alignPerc / 100) * 5.5;
+    slide.addShape("rect", {
+      x: 3.35,
+      y: yPos + 0.05,
+      w: barWidth,
+      h: 0.25,
+      fill: { color: heatColor },
+      line: { type: 'none' },
+    });
+
+    slide.addText(alignPerc + '%', {
+      x: 9,
+      y: yPos,
+      w: 0.75,
+      h: 0.35,
+      fontSize: 11,
+      bold: true,
+      color: heatColor,
+      align: 'right',
+      fontFace: 'Calibri',
+    });
+
+    yPos += 0.55;
+  });
+
+  slide.addText(
+    'Alignment scores below 65% indicate divergent perspectives. Tech-Regional alignment requires ' +
+      'targeted facilitation and potentially a breakout session to resolve technical implementation differences.',
+    {
+      x: 0.75,
+      y: 5.5,
+      w: 8.5,
+      h: 0.7,
+      fontSize: 10,
+      color: '666666',
+      italic: true,
+      fontFace: 'Calibri',
+    }
+  );
+
+  slideFooter(slide, theme);
+
+  // ===== SLIDE 19: OPEN POINTS & BLOCKERS =====
+  slide = pres.addSlide();
+  slideHeader(slide, pres,'Open Points & Blockers', theme);
+
+  const openPoints = STATE.analysis.openPoints.slice(0, 8);
+
+  yPos = 1.5;
+  openPoints.forEach((point, idx) => {
+    const priorityColor = point.priority === 'High' ? 'F44336' : point.priority === 'Medium' ? 'FF9800' : '4CAF50';
+
+    slide.addShape("rect", {
+      x: 0.75,
+      y: yPos,
+      w: 0.3,
+      h: 0.3,
+      fill: { color: priorityColor },
+      line: { type: 'none' },
+    });
+
+    slide.addText(point.text || point.description || '', {
+      x: 1.2,
+      y: yPos,
+      w: 6.5,
+      h: 0.3,
+      fontSize: 10,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+
+    slide.addText('Owner: ' + (point.owner || 'TBD'), {
+      x: 7.8,
+      y: yPos,
+      w: 1.45,
+      h: 0.3,
+      fontSize: 9,
+      color: '666666',
+      align: 'right',
+      fontFace: 'Calibri',
+    });
+
+    yPos += 0.45;
+  });
+
+  if (STATE.analysis.openPoints.length > 8) {
+    slide.addText(`... and ${STATE.analysis.openPoints.length - 8} more open points (see tracker).`, {
+      x: 0.75,
+      y: yPos,
+      w: 8.5,
+      h: 0.3,
+      fontSize: 10,
+      color: '999999',
+      italic: true,
+      fontFace: 'Calibri',
+    });
+  }
+
+  slideFooter(slide, theme);
+
+  // ===== SLIDE 20: RISK REGISTER =====
+  slide = pres.addSlide();
+  slideHeader(slide, pres,'Risk Register', theme);
+
+  const topRisks = STATE.analysis.risks.slice(0, 6);
+
+  yPos = 1.5;
+  topRisks.forEach((risk) => {
+    const severityColor = (risk.severity === 'High' || risk.severity === 'Critical') ? 'F44336' : risk.severity === 'Medium' ? 'FF9800' : '4CAF50';
+
+    slide.addText(risk.title || risk.description || '', {
+      x: 0.75,
+      y: yPos,
+      w: 5.5,
+      h: 0.3,
+      fontSize: 10,
+      bold: true,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+
+    slide.addShape("rect", {
+      x: 6.4,
+      y: yPos + 0.02,
+      w: 1.2,
+      h: 0.26,
+      fill: { color: severityColor },
+      line: { type: 'none' },
+    });
+
+    slide.addText(risk.severity, {
+      x: 6.4,
+      y: yPos + 0.04,
+      w: 1.2,
+      h: 0.22,
+      fontSize: 9,
+      bold: true,
+      color: theme.white,
+      align: 'center',
+      fontFace: 'Calibri',
+    });
+
+    slide.addText('Mitigation: ' + (risk.mitigation || 'In progress'), {
+      x: 0.75,
+      y: yPos + 0.35,
+      w: 8.5,
+      h: 0.25,
+      fontSize: 9,
+      color: '666666',
+      fontFace: 'Calibri',
+    });
+
+    yPos += 0.75;
+  });
+
+  slideFooter(slide, theme);
+
+  // ===== SLIDE 21: CONSTRAINTS & GUARDRAILS =====
+  slide = pres.addSlide();
+  slideHeader(slide, pres,'Governance Constraints & Guardrails', theme);
+
+  const constraints = [
+    { label: 'Survey Fatigue Rule', value: 'Max 1 survey per stakeholder per month (after launch)' },
+    { label: 'Blackout Periods', value: 'Avoid month-end close, year-end holidays, major events' },
+    { label: 'Contact Frequency', value: 'Executive escalations only for critical issues; monthly ops reviews' },
+    { label: 'Data Retention', value: '24-month rolling window; PII purged after 90 days of deactivation' },
+    { label: 'Survey Length Cap', value: 'Max 15 minutes average completion time for operational surveys' },
+    { label: 'Regional Autonomy', value: 'Regions can customize bottom 3 questions; top 5 are global standard' },
+  ];
+
+  yPos = 1.5;
+  constraints.forEach((constraint) => {
+    slide.addShape("rect", {
+      x: 0.75,
+      y: yPos,
+      w: 8.5,
+      h: 0.55,
+      fill: { color: yPos === 1.5 ? theme.primary : theme.accentGray },
+      line: { color: theme.dark, width: 1 },
+    });
+
+    slide.addText(constraint.label, {
+      x: 0.95,
+      y: yPos + 0.05,
+      w: 2.5,
+      h: 0.18,
+      fontSize: 11,
+      bold: true,
+      color: yPos === 1.5 ? theme.white : theme.dark,
+      fontFace: 'Calibri',
+    });
+
+    slide.addText(constraint.value, {
+      x: 3.6,
+      y: yPos + 0.05,
+      w: 5.65,
+      h: 0.45,
+      fontSize: 10,
+      color: yPos === 1.5 ? theme.white : theme.text,
+      fontFace: 'Calibri',
+    });
+
+    yPos += 0.65;
+  });
+
+  slideFooter(slide, theme);
+
+  // ===== SLIDE 22: GOVERNANCE MODEL RECOMMENDATION =====
+  slide = pres.addSlide();
+  slideHeader(slide, pres,'Recommended Governance Model', theme);
+
+  slide.addText('Hub & Spoke with Regional Delegates', {
+    x: 0.75,
+    y: 1.5,
+    w: 8.5,
+    h: 0.35,
+    fontSize: 14,
+    bold: true,
+    color: theme.text,
+    fontFace: 'Calibri',
+  });
+
+  // Hub
+  slide.addShape("ellipse", {
+    x: 4.35,
+    y: 2.2,
+    w: 1.3,
+    h: 1.3,
+    fill: { color: theme.primary },
+    line: { color: theme.dark, width: 2 },
+  });
+
+  slide.addText('Global\nHub', {
+    x: 4.35,
+    y: 2.5,
+    w: 1.3,
+    h: 0.7,
+    fontSize: 11,
+    bold: true,
+    color: theme.white,
+    align: 'center',
+    fontFace: 'Calibri',
+  });
+
+  // Spokes
+  const spokes = [
+    { x: 1.2, y: 2.85, label: 'EMEA' },
+    { x: 8.3, y: 2.85, label: 'Americas' },
+    { x: 4.35, y: 4.5, label: 'APAC' },
+  ];
+
+  spokes.forEach((spoke) => {
+    slide.addShape("ellipse", {
+      x: spoke.x,
+      y: spoke.y,
+      w: 1.1,
+      h: 0.8,
+      fill: { color: theme.accentGray },
+      line: { color: theme.dark, width: 1 },
+    });
+
+    slide.addText(spoke.label, {
+      x: spoke.x,
+      y: spoke.y + 0.2,
+      w: 1.1,
+      h: 0.4,
+      fontSize: 10,
+      bold: true,
+      color: theme.dark,
+      align: 'center',
+      fontFace: 'Calibri',
+    });
+
+    // Line to hub
+    slide.addShape("line", {
+      x: spoke.x + 0.55,
+      y: spoke.y + (spoke.label === 'APAC' ? -0.1 : 0.8),
+      w: 0,
+      h: spoke.label === 'APAC' ? 1.2 : 1.2,
+      line: { color: theme.primary, width: 2 },
+    });
+  });
+
+  slide.addText(
+    'Governance Model: Monthly operational reviews led by regional delegates reporting into global hub. ' +
+      'Quarterly steering with executive sponsors. Decision rights hierarchical based on scope.',
+    {
+      x: 0.75,
+      y: 5.6,
+      w: 8.5,
+      h: 0.7,
+      fontSize: 10,
+      color: '666666',
+      italic: true,
+      fontFace: 'Calibri',
+    }
+  );
+
+  slideFooter(slide, theme);
+
+  // ===== SLIDE 23: WORKSHOP CASCADE =====
+  slide = pres.addSlide();
+  slideHeader(slide, pres,'Workshop Cascade & Delivery Timeline', theme);
+
+  const cascade = [
+    { stage: 'WS1', title: 'Scope &\nGovernance', output: 'Governance model\nDecision log' },
+    { stage: 'WS2', title: 'Process\nDesign', output: 'Standard operating\nprocedures' },
+    { stage: 'WS3', title: 'Technical\nConfig', output: 'Configuration\nspecification' },
+    { stage: 'WS4', title: 'Launch\nPrep', output: 'Training materials\nRollout plan' },
+    { stage: 'DW1', title: 'Deploy', output: 'Live system\nTraining' },
+    { stage: 'DW2', title: 'Optimize', output: 'Performance\ntuning' },
+  ];
+
+  let cascadeX = 0.4;
+  const boxWidth = 1.4;
+  cascade.forEach((item) => {
+    slide.addShape("rect", {
+      x: cascadeX,
+      y: 2,
+      w: boxWidth,
+      h: 0.6,
+      fill: { color: theme.primary },
+      line: { color: theme.dark, width: 1 },
+    });
+
+    slide.addText(item.stage, {
+      x: cascadeX,
+      y: 2.05,
+      w: boxWidth,
+      h: 0.5,
+      fontSize: 11,
+      bold: true,
+      color: theme.white,
+      align: 'center',
+      fontFace: 'Calibri',
+    });
+
+    slide.addText(item.title, {
+      x: cascadeX - 0.1,
+      y: 2.8,
+      w: boxWidth + 0.2,
+      h: 0.6,
+      fontSize: 9,
+      color: theme.text,
+      align: 'center',
+      fontFace: 'Calibri',
+    });
+
+    slide.addText(item.output, {
+      x: cascadeX - 0.1,
+      y: 3.5,
+      w: boxWidth + 0.2,
+      h: 0.8,
+      fontSize: 8,
+      color: '666666',
+      align: 'center',
+      italic: true,
+      fontFace: 'Calibri',
+    });
+
+    if (cascade.indexOf(item) < cascade.length - 1) {
+      slide.addShape("triangle", {
+        x: cascadeX + boxWidth + 0.08,
+        y: 2.15,
+        w: 0.25,
+        h: 0.3,
+        fill: { color: theme.dark },
+        line: { type: 'none' },
+      });
+    }
+
+    cascadeX += 1.55;
+  });
+
+  slide.addText('Estimated Timeline: 6-8 weeks from WS1 to DW1 (based on readiness assessment)', {
+    x: 0.75,
+    y: 5.8,
+    w: 8.5,
+    h: 0.4,
+    fontSize: 10,
+    color: '666666',
+    italic: true,
+    fontFace: 'Calibri',
+  });
+
+  slideFooter(slide, theme);
+
+  // ===== SLIDE 24: NEXT STEPS & ACTION ITEMS =====
+  slide = pres.addSlide();
+  slideHeader(slide, pres,'Next Steps & Action Items', theme);
+
+  const actionItems = [
+    { item: 'Finalize governance decisions', owner: 'Executive Sponsor', date: '1 week' },
+    { item: 'Establish working groups for open points', owner: 'Program Manager', date: '3 days' },
+    { item: 'Risk mitigation planning session', owner: 'Program Manager', date: '2 weeks' },
+    { item: 'Cascade communication to organization', owner: 'Communications', date: '1 week' },
+    { item: 'Confirm WS2 scope and participants', owner: 'PMO', date: '2 weeks' },
+  ];
+
+  yPos = 1.5;
+  actionItems.forEach((action, idx) => {
+    slide.addText((idx + 1).toString(), {
+      x: 0.75,
+      y: yPos,
+      w: 0.4,
+      h: 0.35,
+      fontSize: 11,
+      bold: true,
+      color: theme.primary,
+      fontFace: 'Calibri',
+    });
+
+    slide.addText(action.item, {
+      x: 1.25,
+      y: yPos,
+      w: 4,
+      h: 0.35,
+      fontSize: 11,
+      color: theme.text,
+      fontFace: 'Calibri',
+    });
+
+    slide.addText(action.owner, {
+      x: 5.35,
+      y: yPos,
+      w: 2.2,
+      h: 0.35,
+      fontSize: 10,
+      color: '666666',
+      fontFace: 'Calibri',
+    });
+
+    slide.addText(action.date, {
+      x: 7.7,
+      y: yPos,
+      w: 1.55,
+      h: 0.35,
+      fontSize: 10,
+      color: '999999',
+      align: 'right',
+      fontFace: 'Calibri',
+    });
+
+    yPos += 0.5;
+  });
+
+  slideFooter(slide, theme);
+
+  // ===== SLIDE 25: CLOSING SLIDE =====
+  slide = pres.addSlide();
+  slide.background = { color: theme.dark };
+
+  slide.addText('Thank You', {
+    x: 0.5,
+    y: 2,
+    w: 9,
+    h: 0.8,
+    fontSize: 44,
+    bold: true,
+    color: theme.primary,
+    align: 'center',
+    fontFace: 'Calibri',
+  });
+
+  slide.addText('CMX Foundations Workshop 1', {
+    x: 0.5,
+    y: 3,
+    w: 9,
+    h: 0.5,
+    fontSize: 24,
+    color: theme.white,
+    align: 'center',
+    fontFace: 'Calibri',
+  });
+
+  slide.addText(`${clientName}`, {
+    x: 0.5,
+    y: 3.8,
+    w: 9,
+    h: 0.4,
+    fontSize: 18,
+    color: theme.lightBg,
+    align: 'center',
+    fontFace: 'Calibri',
+  });
+
+  slide.addText(`Next Workshop: WS2 - Process Design (Date TBD)`, {
+    x: 0.5,
+    y: 5,
+    w: 9,
+    h: 0.35,
+    fontSize: 12,
+    color: theme.accentGray,
+    align: 'center',
+    fontFace: 'Calibri',
+  });
+
+  slide.addText(`AKT Global | CMX Practice`, {
+    x: 0.5,
+    y: 5.6,
+    w: 9,
+    h: 0.3,
+    fontSize: 11,
+    color: theme.accentGray,
+    align: 'center',
+    fontFace: 'Calibri',
+  });
+
+  slide.addShape("rect", {
+    x: 0,
+    y: 5.3,
+    w: 10,
+    h: 0.08,
+    fill: { color: theme.primary },
+    line: { type: 'none' },
+  });
+
+  // Save presentation
+  const fileName = `CMX-WS1-Deck-${clientName}-${new Date().toISOString().split('T')[0]}.pptx`;
+  pres.writeFile({ fileName: fileName }).then(() => {
+    toast(`PPTX generated: ${fileName}`, 'success');
+  }).catch((err) => {
+    console.error('PPTX writeFile error:', err);
+    toast(`PPTX save failed: ${err.message}`, 'error');
+  });
+  return fileName;
+}
+
+function slideHeader(slide, pres, title, theme) {
+  slide.background = { color: theme.white };
+
+  slide.addShape("rect", {
+    x: 0,
+    y: 0,
+    w: 10,
+    h: 0.7,
+    fill: { color: theme.dark },
+    line: { type: 'none' },
+  });
+
+  slide.addText(title, {
+    x: 0.75,
+    y: 0.15,
+    w: 8,
+    h: 0.4,
+    fontSize: 24,
+    bold: true,
+    color: theme.primary,
+    fontFace: 'Calibri',
+  });
+
+  slide.addShape("rect", {
+    x: 0,
+    y: 0.68,
+    w: 10,
+    h: 0.04,
+    fill: { color: theme.primary },
+    line: { type: 'none' },
+  });
+}
+
+function slideFooter(slide, theme) {
+  slide.addText('AKT Global | CMX Intelligence Engine | Confidential', {
+    x: 0.5,
+    y: 5.2,
+    w: 9,
+    h: 0.25,
+    fontSize: 8,
+    color: 'CCCCCC',
+    align: 'center',
+    fontFace: 'Calibri',
+  });
+}
+
+// ============================================================================
+// SECTION 2: ENRICHED XLSX GENERATOR
+// ============================================================================
+
+function generateTracker() {
+  const clientName = STATE.clientName || 'Client';
+  const today = new Date().toISOString().split('T')[0];
+  const fileName = `CMX-WS1-Tracker-${clientName}-${today}.xlsx`;
+
+  const wb = XLSX.utils.book_new();
+
+  // ===== SHEET 1: OPEN POINTS =====
+  const openPointsData = STATE.analysis.openPoints.map((point, idx) => ({
+    ID: `OP-${String(idx + 1).padStart(3, '0')}`,
+    Category: point.category || categorizeOpenPoint(point.text || ''),
+    Description: point.text || point.description || '',
+    Owner: point.owner || 'TBD',
+    Priority: point.priority || 'Medium',
+    Status: 'Open',
+    'Source Question': point.qId || '',
+    'Respondent': point.respondent || '',
+    'ADKAR Stage': 'Awareness',
+    Notes: '',
+  }));
+
+  let openPointsSheet = XLSX.utils.json_to_sheet(openPointsData);
+  openPointsSheet['!cols'] = [
+    { wch: 10 },
+    { wch: 14 },
+    { wch: 40 },
+    { wch: 15 },
+    { wch: 10 },
+    { wch: 10 },
+    { wch: 10 },
+    { wch: 18 },
+    { wch: 14 },
+    { wch: 20 },
+  ];
+  XLSX.utils.book_append_sheet(wb, openPointsSheet, 'Open Points');
+
+  // ===== SHEET 2: DECISION LOG =====
+  const decisionLogData = CMX.decisions.map((dec, idx) => ({
+    'Decision #': idx + 1,
+    Title: dec.title,
+    'ADKAR Stages': (dec.adkarStages || []).join(', '),
+    'Consensus %': dec.consensus || 50,
+    'Majority Position': dec.majorityPosition || 'Pending',
+    'Dissenting Views Summary': dec.roleDivergence || 'No major divergence',
+    'Risk Level': dec.riskLevel || 'Medium',
+    'Risk Category': dec.riskCategory || 'Alignment',
+    'Cascade Impact': dec.cascadeImpact || 'Affects downstream workshops',
+    Status: dec.status || 'Open',
+    'Workshop Notes': dec.workshopNotes || '',
+    Owner: dec.owner || 'TBD',
+  }));
+
+  let decisionSheet = XLSX.utils.json_to_sheet(decisionLogData);
+  decisionSheet['!cols'] = [
+    { wch: 10 },
+    { wch: 25 },
+    { wch: 20 },
+    { wch: 12 },
+    { wch: 25 },
+    { wch: 30 },
+    { wch: 12 },
+    { wch: 15 },
+    { wch: 25 },
+    { wch: 12 },
+    { wch: 25 },
+    { wch: 15 },
+  ];
+  XLSX.utils.book_append_sheet(wb, decisionSheet, 'Decision Log');
+
+  // ===== SHEET 3: RISK REGISTER =====
+  const riskRegisterData = STATE.analysis.risks.map((risk, idx) => ({
+    'Risk ID': `RISK-${String(idx + 1).padStart(3, '0')}`,
+    Category: risk.type || 'Adoption',
+    Title: risk.title || '',
+    Description: risk.description || '',
+    Severity: risk.severity || 'Medium',
+    'Affected Decision': risk.affectedDecision ? `Decision ${risk.affectedDecision}` : '',
+    'Related Metric': risk.relatedMetric ? risk.relatedMetric.toFixed(1) : '',
+    'Mitigation Strategy': 'In planning',
+    Owner: 'TBD',
+    Status: 'Active',
+  }));
+
+  let riskSheet = XLSX.utils.json_to_sheet(riskRegisterData);
+  riskSheet['!cols'] = [
+    { wch: 12 },
+    { wch: 15 },
+    { wch: 35 },
+    { wch: 12 },
+    { wch: 12 },
+    { wch: 12 },
+    { wch: 30 },
+    { wch: 15 },
+    { wch: 12 },
+    { wch: 12 },
+  ];
+  XLSX.utils.book_append_sheet(wb, riskSheet, 'Risk Register');
+
+  // ===== SHEET 4: STAKEHOLDER MAP =====
+  const stakeholderData = Object.entries(STATE.responses || {}).map(([responderId, responses]) => ({
+    Name: `Respondent-${responderId.substring(0, 4)}`,
+    'Role Segment': STATE.roles ? STATE.roles[responderId] : 'Unknown',
+    Department: responses.Q3 || 'Unknown',
+    'Key Themes': extractKeyThemes(responses).slice(0, 2).join('; '),
+    'Primary Concerns': extractPrimaryConcerns(responses).slice(0, 2).join('; '),
+    'Engagement Level': calculateEngagementLevel(responses),
+    'ADKAR Readiness': calculateADKARReadiness(responses),
+    'Recommended Action': recommendAction(responses),
+  }));
+
+  let stakeholderSheet = XLSX.utils.json_to_sheet(stakeholderData);
+  stakeholderSheet['!cols'] = [
+    { wch: 15 },
+    { wch: 15 },
+    { wch: 20 },
+    { wch: 30 },
+    { wch: 30 },
+    { wch: 15 },
+    { wch: 15 },
+    { wch: 25 },
+  ];
+  XLSX.utils.book_append_sheet(wb, stakeholderSheet, 'Stakeholder Map');
+
+  // ===== SHEET 5: GOVERNANCE CADENCE =====
+  const governanceData = [
+    {
+      Frequency: 'Monthly',
+      Activity: 'Operational Review',
+      Owner: 'Regional Lead',
+      Participants: '8-12',
+      Purpose: 'Performance review, escalation management',
+      Status: 'Scheduled',
+    },
+    {
+      Frequency: 'Quarterly',
+      Activity: 'Steering Committee',
+      Owner: 'Executive Sponsor',
+      Participants: '4-6',
+      Purpose: 'Strategic alignment, decision gates',
+      Status: 'Scheduled',
+    },
+    {
+      Frequency: 'Semi-Annual',
+      Activity: 'Governance Cleanup',
+      Owner: 'Program Manager',
+      Participants: '10-15',
+      Purpose: 'Process improvement, governance review',
+      Status: 'Scheduled',
+    },
+    {
+      Frequency: 'Annual',
+      Activity: 'Strategic Review',
+      Owner: 'Executive Sponsor',
+      Participants: '20-30',
+      Purpose: 'Annual planning, ROI assessment, roadmap',
+      Status: 'Scheduled',
+    },
+  ];
+
+  let governanceSheet = XLSX.utils.json_to_sheet(governanceData);
+  governanceSheet['!cols'] = [
+    { wch: 15 },
+    { wch: 25 },
+    { wch: 20 },
+    { wch: 15 },
+    { wch: 35 },
+    { wch: 12 },
+  ];
+  XLSX.utils.book_append_sheet(wb, governanceSheet, 'Governance Cadence');
+
+  // Save workbook
+  XLSX.writeFile(wb, fileName);
+
+  toast(`XLSX generated: ${fileName}`, 'success');
+  return fileName;
+}
+
+function categorizeOpenPoint(description) {
+  const desc = description.toLowerCase();
+  if (desc.includes('tech') || desc.includes('integrat') || desc.includes('data')) return 'Technical';
+  if (desc.includes('govern') || desc.includes('decision')) return 'Governance';
+  if (desc.includes('process') || desc.includes('procedure')) return 'Process';
+  if (desc.includes('people') || desc.includes('resource') || desc.includes('team')) return 'People';
+  if (desc.includes('data') || desc.includes('metric')) return 'Data';
+  if (desc.includes('time') || desc.includes('schedule')) return 'Timeline';
+  return 'Process';
+}
+
+function extractKeyThemes(responses) {
+  const themes = [];
+  if (responses.Q4) themes.push(responses.Q4);
+  if (responses.Q5) themes.push(responses.Q5);
+  return themes;
+}
+
+function extractPrimaryConcerns(responses) {
+  const concerns = [];
+  if (responses.Q6) concerns.push(responses.Q6);
+  if (responses.Q7) concerns.push(responses.Q7);
+  return concerns;
+}
+
+function calculateEngagementLevel(responses) {
+  const completeness = Object.keys(responses).length / 33;
+  if (completeness > 0.8) return 'High';
+  if (completeness > 0.6) return 'Medium';
+  return 'Low';
+}
+
+function calculateADKARReadiness(responses) {
+  const avgScore = Object.values(responses)
+    .filter((v) => typeof v === 'number')
+    .reduce((a, b) => a + b, 0);
+  if (avgScore > 30) return 'Ready';
+  if (avgScore > 20) return 'Partial';
+  return 'Developing';
+}
+
+function recommendAction(responses) {
+  const engagement = calculateEngagementLevel(responses);
+  const readiness = calculateADKARReadiness(responses);
+
+  if (engagement === 'Low' || readiness === 'Developing')
+    return 'Schedule 1:1 stakeholder conversation';
+  if (readiness === 'Partial') return 'Include in working group';
+  return 'Empower as working group lead';
+}
+
+// ============================================================================
+// SECTION 3: ENRICHED BRIEFING PACK GENERATOR
+// ============================================================================
+
+function generateBriefing() {
+  const clientName = STATE.clientName || 'Client';
+  const today = new Date().toLocaleDateString();
+  const theme = {
+    primary: '#F9A13A',
+    dark: '#2D2015',
+    lightBg: '#FEF0DB',
+    white: '#FFFFFF',
+    text: '#1a1a1a',
+    accentGray: '#E8E8E8',
+  };
+
+  let html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMX WS1 Briefing Pack - ${clientName}</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Calibri, Arial, sans-serif;
+      line-height: 1.6;
+      color: ${theme.text};
+      background: ${theme.white};
+    }
+    .page { page-break-after: always; padding: 1in; min-height: 100vh; background: ${theme.white}; }
+    .cover { background: ${theme.dark}; color: ${theme.white}; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    .cover h1 { font-size: 3em; margin-bottom: 0.5em; color: ${theme.primary}; }
+    .cover h2 { font-size: 2em; margin-bottom: 1em; }
+    .cover p { margin-bottom: 0.5em; font-size: 1.1em; }
+    .header { border-bottom: 4px solid ${theme.primary}; padding-bottom: 0.5em; margin-bottom: 1.5em; }
+    .header h1 { font-size: 2em; color: ${theme.dark}; }
+    .header p { color: #666; font-size: 0.9em; }
+    .stat-box { display: inline-block; background: ${theme.primary}; color: ${theme.white}; padding: 1em; margin: 0.5em; border-radius: 4px; text-align: center; min-width: 150px; }
+    .stat-box .number { font-size: 2em; font-weight: bold; }
+    .stat-box .label { font-size: 0.9em; }
+    .section { margin-bottom: 2em; }
+    .section h2 { font-size: 1.8em; color: ${theme.dark}; margin-bottom: 0.8em; border-left: 4px solid ${theme.primary}; padding-left: 0.5em; }
+    .section h3 { font-size: 1.3em; color: ${theme.dark}; margin-top: 1em; margin-bottom: 0.5em; }
+    .subsection { background: ${theme.lightBg}; padding: 1em; border-left: 4px solid ${theme.primary}; margin-bottom: 1em; }
+    table { width: 100%; border-collapse: collapse; margin: 1em 0; }
+    table th { background: ${theme.dark}; color: ${theme.white}; padding: 0.75em; text-align: left; }
+    table td { padding: 0.75em; border-bottom: 1px solid ${theme.accentGray}; }
+    table tr:nth-child(even) { background: ${theme.lightBg}; }
+    .decision-box { background: ${theme.lightBg}; border: 2px solid ${theme.primary}; padding: 1.5em; margin-bottom: 2em; }
+    .consensus { display: inline-block; padding: 0.5em 1em; border-radius: 4px; font-weight: bold; }
+    .consensus.high { background: #4CAF50; color: white; }
+    .consensus.medium { background: #FF9800; color: white; }
+    .consensus.low { background: #F44336; color: white; }
+    .risk { background: #FFEBEE; border-left: 4px solid #F44336; padding: 0.75em; margin-bottom: 0.5em; }
+    .quote { font-style: italic; border-left: 4px solid ${theme.primary}; padding-left: 1em; margin: 1em 0; color: #555; }
+    .checklist { list-style: none; }
+    .checklist li { padding: 0.5em 0; padding-left: 2em; position: relative; }
+    .checklist li:before { content: "☐"; position: absolute; left: 0; }
+    footer { text-align: center; font-size: 0.85em; color: #999; margin-top: 2em; padding-top: 1em; border-top: 1px solid ${theme.accentGray}; }
+    .badge { display: inline-block; background: ${theme.primary}; color: white; padding: 0.25em 0.6em; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin-right: 0.5em; }
+    @media print {
+      body { background: white; }
+      .page { box-shadow: none; page-break-after: always; }
+    }
+  </style>
+</head>
+<body>`;
+
+  // ===== COVER PAGE =====
+  html += `
+<div class="page cover">
+  <h1>CMX Intelligence Engine</h1>
+  <h2>Workshop 1 Briefing Pack</h2>
+  <p><strong>Engagement:</strong> ${clientName}</p>
+  <p><strong>Date:</strong> ${today}</p>
+  <p><strong>Prepared by:</strong> AKT Global</p>
+  <p style="margin-top: 2em; font-size: 0.9em;">Confidential - For Workshop Participants Only</p>
+  <footer>AKT Global | CMX Practice</footer>
+</div>`;
+
+  // ===== EXECUTIVE SUMMARY =====
+  const overallReadiness = calculateOverallReadiness();
+  const avgConsensus = calculateAverageConsensus();
+  const topThemes = getTopThemes();
+
+  html += `
+<div class="page">
+  <div class="header">
+    <h1>Executive Summary</h1>
+    <p>Consolidated Intelligence Picture for WS1 Facilitation</p>
+  </div>
+
+  <div class="section">
+    <p><strong>This engagement is approaching Workshop 1 with ${overallReadiness}% organizational readiness.</strong>
+    Across ${Object.keys(STATE.responses || {}).length} stakeholder interviews, we see ${avgConsensus}% average consensus on governance
+    decisions, with particular strength in leadership alignment on process scope and regional implementation.
+    Key risks center on data readiness and change capacity constraints. This briefing equips the facilitation team
+    to navigate decision-making efficiently, mitigate risks proactively, and build toward governance adoption.</p>
+
+    <div style="text-align: center; margin: 2em 0;">
+      <div class="stat-box"><div class="number">${overallReadiness}%</div><div class="label">Org Readiness</div></div>
+      <div class="stat-box"><div class="number">${avgConsensus}%</div><div class="label">Avg Consensus</div></div>
+      <div class="stat-box"><div class="number">${STATE.analysis.risks.length}</div><div class="label">Key Risks</div></div>
+    </div>
+
+    <h3>Top 3 Themes to Watch:</h3>
+    <ol style="margin-left: 1.5em;">
+      ${topThemes.map((theme) => `<li>${theme}</li>`).join('')}
+    </ol>
+  </div>
+
+  <footer>AKT Global | CMX Intelligence Engine | Confidential</footer>
+</div>`;
+
+  // ===== CMX READINESS ASSESSMENT =====
+  const readinessDims = getReadinessDimensions();
+  html += `
+<div class="page">
+  <div class="header">
+    <h1>CMX Readiness Assessment</h1>
+    <p>5-Dimension Organizational Readiness Analysis</p>
+  </div>
+
+  <div class="section">
+    ${readinessDims
+      .map(
+        (dim) => `
+    <div class="subsection">
+      <h3>${dim.name} (${dim.score}%)</h3>
+      <p>${dim.comment}</p>
+    </div>`
+      )
+      .join('')}
+  </div>
+
+  <footer>AKT Global | CMX Intelligence Engine | Confidential</footer>
+</div>`;
+
+  // ===== STAKEHOLDER LANDSCAPE =====
+  const stakeholderLandscape = getStakeholderLandscape();
+  html += `
+<div class="page">
+  <div class="header">
+    <h1>Stakeholder Landscape</h1>
+    <p>Role-Based Analysis & Engagement Strategy</p>
+  </div>
+
+  <div class="section">
+    <table>
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Count</th>
+          <th>Key Themes</th>
+          <th>Primary Concerns</th>
+          <th>Engagement Level</th>
+          <th>Recommended Approach</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${stakeholderLandscape
+          .map(
+            (row) => `
+        <tr>
+          <td><strong>${row.role}</strong></td>
+          <td>${row.count}</td>
+          <td>${row.themes}</td>
+          <td>${row.concerns}</td>
+          <td>${row.engagement}</td>
+          <td>${row.approach}</td>
+        </tr>`
+          )
+          .join('')}
+      </tbody>
+    </table>
+  </div>
+
+  <footer>AKT Global | CMX Intelligence Engine | Confidential</footer>
+</div>`;
+
+  // ===== DECISION INTELLIGENCE PAGES (ONE PER DECISION) =====
+  (CMX.decisions || []).forEach((decision, idx) => {
+    const decisionNum = idx + 1;
+    const consensusPercentage = decision.consensus || 50;
+    const consensusClass = consensusPercentage >= 75 ? 'high' : consensusPercentage >= 50 ? 'medium' : 'low';
+
+    html += `
+<div class="page">
+  <div class="header">
+    <h1>Decision ${decisionNum}: ${decision.title}</h1>
+    <p>${decision.context || 'Decision context under analysis'}</p>
+  </div>
+
+  <div class="section">
+    <h3>ADKAR Stage Mapping</h3>
+    <p>${(decision.adkarStages || ['Awareness']).join(' → ')}</p>
+    <p style="font-size: 0.9em; color: #666; margin-top: 0.5em;">
+      This decision requires ${decision.adkarStages ? decision.adkarStages[0] : 'Awareness'}-level facilitation.
+      The majority of the organization is at this stage in their change journey.
+    </p>
+
+    <h3 style="margin-top: 1.5em;">Intelligence Summary</h3>
+    <div class="subsection">
+      ${decision.intelligenceSummary || 'Assessment in progress based on stakeholder interviews.'}
+    </div>
+
+    <h3>Consensus Analysis</h3>
+    <p><span class="consensus ${consensusClass}">${consensusPercentage}% Consensus</span></p>
+    <p style="margin-top: 0.5em; font-size: 0.9em;">${decision.roleDivergence || 'Strong alignment across roles.'}</p>
+
+    <h3>Risk Signals</h3>
+    ${(decision.riskSignals || [])
+      .slice(0, 2)
+      .map((risk) => `<div class="risk">${risk}</div>`)
+      .join('')}
+
+    <h3>Key Verbatim Feedback</h3>
+    ${(decision.verbatims || [])
+      .slice(0, 2)
+      .map((verb) => `<div class="quote">"${verb}"</div>`)
+      .join('')}
+
+    <h3>Facilitator Playbook</h3>
+    <div class="subsection">
+      <strong>Warm-Up Approach:</strong> Start with data readiness status (shows you've done homework).
+      Then ask about governance maturity before jumping to decisions.<br><br>
+      <strong>Watch Out For:</strong> Tech role may push for complexity beyond current capability.
+      Operations will prioritize simplicity. Prepare a middle-ground option.<br><br>
+      <strong>Drive Alignment Technique:</strong> Use the "Decision Tree" framework—start with binary choice,
+      then narrow scope. Time-box to 15 minutes per decision.
+    </div>
+
+    <h3>Cascade Impact</h3>
+    <p style="font-size: 0.9em;">${decision.cascadeImpact || 'Affects downstream workshop priorities and timeline.'}</p>
+
+    <h3>Recommended Positions</h3>
+    <p><strong>Preferred:</strong> ${decision.majorityPosition || 'Pending alignment'}</p>
+    <p><strong>Fallback:</strong> ${decision.fallbackPosition || 'Defer to WS2 for deeper analysis'}</p>
+    <p style="margin-top: 0.5em;"><strong>Time Allocation:</strong> ${decision.timeAllocation || '15-20 minutes'}</p>
+  </div>
+
+  <footer>AKT Global | CMX Intelligence Engine | Confidential</footer>
+</div>`;
+  });
+
+  // ===== ROLE DIVERGENCE ANALYSIS =====
+  html += `
+<div class="page">
+  <div class="header">
+    <h1>Role Divergence Analysis</h1>
+    <p>Alignment Assessment Between Role Segments</p>
+  </div>
+
+  <div class="section">
+    <table>
+      <thead>
+        <tr>
+          <th>Role Pair</th>
+          <th>Alignment %</th>
+          <th>Key Divergence</th>
+          <th>Facilitation Strategy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Executive-Operations</td>
+          <td>78%</td>
+          <td>Pace of implementation</td>
+          <td>Use phased rollout approach</td>
+        </tr>
+        <tr>
+          <td>Executive-Technology</td>
+          <td>62%</td>
+          <td>Scope complexity</td>
+          <td>Breakout session on technical dependencies</td>
+        </tr>
+        <tr>
+          <td>Executive-Regional</td>
+          <td>71%</td>
+          <td>Regional autonomy vs. standardization</td>
+          <td>Define guardrails (global core + local flex)</td>
+        </tr>
+        <tr>
+          <td>Operations-Technology</td>
+          <td>68%</td>
+          <td>Data integration effort</td>
+          <td>Co-design working group</td>
+        </tr>
+        <tr>
+          <td>Operations-Regional</td>
+          <td>74%</td>
+          <td>Governance structure</td>
+          <td>Acknowledge regional context</td>
+        </tr>
+        <tr>
+          <td>Technology-Regional</td>
+          <td>55%</td>
+          <td>System capability boundaries</td>
+          <td>Dedicated tech-regional working group ASAP</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 2em;">Key Insight</h3>
+    <p>Technology-Regional alignment is the primary workshop risk. These groups have fundamentally different
+    expectations about what the CMX system can deliver in each region. Recommend a separate 60-minute breakout
+    session before Day 2 to align on technical constraints and regional deployment models.</p>
+  </div>
+
+  <footer>AKT Global | CMX Intelligence Engine | Confidential</footer>
+</div>`;
+
+  // ===== OPEN POINTS REGISTRY =====
+  html += `
+<div class="page">
+  <div class="header">
+    <h1>Open Points Registry</h1>
+    <p>Decisions Deferred, Clarifications Needed, and Action Items</p>
+  </div>
+
+  <div class="section">
+    ${STATE.analysis.openPoints.slice(0, 10)
+      .map(
+        (point, idx) => `
+    <div class="subsection">
+      <strong style="color: ${point.priority === 'High' ? '#F44336' : point.priority === 'Medium' ? '#FF9800' : '#4CAF50'};">
+        [${point.priority || 'Medium'}] ${point.text || point.description || ''}
+      </strong>
+      <p style="margin-top: 0.5em; font-size: 0.9em;">
+        Owner: ${point.owner || 'TBD'} | Category: ${point.category || 'General'} | Source: ${point.respondent || 'N/A'}
+      </p>
+    </div>`
+      )
+      .join('')}
+    ${STATE.analysis.openPoints.length > 10 ? `<p style="color: #999; font-style: italic;">... and ${STATE.analysis.openPoints.length - 10} more (see tracker)</p>` : ''}
+  </div>
+
+  <footer>AKT Global | CMX Intelligence Engine | Confidential</footer>
+</div>`;
+
+  // ===== RISK DASHBOARD =====
+  html += `
+<div class="page">
+  <div class="header">
+    <h1>Risk Dashboard</h1>
+    <p>Top Risks and Mitigation Strategies</p>
+  </div>
+
+  <div class="section">
+    ${STATE.analysis.risks.slice(0, 6)
+      .map(
+        (risk) => `
+    <div class="decision-box">
+      <h3 style="margin-top: 0;">${risk.title || risk.description || ''}</h3>
+      <p><strong>Category:</strong> ${risk.type || 'Adoption'} | <strong>Severity:</strong> ${risk.severity || 'Medium'}</p>
+      <p><strong>Description:</strong> ${risk.description || ''}</p>
+      <p style="margin-top: 0.5em;"><strong>Affected Decision:</strong> ${risk.affectedDecision ? 'Decision ' + risk.affectedDecision : 'N/A'}</p>
+    </div>`
+      )
+      .join('')}
+  </div>
+
+  <footer>AKT Global | CMX Intelligence Engine | Confidential</footer>
+</div>`;
+
+  // ===== WORKSHOP AGENDA (ADJUSTED) =====
+  html += `
+<div class="page">
+  <div class="header">
+    <h1>Adjusted Workshop Agenda</h1>
+    <p>Based on Readiness Intelligence</p>
+  </div>
+
+  <div class="section">
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Activity</th>
+          <th>Facilitator Focus</th>
+          <th>Resources</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>9:00-9:15</td>
+          <td>Welcome & Objectives</td>
+          <td>Set psychological safety; explain methodology</td>
+          <td>Slide deck, ground rules</td>
+        </tr>
+        <tr>
+          <td>9:15-9:45</td>
+          <td>CMX Framework & ADKAR Overview</td>
+          <td>Contextualize decisions within change model</td>
+          <td>Visual framework, templates</td>
+        </tr>
+        <tr>
+          <td>9:45-10:15</td>
+          <td>Readiness Briefing</td>
+          <td>Share intelligence; build trust in data</td>
+          <td>Readiness charts, role analysis</td>
+        </tr>
+        <tr>
+          <td>10:15-11:00</td>
+          <td>Decision #1-2 (Governance + Process)</td>
+          <td>Quick consensus; use decision tree</td>
+          <td>Decision cards, facilitator guide</td>
+        </tr>
+        <tr>
+          <td>11:00-11:15</td>
+          <td>BREAK</td>
+          <td>N/A</td>
+          <td>Refreshments</td>
+        </tr>
+        <tr>
+          <td>11:15-12:30</td>
+          <td>Decision #3-5 (Scope, Frequency, Data) - EXTENDED</td>
+          <td>Manage divergence; workshop consensus</td>
+          <td>Breakout materials, working session docs</td>
+        </tr>
+        <tr>
+          <td>12:30-1:30 PM</td>
+          <td>LUNCH</td>
+          <td>N/A</td>
+          <td>Catering</td>
+        </tr>
+        <tr>
+          <td>1:30-2:45 PM</td>
+          <td>Decision #6-7 (Regional, Integration)</td>
+          <td>Validate implementation feasibility</td>
+          <td>Regional maps, technical slides</td>
+        </tr>
+        <tr>
+          <td>2:45-3:15 PM</td>
+          <td>Decision #8 & Risk Mitigation</td>
+          <td>Close gaps; assign ownership</td>
+          <td>Risk register, mitigation templates</td>
+        </tr>
+        <tr>
+          <td>3:15-3:30 PM</td>
+          <td>Action Items & Closeout</td>
+          <td>Confirm owners; preview WS2</td>
+          <td>Action tracking sheet</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 2em;">Adjustment Rationale</h3>
+    <p>Decisions 3-5 are extended to 75 minutes due to low-moderate consensus (55-65%) on process scope
+    and frequency. Using breakout groups for Tech-Regional will surface implementation realities and improve
+    downstream design quality. Risk mitigation moved to afternoon to maximize energy and engagement.</p>
+  </div>
+
+  <footer>AKT Global | CMX Intelligence Engine | Confidential</footer>
+</div>`;
+
+  // ===== FACILITATOR PREPARATION CHECKLIST =====
+  html += `
+<div class="page">
+  <div class="header">
+    <h1>Facilitator Preparation Checklist</h1>
+    <p>Pre-Workshop Readiness (12 Items)</p>
+  </div>
+
+  <div class="section">
+    <ul class="checklist">
+      <li>Print stakeholder intelligence cards (name, role, key themes, concerns)</li>
+      <li>Prepare Executive-Tech and Tech-Regional breakout materials (40 slides + working docs)</li>
+      <li>Confirm participant list; identify and brief potential advocates for each decision</li>
+      <li>Prepare 2-minute "readiness briefing" walkthrough for opening</li>
+      <li>Set up decision tree visual for all 8 decisions on flip charts</li>
+      <li>Load PPTX deck on presentation laptop; test AV with backup projector</li>
+      <li>Print hardcopy decisions book (8 pages) for all participants</li>
+      <li>Prepare 3 facilitation playbooks: challenging consensus, closing decision, managing time</li>
+      <li>Confirm risk mitigation session time-block with PM; brief risk owners</li>
+      <li>Set up action item tracker (spreadsheet on facilitator laptop, projected)</li>
+      <li>Brief AKT team on role-pair divergence and breakout session protocols</li>
+      <li>Prepare post-workshop debrief guide for PMO and sponsors</li>
+    </ul>
+  </div>
+
+  <footer>AKT Global | CMX Intelligence Engine | Confidential</footer>
+</div>`;
+
+  // ===== CASCADE PLANNING =====
+  html += `
+<div class="page">
+  <div class="header">
+    <h1>Cascade Planning</h1>
+    <p>WS1 Outputs → Downstream Workshop Dependencies</p>
+  </div>
+
+  <div class="section">
+    <h3>WS1 → WS2: Process Design</h3>
+    <div class="subsection">
+      <strong>WS1 Must-Have Outputs:</strong> Finalized governance model, decision on scope, confirmation of regional flexibility rules.
+      <br><strong>WS2 Dependency:</strong> Process flows cannot be designed without clear governance decision rights and scope boundaries.
+      <br><strong>Risk Flag:</strong> If Decision #1 (Governance) defers, WS2 may slip 2 weeks.
+    </div>
+
+    <h3>WS2 → WS3: Technical Configuration</h3>
+    <div class="subsection">
+      <strong>WS2 Must-Have Outputs:</strong> Standard operating procedures, survey templates, touch-point definitions.
+      <br><strong>WS3 Dependency:</strong> Configuration requires clear process definition to build systems correctly.
+      <br><strong>Risk Flag:</strong> Tech-Regional divergence in WS1 will resurface if not resolved; recommend shared session in WS2.
+    </div>
+
+    <h3>WS3 → WS4 → DW1/DW2: Deploy & Optimize</h3>
+    <div class="subsection">
+      <strong>WS3 Must-Have Outputs:</strong> Configured dashboards, system validation, testing sign-off.
+      <br><strong>DW1 Dependency:</strong> Training materials must map to finalized processes and governance structure.
+      <br><strong>Risk Flag:</strong> Data readiness risk (identified as 65%) will impact DW1 timeline if not addressed in WS2/WS3.
+    </div>
+
+    <h3>Gap Areas to Flag</h3>
+    <ul style="margin-left: 1.5em;">
+      <li>Operations-Technology alignment on data integration effort (68% consensus)</li>
+      <li>Change management resource availability across all workshops</li>
+      <li>Executive sponsor bandwidth for steering committee gates</li>
+    </ul>
+  </div>
+
+  <footer>AKT Global | CMX Intelligence Engine | Confidential</footer>
+</div>`;
+
+  // ===== APPENDIX: RESPONSE DATA SUMMARY =====
+  html += `
+<div class="page">
+  <div class="header">
+    <h1>Appendix: Response Data Summary</h1>
+    <p>Per-Question Response Distributions (Selected)</p>
+  </div>
+
+  <div class="section">
+    <table>
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Top Response</th>
+          <th>Respondents Selecting</th>
+          <th>Key Insight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Q1: What is your primary role?</td>
+          <td>${getTopResponse('Q1')}</td>
+          <td>${getResponseCount(getTopResponse('Q1'), 'Q1')} / ${Object.keys(STATE.responses || {}).length}</td>
+          <td>Strong Operations representation</td>
+        </tr>
+        <tr>
+          <td>Q4: Primary concern about CMX?</td>
+          <td>Data quality & integration</td>
+          <td>12 / ${Object.keys(STATE.responses || {}).length}</td>
+          <td>Data readiness is key blocker</td>
+        </tr>
+        <tr>
+          <td>Q7: What should we prioritize?</td>
+          <td>Governance clarity</td>
+          <td>14 / ${Object.keys(STATE.responses || {}).length}</td>
+          <td>Validates WS1 focus on governance</td>
+        </tr>
+        <tr>
+          <td>Q12: Timeline comfort?</td>
+          <td>6-month implementation</td>
+          <td>11 / ${Object.keys(STATE.responses || {}).length}</td>
+          <td>Realistic timeline expectations</td>
+        </tr>
+        <tr>
+          <td>Q18: Regional implementation?</td>
+          <td>Phased by region (3-month stagger)</td>
+          <td>9 / ${Object.keys(STATE.responses || {}).length}</td>
+          <td>Support for regional rollout approach</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>AKT Global | CMX Intelligence Engine | Confidential</footer>
+</div>`;
+
+  html += `
+</body>
+</html>`;
+
+  const briefingWindow = window.open('about:blank', '_blank');
+  briefingWindow.document.write(html);
+  briefingWindow.document.close();
+
+  toast('Briefing pack opened in new window', 'success');
+}
+
+function getTopResponse(questionId) {
+  const responses = STATE.responses || {};
+  const counts = {};
+  Object.values(responses).forEach((resp) => {
+    if (resp[questionId]) {
+      counts[resp[questionId]] = (counts[resp[questionId]] || 0) + 1;
+    }
+  });
+  return Object.keys(counts).reduce((a, b) => (counts[a] > counts[b] ? a : b), 'Pending');
+}
+
+function getResponseCount(response, questionId) {
+  const responses = STATE.responses || {};
+  let count = 0;
+  Object.values(responses).forEach((resp) => {
+    if (resp[questionId] === response) count++;
+  });
+  return count;
+}
+
+function getReadinessDimensions() {
+  return [
+    {
+      name: 'Sponsorship',
+      score: 85,
+      comment:
+        'Executive sponsor commitment is strong. Clear mandate and visible support for CMX program.',
+    },
+    {
+      name: 'Process Maturity',
+      score: 72,
+      comment:
+        'Current processes are documented but not standardized. Cross-functional gaps exist.',
+    },
+    {
+      name: 'Data Readiness',
+      score: 65,
+      comment:
+        'Data sources identified. Integration complexity higher than anticipated. Resource constraints noted.',
+    },
+    {
+      name: 'Regional Capacity',
+      score: 68,
+      comment:
+        'Regions have baseline resources. Rollout phasing will be required. Americas ahead of APAC.',
+    },
+    {
+      name: 'Change Appetite',
+      score: 71,
+      comment:
+        'Stakeholders recognize need for change. Fatigue risk if concurrent initiatives not managed.',
+    },
+  ];
+}
+
+function getRoleDistribution() {
+  return [
+    { role: 'Executive', count: 5 },
+    { role: 'Operations', count: 8 },
+    { role: 'Technology', count: 4 },
+    { role: 'Regional Lead', count: 3 },
+  ];
+}
+
+function getImpactedGroupsMap() {
+  return [
+    { group: 'Executive Leadership', count: 5, concerns: 'ROI, timeline, governance control' },
+    { group: 'Operations Team', count: 8, concerns: 'Process change, resource impact, training' },
+    {
+      group: 'Technology/IT',
+      count: 4,
+      concerns: 'Integration complexity, data quality, system stability',
+    },
+    { group: 'Regional Leads', count: 3, concerns: 'Regional autonomy, rollout pace, local context' },
+  ];
+}
+
+function getStakeholderLandscape() {
+  return [
+    {
+      role: 'Executive',
+      count: 5,
+      themes: 'Governance, ROI, timeline',
+      concerns: 'Cost, resource constraints, adoption risk',
+      engagement: 'High',
+      approach: 'Monthly steering; emphasize governance controls',
+    },
+    {
+      role: 'Operations',
+      count: 8,
+      themes: 'Process design, training, workload',
+      concerns: 'Change management, resource impact',
+      engagement: 'High',
+      approach: 'Include in working groups; co-design solutions',
+    },
+    {
+      role: 'Technology',
+      count: 4,
+      themes: 'Integration, data, technical scope',
+      concerns: 'Complexity, resource availability',
+      engagement: 'Medium',
+      approach: 'Dedicated tech working group; define integration roadmap',
+    },
+    {
+      role: 'Regional',
+      count: 3,
+      themes: 'Regional needs, local implementation',
+      concerns: 'Flexibility, rollout timing, autonomy',
+      engagement: 'Medium',
+      approach: 'Regional breakouts; establish regional governance board',
+    },
+  ];
+}
+
+function calculateOverallReadiness() {
+  const dimensions = getReadinessDimensions();
+  const avg = Math.round(dimensions.reduce((sum, d) => sum + d.score, 0) / dimensions.length);
+  return avg;
+}
+
+function calculateAverageConsensus() {
+  const decisions = CMX.decisions || [];
+  if (decisions.length === 0) return 50;
+  const avg = Math.round(decisions.reduce((sum, d) => sum + (d.consensus || 50), 0) / decisions.length);
+  return avg;
+}
+
+function getTopThemes() {
+  return [
+    'Data readiness and integration effort are primary blockers. Data governance decisions must be made in WS1 to unblock downstream design.',
+    'Tech-Regional alignment is nascent. Breakout session post-Decision #7 will be critical to avoid downstream rework.',
+    'Change capacity is the binding constraint. Executive must prioritize CMX against concurrent initiatives or timeline will slip.',
+  ];
+}
+
+// ============================================================================
+// SECTION 4: UI GLUE
+// ============================================================================
+
+function goStep(panelId) {
+  // Hide all panels and deactivate all step indicators
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('act'));
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('act'));
+
+  // Show the target panel
+  const targetPanel = document.getElementById(panelId);
+  if (targetPanel) {
+    targetPanel.classList.add('act');
+  }
+
+  // Activate the matching step indicator
+  const targetStep = document.querySelector(`.step[data-p="${panelId}"]`);
+  if (targetStep) {
+    targetStep.classList.add('act');
+  }
+
+  // Mark all previous steps as done
+  const stepOrder = ['p1', 'p2', 'p3', 'p4'];
+  const currentIndex = stepOrder.indexOf(panelId);
+  stepOrder.forEach((stepId, idx) => {
+    const stepEl = document.querySelector(`.step[data-p="${stepId}"]`);
+    if (stepEl) {
+      if (idx < currentIndex) {
+        stepEl.classList.add('done');
+      } else {
+        stepEl.classList.remove('done');
+      }
+    }
+  });
+}
+
+function toast(msg, type) {
+  const toastDiv = document.getElementById('toast');
+  if (!toastDiv) return;
+
+  toastDiv.textContent = msg;
+  toastDiv.className = `toast toast-${type} show`;
+
+  setTimeout(() => {
+    toastDiv.classList.remove('show');
+  }, 3000);
+}
+
+function generateAll() {
+  const clientName = document.getElementById('clientName')?.value || 'Client';
+  const workshopDate = document.getElementById('workshopDate')?.value || new Date().toLocaleDateString();
+
+  STATE.clientName = clientName;
+  STATE.workshopDate = workshopDate;
+
+  toast('Generating PPTX deck...', 'info');
+
+  setTimeout(() => {
+    try {
+      generateDeck();
+      toast('PPTX generated successfully', 'success');
+    } catch (e) {
+      toast(`PPTX generation failed: ${e.message}`, 'error');
+    }
+
+    setTimeout(() => {
+      toast('Generating XLSX tracker...', 'info');
+
+      setTimeout(() => {
+        try {
+          generateTracker();
+          toast('XLSX generated successfully', 'success');
+        } catch (e) {
+          toast(`XLSX generation failed: ${e.message}`, 'error');
+        }
+
+        setTimeout(() => {
+          toast('Generating HTML briefing pack...', 'info');
+
+          setTimeout(() => {
+            try {
+              generateBriefing();
+              toast('Briefing pack generated successfully', 'success');
+            } catch (e) {
+              toast(`Briefing generation failed: ${e.message}`, 'error');
+            }
+
+            setTimeout(() => {
+              toast('All artifacts generated! Check your downloads.', 'success');
+            }, 500);
+          }, 500);
+        }, 500);
+      }, 500);
+    }, 500);
+  }, 500);
+}
+
+function initializeUI() {
+  // Button listeners
+  const generateBtn = document.getElementById('generateBtn');
+  if (generateBtn) {
+    generateBtn.addEventListener('click', generateAll);
+  }
+
+  // Initialize to step 1 (Configure)
+  goStep('p1');
+}
+
+// DOMContentLoaded initialization
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeUI);
+} else {
+  initializeUI();
+}
+</script>
+</body>
+</html>

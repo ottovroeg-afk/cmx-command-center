@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMX Intelligence Engine — Demo Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #1a1510;
+    color: #e8e0d4;
+    line-height: 1.6;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    background: linear-gradient(135deg, #2D2015 0%, #3a2a1a 100%);
+    border-bottom: 4px solid #F9A13A;
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-left h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: #F9A13A;
+    letter-spacing: -0.5px;
+  }
+  .header-left .subtitle {
+    font-size: 0.95rem;
+    color: #c4b8a4;
+    margin-top: 0.3rem;
+  }
+  .akt-logo {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #F9A13A;
+    letter-spacing: 2px;
+  }
+
+  /* ─── MAIN ─── */
+  .main { max-width: 1000px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+
+  /* ─── OVERVIEW BOX ─── */
+  .overview {
+    background: #2a2118;
+    border: 1px solid #3d3228;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .overview h2 {
+    color: #F9A13A;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .overview p { color: #c4b8a4; font-size: 0.95rem; margin-bottom: 0.8rem; }
+  .overview .meta-row {
+    display: flex; gap: 2rem; margin-top: 1.2rem; flex-wrap: wrap;
+  }
+  .meta-item {
+    background: #1a1510;
+    border: 1px solid #3d3228;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+  .meta-item strong { color: #F9A13A; }
+
+  /* ─── TIMELINE ─── */
+  .timeline { position: relative; padding-left: 2.5rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.85rem;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, #F9A13A, #006462, #2D2015);
+    border-radius: 2px;
+  }
+
+  .step {
+    position: relative;
+    margin-bottom: 2.5rem;
+    background: #2a2118;
+    border: 1px solid #3d3228;
+    border-radius: 12px;
+    padding: 1.8rem 2rem;
+    transition: border-color 0.3s;
+  }
+  .step:hover { border-color: #F9A13A; }
+
+  .step-number {
+    position: absolute;
+    left: -2.5rem;
+    top: 1.8rem;
+    width: 1.7rem;
+    height: 1.7rem;
+    background: #F9A13A;
+    color: #2D2015;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    z-index: 1;
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .step-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #F9A13A;
+  }
+  .step-time {
+    background: #3d3228;
+    color: #F9A13A;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+  }
+  .step-file {
+    display: inline-block;
+    background: #1a1510;
+    border: 1px solid #4a3e30;
+    color: #c4b8a4;
+    font-size: 0.8rem;
+    font-family: 'SF Mono', 'Consolas', monospace;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+  .step-file .ext { color: #F9A13A; font-weight: 600; }
+
+  .step p { color: #b8ad9e; font-size: 0.9rem; margin-bottom: 0.5rem; }
+
+  .action-list { list-style: none; margin-top: 1rem; }
+  .action-list li {
+    position: relative;
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    font-size: 0.9rem;
+    color: #c4b8a4;
+    border-bottom: 1px solid #2D2015;
+  }
+  .action-list li:last-child { border-bottom: none; }
+  .action-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #F9A13A;
+    font-weight: 700;
+  }
+
+  .talking-point {
+    background: #1a1510;
+    border-left: 3px solid #006462;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.85rem;
+    color: #8ab8a8;
+  }
+  .talking-point strong { color: #00a896; }
+
+  /* ─── SECTION DIVIDER ─── */
+  .section-divider {
+    text-align: center;
+    margin: 3rem 0 2rem;
+    position: relative;
+  }
+  .section-divider::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: #3d3228;
+  }
+  .section-divider span {
+    position: relative;
+    background: #1a1510;
+    padding: 0 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #8a7e6e;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  /* ─── ASSET TABLE ─── */
+  .asset-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+  .asset-table th {
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #8a7e6e;
+    border-bottom: 2px solid #3d3228;
+  }
+  .asset-table td {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.85rem;
+    color: #c4b8a4;
+    border-bottom: 1px solid #2a2118;
+  }
+  .asset-table tr:hover td { background: #2a2118; }
+  .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .tag-html { background: #006462; color: #e8e0d4; }
+  .tag-pptx { background: #c44a00; color: #e8e0d4; }
+  .tag-xlsx { background: #2b7a2b; color: #e8e0d4; }
+  .tag-csv { background: #5a4a8a; color: #e8e0d4; }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    color: #5a4e3e;
+    font-size: 0.8rem;
+    border-top: 1px solid #2a2118;
+    margin-top: 2rem;
+  }
+
+  @media print {
+    body { background: #fff; color: #222; }
+    .step { break-inside: avoid; border-color: #ddd; background: #fafafa; }
+    .header { background: #f5f0e8; }
+    .step-title, .header-left h1 { color: #c47800; }
+    .talking-point { background: #f0f7f5; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>CMX Intelligence Engine — Demo Guide</h1>
+    <div class="subtitle">Step-by-step walkthrough for demonstrating all assets to senior stakeholders</div>
+  </div>
+  <div class="akt-logo">akt</div>
+</div>
+
+<div class="main">
+
+  <!-- OVERVIEW -->
+  <div class="overview">
+    <h2>What You're Demonstrating</h2>
+    <p>A connected automation system that replaces 3-5 days of manual workshop preparation with a 30-minute intelligence pipeline. Stakeholder input is collected via structured questionnaires, analyzed by an AI-powered engine, and converted into production-ready workshop artifacts — all pre-populated with real data.</p>
+    <p>The demo uses <strong>Nextera Energy (GMTP program)</strong> as a live scenario with 12 pre-filled respondents across Executive, Operational, Technical, and Regional roles.</p>
+    <div class="meta-row">
+      <div class="meta-item"><strong>Total demo time:</strong>&nbsp; ~12 minutes</div>
+      <div class="meta-item"><strong>Assets covered:</strong>&nbsp; 10 files</div>
+      <div class="meta-item"><strong>Client scenario:</strong>&nbsp; Nextera Energy</div>
+      <div class="meta-item"><strong>No setup needed:</strong>&nbsp; All data pre-loaded</div>
+    </div>
+  </div>
+
+  <!-- ═══════════ PART A: INTRO DECK ═══════════ -->
+  <div class="section-divider"><span>Part A — Context Setting</span></div>
+
+  <div class="timeline">
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-header">
+        <div class="step-title">Open the Senior Team Introduction Deck</div>
+        <div class="step-time">3 min</div>
+      </div>
+      <div class="step-file">CMX Intelligence Engine - Senior Team Introduction<span class="ext">.pptx</span></div>
+      <p>Present the 11-slide executive deck to set context before the live demo. This deck explains the problem, the solution, and the efficiency gains.</p>
+      <ul class="action-list">
+        <li>Open the PPTX in PowerPoint or Keynote</li>
+        <li>Walk through slides 1-5 (problem → what we built → cascade → intelligence depth)</li>
+        <li>Pause at slide 6 (Efficiency Impact) — the before/after comparison lands well</li>
+        <li>Skim slides 7-8 (quality + numbers) to build anticipation</li>
+        <li>Stop at slide 9 (Live Demo Flow) — use this as a transition to the live demo</li>
+      </ul>
+      <div class="talking-point">
+        <strong>Key message:</strong> "What you're about to see isn't a prototype or concept — it's a working system with real Nextera data loaded. Every number you'll see came from actual stakeholder responses."
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ PART B: QUESTIONNAIRES ═══════════ -->
+  <div class="section-divider"><span>Part B — The Collection Layer</span></div>
+
+  <div class="timeline">
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-header">
+        <div class="step-title">Show the WS1 Pre-Workshop Questionnaire</div>
+        <div class="step-time">2 min</div>
+      </div>
+      <div class="step-file">CMX Pre-Workshop Questionnaire<span class="ext">.html</span></div>
+      <p>This is the WS1 Governance questionnaire with 12 pre-filled Nextera respondents, 33 questions across 8 decision blocks.</p>
+      <ul class="action-list">
+        <li>Open the HTML file in any browser — works fully offline</li>
+        <li>Point out the 12 respondent cards at the top — each shows name, role, department</li>
+        <li>Click on any respondent card to open their full response in a modal</li>
+        <li>Scroll through the questions — highlight how they're grouped by governance decision</li>
+        <li>Show the role-adaptive branching (Executive sees governance questions, Technical sees data questions)</li>
+        <li>Click the <strong>"Export CSV for Intelligence Engine"</strong> button</li>
+        <li>Show the CSV preview that appears — this is what feeds the engine</li>
+      </ul>
+      <div class="talking-point">
+        <strong>Key message:</strong> "This replaces the email chain. Instead of chasing 12 people for input, they get a structured survey. In Qualtrics, this would use branch logic to show role-specific questions. The CSV export is what we feed into the engine."
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-header">
+        <div class="step-title">Quick Tour of the Full Cascade</div>
+        <div class="step-time">1 min</div>
+      </div>
+      <div class="step-file">CMX WS2/WS3/WS4 Pre-Workshop Questionnaires + DW1/DW2 Session Outputs<span class="ext">.html</span></div>
+      <p>Briefly show that the full cascade exists — you don't need to deep-dive each one.</p>
+      <ul class="action-list">
+        <li>Open WS2 (Stakeholder Mapping) — point out 25 questions, 10 respondents</li>
+        <li>Open WS3 (Survey Design) — show this covers NPS/ADKAR template selection</li>
+        <li>Open WS4 (Platform) — note the Technical-weighted respondent mix (8 people)</li>
+        <li>Open DW1 (Decision Workshop 1) — show 12 concrete decisions, status badges (decided / deferred / escalated)</li>
+        <li>Open DW2 (Decision Workshop 2) — show ticketing SLAs, dashboard views, alert thresholds</li>
+      </ul>
+      <div class="talking-point">
+        <strong>Key message:</strong> "We don't just automate one workshop — we've built the complete cascade. Each workshop's outputs flow into the next. WS1 governance decisions shape WS2's stakeholder approach, which shapes WS3's survey design, and so on."
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ PART C: THE ENGINE ═══════════ -->
+  <div class="section-divider"><span>Part C — The Intelligence Engine</span></div>
+
+  <div class="timeline">
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-header">
+        <div class="step-title">Launch the Intelligence Engine</div>
+        <div class="step-time">30 sec</div>
+      </div>
+      <div class="step-file">CMX Intelligence Engine<span class="ext">.html</span></div>
+      <p>Open the main application. It runs entirely in the browser — no server, no installation, no internet required.</p>
+      <ul class="action-list">
+        <li>Open the HTML file in Chrome or Edge</li>
+        <li>Point out the 4-step workflow bar at the top: Configure → Import → Intelligence → Generate</li>
+        <li>Note: the engine is ~4,900 lines of JavaScript running client-side</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-number">5</div>
+      <div class="step-header">
+        <div class="step-title">Import the Survey Data</div>
+        <div class="step-time">30 sec</div>
+      </div>
+      <div class="step-file">Qualtrics Test Export - CMX WS1<span class="ext">.csv</span></div>
+      <p>Import the pre-built CSV file (or use the one you just exported from the questionnaire).</p>
+      <ul class="action-list">
+        <li>Click "Load Demo Data" for instant population, <strong>OR</strong></li>
+        <li>Drag and drop the CSV file into the import zone</li>
+        <li>Watch the stats update: 12 responses loaded, 33 questions parsed</li>
+        <li>Click through to show the data preview table</li>
+      </ul>
+      <div class="talking-point">
+        <strong>Key message:</strong> "In production, this CSV comes straight from Qualtrics. The consultant exports the survey responses, drops it in, and the engine takes over. No manual data entry, no copy-paste."
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">6</div>
+      <div class="step-header">
+        <div class="step-title">Run the Intelligence Analysis</div>
+        <div class="step-time">2 min</div>
+      </div>
+      <p>This is the showstopper. Click "Run Analysis" and walk through what the engine produces.</p>
+      <ul class="action-list">
+        <li>Click <strong>"Run Analysis"</strong> — the intelligence panel appears</li>
+        <li>Walk through the <strong>readiness radar</strong> — shows 5 dimensions scored automatically</li>
+        <li>Show the <strong>decision cards</strong> — each of the 8 governance decisions gets:
+          <br>&nbsp;&nbsp;&nbsp;• Consensus score (role-weighted)
+          <br>&nbsp;&nbsp;&nbsp;• ADKAR stage mapping
+          <br>&nbsp;&nbsp;&nbsp;• Risk signals
+          <br>&nbsp;&nbsp;&nbsp;• Consultant-grade summary text
+        </li>
+        <li>Highlight <strong>role divergence</strong> — where Executive and Regional disagree</li>
+        <li>Show the <strong>risk dashboard</strong> — 6 CMX-specific risk categories</li>
+        <li>Point out <strong>facilitator playbooks</strong> — per-decision warm-ups and watch-outs</li>
+      </ul>
+      <div class="talking-point">
+        <strong>Key message:</strong> "This analysis reads like a senior consultant wrote it. Role-weighted consensus, ADKAR mapping, divergence detection — all computed in seconds from raw survey data. This is the intelligence that used to take days to compile."
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">7</div>
+      <div class="step-header">
+        <div class="step-title">Generate All Artifacts</div>
+        <div class="step-time">1 min</div>
+      </div>
+      <p>Click "Generate All" and download the three outputs.</p>
+      <ul class="action-list">
+        <li>Click <strong>"Generate All"</strong> — three download buttons appear</li>
+        <li>Download the <strong>PPTX Workshop Deck</strong> — open it to show 25+ slides pre-populated with Nextera data, charts, and decision recommendations</li>
+        <li>Download the <strong>XLSX Open Points Tracker</strong> — show 5 sheets: Open Points, Decision Log, Risk Register, Stakeholder Map, Governance Cadence</li>
+        <li>Download the <strong>HTML Facilitator Briefing</strong> — show the print-ready briefing pack with per-decision intelligence</li>
+      </ul>
+      <div class="talking-point">
+        <strong>Key message:</strong> "Three production-ready artifacts in one click. The deck isn't a template — it's filled with real data. The tracker isn't blank — it's seeded with open items from the survey. The briefing pack gives the facilitator everything they need for Day 1."
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ PART D: WRAP-UP ═══════════ -->
+  <div class="section-divider"><span>Part D — Impact & Next Steps</span></div>
+
+  <div class="timeline">
+    <div class="step">
+      <div class="step-number">8</div>
+      <div class="step-header">
+        <div class="step-title">Return to the Deck — Close on Impact</div>
+        <div class="step-time">2 min</div>
+      </div>
+      <div class="step-file">CMX Intelligence Engine - Senior Team Introduction<span class="ext">.pptx</span></div>
+      <p>Return to the introduction deck for the closing.</p>
+      <ul class="action-list">
+        <li>Jump to slide 8 (By the Numbers) — let the stats land after they've seen the live demo</li>
+        <li>Show slide 10 (What's Next) — the three-phase roadmap: Now → Next → Then</li>
+        <li>End on slide 11 — the closing quote: "What if every workshop came pre-loaded with stakeholder intelligence? Now it does."</li>
+      </ul>
+      <div class="talking-point">
+        <strong>Key message:</strong> "We've turned 3-5 days of manual prep into 30 minutes. But the real value isn't just speed — it's that every engagement now starts with intelligence, not guesswork. This is repeatable across every CMX client."
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ ASSET REFERENCE ═══════════ -->
+  <div class="section-divider"><span>Complete Asset Reference</span></div>
+
+  <div class="overview">
+    <h2>All Demo Assets</h2>
+    <table class="asset-table">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Type</th>
+          <th>Purpose</th>
+          <th>Used in Step</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CMX Intelligence Engine - Senior Team Introduction</td>
+          <td><span class="tag tag-pptx">PPTX</span></td>
+          <td>11-slide executive introduction deck</td>
+          <td>Steps 1, 8</td>
+        </tr>
+        <tr>
+          <td>CMX Pre-Workshop Questionnaire</td>
+          <td><span class="tag tag-html">HTML</span></td>
+          <td>WS1 questionnaire — 33 questions, 12 respondents</td>
+          <td>Step 2</td>
+        </tr>
+        <tr>
+          <td>CMX WS2 Pre-Workshop Questionnaire</td>
+          <td><span class="tag tag-html">HTML</span></td>
+          <td>WS2 Stakeholder Mapping — 25 questions, 10 respondents</td>
+          <td>Step 3</td>
+        </tr>
+        <tr>
+          <td>CMX WS3 Pre-Workshop Questionnaire</td>
+          <td><span class="tag tag-html">HTML</span></td>
+          <td>WS3 Survey Design — 28 questions, 10 respondents</td>
+          <td>Step 3</td>
+        </tr>
+        <tr>
+          <td>CMX WS4 Pre-Workshop Questionnaire</td>
+          <td><span class="tag tag-html">HTML</span></td>
+          <td>WS4 Platform Architecture — 26 questions, 8 respondents</td>
+          <td>Step 3</td>
+        </tr>
+        <tr>
+          <td>CMX DW1 Session Outputs</td>
+          <td><span class="tag tag-html">HTML</span></td>
+          <td>Decision Workshop 1 — 12 decisions</td>
+          <td>Step 3</td>
+        </tr>
+        <tr>
+          <td>CMX DW2 Session Outputs</td>
+          <td><span class="tag tag-html">HTML</span></td>
+          <td>Decision Workshop 2 — 10 decisions</td>
+          <td>Step 3</td>
+        </tr>
+        <tr>
+          <td>CMX Intelligence Engine</td>
+          <td><span class="tag tag-html">HTML</span></td>
+          <td>Main analysis engine — 4,900+ lines</td>
+          <td>Steps 4-7</td>
+        </tr>
+        <tr>
+          <td>Qualtrics Test Export - CMX WS1</td>
+          <td><span class="tag tag-csv">CSV</span></td>
+          <td>Pre-built test data — 12 Nextera respondents</td>
+          <td>Step 5</td>
+        </tr>
+        <tr>
+          <td>CMX WS1 Pre-Workshop Questionnaire - Qualtrics Spec</td>
+          <td><span class="tag tag-xlsx">XLSX</span></td>
+          <td>Survey specification for Qualtrics build</td>
+          <td>Reference</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TIPS -->
+  <div class="overview">
+    <h2>Demo Tips</h2>
+    <p><strong>Before the demo:</strong> Open all HTML files in separate browser tabs so you can switch quickly. Have the PPTX open in presentation mode.</p>
+    <p><strong>Internet not required:</strong> Everything runs locally in the browser. No server, no API calls, no cloud dependencies. You can demo on a plane.</p>
+    <p><strong>If something goes wrong:</strong> The "Load Demo Data" button in the Intelligence Engine is your safety net — it pre-populates everything instantly without needing the CSV import.</p>
+    <p><strong>For maximum impact:</strong> Pause after the intelligence analysis (Step 6) and ask: "How long would this take a consultant to produce manually?" Let the audience answer before you show the one-click generation.</p>
+  </div>
+
+</div>
+
+<div class="footer">
+  CMX Intelligence Engine — Demo Guide &nbsp;|&nbsp; AKT Global &nbsp;|&nbsp; February 2026 &nbsp;|&nbsp; Confidential
+</div>
+
+</body>
+</html>

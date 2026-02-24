@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMX Pre-Workshop Questionnaire - AKT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #F7F5F2;
+            color: #2D2015;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2D2015 0%, #1a120c 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 4px solid #F9A13A;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #F9A13A;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 0.25rem;
+        }
+
+        .client-bar {
+            background: white;
+            padding: 1.25rem 2rem;
+            border-bottom: 1px solid #E0D8CE;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .client-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .client-info strong {
+            color: #2D2015;
+            font-weight: 600;
+        }
+
+        .client-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .status-badge {
+            background: #E8F5E9;
+            color: #2E7D32;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-badge::before {
+            content: "✓";
+            font-weight: bold;
+        }
+
+        .stats-bar {
+            background: #F7F5F2;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #E0D8CE;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #F9A13A;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
+        .toolbar {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #E0D8CE;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #E0D8CE;
+            background: white;
+            color: #2D2015;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: #F9A13A;
+            color: #F9A13A;
+        }
+
+        .filter-btn.active {
+            background: #F9A13A;
+            color: white;
+            border-color: #F9A13A;
+        }
+
+        .export-button {
+            background: #F9A13A;
+            color: #2D2015;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .export-button:hover {
+            background: #E89121;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(249, 161, 58, 0.3);
+        }
+
+        .content {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .response-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .respondent-card {
+            background: white;
+            border: 1px solid #E0D8CE;
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .respondent-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            border-color: #F9A13A;
+        }
+
+        .respondent-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2D2015;
+            margin-bottom: 0.75rem;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .role-executive {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .role-operational {
+            background: #E3F2FD;
+            color: #1565C0;
+        }
+
+        .role-technical {
+            background: #F3E5F5;
+            color: #6A1B9A;
+        }
+
+        .role-regional {
+            background: #E0F2F1;
+            color: #00695C;
+        }
+
+        .respondent-meta {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .respondent-meta strong {
+            color: #2D2015;
+        }
+
+        .completion-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #E0D8CE;
+            font-size: 0.85rem;
+        }
+
+        .completion-checkmark {
+            color: #2E7D32;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin-top: 2rem;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #2D2015 0%, #1a120c 100%);
+            color: white;
+            padding: 2rem;
+            border-bottom: 4px solid #F9A13A;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .modal-title {
+            flex: 1;
+        }
+
+        .modal-title h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .question-block {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #E0D8CE;
+        }
+
+        .question-block:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .block-title {
+            color: #F9A13A;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.25rem;
+        }
+
+        .question {
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: #2D2015;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .question-type {
+            font-size: 0.75rem;
+            color: #999;
+            margin-bottom: 0.35rem;
+            font-style: italic;
+        }
+
+        .answer {
+            background: #F7F5F2;
+            padding: 0.75rem 1rem;
+            border-left: 3px solid #F9A13A;
+            border-radius: 2px;
+            font-size: 0.9rem;
+            color: #2D2015;
+            word-break: break-word;
+        }
+
+        .na-answer {
+            background: #F5F5F5;
+            color: #999;
+            border-left-color: #CCC;
+            font-style: italic;
+        }
+
+        .export-section {
+            background: white;
+            border: 1px solid #E0D8CE;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .export-section h3 {
+            color: #2D2015;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .csv-preview {
+            background: #2D2015;
+            color: #E0D8CE;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            overflow-x: auto;
+            margin: 1rem 0;
+            max-height: 200px;
+        }
+
+        .preview-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .export-buttons-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .response-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .client-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .stats-bar {
+                gap: 1rem;
+            }
+
+            .modal {
+                padding: 1rem;
+            }
+
+            .modal-content {
+                max-height: 95vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">AKT <span>INTELLIGENCE</span></div>
+        <h1>CMX Pre-Workshop Questionnaire</h1>
+        <p>Foundations Workshop 3: Survey Content & Design</p>
+    </div>
+
+    <!-- Client Bar -->
+    <div class="client-bar">
+        <div class="client-info">
+            <strong>Nextera Energy Inc. — Grid Modernization Transformation Program (GMTP)</strong>
+            <p>Customer Managed Experience (CMX) Implementation</p>
+        </div>
+        <div class="status-badge">10 of 10 responses collected</div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-value">10</div>
+            <div class="stat-label">Total Responses</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Role Segments</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Completion Rate</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">28</div>
+            <div class="stat-label">Questions</div>
+        </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterByRole('all')">All Respondents</button>
+            <button class="filter-btn" onclick="filterByRole('Executive')">Executives (2)</button>
+            <button class="filter-btn" onclick="filterByRole('Operational')">Operational (4)</button>
+            <button class="filter-btn" onclick="filterByRole('Technical')">Technical (2)</button>
+            <button class="filter-btn" onclick="filterByRole('Regional')">Regional (3)</button>
+        </div>
+        <button class="export-button" onclick="exportCSV()">Export CSV for Intelligence Engine</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="response-grid" id="responseGrid"></div>
+
+        <!-- Export Section -->
+        <div class="export-section">
+            <h3>Export All Responses</h3>
+            <div class="preview-label">CSV Preview (first 3 data rows):</div>
+            <div class="csv-preview" id="csvPreview"></div>
+            <div class="export-buttons-group">
+                <button class="export-button" onclick="exportCSV()">Download CSV</button>
+                <button class="filter-btn" onclick="copyPreviewToClipboard()">Copy Preview to Clipboard</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Individual Responses -->
+    <div class="modal" id="responseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <h2 id="modalName"></h2>
+                    <p id="modalRole"></p>
+                </div>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // All respondent data for WS3
+        const respondents = [
+            {
+                id: "R_0001",
+                name: "Patricia Chen",
+                role: "Executive",
+                department: "Chief Transformation Officer Office",
+                title: "VP, Chief Transformation Officer Office",
+                responses: {
+                    Q1: "Patricia Chen",
+                    Q2: "Executive",
+                    Q3: "Chief Transformation Officer Office",
+                    Q4: "patricia.chen@nextera.com",
+                    Q5: "ADKAR;NPS",
+                    Q6: "3-5 min",
+                    Q7: "5",
+                    Q8: "Named with consent",
+                    Q9: "Quarterly",
+                    Q10: "ADKAR milestones; Awareness, Desire, Ability, Reinforcement",
+                    Q11: "System adoption;Process changes;Leadership effectiveness",
+                    Q12: "Yes at end only",
+                    Q13: "English",
+                    Q14: "Dashboard access;Summary email",
+                    Q15: "Strategic KPIs tied to GMTP milestones: system adoption rate, process change velocity, leadership effectiveness score, overall readiness index",
+                    Q16: "Yes with threshold",
+                    Q17: "ADKAR Desire drops below 3.0, trigger immediate leadership intervention plan",
+                    Q18: null,
+                    Q19: null,
+                    Q20: null,
+                    Q21: null,
+                    Q22: null,
+                    Q23: null,
+                    Q24: null,
+                    Q25: "Integration with executive dashboards and Workday reporting",
+                    Q26: "Compensation; Benefits; Job security",
+                    Q27: "Dashboard shows threshold-based alerts, GMTP milestone tracking, and regional breakdown by Awareness/Desire/Knowledge/Ability/Reinforcement",
+                    Q28: "Let's keep content focused on transformation readiness, not general satisfaction. No scope creep."
+                }
+            },
+            {
+                id: "R_0002",
+                name: "Michael Rothstein",
+                role: "Executive",
+                department: "Human Resources",
+                title: "CHRO, Human Resources",
+                responses: {
+                    Q1: "Michael Rothstein",
+                    Q2: "Executive",
+                    Q3: "Human Resources",
+                    Q4: "michael.rothstein@nextera.com",
+                    Q5: "NPS;ADKAR",
+                    Q6: "3-5 min",
+                    Q7: "4",
+                    Q8: "Fully anonymous",
+                    Q9: "Event-driven",
+                    Q10: "Awareness, Desire",
+                    Q11: "System adoption;Role changes;Training quality",
+                    Q12: "Yes at end only",
+                    Q13: "English",
+                    Q14: "Summary email;Town hall presentation",
+                    Q15: "Employee readiness for role changes, training effectiveness, change fatigue indicator, GMTP impact on HR operations",
+                    Q16: "No — aggregated only",
+                    Q17: "NPS below 4.0 OR ADKAR Desire component drops below 2.5 triggers HR escalation to manager cascade",
+                    Q18: null,
+                    Q19: null,
+                    Q20: null,
+                    Q21: null,
+                    Q22: null,
+                    Q23: null,
+                    Q24: null,
+                    Q25: "Need clear separation from Glint survey to avoid duplicate questions",
+                    Q26: "Compensation; Benefits; Career path changes",
+                    Q27: "Survey content covers only GMTP-related readiness, not general employee satisfaction, and integrates with Glint blackout calendar",
+                    Q28: "Anonymous surveys critical for union workforce trust. Schedule around Glint blackout windows."
+                }
+            },
+            {
+                id: "R_0003",
+                name: "Angela Ramirez",
+                role: "Operational",
+                department: "Operations — Florida Power & Light",
+                title: "HR Director, Operations — Florida Power & Light",
+                responses: {
+                    Q1: "Angela Ramirez",
+                    Q2: "Operational",
+                    Q3: "Operations — Florida Power & Light",
+                    Q4: "angela.ramirez@nextera.com",
+                    Q5: "ADKAR",
+                    Q6: "Under 3 min",
+                    Q7: "5",
+                    Q8: "Fully anonymous",
+                    Q9: "Quarterly",
+                    Q10: "Ability, Reinforcement",
+                    Q11: "System adoption;Process changes;Role changes",
+                    Q12: "Yes at end only",
+                    Q13: "Spanish;English",
+                    Q14: "None;Summary email",
+                    Q15: null,
+                    Q16: null,
+                    Q17: "ADKAR Ability below 2.5 triggers field supervisor intervention; comment themes escalate to FPL ops lead",
+                    Q18: "Field worker HRIS gaps, SMS delivery reliability, supervisor workload during peak seasons, union communication requirements",
+                    Q19: "SMS with link",
+                    Q20: "5",
+                    Q21: "Same for all",
+                    Q22: "Region;Department;Role level;Tenure",
+                    Q23: "ADKAR segmentation by impacted group (new vs experienced field workers) plus tenure bands (0-5yr, 5-10yr, 10+yr)",
+                    Q24: "Deduplication on phone number + region combo; mandatory region and role fields; timestamp validation",
+                    Q25: "SMS delivery costs, Spanish translation quality control, ensuring field worker privacy with supervisors present",
+                    Q26: "Compensation; Benefits; Management criticism",
+                    Q27: "Field workers can respond via SMS in <2 minutes, Spanish translation verified by native speakers, anonymous with union leadership sign-off",
+                    Q28: "FPL has 2,200 field workers, 60% without email. SMS is make-or-break. Happy to pilot."
+                }
+            },
+            {
+                id: "R_0004",
+                name: "David Park",
+                role: "Operational",
+                department: "Enterprise Transformation Office",
+                title: "Program Manager, Enterprise Transformation Office",
+                responses: {
+                    Q1: "David Park",
+                    Q2: "Operational",
+                    Q3: "Enterprise Transformation Office",
+                    Q4: "david.park@nextera.com",
+                    Q5: "NPS;BEST NPS",
+                    Q6: "5-7 min",
+                    Q7: "5",
+                    Q8: "Named with consent",
+                    Q9: "Quarterly",
+                    Q10: "Ability, Reinforcement, Knowledge",
+                    Q11: "System adoption;Process changes;Leadership effectiveness",
+                    Q12: "Yes at end only",
+                    Q13: "English;Spanish",
+                    Q14: "Dashboard access;Summary email",
+                    Q15: null,
+                    Q16: null,
+                    Q17: "Below-threshold NPS by region triggers deep-dive; BEST NPS scores guide coaching plan",
+                    Q18: "Regional capability gaps, field worker email reliability variation, dual-language survey delivery costs, benchmarking gap analysis",
+                    Q19: "QR code at depot",
+                    Q20: "8",
+                    Q21: "Role-based variants",
+                    Q22: "Region;Department;Role level;Manager",
+                    Q23: "ADKAR segmentation by region + role + manager accountability for action closure",
+                    Q24: "Mandatory region+role+manager fields; dedup on EmpID; timestamp must fall within business hours per region TZ",
+                    Q25: "Benchmarking external survey data, tracking NPS trends across 14 regions, managing language variants at scale",
+                    Q26: "Job security; Downsizing concerns",
+                    Q27: "Dashboard shows regional NPS benchmarks, ADKAR heatmap by stage, manager-level response rates, action closure tracking",
+                    Q28: "Benchmarking is critical for our GMTP progress reporting. Need external data for comparison."
+                }
+            },
+            {
+                id: "R_0005",
+                name: "Thomas Jackson",
+                role: "Operational",
+                department: "Program Management Office",
+                title: "PMO Lead, Program Management Office",
+                responses: {
+                    Q1: "Thomas Jackson",
+                    Q2: "Operational",
+                    Q3: "Program Management Office",
+                    Q4: "thomas.jackson@nextera.com",
+                    Q5: "ADKAR;NPS",
+                    Q6: "Under 3 min",
+                    Q7: "4",
+                    Q8: "Fully anonymous",
+                    Q9: "Event-driven",
+                    Q10: "Knowledge, Ability",
+                    Q11: "System adoption;Training quality",
+                    Q12: "Yes at end only",
+                    Q13: "English;Spanish",
+                    Q14: "None;Town hall presentation",
+                    Q15: null,
+                    Q16: null,
+                    Q17: "Training effectiveness scores below 3.0 trigger remedial module assignment; comments rolled up to PMO weekly",
+                    Q18: "4,000 field workers with unreliable email, depot access windows limited by shift schedules, verbal collection logistics, Spanish capability gaps",
+                    Q19: "QR code at depot;Kiosk at workplace;Manager collects verbally",
+                    Q20: "8",
+                    Q21: "Role-based variants",
+                    Q22: "Region;Department;Role level;Tenure;Location",
+                    Q23: "ADKAR segmentation by shift pattern + role + training cohort",
+                    Q24: "Mandatory shift code, location code, training date fields; dedup on region+empid; QR code must link to correct language version",
+                    Q25: "Multiple depot logistics, Spanish translation coordination, ensuring kiosk adoption without training burden",
+                    Q26: "Workload concerns; Overtime impact",
+                    Q27: "Field workers can respond via QR at depot OR kiosk, Spanish available, max 5-8 minutes, manager verbal collection as fallback option",
+                    Q28: "Depot-based approach reaches ~80% of field workers. Kiosk handles remaining office staff. Let's pilot depot first."
+                }
+            },
+            {
+                id: "R_0006",
+                name: "Sophia Martinez",
+                role: "Technical",
+                department: "Platform Administration",
+                title: "Qualtrics Admin, Platform Administration",
+                responses: {
+                    Q1: "Sophia Martinez",
+                    Q2: "Technical",
+                    Q3: "Platform Administration",
+                    Q4: "sophia.martinez@nextera.com",
+                    Q5: "ADKAR;NPS;BEST NPS",
+                    Q6: "3-5 min",
+                    Q7: "4",
+                    Q8: "Named with consent",
+                    Q9: "Quarterly",
+                    Q10: "Knowledge, Ability, Reinforcement",
+                    Q11: "System adoption;Process changes;Role changes;Leadership effectiveness;Training quality",
+                    Q12: "Yes every question",
+                    Q13: "English;Spanish;Mandarin",
+                    Q14: "Dashboard access;Summary email;Manager cascade",
+                    Q15: null,
+                    Q16: null,
+                    Q17: null,
+                    Q18: "Data quality and enrichment complexity, SMS/QR infrastructure coordination, multi-language content management, webhook latency impacts on real-time dashboards",
+                    Q19: "SMS with link;QR code at depot;Kiosk at workplace",
+                    Q20: "10",
+                    Q21: "Fully customized per group",
+                    Q22: "Region;Department;Role level;Tenure;Manager;Location;Language",
+                    Q23: "ADKAR segmentation by impacted group + tenure band + region + language + manager hierarchy; custom logic for field vs office",
+                    Q24: "All metadata fields mandatory except Manager (NULL allowed for independent contractors); dedup on phone+region+language; date validation per regional TZ; auto-purge non-responsive records after 30 days",
+                    Q25: "Multi-language content versioning in Qualtrics, webhook reliability for real-time dashboard updates, API rate limiting during peak survey windows, SMS provider redundancy",
+                    Q26: "Personal information exposure",
+                    Q27: "All 7 metadata fields captured, ADKAR logic routes correctly by impacted group, dashboard updates within 5 min of response, dedup logic prevents duplicate counting",
+                    Q28: "I can support fully customized survey logic. Need clear ADKAR segmentation rules and metadata governance before build-out."
+                }
+            },
+            {
+                id: "R_0007",
+                name: "Robert Kim",
+                role: "Technical",
+                department: "Data & Analytics",
+                title: "Data Engineer, Data & Analytics",
+                responses: {
+                    Q1: "Robert Kim",
+                    Q2: "Technical",
+                    Q3: "Data & Analytics",
+                    Q4: "robert.kim@nextera.com",
+                    Q5: "ADKAR;NPS",
+                    Q6: "5-7 min",
+                    Q7: "4",
+                    Q8: "Named with consent",
+                    Q9: "Quarterly",
+                    Q10: "Ability, Reinforcement",
+                    Q11: "System adoption;Process changes;Leadership effectiveness",
+                    Q12: "Yes at end only",
+                    Q13: "English;Spanish",
+                    Q14: "Dashboard access;Summary email",
+                    Q15: null,
+                    Q16: null,
+                    Q17: null,
+                    Q18: "Data consistency across 14 regions, employee ID instability, region code standardization, deduplication logic robustness, metadata completeness validation",
+                    Q19: "QR code at depot;Tablet with supervisor",
+                    Q20: "10",
+                    Q21: "Role-based variants",
+                    Q22: "Region;Department;Role level;Tenure;Manager",
+                    Q23: "ADKAR segmentation by manager + role; separate logic branches for field vs salaried workforce",
+                    Q24: "Region, Department, Role level are mandatory and validated against master data; dedup logic: primary key is region+empid+date, secondary check on phone+region combo; all timestamps must validate against Workday payroll records",
+                    Q25: "Contact Directory master data quality issues, Workday integration delays, data pipeline latency from Qualtrics to warehouse, duplicate account handling in Azure AD",
+                    Q26: "Data privacy concerns; ID exposure",
+                    Q27: "Mandatory metadata fields enforced at API level, dedup logic tested for 100k+ record batches, dashboard data lags <24 hours, no orphaned records in warehouse",
+                    Q28: "Data quality is the blocker. Contact Directory needs cleanup before we can dedupe reliably. Need Workday integration for employee status validation."
+                }
+            },
+            {
+                id: "R_0008",
+                name: "Linda Santos",
+                role: "Regional",
+                department: "Florida Power & Light",
+                title: "Regional HR Lead, Florida Power & Light",
+                responses: {
+                    Q1: "Linda Santos",
+                    Q2: "Regional",
+                    Q3: "Florida Power & Light",
+                    Q4: "linda.santos@nextera.com",
+                    Q5: "ADKAR;NPS",
+                    Q6: "Under 3 min",
+                    Q7: "5",
+                    Q8: "Fully anonymous",
+                    Q9: "Quarterly",
+                    Q10: "Awareness, Desire, Ability",
+                    Q11: "System adoption;Process changes;Role changes",
+                    Q12: "Yes at end only",
+                    Q13: "Spanish;English",
+                    Q14: "None;Summary email",
+                    Q15: null,
+                    Q16: null,
+                    Q17: null,
+                    Q18: "Union workforce coordination, Spanish-language quality assurance, field worker SMS reliability in Gulf Coast region, supervisor bias mitigation",
+                    Q19: "SMS with link",
+                    Q20: "5",
+                    Q21: "Same for all",
+                    Q22: "Region;Department;Tenure",
+                    Q23: "ADKAR segmentation by tenure band; separate paths for union vs non-union",
+                    Q24: "Region and Tenure mandatory; phone number format validation for SMS delivery; dedup on phone+region",
+                    Q25: "Anonymous survey design that preserves union worker trust, SMS delivery reliability in coastal areas with poor signal, Spanish translation accuracy",
+                    Q26: "Compensation; Benefits; Union relationship criticism",
+                    Q27: "FPL field workers respond via SMS in their preferred language, survey is truly anonymous (no supervisor visibility), questions respect union agreements, <5 min to complete",
+                    Q28: "FPL can pilot. 2,200 field workers ready. Just need Spanish version and union leadership buy-in letter."
+                }
+            },
+            {
+                id: "R_0009",
+                name: "Nathan Powell",
+                role: "Regional",
+                department: "NextEra Energy Resources (NEER)",
+                title: "Regional HR Lead, NextEra Energy Resources (NEER)",
+                responses: {
+                    Q1: "Nathan Powell",
+                    Q2: "Regional",
+                    Q3: "NextEra Energy Resources (NEER)",
+                    Q4: "nathan.powell@nextera.com",
+                    Q5: "NPS;BEST NPS",
+                    Q6: "Under 3 min",
+                    Q7: "3",
+                    Q8: "Fully anonymous",
+                    Q9: "Event-driven",
+                    Q10: "Awareness, Desire, Knowledge",
+                    Q11: "System adoption;Leadership effectiveness",
+                    Q12: "Yes at end only",
+                    Q13: "English;Spanish",
+                    Q14: "None;Summary email",
+                    Q15: null,
+                    Q16: null,
+                    Q17: null,
+                    Q18: "Transient workforce with high turnover, multiple sub-region maturity levels, remote wind farm and solar site access logistics, temporary worker integration",
+                    Q19: "SMS with link",
+                    Q20: "5",
+                    Q21: "Role-based variants",
+                    Q22: "Region;Department;Role level;Tenure",
+                    Q23: "ADKAR segmentation by sub-region + tenure; separate for temporary vs permanent staff",
+                    Q24: "Region and Role level mandatory; tenure must be valid (0-tenure excluded for first 30 days); phone validation for SMS",
+                    Q25: "High turnover means rapid contact list churn, remote site SMS delivery variability, temporary worker onboarding survey timing, preventing duplicate responses from rehires",
+                    Q26: "Job security; Layoff concerns",
+                    Q27: "NEER transient workers can complete NPS via SMS in <3 minutes, survey respects anonymity concerns, separate content for temporary vs permanent roles",
+                    Q28: "Phased rollout by sub-region: NEER corporate first (stable), then wind operations (medium turnover), then solar sites (high turnover) last. Avoid survey fatigue."
+                }
+            },
+            {
+                id: "R_0010",
+                name: "Sarah Chen",
+                role: "Regional",
+                department: "Corporate Services (Midwest + East)",
+                title: "Regional HR Lead, Corporate Services (Midwest + East)",
+                responses: {
+                    Q1: "Sarah Chen",
+                    Q2: "Regional",
+                    Q3: "Corporate Services (Midwest + East)",
+                    Q4: "sarah.chen@nextera.com",
+                    Q5: "ADKAR;NPS;BEST NPS",
+                    Q6: "7-10 min",
+                    Q7: "4",
+                    Q8: "Named with consent",
+                    Q9: "Quarterly",
+                    Q10: "Desire, Knowledge, Ability, Reinforcement",
+                    Q11: "System adoption;Process changes;Role changes;Leadership effectiveness;Training quality",
+                    Q12: "Yes every question",
+                    Q13: "English",
+                    Q14: "Dashboard access;Summary email;Town hall presentation;Manager cascade",
+                    Q15: null,
+                    Q16: null,
+                    Q17: null,
+                    Q18: "Corporate office location distribution across Midwest and East regions, virtual team coordination requirements, time zone scheduling, executive and support staff survey fatigue",
+                    Q19: "Tablet with supervisor",
+                    Q20: "10",
+                    Q21: "Fully customized per group",
+                    Q22: "Region;Department;Role level;Manager",
+                    Q23: "ADKAR segmentation by department + role level + manager reporting line",
+                    Q24: "All fields mandatory including Manager; timestamps must fall within 9-5 business hours per region TZ; dedup on empid+date",
+                    Q25: "Reconciling ADKAR survey content with Glint surveys, manager-level reporting consistency, time zone coordination for live town halls, multi-location logistics",
+                    Q26: "None identified for corporate offices",
+                    Q27: "Full ADKAR + NPS coverage with rich manager cascade data, dashboard shows individual team readiness scores with threshold alerts, town hall presentation includes action plans by ADKAR stage",
+                    Q28: "Corporate offices are smaller (150-300 per location) but strategic. Can support 10-question surveys. Full ADKAR content is appropriate for transformation tracking."
+                }
+            }
+        ];
+
+        // Question definitions for modal display
+        const questionDefinitions = {
+            blocks: [
+                {
+                    title: "Welcome & Demographics",
+                    questions: [
+                        { id: "Q1", text: "Full name", type: "text" },
+                        { id: "Q2", text: "Role segment", type: "single" },
+                        { id: "Q3", text: "Department", type: "text" },
+                        { id: "Q4", text: "Email", type: "text" }
+                    ]
+                },
+                {
+                    title: "Survey Template Selection",
+                    questions: [
+                        { id: "Q5", text: "Which survey template types should we deploy?", type: "multi" },
+                        { id: "Q6", text: "What is the ideal survey completion time?", type: "single" },
+                        { id: "Q7", text: "How important is benchmarking against external data?", type: "scale" },
+                        { id: "Q8", text: "Should surveys be anonymous or named with consent opt-in?", type: "single" },
+                        { id: "Q9", text: "How many survey 'moments' per year feel right?", type: "single" }
+                    ]
+                },
+                {
+                    title: "ADKAR Content Design",
+                    questions: [
+                        { id: "Q10", text: "Which ADKAR stages are most critical to measure first?", type: "multi" },
+                        { id: "Q11", text: "What transformation-specific topics should surveys cover?", type: "multi" },
+                        { id: "Q12", text: "Should we include free-text comment fields?", type: "single" },
+                        { id: "Q13", text: "What language should be used in surveys?", type: "multi" },
+                        { id: "Q14", text: "How should survey results be communicated back to respondents?", type: "multi" }
+                    ]
+                },
+                {
+                    title: "Executive Content Preferences",
+                    questions: [
+                        { id: "Q15", text: "What strategic KPIs should CMX surveys measure?", type: "text" },
+                        { id: "Q16", text: "Should executive-facing dashboards show individual team scores?", type: "single" },
+                        { id: "Q17", text: "What action triggers should survey results generate?", type: "text" }
+                    ],
+                    roleFilter: "Executive"
+                },
+                {
+                    title: "Operational Content Preferences",
+                    questions: [
+                        { id: "Q18", text: "What operational pain points should surveys capture?", type: "text" },
+                        { id: "Q19", text: "How should field workers experience the survey?", type: "multi" },
+                        { id: "Q20", text: "What is the maximum number of questions field workers will tolerate?", type: "single" },
+                        { id: "Q21", text: "Should different impacted groups get different survey versions?", type: "single" }
+                    ],
+                    roleFilter: "Operational"
+                },
+                {
+                    title: "Technical Content Requirements",
+                    questions: [
+                        { id: "Q22", text: "What metadata should be captured alongside survey responses?", type: "multi" },
+                        { id: "Q23", text: "How should ADKAR segmentation logic work?", type: "text" },
+                        { id: "Q24", text: "What data validation rules are needed?", type: "text" }
+                    ],
+                    roleFilter: "Technical"
+                },
+                {
+                    title: "Regional Considerations",
+                    questions: [
+                        { id: "Q18", text: "What operational pain points should surveys capture?", type: "text" },
+                        { id: "Q19", text: "How should field workers experience the survey?", type: "multi" },
+                        { id: "Q20", text: "What is the maximum number of questions field workers will tolerate?", type: "single" },
+                        { id: "Q21", text: "Should different impacted groups get different survey versions?", type: "single" },
+                        { id: "Q22", text: "What metadata should be captured alongside survey responses?", type: "multi" },
+                        { id: "Q23", text: "How should ADKAR segmentation logic work?", type: "text" }
+                    ],
+                    roleFilter: "Regional"
+                },
+                {
+                    title: "Open Points & Close",
+                    questions: [
+                        { id: "Q25", text: "What survey content concerns do you have?", type: "text" },
+                        { id: "Q26", text: "What topics should we AVOID in surveys?", type: "text" },
+                        { id: "Q27", text: "What would make you confident the survey is well-designed?", type: "text" },
+                        { id: "Q28", text: "Additional comments?", type: "text" }
+                    ]
+                }
+            ]
+        };
+
+        let currentFilter = "all";
+
+        function getRoleColor(role) {
+            const colors = {
+                Executive: "role-executive",
+                Operational: "role-operational",
+                Technical: "role-technical",
+                Regional: "role-regional"
+            };
+            return colors[role] || "";
+        }
+
+        function renderResponses() {
+            const grid = document.getElementById("responseGrid");
+            grid.innerHTML = "";
+
+            const filtered = currentFilter === "all"
+                ? respondents
+                : respondents.filter(r => r.role === currentFilter);
+
+            filtered.forEach(respondent => {
+                const card = document.createElement("div");
+                card.className = "respondent-card";
+                card.onclick = () => openModal(respondent);
+
+                card.innerHTML = `
+                    <div class="respondent-name">${respondent.name}</div>
+                    <div class="role-badge ${getRoleColor(respondent.role)}">${respondent.role}</div>
+                    <div class="respondent-meta">
+                        <strong>Department:</strong><br>${respondent.department}
+                    </div>
+                    <div class="completion-status">
+                        <span class="completion-checkmark">✓</span>
+                        <span>100% Complete</span>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+
+            updateCSVPreview();
+        }
+
+        function filterByRole(role) {
+            currentFilter = role;
+
+            document.querySelectorAll(".filter-btn").forEach(btn => {
+                btn.classList.remove("active");
+            });
+            event.target.classList.add("active");
+
+            renderResponses();
+        }
+
+        function openModal(respondent) {
+            const modal = document.getElementById("responseModal");
+            document.getElementById("modalName").textContent = respondent.name;
+            document.getElementById("modalRole").textContent = `${respondent.role} • ${respondent.department}`;
+
+            const modalBody = document.getElementById("modalBody");
+            modalBody.innerHTML = "";
+
+            questionDefinitions.blocks.forEach(block => {
+                if (block.roleFilter && block.roleFilter !== respondent.role) {
+                    return;
+                }
+
+                const blockDiv = document.createElement("div");
+                blockDiv.className = "question-block";
+
+                const blockTitle = document.createElement("div");
+                blockTitle.className = "block-title";
+                blockTitle.textContent = block.title;
+                blockDiv.appendChild(blockTitle);
+
+                block.questions.forEach(question => {
+                    const questionDiv = document.createElement("div");
+                    questionDiv.className = "question";
+
+                    const response = respondent.responses[question.id];
+                    const isNA = response === null;
+
+                    const questionText = document.createElement("div");
+                    questionText.className = "question-text";
+                    questionText.textContent = `${question.id}: ${question.text}`;
+                    questionDiv.appendChild(questionText);
+
+                    const answer = document.createElement("div");
+                    answer.className = `answer ${isNA ? 'na-answer' : ''}`;
+                    answer.textContent = isNA ? "Not applicable to this role" : response;
+                    questionDiv.appendChild(answer);
+
+                    blockDiv.appendChild(questionDiv);
+                });
+
+                modalBody.appendChild(blockDiv);
+            });
+
+            modal.classList.add("active");
+        }
+
+        function closeModal() {
+            document.getElementById("responseModal").classList.remove("active");
+        }
+
+        document.getElementById("responseModal").addEventListener("click", function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        function generateCSVData() {
+            const headers = ["ResponseID", "StartDate", "EndDate"];
+            for (let i = 1; i <= 28; i++) {
+                headers.push(`Q${i}`);
+            }
+
+            const rows = [];
+            rows.push(headers.join(","));
+
+            respondents.forEach((respondent, index) => {
+                const row = [
+                    respondent.id,
+                    `2026-04-${String((index + 1) * 2).padStart(2, '0')}T08:00:00Z`,
+                    `2026-04-${String((index + 1) * 2).padStart(2, '0')}T16:30:00Z`
+                ];
+
+                for (let i = 1; i <= 28; i++) {
+                    const qId = `Q${i}`;
+                    let value = respondent.responses[qId] || "";
+
+                    // Escape quotes in CSV
+                    if (value && value.includes(",")) {
+                        value = `"${value.replace(/"/g, '""')}"`;
+                    }
+                    row.push(value);
+                }
+
+                rows.push(row.join(","));
+            });
+
+            return rows;
+        }
+
+        function updateCSVPreview() {
+            const csvData = generateCSVData();
+            const preview = [csvData[0], csvData[1], csvData[2], csvData[3]].join("\n");
+            document.getElementById("csvPreview").textContent = preview + "\n...";
+        }
+
+        function exportCSV() {
+            const csvData = generateCSVData();
+            const csvContent = csvData.join("\n");
+
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "CMX_WS3_PreWorkshop_Responses.csv";
+            link.click();
+        }
+
+        function copyPreviewToClipboard() {
+            const preview = document.getElementById("csvPreview").textContent.replace("\n...", "");
+            const fullCSV = generateCSVData().join("\n");
+            navigator.clipboard.writeText(fullCSV).then(() => {
+                alert("Full CSV copied to clipboard!");
+            });
+        }
+
+        // Initialize
+        renderResponses();
+    </script>
+</body>
+</html>

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMX Decision Workshop 2 - Session Outputs - AKT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #F7F5F2;
+            color: #2D2015;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2D2015 0%, #1a120c 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 4px solid #F9A13A;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #F9A13A;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 0.25rem;
+        }
+
+        .client-bar {
+            background: white;
+            padding: 1.25rem 2rem;
+            border-bottom: 1px solid #E0D8CE;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .client-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .client-info strong {
+            color: #2D2015;
+            font-weight: 600;
+        }
+
+        .client-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .session-meta {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .session-meta strong {
+            color: #2D2015;
+            display: block;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .stats-bar {
+            background: #F7F5F2;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #E0D8CE;
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #F9A13A;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
+        .toolbar {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #E0D8CE;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #E0D8CE;
+            background: white;
+            color: #2D2015;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: #F9A13A;
+            color: #F9A13A;
+        }
+
+        .filter-btn.active {
+            background: #F9A13A;
+            color: white;
+            border-color: #F9A13A;
+        }
+
+        .export-button {
+            background: #F9A13A;
+            color: #2D2015;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .export-button:hover {
+            background: #E89121;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(249, 161, 58, 0.3);
+        }
+
+        .content {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .decision-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .decision-card {
+            background: white;
+            border: 1px solid #E0D8CE;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .decision-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            border-color: #F9A13A;
+        }
+
+        .decision-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .decision-id-title {
+            flex: 1;
+        }
+
+        .decision-id {
+            color: #F9A13A;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+
+        .decision-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2D2015;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .status-decided {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .status-deferred {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .status-escalated {
+            background: #FFEBEE;
+            color: #C62828;
+        }
+
+        .decision-outcome {
+            background: #F7F5F2;
+            padding: 1rem;
+            border-left: 3px solid #F9A13A;
+            border-radius: 2px;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            color: #2D2015;
+            line-height: 1.6;
+        }
+
+        .decision-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-item {
+            font-size: 0.85rem;
+        }
+
+        .detail-label {
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.75rem;
+        }
+
+        .detail-value {
+            color: #2D2015;
+            font-weight: 500;
+        }
+
+        .rationale-dependencies {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #E0D8CE;
+            display: none;
+        }
+
+        .rationale-dependencies.expanded {
+            display: block;
+        }
+
+        .expand-button {
+            background: none;
+            border: none;
+            color: #F9A13A;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 0.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .expand-button:hover {
+            color: #E89121;
+        }
+
+        .rationale-block, .dependencies-block {
+            margin-bottom: 1rem;
+        }
+
+        .rationale-block:last-child, .dependencies-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .block-title {
+            color: #2D2015;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .block-content {
+            color: #2D2015;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .export-section {
+            background: white;
+            border: 1px solid #E0D8CE;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .export-section h3 {
+            color: #2D2015;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .csv-preview {
+            background: #2D2015;
+            color: #E0D8CE;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            overflow-x: auto;
+            margin: 1rem 0;
+            max-height: 200px;
+        }
+
+        .preview-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .export-buttons-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .decision-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .decision-details {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                gap: 1.5rem;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .export-buttons-group {
+                flex-direction: column;
+            }
+
+            .export-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">AKT <span>INTELLIGENCE</span></div>
+        <h1>Decision Workshop 2: Session Outputs</h1>
+        <p>Dashboards & Ticketing</p>
+    </div>
+
+    <!-- Client Bar -->
+    <div class="client-bar">
+        <div class="client-info">
+            <strong>Nextera Energy Inc. — Grid Modernization Transformation Program (GMTP)</strong>
+            <p>Customer Managed Experience (CMX) Implementation</p>
+        </div>
+        <div class="session-meta">
+            <strong>April 2, 2026</strong>
+            <span>2-hour working session</span>
+        </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-value">10</div>
+            <div class="stat-label">Decisions Made</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">7</div>
+            <div class="stat-label">Attendees</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">9</div>
+            <div class="stat-label">Decided</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">1</div>
+            <div class="stat-label">Deferred</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Escalated</div>
+        </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterByStatus('all')">All Decisions</button>
+            <button class="filter-btn" onclick="filterByStatus('Decided')">Decided (9)</button>
+            <button class="filter-btn" onclick="filterByStatus('Deferred')">Deferred (1)</button>
+        </div>
+        <button class="export-button" onclick="exportCSV()">Export CSV for Intelligence Engine</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="decision-grid" id="decisionGrid"></div>
+
+        <!-- Export Section -->
+        <div class="export-section">
+            <h3>Export All Decisions</h3>
+            <div class="preview-label">CSV Preview (first 3 decisions):</div>
+            <div class="csv-preview" id="csvPreview"></div>
+            <div class="export-buttons-group">
+                <button class="export-button" onclick="exportCSV()">Download CSV</button>
+                <button class="filter-btn" onclick="exportJSON()">Download JSON</button>
+                <button class="filter-btn" onclick="copyPreviewToClipboard()">Copy Preview to Clipboard</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const decisions = [
+            {
+                id: "DW2-001",
+                title: "Dashboard Role Views",
+                status: "Decided",
+                outcome: "5 dashboard views: COMEX (exec summary), CTO Portfolio (cross-program), Program Lead (detail), Regional Manager (region drill-down), HR Director (people metrics). Manager-level view deferred to Phase 2.",
+                owner: "Sophia Martinez",
+                rationale: "Role-based views ensure each stakeholder sees relevant information. COMEX view aligns with executive sponsorship from Patricia Chen.",
+                dependencies: "Requires platform access matrix (DW1-005). Feeds into dashboard refresh frequency (DW2-002)",
+                dueDate: null
+            },
+            {
+                id: "DW2-002",
+                title: "Dashboard Refresh Frequency",
+                status: "Decided",
+                outcome: "Real-time for active survey periods. Weekly refresh for historical views. Daily email digest for Program Leads during survey windows.",
+                owner: "Sophia Martinez",
+                rationale: "Real-time during surveys enables rapid response to low engagement. Weekly historical keeps system performant.",
+                dependencies: "Depends on dashboard role views (DW2-001). Technical feasibility requires API assessment (DW1-025)",
+                dueDate: null
+            },
+            {
+                id: "DW2-003",
+                title: "NPS Dashboard Design",
+                status: "Decided",
+                outcome: "Standard AKT NPS template: Overall NPS trending, Promoter/Passive/Detractor distribution, sentiment word cloud, comments library, regional comparison.",
+                owner: "AKT (James Whitford)",
+                rationale: "Proven template accelerates deployment. Regional comparison supports Nextera's multi-division structure.",
+                dependencies: "Requires survey template selection (DW1-004). Feeds into alert threshold configuration (DW2-005)",
+                dueDate: null
+            },
+            {
+                id: "DW2-004",
+                title: "ADKAR Dashboard Design",
+                status: "Decided",
+                outcome: "Stage-by-stage scoring (5-point visualization), segment comparison by impacted group, ADKAR trend over waves, lowest-scoring stage identification, drill-down by ADKAR segment.",
+                owner: "AKT",
+                rationale: "ADKAR is key for transformation programs. Drill-down capability enables segment-level action planning.",
+                dependencies: "Requires ADKAR segment definition in intake form (DW1-002). Coordinates with alert thresholds (DW2-005)",
+                dueDate: null
+            },
+            {
+                id: "DW2-005",
+                title: "Alert Threshold Configuration",
+                status: "Decided",
+                outcome: "NPS floor: <20 triggers alert. ADKAR floor: <3.0 on any stage triggers alert. Trend deviation: >10% drop = moderate alert, >20% drop = critical alert. Dashboard notification only (no email alerts in Phase 1).",
+                owner: "Sophia Martinez + CMX Program Lead",
+                rationale: "Thresholds calibrated to Nextera's historical survey performance. Dashboard-only approach reduces alert fatigue in MVP.",
+                dependencies: "Depends on NPS and ADKAR dashboard designs (DW2-003, DW2-004). Integrates with ticketing triggers (DW2-006)",
+                dueDate: null
+            },
+            {
+                id: "DW2-006",
+                title: "Ticketing Trigger Rules",
+                status: "Decided",
+                outcome: "NPS 0-2 auto-creates ticket. ADKAR 1-2 auto-creates ticket. Red word list detection routes to HRD only. Consent-based routing: ticket includes contact info only with explicit opt-in.",
+                owner: "CMX Program Lead",
+                rationale: "Automated tickets ensure response to critical feedback. Consent-based approach respects respondent privacy and NERC CIP compliance concerns.",
+                dependencies: "Requires alert thresholds (DW2-005). Red word list defined in DW2-008. Integrates with ticketing SLAs (DW2-007)",
+                dueDate: null
+            },
+            {
+                id: "DW2-007",
+                title: "Ticketing SLAs",
+                status: "Decided",
+                outcome: "First touch: 48 hours (auto-reminder if untouched). Resolution: 5 business days (escalation to N+1 after SLA breach). Red word list: HRD Portfolio ownership, no escalation outside HR.",
+                owner: "Michael Rothstein",
+                rationale: "SLAs ensure accountability. Red word list kept within HR maintains confidentiality for sensitive employee concerns.",
+                dependencies: "Requires ticketing trigger rules (DW2-006). Red word list ownership (DW2-008)",
+                dueDate: null
+            },
+            {
+                id: "DW2-008",
+                title: "Red Word List",
+                status: "Decided",
+                outcome: "Initial list: 45 trigger words/phrases covering welfare, harassment, discrimination, safety, legal threats. HR reviews and updates annually. No escalation outside HRD Portfolio — privacy protected.",
+                owner: "Michael Rothstein + Legal",
+                rationale: "Comprehensive initial list covers known risk areas. Annual review keeps pace with evolving workplace issues.",
+                dependencies: "Feeds into ticketing trigger rules (DW2-006) and ticketing SLAs (DW2-007). Legal sign-off completed.",
+                dueDate: null
+            },
+            {
+                id: "DW2-009",
+                title: "Root Cause Taxonomy",
+                status: "Deferred",
+                outcome: "Unstructured for first 6 months. After 6 months of data, AKT proposes structured root cause categories. Incorporated into Governance Playbook.",
+                owner: "AKT",
+                rationale: "First 6 months of real data enables data-driven taxonomy design. Avoids pre-judging root cause categories.",
+                dependencies: "Informs ticketing process maturation. Will be integrated into DW3 governance review",
+                dueDate: "2026-09-30"
+            },
+            {
+                id: "DW2-010",
+                title: "Manager Enablement Toolkit",
+                status: "Decided",
+                outcome: "AKT to develop: Dashboard navigation guide, Alert interpretation training, Ticket resolution guide, 'How to act on feedback' one-pager. Delivered 2 weeks before first survey launch.",
+                owner: "AKT (James Whitford)",
+                rationale: "Toolkit ensures managers can effectively act on insights. Delivery timing aligns with survey launch readiness.",
+                dependencies: "Depends on all dashboard and ticketing decisions (DW2-001 through DW2-009). Coordinates with pre-launch comms plan",
+                dueDate: "2026-05-15"
+            }
+        ];
+
+        let currentFilter = "all";
+
+        function getStatusClass(status) {
+            const classes = {
+                "Decided": "status-decided",
+                "Deferred": "status-deferred",
+                "Escalated": "status-escalated"
+            };
+            return classes[status] || "";
+        }
+
+        function renderDecisions() {
+            const grid = document.getElementById("decisionGrid");
+            grid.innerHTML = "";
+
+            const filtered = currentFilter === "all"
+                ? decisions
+                : decisions.filter(d => d.status === currentFilter);
+
+            filtered.forEach(decision => {
+                const card = document.createElement("div");
+                card.className = "decision-card";
+                card.id = `card-${decision.id}`;
+
+                const dueDate = decision.dueDate ? `<span>${decision.dueDate}</span>` : '';
+                const dueDateHTML = decision.dueDate ? `<div class="detail-item"><div class="detail-label">Due Date</div><div class="detail-value">${dueDate}</div></div>` : '';
+
+                card.innerHTML = `
+                    <div class="decision-header">
+                        <div class="decision-id-title">
+                            <div class="decision-id">${decision.id}</div>
+                            <div class="decision-title">${decision.title}</div>
+                        </div>
+                        <div class="status-badge ${getStatusClass(decision.status)}">${decision.status}</div>
+                    </div>
+                    <div class="decision-outcome">${decision.outcome}</div>
+                    <div class="decision-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Owner</div>
+                            <div class="detail-value">${decision.owner}</div>
+                        </div>
+                        ${dueDateHTML}
+                    </div>
+                    <button class="expand-button" onclick="toggleExpanded('${decision.id}')">+ Details & Dependencies</button>
+                    <div class="rationale-dependencies" id="expand-${decision.id}">
+                        <div class="rationale-block">
+                            <div class="block-title">Rationale</div>
+                            <div class="block-content">${decision.rationale}</div>
+                        </div>
+                        <div class="dependencies-block">
+                            <div class="block-title">Dependencies</div>
+                            <div class="block-content">${decision.dependencies}</div>
+                        </div>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+
+            updateCSVPreview();
+        }
+
+        function toggleExpanded(decisionId) {
+            const expandDiv = document.getElementById(`expand-${decisionId}`);
+            const button = document.querySelector(`#card-${decisionId} .expand-button`);
+
+            expandDiv.classList.toggle("expanded");
+            button.textContent = expandDiv.classList.contains("expanded") ? "- Hide Details" : "+ Details & Dependencies";
+        }
+
+        function filterByStatus(status) {
+            currentFilter = status;
+
+            document.querySelectorAll(".filter-btn").forEach(btn => {
+                btn.classList.remove("active");
+            });
+            event.target.classList.add("active");
+
+            renderDecisions();
+        }
+
+        function generateCSVData() {
+            const headers = ["DecisionID", "Title", "Status", "Outcome", "Owner", "Rationale", "Dependencies", "DueDate"];
+            const rows = [];
+            rows.push(headers.join(","));
+
+            decisions.forEach(decision => {
+                const row = [
+                    decision.id,
+                    decision.title,
+                    decision.status,
+                    `"${decision.outcome.replace(/"/g, '""')}"`,
+                    decision.owner,
+                    `"${decision.rationale.replace(/"/g, '""')}"`,
+                    `"${decision.dependencies.replace(/"/g, '""')}"`,
+                    decision.dueDate || ""
+                ];
+                rows.push(row.join(","));
+            });
+
+            return rows;
+        }
+
+        function updateCSVPreview() {
+            const csvData = generateCSVData();
+            const preview = [csvData[0], csvData[1], csvData[2], csvData[3]].join("\n");
+            document.getElementById("csvPreview").textContent = preview + "\n...";
+        }
+
+        function exportCSV() {
+            const csvData = generateCSVData();
+            const csvContent = csvData.join("\n");
+
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "CMX_DW2_Session_Outputs.csv";
+            link.click();
+        }
+
+        function exportJSON() {
+            const jsonContent = JSON.stringify(decisions, null, 2);
+            const blob = new Blob([jsonContent], { type: "application/json;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "CMX_DW2_Session_Outputs.json";
+            link.click();
+        }
+
+        function copyPreviewToClipboard() {
+            const csvData = generateCSVData();
+            const fullCSV = csvData.join("\n");
+            navigator.clipboard.writeText(fullCSV).then(() => {
+                alert("Full CSV copied to clipboard!");
+            });
+        }
+
+        // Initialize
+        renderDecisions();
+    </script>
+</body>
+</html>
