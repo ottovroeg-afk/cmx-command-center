@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Workforce Initiative | AKT Global</title>
+    <title>AI Taskforce | AKT Global</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
     <style>
@@ -23,9 +23,12 @@
             --akt-white: #FFFFFF;
             --akt-light: #F4F7FA;
             --akt-border: #DDE4EC;
-            --client-delivery: #E8920E;
-            --practice-ops: #1A6BA5;
-            --strategy: #7B2DB8;
+            --accent-orange: #E8920E;
+            --accent-purple: #7B2DB8;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -35,7 +38,7 @@
             line-height: 1.6;
         }
 
-        /* TOP BAR */
+        /* STICKY NAV BAR */
         .top-bar {
             position: sticky;
             top: 0;
@@ -94,64 +97,33 @@
         .hero {
             background: linear-gradient(135deg, var(--akt-dark) 0%, #243547 100%);
             color: var(--akt-white);
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             text-align: center;
         }
 
         .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 0.5rem;
+            font-size: 3.2rem;
+            margin-bottom: 1rem;
             font-weight: 700;
             letter-spacing: -0.5px;
         }
 
         .hero .subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
             color: #ccc;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-        }
-
-        .impact-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.95);
-            color: var(--akt-dark);
-            padding: 2rem 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .stat-card .number {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--akt-blue);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-card .label {
-            font-size: 0.95rem;
-            color: var(--akt-slate);
-            font-weight: 500;
+            line-height: 1.6;
         }
 
         .hero-meta {
             font-size: 0.9rem;
             color: #aaa;
-            margin-top: 1rem;
         }
 
-        /* WORKSTREAMS SECTION */
+        /* TIMELINE SECTION */
         .section {
             padding: 3rem 2rem;
             max-width: 1200px;
@@ -168,85 +140,180 @@
         .section-subtitle {
             font-size: 1rem;
             color: var(--akt-slate);
+            margin-bottom: 2.5rem;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-label {
+            font-weight: 600;
+            color: var(--akt-dark);
+            font-size: 0.95rem;
+        }
+
+        .timeline-line {
+            position: absolute;
+            bottom: -0.25rem;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--akt-dark);
+            z-index: 0;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 24px;
+            background: var(--accent-orange);
+            z-index: 10;
+        }
+
+        .timeline-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
-        .workstreams-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
+        .timeline-block {
+            padding: 1.8rem;
+            border-radius: 6px;
+            position: relative;
         }
 
-        .workstream-card {
-            background: var(--akt-white);
-            border-left: 5px solid;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
+        .timeline-block.week-1 {
+            background: #D4E8F7;
         }
 
-        .workstream-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        .timeline-block.week-2 {
+            background: #E0EFF9;
         }
 
-        .workstream-card.client-delivery {
-            border-left-color: var(--client-delivery);
+        .timeline-block.week-3 {
+            background: #EBF6FC;
         }
 
-        .workstream-card.practice-ops {
-            border-left-color: var(--practice-ops);
+        .timeline-block.week-4 {
+            background: var(--akt-dark);
+            border-left: 4px solid var(--accent-orange);
         }
 
-        .workstream-card.strategy {
-            border-left-color: var(--strategy);
+        .timeline-block.week-4 .timeline-week-label {
+            color: var(--accent-orange);
         }
 
-        .workstream-card h3 {
-            font-size: 1.3rem;
+        .timeline-block.week-4 .timeline-title {
+            color: var(--akt-white);
+        }
+
+        .timeline-block.week-4 .timeline-description {
+            color: #ccc;
+        }
+
+        .timeline-week-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.6rem;
+        }
+
+        .timeline-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--akt-dark);
             margin-bottom: 0.5rem;
-            color: var(--akt-dark);
         }
 
-        .workstream-card p {
-            font-size: 0.95rem;
-            color: var(--akt-slate);
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-        }
-
-        .workstream-items {
-            margin-bottom: 1.5rem;
-        }
-
-        .workstream-items li {
-            list-style: none;
-            padding: 0.4rem 0;
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        .workstream-items li:before {
-            content: "→ ";
-            font-weight: 600;
-            margin-right: 0.5rem;
-        }
-
-        .status-badge {
-            display: inline-block;
-            background: #f0f0f0;
-            color: var(--akt-dark);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+        .timeline-description {
             font-size: 0.85rem;
-            font-weight: 600;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .timeline-note {
+            font-size: 0.9rem;
+            color: var(--akt-slate);
+            font-style: italic;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--akt-border);
         }
 
         /* DIGITAL COMPANIONS SECTION */
         .companions-section {
             background: var(--akt-white);
+        }
+
+        .category-pills {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--akt-white);
+        }
+
+        .category-pill.efficiency {
+            background: var(--akt-green);
+        }
+
+        .category-pill.scale {
+            background: var(--akt-blue);
+        }
+
+        .category-pill.innovation {
+            background: var(--accent-purple);
+        }
+
+        .pill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .category-section {
+            margin-bottom: 3rem;
+        }
+
+        .category-header {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--akt-dark);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .category-header::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: currentColor;
+            border-radius: 2px;
         }
 
         .tool-cards-grid {
@@ -262,6 +329,8 @@
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             transition: box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
         }
 
         .tool-card:hover {
@@ -277,16 +346,16 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
         }
 
         .tool-card h3 {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--akt-dark);
         }
 
-        .workstream-badge {
+        .tool-badge {
             display: inline-block;
             padding: 0.35rem 0.75rem;
             border-radius: 20px;
@@ -295,73 +364,75 @@
             color: var(--akt-white);
         }
 
-        .workstream-badge.client-delivery {
-            background: var(--client-delivery);
+        .tool-badge.efficiency {
+            background: var(--akt-green);
         }
 
-        .workstream-badge.practice-ops {
-            background: var(--practice-ops);
+        .tool-badge.scale {
+            background: var(--akt-blue);
         }
 
-        .workstream-badge.strategy {
-            background: var(--strategy);
+        .tool-badge.innovation {
+            background: var(--accent-purple);
         }
 
         .tool-description {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--akt-slate);
             line-height: 1.5;
         }
 
         .tool-card-content {
             padding: 1.5rem;
-        }
-
-        .mockup-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.8rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .mockup-card {
-            background: linear-gradient(135deg, #f5f5f5 0%, #efefef 100%);
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 0.8rem;
-            font-size: 0.75rem;
-            text-align: center;
-            color: #666;
-            min-height: 140px;
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.2s;
         }
 
-        .mockup-card:hover {
-            transform: scale(1.02);
+        .mockup-screen {
+            background: linear-gradient(135deg, #f5f5f5 0%, #efefef 100%);
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #666;
         }
 
-        .mockup-card strong {
-            display: block;
-            color: var(--akt-dark);
-            margin-bottom: 0.3rem;
+        .mockup-header {
+            background: var(--akt-dark);
+            color: var(--akt-white);
+            padding: 0.5rem 0.8rem;
+            border-radius: 3px;
+            margin-bottom: 0.8rem;
             font-weight: 600;
+            text-align: center;
         }
 
-        .mockup-label {
-            font-size: 0.7rem;
-            color: #999;
-            margin-top: 0.4rem;
+        .mockup-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .mockup-item {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 0.6rem;
+            border-radius: 3px;
+            border-left: 2px solid var(--akt-blue);
+            font-size: 0.75rem;
+            color: #555;
         }
 
         .tool-actions {
             display: flex;
             flex-wrap: wrap;
             gap: 0.8rem;
-            margin-bottom: 1rem;
+            margin-top: auto;
         }
 
         .btn {
@@ -375,6 +446,7 @@
             transition: all 0.3s;
             text-decoration: none;
             text-align: center;
+            white-space: nowrap;
         }
 
         .btn-primary {
@@ -412,7 +484,6 @@
             padding: 1rem;
             background: #f9f9f9;
             border-top: 1px solid var(--akt-border);
-            border-bottom: 1px solid var(--akt-border);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -429,6 +500,7 @@
         .demo-toggle .arrow {
             transition: transform 0.3s;
             display: inline-block;
+            font-size: 1.2rem;
         }
 
         .demo-toggle.open .arrow {
@@ -443,7 +515,7 @@
         }
 
         .demo-content.open {
-            max-height: 500px;
+            max-height: 600px;
             padding: 1rem;
         }
 
@@ -453,10 +525,10 @@
         }
 
         .demo-steps li {
-            padding: 0.5rem 0;
+            padding: 0.6rem 0;
             font-size: 0.9rem;
             color: #555;
-            padding-left: 1.5rem;
+            padding-left: 2rem;
             position: relative;
         }
 
@@ -466,7 +538,55 @@
             left: 0;
             font-weight: 700;
             color: var(--akt-blue);
-            width: 1.2rem;
+            width: 1.5rem;
+        }
+
+        /* INNOVATION SECTION */
+        .innovation-section {
+            background: linear-gradient(to bottom, #f8f9fb 0%, #f2f4f8 100%);
+            border-top: 1px solid var(--akt-border);
+        }
+
+        .future-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .future-card {
+            background: var(--akt-white);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.8rem;
+            transition: all 0.3s;
+        }
+
+        .future-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .future-card h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--akt-dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .future-card p {
+            font-size: 0.9rem;
+            color: #777;
+            line-height: 1.5;
+        }
+
+        .planned-badge {
+            display: inline-block;
+            background: #e8e8e8;
+            color: #666;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
         }
 
         /* STRATEGY LIBRARY SECTION */
@@ -474,22 +594,42 @@
             background: var(--akt-white);
         }
 
+        .strategy-intro {
+            margin-bottom: 2.5rem;
+        }
+
         .deliverables-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
         }
 
         .deliverable-card {
             background: var(--akt-light);
             border: 1px solid var(--akt-border);
             border-radius: 8px;
-            padding: 1.8rem;
+            padding: 2rem;
             transition: box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
         }
 
         .deliverable-card:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .deliverable-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .deliverable-card h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--akt-dark);
+            flex: 1;
         }
 
         .deliverable-badge {
@@ -499,101 +639,34 @@
             padding: 0.3rem 0.8rem;
             border-radius: 4px;
             font-size: 0.75rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            margin-left: 0.8rem;
         }
 
-        .deliverable-card h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--akt-dark);
-            margin-bottom: 0.8rem;
+        .deliverable-badge.origin {
+            background: var(--accent-orange);
         }
 
-        .deliverable-card p {
+        .deliverable-description {
             font-size: 0.9rem;
             color: var(--akt-slate);
             line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .deliverable-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #888;
             margin-bottom: 1.2rem;
         }
 
-        .file-meta {
-            font-size: 0.8rem;
-            color: #999;
-            margin-bottom: 1rem;
-        }
-
-        /* ROADMAP SECTION */
-        .roadmap-section {
-            background: var(--akt-light);
-        }
-
-        .roadmap-timeline {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .phase-card {
-            background: var(--akt-white);
-            border-left: 5px solid;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .phase-card.phase-1 {
-            border-left-color: var(--akt-green);
-        }
-
-        .phase-card.phase-1 .phase-badge {
-            background: var(--akt-green);
-        }
-
-        .phase-card.phase-2 {
-            border-left-color: var(--akt-blue);
-        }
-
-        .phase-card.phase-2 .phase-badge {
-            background: var(--akt-blue);
-        }
-
-        .phase-badge {
-            display: inline-block;
-            color: var(--akt-white);
-            padding: 0.4rem 0.9rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .phase-card h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--akt-dark);
-            margin-bottom: 1rem;
-        }
-
-        .phase-items {
-            list-style: none;
-            padding: 0;
-        }
-
-        .phase-items li {
-            padding: 0.6rem 0;
-            font-size: 0.9rem;
-            color: #555;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .phase-items li:before {
-            content: "◆";
-            position: absolute;
-            left: 0;
-            color: var(--akt-blue);
-            font-size: 0.6rem;
+        .deliverable-download {
+            align-self: flex-start;
         }
 
         /* FOOTER */
@@ -603,6 +676,10 @@
             padding: 2rem;
             text-align: center;
             font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
         }
 
         footer a {
@@ -624,7 +701,11 @@
                 font-size: 1rem;
             }
 
-            .impact-stats {
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .timeline-container {
                 grid-template-columns: 1fr;
             }
 
@@ -632,7 +713,7 @@
                 grid-template-columns: 1fr;
             }
 
-            .mockup-grid {
+            .future-cards-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -640,504 +721,424 @@
                 grid-template-columns: 1fr;
             }
 
-            .roadmap-timeline {
-                grid-template-columns: 1fr;
+            .category-pills {
+                flex-direction: column;
+                align-items: center;
             }
-        }
-
-        /* UTILITIES */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .mb-1 {
-            margin-bottom: 1rem;
-        }
-
-        .mb-2 {
-            margin-bottom: 2rem;
-        }
-
-        .mt-2 {
-            margin-top: 2rem;
         }
     </style>
 </head>
 <body>
-    <!-- TOP BAR -->
-    <div class="top-bar">
-        <div class="top-bar-left">
-            <span class="logo">akt</span>
-            <span>AI Workforce Initiative</span>
+
+<!-- STICKY NAV BAR -->
+<div class="top-bar">
+    <div class="top-bar-left">
+        <div class="logo">AI Taskforce</div>
+        <span>AKT Global</span>
+    </div>
+    <div class="top-bar-right">
+        <a href="#companions">Digital Companions</a>
+        <a href="#strategy">Strategy Library</a>
+    </div>
+</div>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <h1>AI Taskforce</h1>
+    <p class="subtitle">How AI reshapes our Qualtrics partnership, delivery model, and revenue.</p>
+    <p class="hero-meta">April 2026 · Prepared for AKT Leadership</p>
+</section>
+
+<!-- TIMELINE SECTION -->
+<section class="section">
+    <h2 class="section-title">Four-Week Delivery Timeline</h2>
+    <p class="section-subtitle">From use-case mapping to decision-ready roadmap</p>
+
+    <div class="timeline-header">
+        <span class="timeline-label">March 2026</span>
+        <span class="timeline-label">April</span>
+        <div class="timeline-line"></div>
+        <div class="timeline-marker"></div>
+    </div>
+
+    <div class="timeline-container">
+        <div class="timeline-block week-1">
+            <div class="timeline-week-label">Week 1</div>
+            <div class="timeline-title">Use case mapping</div>
+            <div class="timeline-description">AI tool audit · all AKT roles</div>
         </div>
-        <div class="top-bar-right">
-            <a href="#overview">Overview</a>
-            <a href="#companions">Digital Companions</a>
-            <a href="#strategy">Strategy Library</a>
-            <a href="#roadmap">What's Next</a>
+        <div class="timeline-block week-2">
+            <div class="timeline-week-label">Week 2</div>
+            <div class="timeline-title">Guardrail framework</div>
+            <div class="timeline-description">Infrastructure decisions</div>
+        </div>
+        <div class="timeline-block week-3">
+            <div class="timeline-week-label">Week 3</div>
+            <div class="timeline-title">IP + commercial + scenarios</div>
+            <div class="timeline-description">6-12 month futures</div>
+        </div>
+        <div class="timeline-block week-4">
+            <div class="timeline-week-label">Week 4 · 1 Apr</div>
+            <div class="timeline-title">Roadmap + MVP scope</div>
+            <div class="timeline-description">Decision-ready set to COO</div>
         </div>
     </div>
 
-    <!-- HERO SECTION -->
-    <div class="hero" id="overview">
-        <div class="container">
-            <h1>AI Workforce Initiative</h1>
-            <p class="subtitle">How AI reshapes our Qualtrics partnership, delivery model, and revenue.</p>
+    <p class="timeline-note">See the Strategy Library below for the full evidence base and deliverables.</p>
+</section>
 
-            <div class="impact-stats">
-                <div class="stat-card">
-                    <div class="number">7</div>
-                    <div class="label">Tools Built</div>
+<!-- DIGITAL COMPANIONS SECTION -->
+<section class="section companions-section" id="companions">
+    <h2 class="section-title">Digital Companions</h2>
+    <p class="section-subtitle">Single-file HTML apps · Zero server dependency · Privacy by design</p>
+
+    <div class="category-pills">
+        <div class="category-pill efficiency">
+            <span class="pill-dot"></span> Efficiency
+        </div>
+        <div class="category-pill scale">
+            <span class="pill-dot"></span> Scale
+        </div>
+        <div class="category-pill innovation">
+            <span class="pill-dot"></span> Innovation
+        </div>
+    </div>
+
+    <!-- EFFICIENCY TOOLS -->
+    <div class="category-section">
+        <h3 class="category-header" style="color: var(--akt-green);">Efficiency Tools</h3>
+        <div class="tool-cards-grid">
+            <!-- QTM -->
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <div class="tool-card-title">
+                        <h3>QTM — Qualtrics Translator Machine</h3>
+                        <span class="tool-badge efficiency">Efficiency</span>
+                    </div>
+                    <p class="tool-description">Transforms raw Qualtrics exports into strategic client-ready insights across 10 analytical dimensions</p>
                 </div>
-                <div class="stat-card">
-                    <div class="number">46%</div>
-                    <div class="label">Efficiency Gain</div>
-                </div>
-                <div class="stat-card">
-                    <div class="number">4</div>
-                    <div class="label">Scenarios Modelled</div>
+                <div class="tool-card-content">
+                    <div class="mockup-screen">
+                        <div class="mockup-header">QTM Workflow</div>
+                        <div class="mockup-content">
+                            <div class="mockup-item">📤 Upload Data — CSV, XLS, TXT</div>
+                            <div class="mockup-item">⚙️ Analyzing — 10D analytical engine</div>
+                            <div class="mockup-item">📊 Outputs — Client-ready decks</div>
+                        </div>
+                    </div>
+                    <div class="tool-actions">
+                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/QTM_App.html" class="btn btn-launch">Launch QTM</a>
+                        <button class="btn btn-secondary" onclick="downloadQTMDemo()">Demo Data ZIP</button>
+                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/QTM_2Pager_1.docx" class="btn btn-secondary">Download 2-Pager</a>
+                    </div>
+                    <div class="demo-toggle" onclick="toggleDemo(event)">
+                        <span>Demo Guide</span>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="demo-content">
+                        <ul class="demo-steps">
+                            <li data-step="1">Download Demo Data ZIP from above</li>
+                            <li data-step="2">Unzip the file to your desktop</li>
+                            <li data-step="3">Open QTM application</li>
+                            <li data-step="4">Drag CSV files to left panel, TXT files to right</li>
+                            <li data-step="5">Click "Run Analysis" and wait for outputs</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <p class="hero-meta">April 2026 · Prepared for AKT Leadership</p>
-        </div>
-    </div>
-
-    <!-- WORKSTREAMS SECTION -->
-    <div class="section">
-        <div class="container">
-            <h2 class="section-title">The Three Workstreams</h2>
-            <p class="section-subtitle">How the AI Taskforce has organized its work across delivery, operations, and strategy.</p>
-
-            <div class="workstreams-grid">
-                <!-- Client Delivery -->
-                <div class="workstream-card client-delivery">
-                    <h3>Client Delivery</h3>
-                    <p>AI-augmented advisory tools for client engagements</p>
-                    <ul class="workstream-items">
-                        <li>QTM (Qualtrics Translator Machine)</li>
-                        <li>CMX Command Center</li>
-                        <li>EX Survey Intelligence</li>
-                    </ul>
-                    <span class="status-badge">3 tools operational</span>
+            <!-- AKT Voice Studio -->
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <div class="tool-card-title">
+                        <h3>AKT Voice Studio</h3>
+                        <span class="tool-badge efficiency">Efficiency</span>
+                    </div>
+                    <p class="tool-description">Record personal narration over 'The Four Realities' presentation — creates self-contained HTML decks with your voice baked in</p>
                 </div>
-
-                <!-- Practice Operations -->
-                <div class="workstream-card practice-ops">
-                    <h3>Practice Operations</h3>
-                    <p>Internal efficiency, knowledge management, team enablement</p>
-                    <ul class="workstream-items">
-                        <li>Voice Studio</li>
-                        <li>Knowledge Base (planned)</li>
-                        <li>AI-Augmented Proposals (planned)</li>
-                    </ul>
-                    <span class="status-badge">1 operational, 2 planned</span>
-                </div>
-
-                <!-- Strategy & Positioning -->
-                <div class="workstream-card strategy">
-                    <h3>Strategy & Positioning</h3>
-                    <p>Market analysis, scenarios, commercial model, roadmap</p>
-                    <ul class="workstream-items">
-                        <li>Scenario Model</li>
-                        <li>Direction Input</li>
-                        <li>Approval ASK</li>
-                    </ul>
-                    <span class="status-badge">3 deliverables complete</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- DIGITAL COMPANIONS SECTION -->
-    <div class="section companions-section" id="companions">
-        <div class="container">
-            <h2 class="section-title">Digital Companions</h2>
-            <p class="section-subtitle">Operational Tools — Single-file HTML apps · Zero server dependency · Privacy by design</p>
-
-            <div class="tool-cards-grid">
-                <!-- QTM TOOL -->
-                <div class="tool-card">
-                    <div class="tool-card-header">
-                        <div class="tool-card-title">
-                            <h3>QTM</h3>
-                            <span class="workstream-badge client-delivery">Client Delivery</span>
-                        </div>
-                        <p class="tool-description">Transforms raw Qualtrics exports into strategic client-ready insights across 10 analytical dimensions</p>
-                    </div>
-
-                    <div class="tool-card-content">
-                        <div class="mockup-grid">
-                            <div class="mockup-card">
-                                <strong>Upload</strong>
-                                <div class="mockup-label">Data Files & Context</div>
-                            </div>
-                            <div class="mockup-card">
-                                <strong>Analyze</strong>
-                                <div class="mockup-label">Processing Pipeline</div>
-                            </div>
-                            <div class="mockup-card">
-                                <strong>Outputs</strong>
-                                <div class="mockup-label">Executive Decks</div>
-                            </div>
-                        </div>
-
-                        <div class="tool-actions">
-                            <a href="https://ottovroeg-afk.github.io/cmx-command-center/QTM_2Pager_1.docx" target="_blank" class="btn btn-primary">Download 2-Pager</a>
-                            <button class="btn btn-secondary" onclick="downloadQTMDemo()">Demo Data ZIP</button>
-                        </div>
-
-                        <div class="demo-toggle" onclick="toggleDemo(this)">
-                            <span>How to Use QTM <span class="arrow">▶</span></span>
-                        </div>
-                        <div class="demo-content">
-                            <ol class="demo-steps">
-                                <li data-step="1">Download the Demo Data ZIP file</li>
-                                <li data-step="2">Unzip the file to your computer</li>
-                                <li data-step="3">Open the QTM App (via Launch button below)</li>
-                                <li data-step="4">Drag all CSV files from the left folder to the left panel</li>
-                                <li data-step="5">Drag all TXT files from the right folder to the right panel</li>
-                                <li data-step="6">Click "Run Analysis Pipeline" and watch the magic happen</li>
-                            </ol>
-                        </div>
-
-                        <div style="margin-top: 1rem;">
-                            <a href="https://ottovroeg-afk.github.io/cmx-command-center/QTM_App.html" target="_blank" class="btn btn-launch" style="width: 100%; text-align: center;">Launch QTM</a>
+                <div class="tool-card-content">
+                    <div class="mockup-screen">
+                        <div class="mockup-header">Voice Studio Interface</div>
+                        <div class="mockup-content">
+                            <div class="mockup-item">📑 Slides — 'Four Realities' deck</div>
+                            <div class="mockup-item">🎙️ Record — Built-in teleprompter</div>
+                            <div class="mockup-item">💾 Export — Self-contained HTML</div>
                         </div>
                     </div>
-                </div>
-
-                <!-- CMX COMMAND CENTER TOOL -->
-                <div class="tool-card">
-                    <div class="tool-card-header">
-                        <div class="tool-card-title">
-                            <h3>CMX Command Center</h3>
-                            <span class="workstream-badge client-delivery">Client Delivery</span>
-                        </div>
-                        <p class="tool-description">Stakeholder intelligence platform — imports Qualtrics data, runs consensus analysis, generates 31-slide PPTX workshop decks</p>
+                    <div class="tool-actions">
+                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/akt-voice-studio.html" class="btn btn-launch">Launch Voice Studio</a>
                     </div>
-
-                    <div class="tool-card-content">
-                        <div class="mockup-grid">
-                            <div class="mockup-card">
-                                <strong>Dashboard</strong>
-                                <div class="mockup-label">Program Metrics</div>
-                            </div>
-                            <div class="mockup-card">
-                                <strong>Intelligence</strong>
-                                <div class="mockup-label">4-Step Wizard</div>
-                            </div>
-                            <div class="mockup-card">
-                                <strong>Deck Engine</strong>
-                                <div class="mockup-label">PPTX Generation</div>
-                            </div>
-                        </div>
-
-                        <div class="tool-actions">
-                            <a href="https://ottovroeg-afk.github.io/cmx-command-center/cmx-one-pager.docx" target="_blank" class="btn btn-primary">One-Pager</a>
-                            <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX%20Intelligence%20Engine%20-%20Senior%20Team%20Introduction.pptx" target="_blank" class="btn btn-primary">Senior Intro</a>
-                        </div>
-
-                        <div class="demo-toggle" onclick="toggleDemo(this)">
-                            <span>How to Use CMX <span class="arrow">▶</span></span>
-                        </div>
-                        <div class="demo-content">
-                            <ol class="demo-steps">
-                                <li data-step="1">Download the One-Pager to understand the platform</li>
-                                <li data-step="2">Open CMX Command Center (demo data pre-loaded)</li>
-                                <li data-step="3">Explore the Dashboard — see the 87% readiness ring, KPI cards, risk signals</li>
-                                <li data-step="4">Run the Intelligence Wizard — configure, import, analyze, and generate</li>
-                                <li data-step="5">Hit the Deck Engine button — creates a 31-slide PPTX workshop deck automatically</li>
-                            </ol>
-                        </div>
-
-                        <div style="margin-top: 1rem;">
-                            <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX-Command-Center.html" target="_blank" class="btn btn-launch" style="width: 100%; text-align: center;">Launch CMX</a>
-                        </div>
+                    <div class="demo-toggle" onclick="toggleDemo(event)">
+                        <span>Demo Guide</span>
+                        <span class="arrow">→</span>
                     </div>
-                </div>
-
-                <!-- EX SURVEY INTELLIGENCE TOOL -->
-                <div class="tool-card">
-                    <div class="tool-card-header">
-                        <div class="tool-card-title">
-                            <h3>EX Survey Intelligence</h3>
-                            <span class="workstream-badge client-delivery">Client Delivery</span>
-                        </div>
-                        <p class="tool-description">Analyzes Qualtrics EX-25 employee engagement surveys — uploads CSV/XLS, runs pattern detection, produces executive reports</p>
-                    </div>
-
-                    <div class="tool-card-content">
-                        <div class="mockup-grid">
-                            <div class="mockup-card">
-                                <strong>Upload</strong>
-                                <div class="mockup-label">Survey Data & Context</div>
-                            </div>
-                            <div class="mockup-card">
-                                <strong>Dashboard</strong>
-                                <div class="mockup-label">Engagement Heatmap</div>
-                            </div>
-                            <div class="mockup-card">
-                                <strong>Report</strong>
-                                <div class="mockup-label">Executive Summary</div>
-                            </div>
-                        </div>
-
-                        <div class="tool-actions">
-                            <a href="https://ottovroeg-afk.github.io/cmx-command-center/Rivulis_EX25_TestData.csv" target="_blank" class="btn btn-primary">Rivulis Demo CSV</a>
-                        </div>
-
-                        <div class="demo-toggle" onclick="toggleDemo(this)">
-                            <span>How to Use EX Intelligence <span class="arrow">▶</span></span>
-                        </div>
-                        <div class="demo-content">
-                            <ol class="demo-steps">
-                                <li data-step="1">Download the Rivulis CSV demo data</li>
-                                <li data-step="2">Open EX Survey Intelligence App</li>
-                                <li data-step="3">Drag the CSV file into the upload zone</li>
-                                <li data-step="4">Enter company name (e.g., "Rivulis") and survey period (e.g., "Q1 2026")</li>
-                                <li data-step="5">Click "Run Analysis" and view the engagement heatmap and insights</li>
-                            </ol>
-                        </div>
-
-                        <div style="margin-top: 1rem;">
-                            <a href="https://ottovroeg-afk.github.io/cmx-command-center/EX_App_Standalone.html" target="_blank" class="btn btn-launch" style="width: 100%; text-align: center;">Launch EX Intelligence</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- VOICE STUDIO TOOL -->
-                <div class="tool-card">
-                    <div class="tool-card-header">
-                        <div class="tool-card-title">
-                            <h3>Voice Studio</h3>
-                            <span class="workstream-badge practice-ops">Practice Operations</span>
-                        </div>
-                        <p class="tool-description">Record personal narration over "The Four Realities" presentation — creates self-contained HTML decks with your voice baked in</p>
-                    </div>
-
-                    <div class="tool-card-content">
-                        <div class="mockup-grid">
-                            <div class="mockup-card">
-                                <strong>Slides</strong>
-                                <div class="mockup-label">12+ Pre-loaded</div>
-                            </div>
-                            <div class="mockup-card">
-                                <strong>Record</strong>
-                                <div class="mockup-label">One click to record</div>
-                            </div>
-                            <div class="mockup-card">
-                                <strong>Export</strong>
-                                <div class="mockup-label">Self-contained HTML</div>
-                            </div>
-                        </div>
-
-                        <div class="demo-toggle" onclick="toggleDemo(this)">
-                            <span>How to Use Voice Studio <span class="arrow">▶</span></span>
-                        </div>
-                        <div class="demo-content">
-                            <ol class="demo-steps">
-                                <li data-step="1">Open Voice Studio (Four Realities deck pre-loaded)</li>
-                                <li data-step="2">Select a slide from the left sidebar</li>
-                                <li data-step="3">Read the key messages and teleprompter text in the right panel</li>
-                                <li data-step="4">Click Record, speak your narration, click Stop</li>
-                                <li data-step="5">Click Play to review — if happy, move to next slide, or re-record</li>
-                                <li data-step="6">Once all slides are recorded, click Export — creates a complete HTML presentation with your voice embedded</li>
-                            </ol>
-                        </div>
-
-                        <div style="margin-top: 1rem;">
-                            <a href="https://ottovroeg-afk.github.io/cmx-command-center/akt-voice-studio.html" target="_blank" class="btn btn-launch" style="width: 100%; text-align: center;">Launch Voice Studio</a>
-                        </div>
+                    <div class="demo-content">
+                        <ul class="demo-steps">
+                            <li data-step="1">Open Voice Studio application</li>
+                            <li data-step="2">Select a slide from the presentation</li>
+                            <li data-step="3">Read the teleprompter text at your own pace</li>
+                            <li data-step="4">Record your narration using the mic button</li>
+                            <li data-step="5">Review and export as self-contained HTML deck</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- STRATEGY LIBRARY SECTION -->
-    <div class="section strategy-section" id="strategy">
-        <div class="container">
-            <h2 class="section-title">Strategy Library</h2>
-            <p class="section-subtitle">The evidence base, scenario models, and strategic recommendations produced by the AI Taskforce</p>
-
-            <div class="deliverables-grid">
-                <!-- AI FUTURES SCENARIO MODEL -->
-                <div class="deliverable-card">
-                    <span class="deliverable-badge">Deliverable 1</span>
-                    <h3>AI Futures Scenario Model</h3>
-                    <p>Reference-grade strategy document. Four scenarios on Speed × Ambition axes. Competitor deep-dive (Ipsos, Kantar, Zill, Farlinium). Qualtrics platform analysis. 108-task delivery model stress test. Recommended route: C→D→B.</p>
-                    <div class="file-meta">DOCX · ~103 KB</div>
-                    <a href="https://ottovroeg-afk.github.io/cmx-command-center/AKT_AI_Futures_Scenario_Model.docx" target="_blank" class="btn btn-primary" style="width: 100%; text-align: center;">Download Document</a>
+    <!-- SCALE TOOLS -->
+    <div class="category-section">
+        <h3 class="category-header" style="color: var(--akt-blue);">Scale Tools</h3>
+        <div class="tool-cards-grid">
+            <!-- CMX Command Center -->
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <div class="tool-card-title">
+                        <h3>CMX Command Center</h3>
+                        <span class="tool-badge scale">Scale</span>
+                    </div>
+                    <p class="tool-description">Stakeholder intelligence platform — imports Qualtrics data, runs consensus analysis, generates 31-slide PPTX workshop decks</p>
                 </div>
-
-                <!-- AI DIRECTION INPUT -->
-                <div class="deliverable-card">
-                    <span class="deliverable-badge">Deliverable 2</span>
-                    <h3>AI Direction Input</h3>
-                    <p>Direction-validation deck for leadership. Ten evidence-based findings. Service portfolio (Spotlight→Blueprint→Pulse→Ignite→Orbit). Short-term and long-term initiatives. Investment case.</p>
-                    <div class="file-meta">PPTX · ~573 KB</div>
-                    <a href="https://ottovroeg-afk.github.io/cmx-command-center/AKT_AI_Direction_Input.pptx" target="_blank" class="btn btn-primary" style="width: 100%; text-align: center;">Download Presentation</a>
+                <div class="tool-card-content">
+                    <div class="mockup-screen">
+                        <div class="mockup-header">CMX Platform</div>
+                        <div class="mockup-content">
+                            <div class="mockup-item">📈 Dashboard — Real-time KPIs</div>
+                            <div class="mockup-item">🧠 Wizard — 4-step intelligence engine</div>
+                            <div class="mockup-item">📊 Deck Engine — 31-slide PPTX output</div>
+                        </div>
+                    </div>
+                    <div class="tool-actions">
+                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX-Command-Center.html" class="btn btn-launch">Launch CMX</a>
+                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/cmx-one-pager.docx" class="btn btn-secondary">One-Pager</a>
+                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX_Intelligence_Engine_Senior_Team_Introduction.pptx" class="btn btn-secondary">Senior Intro</a>
+                    </div>
+                    <div class="demo-toggle" onclick="toggleDemo(event)">
+                        <span>Demo Guide</span>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="demo-content">
+                        <ul class="demo-steps">
+                            <li data-step="1">Open CMX Command Center</li>
+                            <li data-step="2">Import your Qualtrics dataset (CSV or XLS)</li>
+                            <li data-step="3">Run consensus analysis through 4-step wizard</li>
+                            <li data-step="4">Generate 31-slide workshop deck</li>
+                            <li data-step="5">Export as presentation-ready PPTX</li>
+                        </ul>
+                    </div>
                 </div>
+            </div>
 
-                <!-- AI TASKFORCE APPROVAL ASK -->
-                <div class="deliverable-card">
-                    <span class="deliverable-badge">Origin</span>
-                    <h3>AI Taskforce Approval ASK</h3>
-                    <p>The original 60-hour approval request. Seven strategic answers framework. Four-week timeline. El Corte Inglés market evidence. The document that started it all.</p>
-                    <div class="file-meta">PPTX · ~6.6 MB</div>
-                    <a href="https://ottovroeg-afk.github.io/cmx-command-center/AKT_AI_Taskforce_Approval_ASK.pptx" target="_blank" class="btn btn-primary" style="width: 100%; text-align: center;">Download Presentation</a>
+            <!-- EX Survey Intelligence -->
+            <div class="tool-card">
+                <div class="tool-card-header">
+                    <div class="tool-card-title">
+                        <h3>EX Survey Intelligence</h3>
+                        <span class="tool-badge scale">Scale</span>
+                    </div>
+                    <p class="tool-description">Analyzes Qualtrics EX-25 employee engagement surveys — uploads CSV/XLS, runs pattern detection, produces executive reports</p>
+                </div>
+                <div class="tool-card-content">
+                    <div class="mockup-screen">
+                        <div class="mockup-header">EX Intelligence Suite</div>
+                        <div class="mockup-content">
+                            <div class="mockup-item">📤 Upload — CSV, XLS files</div>
+                            <div class="mockup-item">📊 Dashboard — Engagement metrics</div>
+                            <div class="mockup-item">🔥 Heatmap — Pattern detection</div>
+                        </div>
+                    </div>
+                    <div class="tool-actions">
+                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/EX_App_Standalone.html" class="btn btn-launch">Launch EX Intelligence</a>
+                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/Rivulis_EX25_TestData.csv" class="btn btn-secondary">Rivulis Demo CSV</a>
+                    </div>
+                    <div class="demo-toggle" onclick="toggleDemo(event)">
+                        <span>Demo Guide</span>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="demo-content">
+                        <ul class="demo-steps">
+                            <li data-step="1">Open EX Survey Intelligence application</li>
+                            <li data-step="2">Upload EX-25 CSV or XLS file</li>
+                            <li data-step="3">Wait for pattern detection to complete</li>
+                            <li data-step="4">Review engagement heatmap and findings</li>
+                            <li data-step="5">Generate executive summary report</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ROADMAP SECTION -->
-    <div class="section roadmap-section" id="roadmap">
-        <div class="container">
-            <h2 class="section-title">What's Next</h2>
-            <p class="section-subtitle">The roadmap for the next 12 months and beyond</p>
-
-            <div class="roadmap-timeline">
-                <!-- PHASE 1 -->
-                <div class="phase-card phase-1">
-                    <span class="phase-badge">Active · Now → 6 months</span>
-                    <h3>Phase 1: Foundation</h3>
-                    <ul class="phase-items">
-                        <li>AI Governance Framework (CoE corridor, data classification, EU AI Act)</li>
-                        <li>Team Upskilling (7 role-specific programmes, 80% adoption target)</li>
-                        <li>AI-Augmented Proposals & Reports</li>
-                        <li>Internal Knowledge Management</li>
-                        <li>Marketing Repositioning</li>
-                    </ul>
-                </div>
-
-                <!-- PHASE 2 -->
-                <div class="phase-card phase-2">
-                    <span class="phase-badge">Planned · 6 → 12+ months</span>
-                    <h3>Phase 2: Activation</h3>
-                    <ul class="phase-items">
-                        <li>Programme Intelligence Product (agentic monitoring, subscription)</li>
-                        <li>Subscription Client Pilot (outcome-based pricing)</li>
-                        <li>AI Governance as Client Offering</li>
-                        <li>Qualtrics Dual-Track Partner Status (Q4 2026)</li>
-                        <li>XM Benchmark Programme</li>
-                    </ul>
-                </div>
+    <!-- INNOVATION SECTION -->
+    <div class="category-section innovation-section">
+        <h3 class="category-header" style="color: var(--accent-purple);">Innovation — On the Horizon</h3>
+        <p class="section-subtitle">Potential AI companions being explored for future development</p>
+        <div class="future-cards-grid">
+            <div class="future-card">
+                <div class="planned-badge">Planned</div>
+                <h4>AI Narrative Engine</h4>
+                <p>Automated report writing from structured data. Transform analysis outputs into client-ready narrative decks with section headings, executive summaries, and context-aware insights.</p>
+            </div>
+            <div class="future-card">
+                <div class="planned-badge">Planned</div>
+                <h4>MCP Data Agents</h4>
+                <p>Intelligent agents connecting directly to client data lakes. Real-time analysis of live data sources, automated insights generation, and continuous monitoring dashboards.</p>
+            </div>
+            <div class="future-card">
+                <div class="planned-badge">Planned</div>
+                <h4>Client Portal</h4>
+                <p>Self-service dashboard for clients to access insights. Custom branding, role-based permissions, and real-time collaboration features built into a single-page application.</p>
+            </div>
+            <div class="future-card">
+                <div class="planned-badge">Planned</div>
+                <h4>Predictive Risk Engine</h4>
+                <p>Early warning system for programme risk signals. Monitors engagement trends and flags potential issues before they escalate into major challenges.</p>
+            </div>
+            <div class="future-card">
+                <div class="planned-badge">Planned</div>
+                <h4>Metadata Manager</h4>
+                <p>Centralized management of survey and programme metadata. Maintains authoritative single source of truth for all project context, taxonomies, and historical analysis.</p>
             </div>
         </div>
     </div>
+</section>
 
-    <!-- FOOTER -->
-    <footer>
-        <p>AI Workforce Initiative · AKT Global · April 2026</p>
-        <p style="margin-top: 0.5rem;">Questions? Email <a href="mailto:otto.vroegop@aktglobal.com">otto.vroegop@aktglobal.com</a></p>
-    </footer>
+<!-- STRATEGY LIBRARY SECTION -->
+<section class="section strategy-section" id="strategy">
+    <h2 class="section-title">Strategy Library</h2>
+    <p class="section-subtitle">The evidence base, scenario models, and strategic recommendations produced by the AI Taskforce</p>
 
-    <script>
-        // DEMO TOGGLE FUNCTIONALITY
-        function toggleDemo(element) {
-            element.classList.toggle('open');
-            const content = element.nextElementSibling;
-            if (content && content.classList.contains('demo-content')) {
-                content.classList.toggle('open');
-            }
-        }
+    <div class="deliverables-grid">
+        <!-- AI Futures Scenario Model -->
+        <div class="deliverable-card">
+            <div class="deliverable-header">
+                <h4>AI Futures Scenario Model</h4>
+            </div>
+            <p class="deliverable-description">Reference-grade strategy document. Four scenarios on Speed × Ambition axes. Competitor deep-dive (Ipsos, Kantar, Zill, Farlinium). Qualtrics platform analysis. 108-task delivery model stress test. Recommended route: C→D→B.</p>
+            <div class="deliverable-meta">
+                <span>DOCX · ~103 KB</span>
+            </div>
+            <a href="https://ottovroeg-afk.github.io/cmx-command-center/AKT_AI_Futures_Scenario_Model.docx" class="btn btn-primary deliverable-download">Download</a>
+        </div>
 
-        // QTM DEMO ZIP DOWNLOAD
-        async function downloadQTMDemo() {
-            const button = event.target;
-            button.disabled = true;
-            button.textContent = 'Creating ZIP...';
+        <!-- AI Direction Input -->
+        <div class="deliverable-card">
+            <div class="deliverable-header">
+                <h4>AI Direction Input</h4>
+            </div>
+            <p class="deliverable-description">Direction-validation deck for leadership. Ten evidence-based findings. Service portfolio (Spotlight→Blueprint→Pulse→Ignite→Orbit). Short-term and long-term initiatives. Investment case.</p>
+            <div class="deliverable-meta">
+                <span>PPTX · ~573 KB</span>
+            </div>
+            <a href="https://ottovroeg-afk.github.io/cmx-command-center/AKT_AI_Direction_Input.pptx" class="btn btn-primary deliverable-download">Download</a>
+        </div>
 
-            try {
-                const zip = new JSZip();
+        <!-- AI Taskforce Approval ASK -->
+        <div class="deliverable-card">
+            <div class="deliverable-header">
+                <h4>AI Taskforce Approval ASK</h4>
+                <span class="deliverable-badge origin">Origin</span>
+            </div>
+            <p class="deliverable-description">The original 60-hour approval request. Seven strategic answers framework. Four-week timeline. El Corte Inglés market evidence. The document that started it all.</p>
+            <div class="deliverable-meta">
+                <span>PPTX · ~6.6 MB</span>
+            </div>
+            <a href="https://ottovroeg-afk.github.io/cmx-command-center/AKT_AI_Taskforce_Approval_ASK.pptx" class="btn btn-primary deliverable-download">Download</a>
+        </div>
+    </div>
+</section>
 
-                // Survey data folder
-                const surveyFolder = zip.folder('1_Survey_Data_Left_Panel');
-                const surveyFiles = [
-                    'novatel_survey_export.csv',
-                    'novatel_dashboard_export.csv',
-                    'novatel_driver_analysis.csv',
-                    'novatel_textiq_export.csv',
-                    'novatel_tickets_export.csv'
-                ];
+<!-- FOOTER -->
+<footer>
+    <p><strong>AI Taskforce · AKT Global · April 2026</strong></p>
+    <p>Questions? Email <a href="mailto:otto.vroegop@aktglobal.com">otto.vroegop@aktglobal.com</a></p>
+</footer>
 
-                // Context documents folder
-                const contextFolder = zip.folder('2_Context_Documents_Right_Panel');
-                const contextFiles = [
-                    'CX_Research_Briefing_NovaTel.txt',
-                    'NovaTel_Annual_Report_2025.txt',
-                    'Interview_CEO_Erik_van_der_Berg.txt',
-                    'Interview_CFO_Maria_Santos.txt',
-                    'Interview_CMO_Sara_Lindqvist.txt',
-                    'Interview_COO_Thomas_Mueller.txt',
-                    'European_Telecoms_CX_Benchmark_2025.txt'
-                ];
+<script>
+    // Toggle demo guides
+    function toggleDemo(event) {
+        const toggle = event.currentTarget;
+        const content = toggle.nextElementSibling;
 
-                const baseUrl = 'https://ottovroeg-afk.github.io/cmx-command-center/';
+        toggle.classList.toggle('open');
+        content.classList.toggle('open');
+    }
 
-                // Fetch and add survey files
-                for (const file of surveyFiles) {
-                    try {
-                        const response = await fetch(baseUrl + file);
-                        if (response.ok) {
-                            const blob = await response.blob();
-                            surveyFolder.file(file, blob);
-                        }
-                    } catch (e) {
-                        console.log('Could not fetch ' + file);
-                    }
-                }
+    // Download QTM Demo Data
+    function downloadQTMDemo() {
+        const zip = new JSZip();
 
-                // Fetch and add context files
-                for (const file of contextFiles) {
-                    try {
-                        const response = await fetch(baseUrl + file);
-                        if (response.ok) {
-                            const blob = await response.blob();
-                            contextFolder.file(file, blob);
-                        }
-                    } catch (e) {
-                        console.log('Could not fetch ' + file);
-                    }
-                }
+        // Create sample survey data
+        const surveyData = `QuestionID,Question,Option,ResponseCount,Percentage
+Q1,How satisfied are you with our service?,Very Satisfied,450,45%
+Q1,How satisfied are you with our service?,Satisfied,350,35%
+Q1,How satisfied are you with our service?,Neutral,150,15%
+Q1,How satisfied are you with our service?,Dissatisfied,50,5%
+Q2,How likely are you to recommend us?,Very Likely,520,52%
+Q2,How likely are you to recommend us?,Likely,350,35%
+Q2,How likely are you to recommend us?,Unlikely,100,10%
+Q2,How likely are you to recommend us?,Very Unlikely,30,3%`;
 
-                // Generate and download
-                const blob = await zip.generateAsync({ type: 'blob' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'NovaTel_QTM_Demo_Data.zip';
-                a.click();
-                URL.revokeObjectURL(url);
+        // Create context document
+        const contextDoc = `AI TASKFORCE - QTM DEMO DATA
+========================================
 
-                button.textContent = 'Demo Data ZIP';
-                button.disabled = false;
-            } catch (error) {
-                console.error('ZIP creation error:', error);
-                alert('Error creating ZIP. Check console.');
-                button.textContent = 'Demo Data ZIP';
-                button.disabled = false;
-            }
-        }
+This dataset contains sample Qualtrics survey responses for demonstration purposes.
 
-        // SMOOTH SCROLL
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
+DIMENSIONS ANALYZED:
+1. Satisfaction Index
+2. Recommendation Likelihood
+3. Engagement Score
+4. Brand Perception
+5. Service Quality
+6. Customer Effort
+7. Trust Index
+8. Value Perception
+9. Retention Risk
+10. Upsell Opportunity
+
+HOW TO USE:
+1. Open QTM application
+2. Drag survey_data.csv to the left input panel
+3. Drag this context file to the right input panel
+4. Click "Run Analysis"
+5. Review 10-dimensional insights and client-ready outputs
+
+EXPECTED OUTPUT:
+- Executive summary
+- Segmentation analysis
+- Trend analysis
+- Client-ready presentation deck`;
+
+        zip.file('survey_data.csv', surveyData);
+        zip.file('QTM_Analysis_Context.txt', contextDoc);
+
+        zip.generateAsync({ type: 'blob' }).then(function(content) {
+            const url = window.URL.createObjectURL(content);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'QTM_Demo_Data.zip';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
         });
-    </script>
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
