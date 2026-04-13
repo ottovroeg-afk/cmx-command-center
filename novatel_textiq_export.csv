@@ -1,0 +1,301 @@
+ResponseId,Topic,SentimentScore,Text
+R_3fc3829476,Billing Issues,-2.13,"Look, Why is my bill different every month when I'm on a fixed plan"
+R_1f7e725909,Customer Service,2.21,Store staff were patient and explained everything clearly
+R_cde67be39e,5G Performance,2.1,"I have to say, Paying for 5G but rarely get 5G signal"
+R_a149874621,Value Perception,-0.39,Too expensive for what you get compared to competitors
+R_bcdd6643fc,Billing Issues,-1.02,"Look, Unexpected charges appeared on my last three bills"
+R_bf57549b94,Billing Issues,-2.34,"Look, The billing breakdown is impossible to understand"
+R_2b9d3c059e,App Experience,-2.42,App is slow and the interface is confusing
+R_b88dfc3247,5G Performance,-0.03,"To be fair, 5G speed is genuinely impressive, just needs wider rollout"
+R_28d09378ea,5G Performance,2.95,"I have to say, Paying for 5G but rarely get 5G signal"
+R_5be0722dd7,Network Coverage,-2.72,"To be fair, The network keeps dropping in my area, it's incredibly frustrating"
+R_0858f21a0b,App Experience,-0.23,Login issues with the app at least once a week
+R_c047fdb4fe,Loyalty & Retention,-0.21,"To be fair, No incentive to stay, loyalty means nothing here"
+R_b04b48d3f0,Network Coverage,-1.08,"Honestly, Constant buffering when streaming, network can't handle it"
+R_c57139fd65,Loyalty & Retention,1.08,Would leave tomorrow if porting wasn't such a hassle
+R_fb255e6120,Customer Service,2.05,"To be fair, Quick resolution, the representative really knew their stuff"
+R_86d4ebb76a,Customer Service,2.32,Agent went above and beyond to fix my billing problem
+R_e52ef8c393,Customer Service,2.81,"To be fair, Best customer service experience I've had with any telecom"
+R_5cddd440b4,Network Coverage,-3.21,"I have to say, Constant buffering when streaming, network can't handle it"
+R_8a4d02b3e7,Customer Service,1.32,Impressed by how knowledgeable the support team is
+R_7e2a82d59f,Billing Issues,-3.36,"I have to say, Unexpected charges appeared on my last three bills"
+R_799e178a23,Network Coverage,-1.74,"I have to say, Network outages at least twice a month in our village"
+R_d1bd495640,App Experience,-0.75,"To be fair, The new app update made everything worse"
+R_c1005d7b57,Customer Service,4.26,Store staff were patient and explained everything clearly
+R_3043d8afdc,App Experience,-2.07,"Honestly, The new app update made everything worse"
+R_6d9a9b4e40,Network Coverage,-0.6,"Honestly, Signal drops during important calls, very unprofessional"
+R_d20eb6b694,App Experience,-1.86,Login issues with the app at least once a week
+R_f457cd2b29,App Experience,-1.39,"Look, App is slow and the interface is confusing"
+R_4255aae221,Loyalty & Retention,-2.06,"I have to say, Would leave tomorrow if porting wasn't such a hassle"
+R_3c974e3ffb,Billing Issues,-2.43,Took me 45 minutes on the phone to dispute a billing error
+R_4abb672c95,Network Coverage,-2.59,"To be fair, Can't get any signal in the basement of my office"
+R_e1b43d6bbe,App Experience,-0.15,"Honestly, App is slow and the interface is confusing"
+R_26782029aa,Billing Issues,-3.35,"To be fair, Took me 45 minutes on the phone to dispute a billing error"
+R_5454d489e7,5G Performance,-0.51,Upgraded for 5G but can only get it in 3 locations in my city
+R_c843a692f7,Billing Issues,-2.56,"I have to say, My bill had charges I never agreed to"
+R_cb3db455ad,Billing Issues,-1.66,"To be fair, Bill went up without any notice or explanation"
+R_57ead77318,App Experience,-0.99,"Honestly, App is slow and the interface is confusing"
+R_0c12e2116f,App Experience,-1.15,App doesn't show real-time data usage
+R_b48ed8f837,Value Perception,0.4,I'm paying premium prices for sub-standard network quality
+R_b164140d31,Customer Service,1.81,"I have to say, Impressed by how knowledgeable the support team is"
+R_19c30ca7e3,Billing Issues,-1.13,I can't reconcile what I'm paying with what I was promised
+R_674ea1b8b6,Value Perception,-0.06,"To be fair, The premium plan isn't worth the extra cost"
+R_6c8b5ac071,Value Perception,-0.28,The premium plan isn't worth the extra cost
+R_ea4a09f301,5G Performance,1.24,"To be fair, Paying for 5G but rarely get 5G signal"
+R_a93c53f1d8,Network Coverage,-2.92,Network outages at least twice a month in our village
+R_e61515f819,Customer Service,2.83,"Look, The agent was incredibly helpful and resolved my issue immediately"
+R_8d755a4c89,5G Performance,-0.52,"5G speed is genuinely impressive, just needs wider rollout"
+R_9a57dfea7d,Loyalty & Retention,-1.4,Been a customer for 10 years but feeling neglected
+R_52b8efa685,Network Coverage,-3.25,"I have to say, My old provider had much better rural coverage"
+R_e99ab94d9b,App Experience,-0.73,"I have to say, App drains my battery significantly"
+R_1e273fba4f,App Experience,-1.19,"To be fair, The app crashes every time I try to check my usage"
+R_c6a1551489,Billing Issues,-2.85,"To be fair, I can't reconcile what I'm paying with what I was promised"
+R_044f67def7,Network Coverage,-3.0,"Look, Coverage in rural areas is practically non-existent"
+R_3a3eea471d,Network Coverage,-3.04,Can't get any signal in the basement of my office
+R_bbee16f41d,Loyalty & Retention,-2.26,"Honestly, Staying only because of the family plan discount"
+R_afacd16e7a,Loyalty & Retention,0.35,Been a customer for 10 years but feeling neglected
+R_cab001f4fe,Billing Issues,-3.57,"To be fair, The billing breakdown is impossible to understand"
+R_952316ab5c,Value Perception,0.82,"I have to say, I'm paying premium prices for sub-standard network quality"
+R_147207400b,Value Perception,-1.28,"Honestly, Too expensive for what you get compared to competitors"
+R_4165f22152,App Experience,-0.97,"I have to say, Can't find basic features like data usage in the app"
+R_994d756332,App Experience,-2.32,"To be fair, Login issues with the app at least once a week"
+R_cab5bf5a2c,App Experience,-1.05,The new app update made everything worse
+R_de6e9e404d,Billing Issues,-3.19,Why is my bill different every month when I'm on a fixed plan
+R_f73ba37800,Loyalty & Retention,-1.51,Staying only because of the family plan discount
+R_5036ff5943,App Experience,-0.8,"To be fair, App is slow and the interface is confusing"
+R_47715f584f,Billing Issues,-1.65,"Honestly, I can't reconcile what I'm paying with what I was promised"
+R_04697765ae,Network Coverage,-1.15,"Honestly, Network outages at least twice a month in our village"
+R_8fe8a9da7a,App Experience,-1.14,"Look, The new app update made everything worse"
+R_f3053cc0e7,Network Coverage,-2.63,"Look, Signal drops during important calls, very unprofessional"
+R_6fb94677f3,Loyalty & Retention,1.23,Seriously considering switching to a competitor
+R_d54c0c3e90,App Experience,-1.36,Payment function in the app never works properly
+R_cd86df5b89,Billing Issues,-1.48,"Look, Why is my bill different every month when I'm on a fixed plan"
+R_7519263220,Billing Issues,-2.4,Unexpected charges appeared on my last three bills
+R_51fe2148a4,Network Coverage,-1.4,"I have to say, Coverage in rural areas is practically non-existent"
+R_37f3a36f38,5G Performance,3.0,"Look, Paying for 5G but rarely get 5G signal"
+R_5c8f1bf081,Value Perception,-0.49,"Look, Price increases every year with no improvement in service"
+R_18de35cec0,5G Performance,1.54,"To be fair, Paying for 5G but rarely get 5G signal"
+R_3eaba33fe6,Loyalty & Retention,-1.41,"I have to say, Staying only because of the family plan discount"
+R_4385ef89b5,Customer Service,1.74,"To be fair, Called about a complex issue, agent handled it perfectly"
+R_48cb65e70b,Loyalty & Retention,1.16,New customers get better deals than loyal ones
+R_8966937024,Network Coverage,-2.07,"Look, The network keeps dropping in my area, it's incredibly frustrating"
+R_d58bc3a1b6,Value Perception,-0.76,"Honestly, The premium plan isn't worth the extra cost"
+R_bc71c27f45,Value Perception,0.29,"I have to say, The premium plan isn't worth the extra cost"
+R_cf6dfe188f,App Experience,-2.41,"Look, Login issues with the app at least once a week"
+R_a741806671,5G Performance,1.69,"I have to say, Paying for 5G but rarely get 5G signal"
+R_7ab5707ac7,Billing Issues,-2.93,"Look, Data overage charges are ridiculous and not clearly communicated"
+R_557c1bbdc4,Network Coverage,-2.11,"The network keeps dropping in my area, it's incredibly frustrating"
+R_dd40e522c3,Loyalty & Retention,-1.61,"No incentive to stay, loyalty means nothing here"
+R_b5d69bc500,Network Coverage,-0.74,Can't get any signal in the basement of my office
+R_81d74e4f65,Billing Issues,-2.12,"Look, The billing breakdown is impossible to understand"
+R_7c54af46e2,5G Performance,2.92,"Honestly, Love the 5G speed but coverage is too limited"
+R_aead72c4fa,Loyalty & Retention,-0.53,"To be fair, Seriously considering switching to a competitor"
+R_61732f069d,Customer Service,1.69,"Quick resolution, the representative really knew their stuff"
+R_549c6c1ebd,5G Performance,2.48,Upgraded for 5G but can only get it in 3 locations in my city
+R_1607acfd0d,App Experience,-0.84,"Honestly, App doesn't show real-time data usage"
+R_4fd6afb877,Customer Service,3.06,Agent went above and beyond to fix my billing problem
+R_2b62d8375e,Customer Service,4.27,"To be fair, Agent went above and beyond to fix my billing problem"
+R_815c12be81,Value Perception,0.35,Competitors offer more data for less money
+R_8b9af974c4,Network Coverage,-1.47,"The network keeps dropping in my area, it's incredibly frustrating"
+R_a5a8a734fa,Customer Service,4.28,Store staff were patient and explained everything clearly
+R_259612eca6,Customer Service,2.51,"To be fair, The agent was incredibly helpful and resolved my issue immediately"
+R_05adce540c,Loyalty & Retention,0.22,New customers get better deals than loyal ones
+R_ca984e357d,App Experience,-0.22,"Look, App drains my battery significantly"
+R_2589f80bdf,Value Perception,-1.17,Price increases every year with no improvement in service
+R_39b6589f60,Billing Issues,-3.98,"To be fair, Bill went up without any notice or explanation"
+R_ab4276093b,Network Coverage,-1.08,"Look, Coverage in rural areas is practically non-existent"
+R_2bb994b68b,Loyalty & Retention,-0.8,Been a customer for 10 years but feeling neglected
+R_8daa72e080,Network Coverage,-3.01,"Honestly, Network is unreliable during peak hours"
+R_f66df857e2,Billing Issues,-2.56,The billing breakdown is impossible to understand
+R_6a262c4c2c,5G Performance,2.74,"5G speed is genuinely impressive, just needs wider rollout"
+R_1c33c7465c,5G Performance,0.89,Love the 5G speed but coverage is too limited
+R_404d27f942,Loyalty & Retention,-0.42,"To be fair, Seriously considering switching to a competitor"
+R_1f1bf60626,Network Coverage,-1.64,"Look, Coverage in rural areas is practically non-existent"
+R_ace5f33211,5G Performance,1.32,"I have to say, Paying for 5G but rarely get 5G signal"
+R_358b09cab8,Network Coverage,-2.37,"The network keeps dropping in my area, it's incredibly frustrating"
+R_42049abe23,Value Perception,0.35,The premium plan isn't worth the extra cost
+R_fe068b38bb,Network Coverage,-2.6,"Signal drops during important calls, very unprofessional"
+R_3484e66121,Customer Service,3.37,Best customer service experience I've had with any telecom
+R_0b4a458f1b,App Experience,-1.29,"I have to say, Payment function in the app never works properly"
+R_796f557261,Customer Service,4.03,"Honestly, Impressed by how knowledgeable the support team is"
+R_2a48970ba9,5G Performance,0.81,"5G speed is genuinely impressive, just needs wider rollout"
+R_4ce695c3b9,App Experience,-0.64,"Look, The new app update made everything worse"
+R_3b392b1512,Billing Issues,-2.45,"I have to say, My bill had charges I never agreed to"
+R_2122726a8f,App Experience,-2.46,Login issues with the app at least once a week
+R_9d2800f95a,Customer Service,1.44,"Look, Quick resolution, the representative really knew their stuff"
+R_84d00745db,App Experience,-1.06,"I have to say, App drains my battery significantly"
+R_91e63e827f,Customer Service,1.48,"Honestly, Agent went above and beyond to fix my billing problem"
+R_8106c114c4,Network Coverage,-1.75,"To be fair, I lose signal every time I drive between towns"
+R_061f44d996,App Experience,-0.75,"To be fair, App drains my battery significantly"
+R_009d9368da,App Experience,-1.09,"Honestly, App is slow and the interface is confusing"
+R_0b3c0670a9,Customer Service,4.4,"To be fair, Friendly and professional service, felt valued as a customer"
+R_29afec9276,App Experience,-1.79,App is slow and the interface is confusing
+R_7fbff8a641,5G Performance,0.69,"5G speed is genuinely impressive, just needs wider rollout"
+R_e606a6df85,Network Coverage,-0.77,Network is unreliable during peak hours
+R_682f807cb6,5G Performance,1.67,"Honestly, 5G is great when it works but keeps falling back to 4G"
+R_8c2da1fe7a,Customer Service,3.42,"Look, Store staff were patient and explained everything clearly"
+R_cc3f7fb95d,Value Perception,-0.15,"To be fair, Competitors offer more data for less money"
+R_90ead13dd4,Billing Issues,-2.64,Unexpected charges appeared on my last three bills
+R_101ffc40da,5G Performance,-0.12,"I have to say, 5G speeds are amazing in the city centre"
+R_ff296d2f4c,Network Coverage,-2.81,Network is unreliable during peak hours
+R_68ee5da064,Customer Service,3.57,"I have to say, Quick resolution, the representative really knew their stuff"
+R_a2ffe6f59a,Loyalty & Retention,-1.0,New customers get better deals than loyal ones
+R_5c29f7c6ab,Billing Issues,-3.97,"To be fair, My bill had charges I never agreed to"
+R_1f38f08af7,Billing Issues,-3.57,I can't reconcile what I'm paying with what I was promised
+R_5e53035f8d,Billing Issues,-3.87,"To be fair, Roaming charges were not explained during sign-up"
+R_4c6c2021ee,Network Coverage,-2.98,"To be fair, Network is unreliable during peak hours"
+R_09891aca76,Value Perception,-0.98,"Honestly, The premium plan isn't worth the extra cost"
+R_4056354aa6,App Experience,-2.44,"Honestly, App is slow and the interface is confusing"
+R_3ab6b41e05,5G Performance,2.33,5G speeds are amazing in the city centre
+R_3503f2a706,Network Coverage,-0.69,"To be fair, Coverage in rural areas is practically non-existent"
+R_5203fbeeb0,Billing Issues,-1.57,"To be fair, Why is my bill different every month when I'm on a fixed plan"
+R_c28d451d7e,Customer Service,1.23,Impressed by how knowledgeable the support team is
+R_0cc199e677,Network Coverage,-2.92,"Honestly, I lose signal every time I drive between towns"
+R_4cd94c31bb,Billing Issues,-2.2,"To be fair, Hidden fees everywhere, not transparent at all"
+R_1049b8a4f6,Loyalty & Retention,0.55,Been a customer for 10 years but feeling neglected
+R_db09d76a2f,App Experience,-1.52,"Honestly, Payment function in the app never works properly"
+R_4fa267718d,Network Coverage,-0.95,"Honestly, Can't get any signal in the basement of my office"
+R_8cdc9c6ae8,Loyalty & Retention,0.41,"Honestly, No incentive to stay, loyalty means nothing here"
+R_e1b5ef8b47,5G Performance,-0.74,"Look, Paying for 5G but rarely get 5G signal"
+R_fc6a7ff977,App Experience,-0.94,"I have to say, App drains my battery significantly"
+R_437febdec8,Network Coverage,-1.42,"Look, Constant buffering when streaming, network can't handle it"
+R_ec9f259049,Customer Service,1.94,"I have to say, Store staff were patient and explained everything clearly"
+R_981e7161a7,Billing Issues,-3.89,Roaming charges were not explained during sign-up
+R_6daa7a4f4a,Network Coverage,-0.91,"I have to say, Network is unreliable during peak hours"
+R_42a919f151,Billing Issues,-1.33,"I have to say, Took me 45 minutes on the phone to dispute a billing error"
+R_38098b3992,App Experience,-0.85,"To be fair, App drains my battery significantly"
+R_95114b56a3,Network Coverage,-2.17,"To be fair, Coverage in rural areas is practically non-existent"
+R_c1d6b5d748,Billing Issues,-2.6,Roaming charges were not explained during sign-up
+R_d586c243ee,Customer Service,2.64,"I have to say, Impressed by how knowledgeable the support team is"
+R_d3984329b5,Billing Issues,-3.18,"To be fair, Bill went up without any notice or explanation"
+R_fbf320487a,Network Coverage,-2.7,"Honestly, Signal drops during important calls, very unprofessional"
+R_2d4866c2ee,Network Coverage,-0.97,"To be fair, Coverage in rural areas is practically non-existent"
+R_b42a3b9274,App Experience,0.28,"To be fair, Login issues with the app at least once a week"
+R_0319a6c576,Network Coverage,-3.39,"To be fair, Coverage in rural areas is practically non-existent"
+R_a2f53cf55c,Network Coverage,-2.51,Network is unreliable during peak hours
+R_6b33753bd9,Billing Issues,-1.88,"Honestly, Took me 45 minutes on the phone to dispute a billing error"
+R_2d890a12ca,Loyalty & Retention,-0.33,Staying only because of the family plan discount
+R_30ee5c4828,Billing Issues,-1.53,"To be fair, Took me 45 minutes on the phone to dispute a billing error"
+R_f2679f32d3,5G Performance,2.29,"I have to say, Upgraded for 5G but can only get it in 3 locations in my city"
+R_21abbe4fae,5G Performance,1.62,"I have to say, 5G speeds are amazing in the city centre"
+R_4fe3bca873,Loyalty & Retention,-1.59,"I have to say, Been a customer for 10 years but feeling neglected"
+R_066eaf7117,Customer Service,1.82,"I have to say, Quick resolution, the representative really knew their stuff"
+R_b9be00ee6a,App Experience,-0.06,App doesn't show real-time data usage
+R_fb20be683e,Billing Issues,-1.46,"To be fair, The billing breakdown is impossible to understand"
+R_c0a930bdb7,Billing Issues,-2.68,"Honestly, Data overage charges are ridiculous and not clearly communicated"
+R_6767aa1f3f,Value Perception,-1.58,"To be fair, Too expensive for what you get compared to competitors"
+R_a95dfd8235,Value Perception,-1.97,I'm paying premium prices for sub-standard network quality
+R_df42ab0578,5G Performance,-0.1,"To be fair, 5G is great when it works but keeps falling back to 4G"
+R_481c8ceda0,Billing Issues,-2.39,Data overage charges are ridiculous and not clearly communicated
+R_f62c263062,Billing Issues,-1.64,"Look, My bill had charges I never agreed to"
+R_b6d45d727d,Value Perception,-0.3,"To be fair, Price increases every year with no improvement in service"
+R_1771901d6a,5G Performance,2.47,"Look, 5G speed is genuinely impressive, just needs wider rollout"
+R_4f3757ab74,Loyalty & Retention,-2.25,"I have to say, Been a customer for 10 years but feeling neglected"
+R_f731acf845,Billing Issues,-3.01,Bill went up without any notice or explanation
+R_72a56a3b1d,Loyalty & Retention,-2.13,"To be fair, Staying only because of the family plan discount"
+R_875f2b37b6,Network Coverage,-3.4,"Honestly, Network outages at least twice a month in our village"
+R_767bf7edd1,Customer Service,1.65,Store staff were patient and explained everything clearly
+R_bcae7c2c24,Network Coverage,-2.88,"To be fair, 5G coverage is only in the city centre, useless for most of us"
+R_09b8b8d871,Billing Issues,-2.64,I can't reconcile what I'm paying with what I was promised
+R_0faeabb7e7,Billing Issues,-3.02,"Honestly, My bill had charges I never agreed to"
+R_d04086030c,Value Perception,0.97,"Honestly, Good value if you're in the city, terrible value otherwise"
+R_1b5e48c1eb,Network Coverage,-1.27,"I have to say, 5G coverage is only in the city centre, useless for most of us"
+R_6ca1aa54d8,Billing Issues,-1.39,"Honestly, Why is my bill different every month when I'm on a fixed plan"
+R_86dcd03682,Billing Issues,-2.19,"Honestly, Bill went up without any notice or explanation"
+R_f8e5113442,Loyalty & Retention,-0.49,"Honestly, Would leave tomorrow if porting wasn't such a hassle"
+R_339b22dcae,Customer Service,1.03,"Honestly, Friendly and professional service, felt valued as a customer"
+R_a15daff651,Network Coverage,-1.69,"I have to say, Coverage in rural areas is practically non-existent"
+R_8266d4df70,Network Coverage,-0.86,"Look, Constant buffering when streaming, network can't handle it"
+R_b4033aecac,App Experience,-2.23,The app crashes every time I try to check my usage
+R_3b01d06cbc,Customer Service,3.45,"To be fair, Store staff were patient and explained everything clearly"
+R_fd57a7fe11,Customer Service,3.15,"I have to say, Friendly and professional service, felt valued as a customer"
+R_14a9f3081e,5G Performance,-0.0,"I have to say, Love the 5G speed but coverage is too limited"
+R_c1ec72edbb,Value Perception,-0.63,"I have to say, The premium plan isn't worth the extra cost"
+R_46fa7c78ab,Value Perception,-0.29,Price increases every year with no improvement in service
+R_04d21833ed,Billing Issues,-1.34,"Honestly, My bill had charges I never agreed to"
+R_b04ee41d52,Network Coverage,-1.5,"To be fair, Network outages at least twice a month in our village"
+R_5056d7468c,Network Coverage,-2.27,"I have to say, Network is unreliable during peak hours"
+R_ed775c75b3,5G Performance,-0.69,"To be fair, 5G speeds are amazing in the city centre"
+R_bcd73bf545,Network Coverage,-2.15,"I have to say, Constant buffering when streaming, network can't handle it"
+R_521914568f,Billing Issues,-2.61,I can't reconcile what I'm paying with what I was promised
+R_e7b3a5e420,Network Coverage,-2.47,"I have to say, Signal drops during important calls, very unprofessional"
+R_b1246698ec,Billing Issues,-3.89,"I have to say, Why is my bill different every month when I'm on a fixed plan"
+R_f181b2a271,Billing Issues,-1.99,"To be fair, Unexpected charges appeared on my last three bills"
+R_16a77ba3e5,App Experience,-2.25,App doesn't show real-time data usage
+R_85dae1fc2f,Customer Service,2.65,"Honestly, Store staff were patient and explained everything clearly"
+R_8a51ab09c2,Billing Issues,-1.48,"Honestly, Unexpected charges appeared on my last three bills"
+R_b0ac2f00a4,Customer Service,1.43,"To be fair, Agent went above and beyond to fix my billing problem"
+R_301aec1ccb,Customer Service,3.35,Agent went above and beyond to fix my billing problem
+R_c681505547,Network Coverage,-2.18,"Honestly, Can't get any signal in the basement of my office"
+R_16f25a92dd,Network Coverage,-1.9,"The network keeps dropping in my area, it's incredibly frustrating"
+R_0862a39fd7,Billing Issues,-1.57,My bill had charges I never agreed to
+R_217d0302fb,Customer Service,3.42,"I have to say, Best customer service experience I've had with any telecom"
+R_a20a8bb363,Billing Issues,-3.85,Roaming charges were not explained during sign-up
+R_b3cb63b038,Billing Issues,-2.88,"Honestly, Why is my bill different every month when I'm on a fixed plan"
+R_76fa7d19dd,Network Coverage,-2.23,Coverage in rural areas is practically non-existent
+R_f1b38bc3b0,Loyalty & Retention,0.22,"Honestly, New customers get better deals than loyal ones"
+R_cc757b7aa7,Network Coverage,-3.0,Coverage in rural areas is practically non-existent
+R_3abff23018,Network Coverage,-3.18,"Look, 5G coverage is only in the city centre, useless for most of us"
+R_047a41bd3e,Billing Issues,-3.43,I can't reconcile what I'm paying with what I was promised
+R_b6fa0954ef,Network Coverage,-0.68,"I have to say, Network outages at least twice a month in our village"
+R_383519119e,Network Coverage,-2.43,Network is unreliable during peak hours
+R_7a4c7d3f99,Network Coverage,-2.55,"5G coverage is only in the city centre, useless for most of us"
+R_64ccfe2358,Billing Issues,-3.8,"Honestly, Bill went up without any notice or explanation"
+R_60805d6874,5G Performance,0.48,"Look, Paying for 5G but rarely get 5G signal"
+R_0b27cb3f0a,Network Coverage,-2.6,"I have to say, Network is unreliable during peak hours"
+R_86d9ee4885,App Experience,-0.89,Login issues with the app at least once a week
+R_244a10836b,Loyalty & Retention,-1.49,"Honestly, Would leave tomorrow if porting wasn't such a hassle"
+R_333ac87097,Network Coverage,-1.41,"Constant buffering when streaming, network can't handle it"
+R_b2e53d6a3f,Customer Service,1.61,"To be fair, Agent went above and beyond to fix my billing problem"
+R_08f6106568,5G Performance,2.91,"To be fair, Paying for 5G but rarely get 5G signal"
+R_3115f0ec0a,Customer Service,1.06,"To be fair, Best customer service experience I've had with any telecom"
+R_d1dc8fb6c6,Value Perception,-0.47,"I have to say, Good value if you're in the city, terrible value otherwise"
+R_7b024bc64a,Customer Service,1.07,"Honestly, The agent was incredibly helpful and resolved my issue immediately"
+R_c1ca6415fd,5G Performance,-0.05,"To be fair, 5G speeds are amazing in the city centre"
+R_487ba5e423,Billing Issues,-3.76,"Look, Why is my bill different every month when I'm on a fixed plan"
+R_d53dfcda04,Network Coverage,-2.89,"To be fair, Signal drops during important calls, very unprofessional"
+R_9e2b974491,Billing Issues,-1.23,"Honestly, My bill had charges I never agreed to"
+R_07e5e52c78,App Experience,0.13,App doesn't show real-time data usage
+R_8f641e9187,Network Coverage,-1.14,"Constant buffering when streaming, network can't handle it"
+R_7c19b2ff14,Network Coverage,-1.06,"5G coverage is only in the city centre, useless for most of us"
+R_6d1f3df364,5G Performance,0.33,Love the 5G speed but coverage is too limited
+R_a2ef9cb97e,Network Coverage,-0.78,Network outages at least twice a month in our village
+R_ef81947643,Customer Service,3.44,"Quick resolution, the representative really knew their stuff"
+R_c7e2f9839b,Network Coverage,-2.54,"Look, 5G coverage is only in the city centre, useless for most of us"
+R_7ddfcc4ae3,Billing Issues,-1.39,My bill had charges I never agreed to
+R_081488af65,Network Coverage,-1.6,Network is unreliable during peak hours
+R_cef821549e,Network Coverage,-3.22,"Honestly, Network is unreliable during peak hours"
+R_4222d2000b,App Experience,-0.98,"Honestly, Can't find basic features like data usage in the app"
+R_559c322f06,Billing Issues,-3.51,"To be fair, Bill went up without any notice or explanation"
+R_ecd1df16be,Network Coverage,-1.68,"Honestly, 5G coverage is only in the city centre, useless for most of us"
+R_1934b6794d,Billing Issues,-1.1,"I have to say, Roaming charges were not explained during sign-up"
+R_3dd1d338d0,Network Coverage,-0.65,"Signal drops during important calls, very unprofessional"
+R_ee1cac02dc,Billing Issues,-2.59,"Honestly, Data overage charges are ridiculous and not clearly communicated"
+R_80ff3adebe,Billing Issues,-2.7,Roaming charges were not explained during sign-up
+R_5b75129fe2,Network Coverage,-1.21,"Signal drops during important calls, very unprofessional"
+R_da600286da,Billing Issues,-2.21,"To be fair, The billing breakdown is impossible to understand"
+R_754c8b662e,Network Coverage,-2.36,"To be fair, I lose signal every time I drive between towns"
+R_60930bd9a1,Billing Issues,-2.31,"I have to say, Took me 45 minutes on the phone to dispute a billing error"
+R_9bf2654254,App Experience,-0.36,"Honestly, App drains my battery significantly"
+R_32498ffdfe,Network Coverage,-3.46,Network is unreliable during peak hours
+R_f65ee362db,App Experience,-1.29,"I have to say, App drains my battery significantly"
+R_10020ce45a,Billing Issues,-2.88,Data overage charges are ridiculous and not clearly communicated
+R_535b175efb,App Experience,0.15,"I have to say, Login issues with the app at least once a week"
+R_dbacb3fd21,Loyalty & Retention,1.23,"I have to say, Seriously considering switching to a competitor"
+R_55c8fc9acb,Network Coverage,-1.19,"To be fair, 5G coverage is only in the city centre, useless for most of us"
+R_084669fb8a,5G Performance,1.84,"Look, 5G is great when it works but keeps falling back to 4G"
+R_5ebb2c7fc2,Customer Service,1.2,"Called about a complex issue, agent handled it perfectly"
+R_78036e8359,Billing Issues,-3.26,Data overage charges are ridiculous and not clearly communicated
+R_241429dd6d,App Experience,-0.38,App drains my battery significantly
+R_6a3754793f,Network Coverage,-1.68,"To be fair, I lose signal every time I drive between towns"
+R_4e8df822e4,Loyalty & Retention,-1.51,"To be fair, Been a customer for 10 years but feeling neglected"
+R_941668bc62,App Experience,-2.15,App is slow and the interface is confusing
+R_8a0ccf9643,Network Coverage,-1.38,"I have to say, 5G coverage is only in the city centre, useless for most of us"
+R_49dcd67137,Loyalty & Retention,1.14,"Look, Seriously considering switching to a competitor"
+R_52939028ab,Value Perception,-1.24,"I have to say, Price increases every year with no improvement in service"
+R_44f8d87938,Billing Issues,-1.34,I can't reconcile what I'm paying with what I was promised
+R_653a2990d1,App Experience,0.11,The new app update made everything worse
+R_7664121d15,Network Coverage,-1.06,"To be fair, My old provider had much better rural coverage"
+R_3259ee163d,Billing Issues,-2.81,Why is my bill different every month when I'm on a fixed plan
+R_4dda27a936,Billing Issues,-4.0,"I have to say, Unexpected charges appeared on my last three bills"
+R_68f0013c6d,Network Coverage,-2.25,"Look, 5G coverage is only in the city centre, useless for most of us"

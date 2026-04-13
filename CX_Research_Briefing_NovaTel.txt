@@ -1,0 +1,88 @@
+CUSTOMER EXPERIENCE RESEARCH BRIEFING
+NovaTel Telecommunications Group
+Prepared for: Advisory Team
+Date: 10 January 2026
+Classification: Confidential
+
+---
+
+1. BACKGROUND AND CONTEXT
+
+NovaTel Telecommunications Group is a mid-size European telecommunications provider with 4.2 million subscribers, generating EUR 2.14 billion in annual revenue. The company operates across consumer, business, and premium segments, offering mobile, broadband, and convergent services.
+
+NovaTel has operated a Voice of Customer programme since 2019, using Qualtrics as the primary research platform. The programme includes:
+- Quarterly relationship surveys (NPS, CSAT, attribute satisfaction)
+- Post-interaction transactional surveys (contact centre, store, digital)
+- Annual brand tracking study
+- TextiQ-powered verbatim analysis
+- StatsIQ key driver modelling
+
+2. CURRENT SITUATION
+
+NPS has declined from 32 (Q1 2025) to 24 (Q4 2025), representing the most significant decline in the programme's history. The decline is broad-based but most acute in digital channels (App NPS: 20, Web NPS: 23) and among the consumer segment (NPS: 21).
+
+Key driver analysis shows Network Reliability (28.5% relative importance) and Billing Clarity (21.0%) as the two most important drivers of overall satisfaction, yet both score in the bottom quartile of performance (58.2% and 52.4% top-2-box respectively).
+
+Customer churn has increased from 15.8% (2024) to 18.2% (2025), with the highest churn in the consumer segment (21.4%) and among customers in rural areas (23.1%).
+
+The contact centre handled 3.8 million interactions in 2025, up 15% from 2024. Billing-related queries accounted for 28% of all contacts, network complaints 22%, and app-related issues 12%.
+
+3. RESEARCH OBJECTIVES
+
+This advisory engagement aims to:
+
+a) Diagnose the root causes of NPS decline across channels, segments, and regions
+b) Prioritise improvement actions using the QTM 8-factor prioritisation framework
+c) Quantify the financial impact of recommended improvements
+d) Produce stakeholder-appropriate outputs for C-Suite, VP, and operational audiences
+e) Establish a baseline for tracking improvement over the next 4 quarters
+
+4. DATA SOURCES
+
+The following Qualtrics exports are available for analysis:
+- Q4 2025 relationship survey export (500 responses)
+- TextiQ enriched verbatim export (300 classified verbatims)
+- StatsIQ key driver analysis output (8 attributes)
+- Dashboard metric export (4 quarters x 5 channels x 3 metrics)
+- Closed-loop ticket export (150 tickets, Q4 2025)
+
+Supplementary materials:
+- NovaTel Annual Report 2025
+- Executive interview transcripts (CEO, CMO, COO, CFO)
+- Industry benchmark report (European Telecoms CX Index 2025)
+
+5. KEY HYPOTHESES
+
+Based on preliminary data review, we hypothesise:
+
+H1: Network reliability in rural areas is the primary driver of NPS decline among the consumer segment
+H2: Billing complexity is creating unnecessary contact centre volume and driving detractor creation
+H3: The app experience is undermining the digital-first strategy and creating a negative feedback loop (app failure → contact centre call → higher cost-to-serve)
+H4: The premium segment represents an underexploited growth opportunity with significantly better unit economics
+H5: Agent quality is a competitive strength that is being undermined by product/network issues agents cannot control
+
+6. STAKEHOLDER REQUIREMENTS
+
+CEO (Erik van der Berg): Board-ready materials linking CX to financial outcomes. Top 5 priorities. Investment case.
+CMO (Sara Lindqvist): Segment-level churn risk analysis. Competitive positioning. Brand impact framing.
+COO (Thomas Mueller): Operational priorities. Contact centre volume reduction opportunities. Network investment targeting.
+CFO (Maria Santos): Financial impact modelling. ROI projections for each recommendation. Cost-to-serve analysis.
+
+7. TIMELINE
+
+Week 1 (13-17 Jan): Data ingestion and validation
+Week 2 (20-24 Jan): Analysis pipeline execution and finding generation
+Week 3 (27-31 Jan): Prioritisation, recommendation development, output generation
+Week 4 (3-7 Feb): Stakeholder presentations and programme handover
+
+8. DELIVERABLES
+
+- Executive Advisory Deck (PPTX) — for CEO and board
+- Strategic Advisory Report — findings, evidence, recommendations
+- Activation Pack (XLSX) — detailed action plan with owners and timelines
+- Webinar Outline (MD) — for cross-functional workshop
+
+---
+
+Prepared by: CX Advisory Team
+Approved by: Programme Director

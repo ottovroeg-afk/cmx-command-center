@@ -1,0 +1,64 @@
+NOVATEL TELECOMMUNICATIONS GROUP
+ANNUAL REPORT 2025
+
+CHAIRMAN'S LETTER
+
+Dear Shareholders,
+
+2025 was a transformative year for NovaTel. We navigated significant headwinds in a competitive European telecoms market while laying the groundwork for our next phase of growth. Revenue reached EUR 2.14 billion, a 3.2% increase year-on-year, driven primarily by our enterprise segment and 5G service adoption in urban markets.
+
+However, I must be candid about the challenges we face. Customer satisfaction metrics have declined across several channels, and our churn rate of 18.2% remains above the industry average of 14.5%. The Board has made customer experience improvement a top strategic priority for 2026.
+
+FINANCIAL HIGHLIGHTS
+
+Revenue for the fiscal year 2025 was EUR 2.14 billion, up from EUR 2.07 billion in 2024. EBITDA margin contracted slightly from 38.2% to 36.8%, primarily due to increased network investment and higher customer acquisition costs. Average Revenue Per User (ARPU) grew modestly to EUR 28.40 per month from EUR 27.80, reflecting successful upselling of premium and 5G plans.
+
+Our subscriber base stands at 4.2 million customers, net growth of 85,000 over the year. However, this net figure masks significant gross churn — we acquired 420,000 new customers but lost 335,000, representing an annual churn rate of 18.2%. Reducing this churn rate is our single most important commercial priority.
+
+Cost to serve per customer increased by 4.1% to EUR 6.80 per month, driven by higher contact centre volumes and increased network maintenance costs in rural areas. Digital channel adoption remains at 42%, below our target of 55%.
+
+STRATEGIC PRIORITIES 2026
+
+Priority 1: Network Excellence
+We are investing EUR 380 million in network infrastructure in 2026, with a focus on expanding 5G coverage from 45% to 65% population coverage. Rural network reliability remains our most significant operational challenge, and we have allocated EUR 90 million specifically for rural infrastructure upgrades. We are targeting a 15-percentage-point improvement in rural network satisfaction scores.
+
+Priority 2: Digital-First Customer Experience
+Our digital transformation programme, Project Horizon, aims to increase digital channel adoption from 42% to 60% by end of 2026. This includes a complete rebuild of the NovaTel app (launching Q2 2026), a redesigned self-service billing portal, and AI-powered customer support capabilities. The current app experience is a known pain point — app NPS stands at just 20, significantly below our overall NPS of 24.
+
+Priority 3: Billing Transparency and Trust
+Customer complaints about billing have increased 22% year-on-year. We recognise that billing clarity is the second most important driver of customer satisfaction, yet our performance in this area is among the weakest. In 2026, we will simplify our tariff structure from 47 plans to 12, implement real-time spend alerts, and launch a plain-language billing initiative across all customer communications.
+
+Priority 4: Churn Reduction
+With an 18.2% annual churn rate (industry average: 14.5%), reducing customer defection is critical. Our analysis shows that customers who experience two or more service failures within a 90-day period have a 4.3x higher probability of churning. We are implementing a predictive churn model and proactive retention programme targeting at-risk customers.
+
+Priority 5: Premium Segment Growth
+The premium segment represents 15% of our customer base but contributes 28% of revenue and has the highest satisfaction scores. We will invest in exclusive premium experiences, priority network access, and dedicated support to grow this segment to 20% of the base by 2027.
+
+OPERATIONAL REVIEW
+
+Network Operations
+Our network carried 2.8 petabytes of data daily in 2025, up 34% from the prior year. 5G now covers 45% of the population across 28 cities. However, rural areas continue to experience reliability issues, with an average of 2.3 outages per month in rural zones compared to 0.4 in urban areas. Customer complaints about network reliability have increased 18% in rural markets.
+
+The total number of network-related customer complaints reached 42,000 in 2025, representing 31% of all inbound contacts. We are committed to reducing this by 40% through infrastructure investment and proactive outage communication.
+
+Customer Service
+Our contact centre handled 3.8 million interactions in 2025. First Contact Resolution (FCR) rate improved to 72% from 68%, and agent courtesy scores remain our highest-rated attribute at 78.6% top-2-box. However, average wait times increased to 8.2 minutes from 6.5 minutes due to higher volumes, particularly around billing queries.
+
+We employ 2,800 customer service agents across four centres. Agent attrition was 24% in 2025, which impacts service quality and increases training costs. Our investment in agent tools, training, and wellbeing programmes is designed to reduce attrition to 18% by end of 2026.
+
+Digital Channels
+App downloads grew 28% to 1.9 million active monthly users. However, app ratings declined from 3.8 to 3.2 stars on app stores, with stability and performance cited as the primary issues. The app crash rate of 4.2% is unacceptably high and will be addressed in the app rebuild under Project Horizon.
+
+Web self-service completion rates dropped from 68% to 61%, primarily due to complexity in the billing section. We are redesigning the web experience with a focus on task completion and reducing the need for customers to call our contact centre.
+
+SUSTAINABILITY
+
+NovaTel is committed to achieving net-zero carbon emissions by 2035. In 2025, we reduced our carbon footprint by 12% through renewable energy procurement and network equipment efficiency improvements. 65% of our energy now comes from renewable sources.
+
+OUTLOOK
+
+We enter 2026 with a clear mandate: improve customer experience, reduce churn, and accelerate our digital transformation. The investments we are making in network quality, billing simplicity, and digital channels are directly aligned with what our customers tell us matters most. We are confident that these actions will reverse the NPS decline and position NovaTel for sustainable growth.
+
+Erik van der Berg
+Chairman of the Board
+NovaTel Telecommunications Group

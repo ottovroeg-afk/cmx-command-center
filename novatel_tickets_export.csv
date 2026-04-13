@@ -1,0 +1,151 @@
+TicketId,Category,Status,Priority,CreatedDate,ResolvedDate,Channel,CustomerSegment
+TKT-10000,Network Outage,Closed,Low,2025-11-15 00:00:00,2025-11-19 09:00:00,Store,Premium
+TKT-10001,Network Outage,Open,High,2025-10-18 00:00:00,,Contact_Centre,Premium
+TKT-10002,Account Security,Resolved,Medium,2025-11-01 00:00:00,2025-11-04 09:00:00,Web,Consumer
+TKT-10003,Roaming Issue,Closed,Low,2025-12-21 00:00:00,2025-12-25 10:00:00,Contact_Centre,Consumer
+TKT-10004,Account Security,Resolved,Medium,2025-11-11 00:00:00,2025-11-12 07:00:00,App,Business
+TKT-10005,Network Outage,Closed,High,2025-11-24 00:00:00,2025-11-26 14:00:00,Contact_Centre,Premium
+TKT-10006,Billing Dispute,Resolved,Low,2025-10-25 00:00:00,2025-10-29 17:00:00,App,Business
+TKT-10007,Account Security,Closed,Low,2025-12-26 00:00:00,2025-12-30 17:00:00,Store,Consumer
+TKT-10008,Plan Change,Resolved,Low,2025-12-01 00:00:00,2025-12-02 08:00:00,App,Consumer
+TKT-10009,App Bug,Closed,Critical,2025-11-25 00:00:00,2025-11-25 05:00:00,Contact_Centre,Business
+TKT-10010,Coverage Complaint,In_Progress,High,2025-11-05 00:00:00,,App,Premium
+TKT-10011,Account Security,Closed,Low,2025-10-18 00:00:00,2025-10-21 11:00:00,Contact_Centre,Consumer
+TKT-10012,Network Outage,Closed,Medium,2025-12-13 00:00:00,2025-12-16 06:00:00,Store,Premium
+TKT-10013,5G Activation,Resolved,High,2025-11-18 00:00:00,2025-11-22 06:00:00,Web,Business
+TKT-10014,Network Outage,In_Progress,Low,2025-10-15 00:00:00,,Web,Premium
+TKT-10015,Roaming Issue,Resolved,Critical,2025-10-15 00:00:00,2025-10-15 18:00:00,App,Business
+TKT-10016,5G Activation,Resolved,Critical,2025-10-08 00:00:00,2025-10-09 02:00:00,Contact_Centre,Business
+TKT-10017,Plan Change,Closed,Low,2025-12-26 00:00:00,2025-12-26 18:00:00,App,Premium
+TKT-10018,Coverage Complaint,In_Progress,High,2025-11-28 00:00:00,,Store,Premium
+TKT-10019,Coverage Complaint,Open,Low,2025-11-28 00:00:00,,App,Premium
+TKT-10020,Network Outage,In_Progress,Medium,2025-11-10 00:00:00,,Store,Premium
+TKT-10021,5G Activation,Resolved,Low,2025-10-28 00:00:00,2025-10-31 20:00:00,Contact_Centre,Consumer
+TKT-10022,Plan Change,Closed,High,2025-10-27 00:00:00,2025-10-31 09:00:00,App,Consumer
+TKT-10023,App Bug,Resolved,Critical,2025-12-02 00:00:00,2025-12-03 16:00:00,Store,Business
+TKT-10024,5G Activation,Resolved,Medium,2025-11-24 00:00:00,2025-11-25 22:00:00,Contact_Centre,Business
+TKT-10025,5G Activation,Closed,Low,2025-12-29 00:00:00,2026-01-01 19:00:00,Contact_Centre,Premium
+TKT-10026,Coverage Complaint,Closed,Medium,2025-10-07 00:00:00,2025-10-10 20:00:00,Web,Premium
+TKT-10027,Coverage Complaint,Resolved,High,2025-10-18 00:00:00,2025-10-20 15:00:00,Web,Consumer
+TKT-10028,Roaming Issue,Resolved,High,2025-10-26 00:00:00,2025-10-26 03:00:00,App,Premium
+TKT-10029,App Bug,Resolved,Critical,2025-10-19 00:00:00,2025-10-21 08:00:00,App,Business
+TKT-10030,Billing Dispute,Open,Low,2025-11-30 00:00:00,,Contact_Centre,Premium
+TKT-10031,5G Activation,Closed,Low,2025-11-25 00:00:00,2025-11-28 10:00:00,App,Consumer
+TKT-10032,App Bug,Resolved,High,2025-11-20 00:00:00,2025-11-23 18:00:00,Store,Premium
+TKT-10033,Account Security,Resolved,High,2025-12-25 00:00:00,2025-12-29 05:00:00,Store,Business
+TKT-10034,Billing Dispute,Resolved,Low,2025-12-20 00:00:00,2025-12-22 01:00:00,App,Consumer
+TKT-10035,Plan Change,Resolved,Low,2025-12-02 00:00:00,2025-12-06 22:00:00,Store,Business
+TKT-10036,App Bug,Resolved,Medium,2025-12-28 00:00:00,2026-01-01 07:00:00,Store,Business
+TKT-10037,Roaming Issue,Open,Low,2025-12-13 00:00:00,,Web,Business
+TKT-10038,Account Security,Open,Low,2025-12-29 00:00:00,,App,Consumer
+TKT-10039,App Bug,Closed,Low,2025-12-24 00:00:00,2025-12-25 01:00:00,Store,Business
+TKT-10040,Plan Change,Open,High,2025-10-16 00:00:00,,App,Premium
+TKT-10041,Network Outage,Closed,Critical,2025-11-02 00:00:00,2025-11-02 06:00:00,Contact_Centre,Business
+TKT-10042,Billing Dispute,Open,Low,2025-12-09 00:00:00,,App,Premium
+TKT-10043,App Bug,Resolved,Medium,2025-11-07 00:00:00,2025-11-09 10:00:00,Contact_Centre,Premium
+TKT-10044,Plan Change,Resolved,High,2025-11-15 00:00:00,2025-11-17 19:00:00,App,Consumer
+TKT-10045,Coverage Complaint,Open,High,2025-10-05 00:00:00,,Web,Consumer
+TKT-10046,Roaming Issue,Resolved,Medium,2025-12-17 00:00:00,2025-12-20 05:00:00,Store,Consumer
+TKT-10047,5G Activation,In_Progress,Medium,2025-12-10 00:00:00,,Web,Business
+TKT-10048,Coverage Complaint,Open,High,2025-11-28 00:00:00,,Web,Premium
+TKT-10049,Coverage Complaint,Open,Critical,2025-10-27 00:00:00,,Web,Premium
+TKT-10050,App Bug,Resolved,Medium,2025-11-17 00:00:00,2025-11-20 12:00:00,Web,Business
+TKT-10051,Plan Change,Resolved,Low,2025-11-25 00:00:00,2025-11-28 07:00:00,App,Premium
+TKT-10052,Network Outage,Resolved,Medium,2025-10-15 00:00:00,2025-10-17 06:00:00,App,Business
+TKT-10053,Plan Change,Closed,Medium,2025-11-12 00:00:00,2025-11-12 20:00:00,App,Business
+TKT-10054,Network Outage,Resolved,Low,2025-10-29 00:00:00,2025-10-29 15:00:00,Contact_Centre,Premium
+TKT-10055,Roaming Issue,Open,High,2025-12-02 00:00:00,,Contact_Centre,Premium
+TKT-10056,Billing Dispute,Resolved,Low,2025-11-04 00:00:00,2025-11-08 20:00:00,Store,Consumer
+TKT-10057,5G Activation,Closed,Medium,2025-11-14 00:00:00,2025-11-17 16:00:00,Web,Business
+TKT-10058,App Bug,Resolved,High,2025-10-02 00:00:00,2025-10-05 21:00:00,Web,Business
+TKT-10059,Roaming Issue,Resolved,High,2025-12-12 00:00:00,2025-12-12 08:00:00,Web,Premium
+TKT-10060,App Bug,Resolved,Medium,2025-12-17 00:00:00,2025-12-19 12:00:00,Contact_Centre,Business
+TKT-10061,5G Activation,In_Progress,Medium,2025-12-04 00:00:00,,Web,Business
+TKT-10062,5G Activation,Closed,High,2025-12-21 00:00:00,2025-12-22 17:00:00,App,Premium
+TKT-10063,Plan Change,Open,Critical,2025-10-11 00:00:00,,Web,Premium
+TKT-10064,Coverage Complaint,Open,Medium,2025-10-08 00:00:00,,Store,Consumer
+TKT-10065,App Bug,Resolved,Medium,2025-11-24 00:00:00,2025-11-27 23:00:00,App,Business
+TKT-10066,Billing Dispute,Resolved,High,2025-10-02 00:00:00,2025-10-06 22:00:00,Contact_Centre,Consumer
+TKT-10067,Billing Dispute,Closed,Medium,2025-12-24 00:00:00,2025-12-28 11:00:00,Web,Premium
+TKT-10068,Network Outage,Closed,Medium,2025-12-07 00:00:00,2025-12-08 00:00:00,Web,Premium
+TKT-10069,Account Security,Closed,Medium,2025-11-15 00:00:00,2025-11-17 08:00:00,Contact_Centre,Consumer
+TKT-10070,Network Outage,Closed,Medium,2025-11-13 00:00:00,2025-11-14 09:00:00,Store,Business
+TKT-10071,5G Activation,In_Progress,Low,2025-11-03 00:00:00,,Contact_Centre,Premium
+TKT-10072,Account Security,Closed,High,2025-12-05 00:00:00,2025-12-05 06:00:00,Store,Consumer
+TKT-10073,Account Security,Open,Medium,2025-11-15 00:00:00,,Contact_Centre,Consumer
+TKT-10074,App Bug,In_Progress,Medium,2025-10-01 00:00:00,,App,Consumer
+TKT-10075,App Bug,Resolved,Medium,2025-11-25 00:00:00,2025-11-25 12:00:00,Store,Consumer
+TKT-10076,Plan Change,Closed,Medium,2025-10-20 00:00:00,2025-10-21 10:00:00,Contact_Centre,Business
+TKT-10077,Coverage Complaint,Resolved,Low,2025-11-16 00:00:00,2025-11-17 01:00:00,Store,Premium
+TKT-10078,Roaming Issue,Open,High,2025-11-26 00:00:00,,App,Business
+TKT-10079,Coverage Complaint,Open,Low,2025-10-26 00:00:00,,Store,Business
+TKT-10080,Plan Change,Closed,Critical,2025-11-12 00:00:00,2025-11-12 22:00:00,Contact_Centre,Consumer
+TKT-10081,App Bug,Resolved,Medium,2025-11-23 00:00:00,2025-11-25 17:00:00,Store,Premium
+TKT-10082,Network Outage,Open,High,2025-11-19 00:00:00,,Web,Consumer
+TKT-10083,Plan Change,Resolved,Low,2025-11-14 00:00:00,2025-11-18 04:00:00,Contact_Centre,Business
+TKT-10084,Account Security,Resolved,Medium,2025-12-16 00:00:00,2025-12-18 09:00:00,Store,Consumer
+TKT-10085,App Bug,In_Progress,High,2025-11-24 00:00:00,,Web,Consumer
+TKT-10086,Coverage Complaint,Closed,Critical,2025-11-05 00:00:00,2025-11-09 16:00:00,Web,Premium
+TKT-10087,Network Outage,Open,High,2025-11-24 00:00:00,,Web,Consumer
+TKT-10088,Plan Change,Resolved,Low,2025-12-15 00:00:00,2025-12-15 21:00:00,Store,Consumer
+TKT-10089,App Bug,Closed,Medium,2025-11-05 00:00:00,2025-11-10 00:00:00,Web,Consumer
+TKT-10090,Coverage Complaint,Resolved,High,2025-10-07 00:00:00,2025-10-09 21:00:00,Web,Consumer
+TKT-10091,5G Activation,Resolved,Medium,2025-11-13 00:00:00,2025-11-13 09:00:00,Contact_Centre,Consumer
+TKT-10092,5G Activation,Resolved,Low,2025-11-04 00:00:00,2025-11-05 22:00:00,App,Consumer
+TKT-10093,Roaming Issue,Open,Low,2025-10-06 00:00:00,,Store,Business
+TKT-10094,App Bug,Open,Medium,2025-12-17 00:00:00,,Store,Business
+TKT-10095,Network Outage,In_Progress,High,2025-11-12 00:00:00,,Web,Business
+TKT-10096,Roaming Issue,Resolved,Low,2025-11-16 00:00:00,2025-11-18 00:00:00,Contact_Centre,Consumer
+TKT-10097,Network Outage,Resolved,Low,2025-12-14 00:00:00,2025-12-18 19:00:00,App,Consumer
+TKT-10098,Plan Change,Closed,Low,2025-12-15 00:00:00,2025-12-19 19:00:00,Store,Consumer
+TKT-10099,Roaming Issue,Closed,Medium,2025-10-10 00:00:00,2025-10-13 09:00:00,Store,Consumer
+TKT-10100,App Bug,Resolved,Low,2025-12-08 00:00:00,2025-12-08 07:00:00,Contact_Centre,Premium
+TKT-10101,Network Outage,Closed,Critical,2025-11-14 00:00:00,2025-11-16 11:00:00,App,Business
+TKT-10102,Billing Dispute,Resolved,Low,2025-11-23 00:00:00,2025-11-25 18:00:00,Contact_Centre,Premium
+TKT-10103,Billing Dispute,In_Progress,High,2025-10-17 00:00:00,,Web,Premium
+TKT-10104,Network Outage,Resolved,Low,2025-11-20 00:00:00,2025-11-22 22:00:00,Store,Premium
+TKT-10105,Plan Change,Resolved,Low,2025-11-19 00:00:00,2025-11-20 12:00:00,Web,Premium
+TKT-10106,Account Security,Resolved,Medium,2025-10-28 00:00:00,2025-10-28 03:00:00,Contact_Centre,Business
+TKT-10107,Coverage Complaint,In_Progress,Medium,2025-10-29 00:00:00,,Web,Consumer
+TKT-10108,Billing Dispute,Resolved,Medium,2025-10-06 00:00:00,2025-10-07 15:00:00,Contact_Centre,Consumer
+TKT-10109,Plan Change,Closed,Critical,2025-11-04 00:00:00,2025-11-04 08:00:00,Web,Premium
+TKT-10110,Roaming Issue,Open,Medium,2025-10-15 00:00:00,,Contact_Centre,Business
+TKT-10111,Coverage Complaint,Closed,High,2025-10-11 00:00:00,2025-10-15 19:00:00,Store,Premium
+TKT-10112,Billing Dispute,In_Progress,Medium,2025-11-07 00:00:00,,App,Business
+TKT-10113,App Bug,Resolved,Medium,2025-10-29 00:00:00,2025-10-30 13:00:00,App,Premium
+TKT-10114,Network Outage,Closed,High,2025-12-24 00:00:00,2025-12-28 05:00:00,Store,Premium
+TKT-10115,Plan Change,Closed,High,2025-11-02 00:00:00,2025-11-05 11:00:00,Web,Business
+TKT-10116,5G Activation,In_Progress,Low,2025-11-04 00:00:00,,Web,Premium
+TKT-10117,Account Security,Resolved,Low,2025-11-25 00:00:00,2025-11-29 21:00:00,Web,Business
+TKT-10118,Plan Change,Closed,Medium,2025-10-24 00:00:00,2025-10-25 00:00:00,Web,Premium
+TKT-10119,App Bug,Open,High,2025-11-06 00:00:00,,Store,Premium
+TKT-10120,App Bug,Open,Low,2025-12-17 00:00:00,,Web,Business
+TKT-10121,App Bug,Closed,High,2025-12-22 00:00:00,2025-12-22 14:00:00,App,Premium
+TKT-10122,Network Outage,Resolved,High,2025-10-13 00:00:00,2025-10-13 04:00:00,App,Consumer
+TKT-10123,App Bug,Closed,Critical,2025-11-01 00:00:00,2025-11-02 12:00:00,App,Consumer
+TKT-10124,Roaming Issue,Resolved,High,2025-10-14 00:00:00,2025-10-18 10:00:00,App,Consumer
+TKT-10125,Account Security,Resolved,High,2025-10-18 00:00:00,2025-10-21 02:00:00,Contact_Centre,Business
+TKT-10126,Billing Dispute,Open,Medium,2025-12-01 00:00:00,,Contact_Centre,Premium
+TKT-10127,Billing Dispute,Open,Low,2025-12-09 00:00:00,,Contact_Centre,Consumer
+TKT-10128,App Bug,Closed,Low,2025-12-05 00:00:00,2025-12-07 07:00:00,Web,Consumer
+TKT-10129,Roaming Issue,Resolved,High,2025-10-30 00:00:00,2025-10-30 20:00:00,Web,Premium
+TKT-10130,Network Outage,Resolved,Medium,2025-11-19 00:00:00,2025-11-22 21:00:00,App,Consumer
+TKT-10131,Roaming Issue,Closed,Low,2025-10-14 00:00:00,2025-10-15 14:00:00,Contact_Centre,Consumer
+TKT-10132,Network Outage,Closed,High,2025-11-16 00:00:00,2025-11-20 23:00:00,Web,Consumer
+TKT-10133,App Bug,Resolved,High,2025-11-24 00:00:00,2025-11-27 06:00:00,Web,Premium
+TKT-10134,Coverage Complaint,In_Progress,Medium,2025-12-27 00:00:00,,App,Business
+TKT-10135,Network Outage,Resolved,High,2025-12-03 00:00:00,2025-12-04 11:00:00,Web,Premium
+TKT-10136,5G Activation,In_Progress,Medium,2025-10-19 00:00:00,,Store,Consumer
+TKT-10137,Coverage Complaint,Resolved,Low,2025-10-15 00:00:00,2025-10-18 23:00:00,Contact_Centre,Consumer
+TKT-10138,Roaming Issue,Closed,Medium,2025-10-24 00:00:00,2025-10-25 23:00:00,Store,Premium
+TKT-10139,Roaming Issue,Resolved,Low,2025-11-22 00:00:00,2025-11-25 11:00:00,Web,Business
+TKT-10140,Account Security,Resolved,Medium,2025-11-23 00:00:00,2025-11-25 22:00:00,Web,Business
+TKT-10141,Plan Change,Resolved,High,2025-10-11 00:00:00,2025-10-13 07:00:00,Web,Business
+TKT-10142,Billing Dispute,In_Progress,Medium,2025-10-01 00:00:00,,Store,Consumer
+TKT-10143,Roaming Issue,Open,Medium,2025-10-15 00:00:00,,Web,Business
+TKT-10144,5G Activation,Open,Low,2025-11-28 00:00:00,,Web,Consumer
+TKT-10145,App Bug,Open,Medium,2025-10-18 00:00:00,,App,Premium
+TKT-10146,Network Outage,Resolved,High,2025-11-24 00:00:00,2025-11-27 19:00:00,App,Business
+TKT-10147,App Bug,Closed,Medium,2025-12-16 00:00:00,2025-12-16 05:00:00,App,Consumer
+TKT-10148,5G Activation,Open,Low,2025-10-10 00:00:00,,Web,Business
+TKT-10149,Coverage Complaint,Resolved,Medium,2025-10-18 00:00:00,2025-10-21 19:00:00,Contact_Centre,Business

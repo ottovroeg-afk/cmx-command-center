@@ -1,0 +1,34 @@
+STAKEHOLDER INTERVIEW TRANSCRIPT
+Interviewee: Erik van der Berg, Chief Executive Officer
+Interviewer: Advisory Team
+Date: 15 January 2026
+Duration: 45 minutes
+
+---
+
+Q: Erik, thank you for making time. Let's start with what you see as NovaTel's biggest challenge heading into 2026.
+
+A: Without question, it's the customer experience trajectory. We've watched NPS decline from 32 to 24 over the past year. That's not a blip — that's a trend, and it's telling us something fundamental about the gap between what we promise and what we deliver. If we don't reverse this, the churn problem solves itself — we just won't have customers left to churn.
+
+Q: What do you think is driving that decline?
+
+A: Three things, in order of importance. First, network reliability in non-urban areas. We have 1.4 million customers outside major cities, and their experience is frankly not good enough. They're experiencing outages, slow speeds, and coverage gaps that our urban customers don't see. Second, billing complexity. We've accumulated 47 different tariff plans over the years and nobody — not even our own agents — can explain them clearly. Third, the app. We launched a digital-first strategy but the app itself is unreliable. It's embarrassing.
+
+Q: You mentioned the digital-first strategy. Can you tell us about Project Horizon?
+
+A: Project Horizon is our EUR 45 million digital transformation programme. The centrepiece is a complete rebuild of the NovaTel app, scheduled for Q2 2026. But it's broader than that — we're redesigning the entire self-service experience: billing, usage monitoring, plan management, support. The goal is to get digital channel adoption from 42% to 60% by year-end. Every customer interaction that moves from the contact centre to self-service saves us approximately EUR 8.50 per interaction.
+
+Q: How does the 5G rollout factor into your strategy?
+
+A: 5G is our growth engine. We're at 45% population coverage and targeting 65% by end of 2026. The challenge is that customers are paying for 5G but not consistently getting it. Our 5G satisfaction scores are actually mixed — great in the city centre, disappointing elsewhere. We need to be honest about coverage before we sell more 5G plans. Over-promising and under-delivering is exactly how you destroy trust.
+
+Q: What's your message to the advisory team about what you need from this CX programme?
+
+A: I need three things. One, tell me where the biggest gaps are between customer expectation and our delivery — with data, not anecdotes. Two, help me prioritise. We can't fix everything at once, so what moves the needle most on NPS and churn? Three, give me materials I can take to the board that make the investment case clear. The board understands revenue impact; they need to see the link between CX improvement and financial outcomes.
+
+Q: Final question — if you could fix one thing overnight, what would it be?
+
+A: Billing clarity. It's the most fixable of our problems, it affects every single customer, and it's the second biggest driver of dissatisfaction. We're literally making it hard for people to understand what they're paying us for. That's insane. Network investment takes years; billing simplification can start tomorrow.
+
+---
+END OF TRANSCRIPT

@@ -1,0 +1,42 @@
+STAKEHOLDER INTERVIEW TRANSCRIPT
+Interviewee: Thomas Mueller, Chief Operating Officer
+Interviewer: Advisory Team
+Date: 17 January 2026
+Duration: 50 minutes
+
+---
+
+Q: Thomas, thank you for joining us. What are the key operational challenges you're facing?
+
+A: My world is divided into two parts right now: network operations and customer service operations. Both are under pressure. On the network side, we're managing a massive 5G rollout while trying to maintain and improve our existing infrastructure, particularly in rural areas. On the customer service side, contact volumes are up 15% year-on-year, agent attrition is at 24%, and our average wait time has increased from 6.5 to 8.2 minutes. We're running hot.
+
+Q: Let's start with network operations. What's the rural challenge specifically?
+
+A: We have approximately 3,200 rural cell sites, and about 18% of them are underperforming. These sites are older, harder to maintain, and serve smaller populations — so the business case for upgrade is less obvious. But 1.4 million of our customers live in these areas, and their experience is significantly worse. Rural NPS is around 15 compared to 28 in urban areas. We've secured EUR 90 million for rural upgrades in 2026, which will cover approximately 40% of the underperforming sites. The rest will need to wait for 2027.
+
+Q: How does the 5G rollout interact with rural reliability?
+
+A: It's a tension. Every euro we invest in 5G expansion is a euro we're not investing in rural 4G reliability. The strategic direction is clear — 5G is the future — but we need to be realistic about the rural customers who feel left behind. My team is working on a phased approach: stabilise rural 4G first (Q1-Q2), then begin rural 5G pilots (Q3-Q4). But it's a balancing act.
+
+Q: Moving to customer service — what's driving the volume increase?
+
+A: Billing queries are up 22%, network complaints up 18%, and app-related contacts up 35%. The app issues are particularly frustrating because digital self-service was supposed to reduce contact centre load, but the app's instability is actually generating additional calls. For every customer who can't complete a task in the app, about 30% will call us instead. That's backwards.
+
+Q: Tell us about agent attrition.
+
+A: 24% annual attrition is costing us approximately EUR 4.2 million per year in recruitment and training. A new agent takes 12 weeks to reach full productivity. The causes are: below-market compensation in two of our four centres, high workload due to understaffing, and limited career progression opportunities. We're addressing compensation in our 2026 budget, and we've introduced a team lead development programme. But I'll be honest — the contact centre industry has structural challenges that we can't fully solve.
+
+Q: What about first contact resolution?
+
+A: FCR is at 72%, up from 68% last year. Our target is 80%. The main barriers to higher FCR are: complex billing queries that require specialist teams (agents can't resolve on first call), network issues that require engineering investigation, and app issues that the agent can't replicate. We're investing in better agent tools and expanding agent authority to resolve billing disputes up to EUR 50 without escalation, up from EUR 25.
+
+Q: What's your perspective on the customer experience metrics?
+
+A: I'm proud of our service team. Agent courtesy and professionalism scores are our highest-rated attribute at 78.6% top-2-box. Our people are doing a great job despite difficult conditions. What concerns me is that their good work is being undermined by product and network issues they can't control. An agent can be brilliantly empathetic, but if the customer's network keeps dropping, the call still ends with a detractor score.
+
+Q: What do you need from the CX programme?
+
+A: I need operational clarity. Which specific operational improvements will have the biggest impact on NPS and churn? I know I can't fix everything, so help me prioritise. Also, I want to understand the connection between contact centre metrics and customer outcomes. Does reducing wait time from 8 to 5 minutes actually improve NPS, or should I invest that resource elsewhere?
+
+---
+END OF TRANSCRIPT

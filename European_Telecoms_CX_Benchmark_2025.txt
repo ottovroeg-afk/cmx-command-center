@@ -1,0 +1,63 @@
+EUROPEAN TELECOMS CUSTOMER EXPERIENCE BENCHMARK 2025
+Industry Report Summary
+
+---
+
+MARKET OVERVIEW
+
+The European telecommunications industry served approximately 440 million mobile subscribers in 2025. Customer experience has emerged as the primary competitive differentiator, with operators reporting a 0.8% reduction in churn for every 1-point improvement in NPS.
+
+The industry average NPS improved marginally from 28 to 29 in 2025, driven primarily by improvements in digital channel experience among leading operators. However, the gap between leaders and laggards widened: top-quartile operators achieved NPS of 42+, while bottom-quartile operators averaged NPS of 18.
+
+BENCHMARK METRICS
+
+Industry Average NPS: 29 (range: 12 to 54)
+Industry Average CSAT T2B: 71% (range: 52% to 86%)
+Industry Average CES T2B: 66% (range: 48% to 81%)
+Industry Average Churn Rate: 14.5% (range: 8% to 24%)
+Industry Average ARPU: EUR 26.80 (range: EUR 18 to EUR 45)
+Industry Average Cost-to-Serve: EUR 5.90/month (range: EUR 3.20 to EUR 9.50)
+Industry Average Digital Adoption: 54% (range: 32% to 78%)
+
+KEY DRIVER IMPORTANCE RANKING (INDUSTRY)
+
+The industry-wide key driver analysis reveals the following importance ranking for customer satisfaction:
+1. Network Reliability — 26% average relative importance
+2. Value for Money — 19% average relative importance
+3. Billing Clarity — 15% average relative importance
+4. Digital Experience — 14% average relative importance
+5. Customer Service — 12% average relative importance
+6. Coverage/Availability — 8% average relative importance
+7. Plan Flexibility — 4% average relative importance
+8. Brand Trust — 2% average relative importance
+
+TOP PERFORMERS
+
+MobileFirst (NPS: 41): Industry-leading app experience (4.6 stars), aggressive pricing, best-in-class digital adoption at 72%. Strength in under-35 demographic. Weakness in enterprise segment.
+
+TeleNord (NPS: 38): Strongest network reliability scores in Europe. EUR 2.1 billion network investment over 3 years. Best rural coverage among major operators. Premium pricing strategy successfully defended.
+
+ConnectEU (NPS: 35): Best-in-class billing transparency programme launched in 2024, resulting in 31% reduction in billing-related contacts. Innovative loyalty programme drives 11% churn rate.
+
+EMERGING TRENDS
+
+1. AI-Powered Customer Service: 34% of operators have deployed AI chatbots, with best-in-class achieving 45% deflection rates from live agent channels. Customer acceptance is growing but satisfaction with AI interactions remains 12 points below human agent interactions.
+
+2. 5G Experience Management: Operators that proactively manage 5G coverage expectations (transparent coverage maps, fallback notifications) report 8 points higher satisfaction than those that don't manage expectations.
+
+3. Proactive Service Recovery: Leading operators now identify and contact at-risk customers before they complain. Top-quartile operators resolve 15% of issues proactively, resulting in 22% reduction in detractor creation.
+
+4. Billing Simplification: Operators that reduced their tariff portfolio by more than 50% saw an average 6-point improvement in billing satisfaction and 18% reduction in billing-related contacts within 12 months.
+
+FINANCIAL IMPACT OF CX
+
+Analysis across 28 European operators confirms:
+- 1-point NPS improvement correlates with 0.8% churn reduction
+- 10pp improvement in billing satisfaction correlates with 14% reduction in billing contacts
+- 10pp improvement in digital satisfaction correlates with 8pp increase in digital adoption
+- Reducing churn by 1 percentage point saves operators an average of EUR 8.5 million per million subscribers
+
+---
+
+Source: European Telecoms CX Index, Q4 2025
+Published by: CX Analytics Europe

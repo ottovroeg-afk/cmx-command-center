@@ -1,0 +1,9 @@
+Variable,Coefficient,P_Value,Importance,Performance
+Network Reliability,0.42,0.001,28.5,58.2
+Billing Clarity,0.31,0.003,21.0,52.4
+App Experience,0.25,0.008,16.8,55.1
+Customer Service,0.18,0.012,12.2,78.6
+Value for Money,0.15,0.021,10.1,56.3
+5G Coverage,0.08,0.045,5.4,62.8
+Plan Flexibility,0.05,0.082,3.4,60.1
+Data Speed,0.04,0.11,2.6,68.5

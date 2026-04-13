@@ -1,0 +1,42 @@
+STAKEHOLDER INTERVIEW TRANSCRIPT
+Interviewee: Maria Santos, Chief Financial Officer
+Interviewer: Advisory Team
+Date: 18 January 2026
+Duration: 35 minutes
+
+---
+
+Q: Maria, from a financial perspective, how do you see the CX challenge?
+
+A: I see it entirely through the lens of unit economics. Our customer acquisition cost is EUR 185, our average monthly ARPU is EUR 28.40, and our average customer lifetime is 4.8 years. That means each customer is worth approximately EUR 1,635 in gross revenue over their lifetime. With our current churn rate of 18.2%, we're losing roughly 335,000 customers per year. That's EUR 548 million in lifetime revenue walking out the door. Even if we can retain 10% of those churners, that's EUR 55 million in preserved revenue.
+
+Q: How do you evaluate CX investments?
+
+A: I apply the same rigour as any capital investment. Show me the projected impact on churn, show me the payback period, and show me the sensitivity analysis. What I don't want is vague claims about "improving the customer experience." I want to know: if we invest EUR 5 million in billing simplification, what is the expected reduction in churn, and over what timeframe?
+
+Q: What about the cost-to-serve dimension?
+
+A: Our cost to serve has increased 4.1% to EUR 6.80 per customer per month. That's EUR 342 million annually. The biggest driver is the contact centre, which costs EUR 180 million per year. If we can shift 18 percentage points of interactions to digital self-service — from 42% to 60% as Project Horizon targets — the annual saving is approximately EUR 28 million. That's a compelling ROI for the EUR 45 million Project Horizon investment.
+
+Q: What about the network investment?
+
+A: The EUR 380 million network investment is the largest single capital allocation in NovaTel's history. I need to see it generate returns. For the rural investment specifically — EUR 90 million — I need evidence that improving rural customer experience will actually reduce churn in those areas. Rural customers represent 33% of our base but 28% of revenue due to lower ARPU. If rural churn drops by 5 percentage points, the revenue retention is approximately EUR 38 million over three years. That's a reasonable return on EUR 90 million, but it needs to be validated.
+
+Q: How do you view the premium segment opportunity?
+
+A: It's our best growth lever. Premium ARPU is EUR 52 versus EUR 28 average. If we grow premium from 15% to 20% of the base — an additional 210,000 customers — that's EUR 60 million in incremental annual revenue. The cost of premium service is higher, but the margin is substantially better. I fully support the premium expansion plan.
+
+Q: Any financial concerns about the current trajectory?
+
+A: My biggest concern is the EBITDA margin compression. We've gone from 38.2% to 36.8%, and if we're not careful, the combination of increased network investment and rising cost-to-serve could push us below 35%, which would trigger concern from our institutional investors. We need to be investing in CX improvement AND driving efficiency simultaneously. That's why digital transformation is so important — it's both a CX improvement and a cost reduction play.
+
+Q: What do you need from the CX advisory programme?
+
+A: Financial framing. Every recommendation needs to come with a financial impact estimate — revenue at risk, cost saving potential, required investment, and expected payback period. I also want a clear connection between CX metrics and financial outcomes. What's the revenue impact of a one-point NPS improvement? What's the churn reduction for every 10-percentage-point improvement in billing clarity? Give me the conversion factors so I can model different scenarios.
+
+Q: One final question — are there any CX investments you would NOT support?
+
+A: I would push back on any investment that targets only the "nice to have" attributes — the ones that don't drive NPS or churn. If key driver analysis shows that an attribute has low importance, I don't want us spending significant capital on it regardless of how low the performance score is. Focus investment where importance is high and performance is low. That's where the returns are.
+
+---
+END OF TRANSCRIPT

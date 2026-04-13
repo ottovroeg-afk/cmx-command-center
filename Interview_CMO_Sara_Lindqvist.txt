@@ -1,0 +1,38 @@
+STAKEHOLDER INTERVIEW TRANSCRIPT
+Interviewee: Sara Lindqvist, Chief Marketing Officer
+Interviewer: Advisory Team
+Date: 16 January 2026
+Duration: 40 minutes
+
+---
+
+Q: Sara, what's top of mind for you as CMO heading into 2026?
+
+A: Churn. Our 18.2% annual churn rate is bleeding us. Every percentage point of churn costs us approximately EUR 12 million in lost lifetime value. We're spending EUR 185 per customer acquisition, and too many of those customers are leaving within 18 months. The economics don't work if we can't improve retention.
+
+Q: What's driving the churn in your view?
+
+A: It's a compounding problem. A customer has a network issue, then gets a confusing bill, then can't resolve it through the app — and suddenly they're looking at competitor offers. Our analysis shows that customers who experience two or more service failures in 90 days have a 4.3 times higher churn probability. The issue isn't any single failure; it's the accumulation.
+
+Q: Tell us about the competitive landscape.
+
+A: Our three main competitors — TeleNord, ConnectEU, and MobileFirst — are all investing heavily in customer experience. TeleNord's NPS is at 38, MobileFirst is at 41. We're at 24. That's a 14 to 17-point gap to our closest competitors. MobileFirst in particular has been aggressive on pricing and app experience — their app has a 4.6 rating compared to our 3.2. They're winning customers on experience, not just price.
+
+Q: How is brand perception affected?
+
+A: Our brand tracking shows a significant decline in "trust" and "value" perception over the past year. Trust dropped from 52% to 44%, and value perception from 48% to 39%. These are leading indicators of churn. When customers stop trusting your brand, the next billing surprise or network issue becomes the final straw.
+
+Q: What about the premium segment?
+
+A: The premium segment is our bright spot. NPS is 38 versus 24 overall, churn is only 8%, and ARPU is EUR 52 compared to EUR 28 average. These customers value the dedicated service and priority network access. My plan is to grow premium from 15% to 20% of the base through targeted upselling and by making the premium experience genuinely differentiated. We're launching a premium loyalty programme in Q2 with exclusive benefits and priority 5G access.
+
+Q: What do you need from the CX advisory programme?
+
+A: Two things. First, a clear picture of which customer segments and journeys are most at risk of churn, so we can target our retention efforts. Second, evidence I can use to justify investment in experience improvement to the CFO. Maria is pragmatic — she wants to see ROI projections, not just satisfaction scores. Help me build the business case in financial terms.
+
+Q: Any concerns about the digital transformation programme?
+
+A: My concern is timing. Project Horizon is launching the new app in Q2, but our current app experience is actively damaging the brand right now. Every day that app has a 4.2% crash rate, we're creating detractors. We need an interim fix — even just stability improvements — while the rebuild happens. We can't afford six more months of a broken app.
+
+---
+END OF TRANSCRIPT
