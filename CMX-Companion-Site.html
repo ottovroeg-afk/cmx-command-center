@@ -112,9 +112,8 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: #0B0E13; col
 .companion-sub { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 28px; max-width: 600px; }
 
 /* Tool cards */
-.tool-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-@media(max-width:768px) { .tool-grid { grid-template-columns: 1fr; } }
-.tool-grid.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.tool-grid { display: flex; flex-direction: column; gap: 18px; }
+.tool-grid.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 @media(max-width:900px) { .tool-grid.grid-3 { grid-template-columns: 1fr 1fr; } }
 @media(max-width:600px) { .tool-grid.grid-3 { grid-template-columns: 1fr; } }
 
@@ -473,7 +472,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: #0B0E13; col
     </div>
 
     <!-- Demo: QTM -->
-    <div class="demo-section eff" style="grid-column: 1 / -1;">
+    <div class="demo-section eff" style="">
       <details open>
         <summary>
           <span style="color: var(--eff);">&#9656;</span>
@@ -691,7 +690,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: #0B0E13; col
     </div>
 
     <!-- Demo: CMX Command Center -->
-    <div class="demo-section scale" style="grid-column: 1 / -1;">
+    <div class="demo-section scale" style="">
       <details open>
         <summary>
           <span style="color: var(--scale);">&#9656;</span>
@@ -784,7 +783,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: #0B0E13; col
     </div>
 
     <!-- Demo: EX Survey Intelligence -->
-    <div class="demo-section scale" style="grid-column: 1 / -1;">
+    <div class="demo-section scale" style="">
       <details>
         <summary>
           <span style="color: var(--scale);">&#9656;</span>
