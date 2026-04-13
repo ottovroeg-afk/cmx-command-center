@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMX Command Center — Demo Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+:root {
+  --navy: #2D2015;
+  --orange: #F9A13A;
+  --cream: #FEF0DB;
+  --off-white: #F7F5F2;
+  --gray: #737373;
+  --green: #468A4B;
+  --red: #CC3300;
+  --blue: #3366CC;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--off-white); color: #333; line-height: 1.7; }
+
+/* Header */
+.header {
+  background: var(--navy);
+  padding: 40px 60px;
+  border-bottom: 4px solid var(--orange);
+}
+.header .tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+.header h1 {
+  font-size: 36px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+.header .sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.6);
+  max-width: 600px;
+}
+
+/* Layout */
+.container { max-width: 900px; margin: 0 auto; padding: 40px 32px 80px; }
+
+/* Sections */
+.section { margin-bottom: 48px; }
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-label::before {
+  content: '';
+  width: 3px;
+  height: 14px;
+  background: var(--orange);
+  border-radius: 2px;
+}
+h2 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 16px;
+  letter-spacing: -0.3px;
+}
+h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+p { margin-bottom: 14px; font-size: 15px; color: #444; }
+.lead { font-size: 17px; color: #333; line-height: 1.8; margin-bottom: 24px; }
+
+/* Cards */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #E0D8CE;
+  padding: 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.card h3 { margin-bottom: 8px; }
+.card p:last-child { margin-bottom: 0; }
+
+/* Grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+@media(max-width:768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+/* Feature cards */
+.feat {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #E0D8CE;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.feat .icon { font-size: 28px; margin-bottom: 10px; }
+.feat .title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.feat .desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+/* Tab explanation */
+.tab-row {
+  display: flex;
+  gap: 0;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #E0D8CE;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.tab-item {
+  flex: 1;
+  padding: 14px 12px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gray);
+  border-right: 1px solid #E0D8CE;
+  cursor: default;
+}
+.tab-item:last-child { border-right: none; }
+.tab-item.active { background: var(--cream); color: var(--navy); }
+
+/* Step flow */
+.step {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+.step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.step-content { flex: 1; }
+.step-content h3 { margin-bottom: 4px; font-size: 16px; }
+.step-content p { margin-bottom: 0; font-size: 14px; }
+
+/* Can / Cannot */
+.can-list, .cannot-list { list-style: none; padding: 0; }
+.can-list li, .cannot-list li {
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.can-list li {
+  background: #e8f5e9;
+  border-left: 4px solid var(--green);
+}
+.cannot-list li {
+  background: #fff3e0;
+  border-left: 4px solid var(--red);
+}
+.can-list li::before { content: '\2713'; color: var(--green); font-weight: 800; }
+.cannot-list li::before { content: '\2717'; color: var(--red); font-weight: 800; }
+
+/* Future cards */
+.future-card {
+  background: linear-gradient(135deg, #f0f4ff, #e8f0ff);
+  border: 1px solid #c8d6f0;
+  border-radius: 12px;
+  padding: 20px;
+}
+.future-card .phase {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.future-card .title { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.future-card .desc { font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 0; }
+
+/* Divider */
+hr { border: none; border-top: 1px solid #E0D8CE; margin: 40px 0; }
+
+/* Quote */
+.quote {
+  background: var(--cream);
+  border-left: 4px solid var(--orange);
+  border-radius: 0 10px 10px 0;
+  padding: 20px 24px;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--navy);
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+
+/* Badge */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.badge-green { background: #e8f5e9; color: var(--green); }
+.badge-orange { background: var(--cream); color: #D97706; }
+.badge-blue { background: #e0e7ff; color: var(--blue); }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 32px;
+  font-size: 12px;
+  color: var(--gray);
+  border-top: 1px solid #E0D8CE;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="tag">Demo Guide for Leadership</div>
+  <h1>CMX Command Center</h1>
+  <div class="sub">What it is, what it does, what it doesn't do, and where it's going. A plain-English walkthrough for executive stakeholders.</div>
+</div>
+
+<div class="container">
+
+<!-- ======== WHAT IS CMX ======== -->
+<div class="section">
+  <div class="section-label">The Basics</div>
+  <h2>What is CMX?</h2>
+  <p class="lead">CMX (Change Management Experience) is a browser-based command center that helps AKT consultants run stakeholder workshops more efficiently. It takes pre-workshop survey data from Qualtrics, analyses it automatically, and produces ready-to-use workshop materials — all in one place.</p>
+
+  <div class="quote">Think of it as the "mission control" for change management programs. Instead of spending days manually analysing survey responses and building decks, CMX does it in minutes.</div>
+
+  <div class="grid-3">
+    <div class="feat">
+      <div class="icon">&#128200;</div>
+      <div class="title">Real-Time Dashboard</div>
+      <div class="desc">Live view of stakeholder readiness, consensus levels, risk signals, and open points across the entire program.</div>
+    </div>
+    <div class="feat">
+      <div class="icon">&#129504;</div>
+      <div class="title">Intelligence Engine</div>
+      <div class="desc">4-step wizard that imports Qualtrics data, analyses stakeholder positions, and identifies where people agree — and where they don't.</div>
+    </div>
+    <div class="feat">
+      <div class="icon">&#128218;</div>
+      <div class="title">Artifact Generation</div>
+      <div class="desc">Auto-generates branded workshop decks (PPTX), open-point trackers (XLSX), and facilitator briefings (HTML) — all pre-populated with data.</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ======== THE 7 TABS ======== -->
+<div class="section">
+  <div class="section-label">What You'll See</div>
+  <h2>The 7 Tabs, Explained Simply</h2>
+  <p>The Command Center has seven tabs. Here's what each one does:</p>
+
+  <div class="tab-row">
+    <div class="tab-item active">Dashboard</div>
+    <div class="tab-item">Pipeline</div>
+    <div class="tab-item">Intelligence</div>
+    <div class="tab-item">Deck Engine</div>
+    <div class="tab-item">Progress</div>
+    <div class="tab-item">Assets</div>
+    <div class="tab-item">Timeline</div>
+  </div>
+
+  <div class="card">
+    <h3>&#127919; Dashboard</h3>
+    <p>The home screen. Shows the big numbers at a glance: overall readiness (68%), average consensus (72%), risk signals (4), open points (9), and respondent count (12). Also shows a role-distribution breakdown (Executive, Operational, Technical, Regional) and quick-action buttons to jump to other features.</p>
+  </div>
+
+  <div class="card">
+    <h3>&#128640; Pipeline</h3>
+    <p>Shows all 6 stages of the CMX Foundations Program — 4 workshops (WS1–WS4) and 2 decision workshops (DW1–DW2). Each stage shows its status: "Workshop Delivered", "Artifacts Generated", or "Analysis Complete". This is where you track what's done and what's next.</p>
+  </div>
+
+  <div class="card">
+    <h3>&#129504; Intelligence</h3>
+    <p>The analytical heart of CMX. Contains two things: the 4-step Intelligence Engine wizard (Configure → Import Data → Intelligence → Generate) and the always-on dashboard intelligence showing decision analysis, risk signals, and a full stakeholder readiness table. This is where raw survey data becomes actionable insight.</p>
+  </div>
+
+  <div class="card">
+    <h3>&#128202; Deck Engine</h3>
+    <p>Generates professional AKT-branded PowerPoint decks with one click. Currently supports WS1 (Governance & Decision Framework) — a 7-slide deck with stakeholder overview, risk dashboard, consensus analysis, and decision deep-dives. WS2 is coming next.</p>
+  </div>
+
+  <div class="card">
+    <h3>&#9745; Progress</h3>
+    <p>Interactive checklists for all 6 program stages. Track completion items like "Pre-survey completed", "Intelligence analysed", "Facilitator briefing prepared". Click to check off items as they're done.</p>
+  </div>
+
+  <div class="card">
+    <h3>&#128230; Assets</h3>
+    <p>Central document library. Links to the Intelligence Engine, WS1 Questionnaire (33 questions), Demo Guide, session outputs for DW1 and DW2, the Program Hub, PPT Engine architecture docs, and downloadable files (PPTX decks, XLSX specs, CSV test data).</p>
+  </div>
+
+  <div class="card">
+    <h3>&#128197; Timeline</h3>
+    <p>Visual program timeline in 3 phases: Phase 1 (Governance & Design), Phase 2 (Platform & Architecture), Phase 3 (Finalization & Go-Live). Shows sequencing of workshops, decision workshops, and key milestones.</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- ======== DEMO FLOW ======== -->
+<div class="section">
+  <div class="section-label">How to Demo It</div>
+  <h2>Recommended Demo Flow (10 min)</h2>
+  <p>Follow these 5 steps when presenting CMX to leadership. The demo uses built-in Nextera Energy sample data, so no setup is needed.</p>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h3>Start on the Dashboard</h3>
+      <p>Open CMX and talk through the headline numbers: 12 stakeholders surveyed, 68% readiness, 72% consensus, 4 risk signals. Point out that this used to take days to compile manually — now it's instant.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h3>Show the Intelligence Engine</h3>
+      <p>Click the "Intelligence Engine" quick action. Walk through the 4 steps: Configure (enter client name), Import Data (click "Load Nextera Demo Data"), view the Intelligence analysis (consensus bars, role divergence), then show the Generate panel where you can create all 3 artifacts in one click.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h3>Click "Generate All 3 Artifacts"</h3>
+      <p>This is the wow moment. One click produces a branded PPTX workshop deck, an XLSX open-points tracker, and an HTML facilitator briefing — all pre-filled with actual stakeholder intelligence. Open the PPTX to show the quality.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <h3>Walk Through the Stakeholder Table</h3>
+      <p>Scroll down to the Stakeholder Readiness & Watch List. Show how each person's readiness score, primary concern, and risk flag are surfaced automatically. Point out the "Watch" flags on lower-readiness stakeholders.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <h3>Show Pipeline + Progress</h3>
+      <p>Quick flip to the Pipeline tab to show the 6-stage program overview, then Progress to show how checklist items track completion. End with: "This is one program. The platform is designed to scale across all clients."</p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ======== WHAT IT CAN DO ======== -->
+<div class="section">
+  <div class="section-label">Capabilities</div>
+  <h2>What CMX Can Do Today</h2>
+
+  <ul class="can-list">
+    <li>Import Qualtrics CSV exports and auto-analyse stakeholder responses across all role types (Executive, Operational, Technical, Regional)</li>
+    <li>Calculate readiness scores, consensus percentages, and role-based metrics automatically</li>
+    <li>Identify risk signals (capacity gaps, alignment divergence, adoption blockers, data quality issues)</li>
+    <li>Surface decision-level analysis — e.g. "50% prefer Hybrid governance, but Exec and Regional roles diverge significantly"</li>
+    <li>Generate AKT-branded PPTX workshop decks (7 slides, pre-populated with client data) in seconds</li>
+    <li>Generate XLSX open-points trackers with owners, priorities, and categories pulled from survey responses</li>
+    <li>Generate HTML facilitator briefings with per-decision intelligence, consensus bars, and recommended positions</li>
+    <li>Track program progress across 6 stages (4 workshops + 2 decision workshops) with interactive checklists</li>
+    <li>Run entirely in the browser — no server, no login, no data leaves the device (privacy by design)</li>
+    <li>Work offline once loaded — perfect for client sites with restricted network access</li>
+    <li>Support demo mode with built-in Nextera Energy sample data (12 stakeholders) for instant walkthroughs</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ======== WHAT IT CANNOT DO ======== -->
+<div class="section">
+  <div class="section-label">Current Limitations</div>
+  <h2>What CMX Cannot Do (Yet)</h2>
+
+  <ul class="cannot-list">
+    <li>Connect directly to Qualtrics API — data must be manually exported as CSV and imported into CMX</li>
+    <li>Support real-time multi-user collaboration — it's a single-user tool, not a shared workspace</li>
+    <li>Store data between sessions — refreshing the page resets everything (no database or cloud storage)</li>
+    <li>Generate decks for WS2, WS3, or WS4 — only WS1 (Governance & Decision Framework) is built so far</li>
+    <li>Use AI/LLM for natural-language analysis — all analysis is rule-based (thresholds and formulas, not AI)</li>
+    <li>Handle non-English survey responses or multi-language analysis</li>
+    <li>Produce editable, design-polished PPTX — the generated slides are functional but use basic programmatic styling</li>
+    <li>Scale to multiple simultaneous programs or clients within a single instance</li>
+    <li>Send notifications, reminders, or integrate with email/calendar systems</li>
+    <li>Track historical trends or compare across multiple survey waves</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ======== ECOSYSTEM ======== -->
+<div class="section">
+  <div class="section-label">The Bigger Picture</div>
+  <h2>CMX in the AKT Tool Ecosystem</h2>
+  <p>CMX doesn't stand alone. It's part of a growing suite of browser-based, AI-powered tools built to accelerate AKT's advisory practice:</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>&#128202; EX Survey Intelligence</h3>
+      <p>Employee Experience analytics — upload Qualtrics EX-25 survey data, get automated findings, strength/concern analysis, and executive reporting. Standalone companion to CMX.</p>
+    </div>
+    <div class="card">
+      <h3>&#127760; QTM — Qualtrics Translator Machine</h3>
+      <p>Translates survey designs across languages, analyses question structures, and manages multi-market survey content. Handles the complexity that CMX relies on upstream.</p>
+    </div>
+    <div class="card">
+      <h3>&#127908; AKT Voice Studio</h3>
+      <p>Record narration for presentation slides. Script editor with key-message prompts, built-in audio recording, and export-ready voice tracks for workshop delivery.</p>
+    </div>
+    <div class="card">
+      <h3>&#127968; Program Hub</h3>
+      <p>Central navigation layer that connects all CMX artifacts, questionnaires, session outputs, and supporting documentation in one place.</p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ======== FUTURE POTENTIAL ======== -->
+<div class="section">
+  <div class="section-label">Where It's Going</div>
+  <h2>Future Potential</h2>
+  <p>CMX is a working prototype today. Here's the realistic roadmap for where it could go:</p>
+
+  <div class="grid-2">
+    <div class="future-card">
+      <div class="phase">Near-Term (Next 3 months)</div>
+      <div class="title">WS2–WS4 + DW2 Deck Generation</div>
+      <div class="desc">Extend the Deck Engine to auto-generate branded slides for all remaining workshop types: Stakeholder Mapping, Survey Design, Platform Architecture, and Dashboard Decisions.</div>
+    </div>
+    <div class="future-card">
+      <div class="phase">Near-Term (Next 3 months)</div>
+      <div class="title">Persistent Storage</div>
+      <div class="desc">Save program state to local storage or file export/import so consultants don't lose their work when the browser closes. Enable session continuity across days.</div>
+    </div>
+    <div class="future-card">
+      <div class="phase">Medium-Term (3–6 months)</div>
+      <div class="title">Direct Qualtrics Integration</div>
+      <div class="desc">Connect to the Qualtrics API to pull survey responses automatically — no more manual CSV exports. Real-time data refresh as new responses arrive.</div>
+    </div>
+    <div class="future-card">
+      <div class="phase">Medium-Term (3–6 months)</div>
+      <div class="title">AI-Powered Narrative Intelligence</div>
+      <div class="desc">Use LLMs (like Claude) to analyse open-text responses, generate executive summaries, and produce natural-language insights — "Here's what your stakeholders are really telling you."</div>
+    </div>
+    <div class="future-card">
+      <div class="phase">Medium-Term (3–6 months)</div>
+      <div class="title">Multi-Program Portfolio View</div>
+      <div class="desc">Manage multiple client programs from one dashboard. Compare readiness scores, share templates, and spot patterns across engagements.</div>
+    </div>
+    <div class="future-card">
+      <div class="phase">Medium-Term (3–6 months)</div>
+      <div class="title">Wave Comparison & Trend Tracking</div>
+      <div class="desc">Track how stakeholder readiness and consensus evolve over time. Compare pre-workshop and post-workshop survey waves side by side.</div>
+    </div>
+    <div class="future-card">
+      <div class="phase">Longer-Term (6–12 months)</div>
+      <div class="title">Client-Facing Portal</div>
+      <div class="desc">A read-only, branded version of the dashboard that clients can access directly. Live program transparency without giving access to the full consultant toolset.</div>
+    </div>
+    <div class="future-card">
+      <div class="phase">Longer-Term (6–12 months)</div>
+      <div class="title">Predictive Risk Engine</div>
+      <div class="desc">Move from reactive risk identification to predictive modelling. Flag programs likely to stall based on patterns from previous engagements.</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ======== KEY MESSAGES ======== -->
+<div class="section">
+  <div class="section-label">Talking Points</div>
+  <h2>Key Messages for Leadership</h2>
+
+  <div class="card" style="border-left: 4px solid var(--orange);">
+    <h3>Speed</h3>
+    <p>What used to take 2–3 days of manual analysis and deck-building now takes under 10 minutes. The Intelligence Engine processes 12+ stakeholder responses and generates 3 presentation-ready artifacts in one click.</p>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--green);">
+    <h3>Quality & Consistency</h3>
+    <p>Every workshop gets the same rigorous analysis. No more varying quality based on which consultant is running the engagement. CMX enforces a standard methodology while remaining flexible to each client's context.</p>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--blue);">
+    <h3>Privacy by Design</h3>
+    <p>Everything runs in the browser. No servers, no cloud, no data transmission. Client data never leaves their device. This makes CMX deployable in even the most security-conscious enterprise environments.</p>
+  </div>
+
+  <div class="card" style="border-left: 4px solid #7209B7;">
+    <h3>Scalable IP</h3>
+    <p>CMX turns AKT's consulting methodology into reusable, scalable software. As the tool matures, it becomes a competitive differentiator — clients get better outcomes, faster, with built-in AKT intelligence.</p>
+  </div>
+</div>
+
+<div class="footer">
+  CMX Command Center Demo Guide &mdash; AKT Global &mdash; April 2026<br>
+  Built for executive presentation. All data shown is simulated (Nextera Energy demo scenario).
+</div>
+
+</div>
+</body>
+</html>

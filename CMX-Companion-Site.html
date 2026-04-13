@@ -183,18 +183,186 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: #0B0E13; col
 .sub-link:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.15); }
 .sub-link .sl-icon { font-size: 12px; }
 
-/* ====== ACTION REQUIRED ====== */
-.action-box {
-  background: linear-gradient(135deg, rgba(204,51,0,0.08), rgba(204,51,0,0.03));
-  border: 1px solid rgba(204,51,0,0.2);
-  border-radius: 12px; padding: 24px; margin: 40px 0;
+/* ====== DEMO SECTIONS ====== */
+.demo-section {
+  background: rgba(255,255,255,0.015);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 20px 0 0 0;
 }
-.action-box h3 { color: #ff6b3d; font-size: 16px; margin-bottom: 8px; }
-.action-box p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 10px; }
-.action-box code {
-  display: block; background: rgba(0,0,0,0.3); border-radius: 6px; padding: 12px 16px;
-  font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; color: #ccc;
-  overflow-x: auto; margin: 8px 0; line-height: 1.6;
+
+.demo-section details {
+  cursor: pointer;
+}
+
+.demo-section summary {
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.2s;
+  user-select: none;
+}
+
+.demo-section summary:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.demo-section summary::marker {
+  color: var(--orange);
+}
+
+.demo-content {
+  padding: 24px;
+}
+
+.demo-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.demo-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.demo-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.demo-step {
+  display: flex;
+  gap: 16px;
+}
+
+.step-number {
+  min-width: 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--orange);
+  flex-shrink: 0;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.step-text {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.file-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s;
+  width: fit-content;
+}
+
+.file-card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.15);
+}
+
+.file-badge {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.file-badge.csv {
+  background: rgba(51,102,204,0.2);
+  color: #6b9ff5;
+}
+
+.file-badge.txt {
+  background: rgba(249,161,58,0.2);
+  color: #f9c976;
+}
+
+.file-name {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+}
+
+.file-card:hover .file-name {
+  color: #fff;
+}
+
+.step-instruction {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.03);
+  padding: 12px;
+  border-left: 2px solid var(--orange);
+  border-radius: 4px;
+  line-height: 1.6;
+}
+
+.demo-coming-soon {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.demo-coming-soon-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: rgba(255,255,255,0.6);
+}
+
+.demo-coming-soon-text {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
 }
 
 /* ====== DIVIDER ====== */
@@ -215,9 +383,9 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: #0B0E13; col
   <div class="container">
     <div class="hero-tag">AKT Global — AI Workforce Initiative</div>
     <h1>Digital <span>Companions</span></h1>
-    <p class="sub">Browser-based, privacy-first tools that make AKT consultants faster, able to handle more, and capable of things that weren't possible before. Organised across three value layers: Efficiency, Scale, and Innovation.</p>
+    <p class="sub">We are not adding tools. We are turning the best version of how AKT delivers into a standard that every engagement runs on. Browser-based, zero-infrastructure, privacy-first. Organised across three value layers.</p>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="num">5</div><div class="lbl">Live Prototypes</div></div>
+      <div class="hero-stat"><div class="num">4</div><div class="lbl">Live Prototypes</div></div>
       <div class="hero-stat"><div class="num">3</div><div class="lbl">Value Layers</div></div>
       <div class="hero-stat"><div class="num">0</div><div class="lbl">Servers Required</div></div>
       <div class="hero-stat"><div class="num">0</div><div class="lbl">Data Leaves Device</div></div>
@@ -267,7 +435,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: #0B0E13; col
     <div class="ch-dot" style="background: var(--eff);"></div>
     <h2>Efficiency Companions</h2>
   </div>
-  <p class="companion-sub">Tools that replace manual, time-consuming consultant work with instant, automated processes. Same quality, fraction of the time.</p>
+  <p class="companion-sub">A full engagement runs to 20–30 hours of document production before a single survey goes live. These tools cut structured document production from hours to minutes, raise the quality floor across the whole team, and free consultants for what actually requires their expertise: relationships, interpretation, and decisions.</p>
 
   <div class="tool-grid">
 
@@ -275,25 +443,149 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: #0B0E13; col
     <div class="tool-card eff">
       <div class="tc-top">
         <div class="icon">&#127760;</div>
-        <span class="badge badge-deploy">Needs Deploy</span>
+        <span class="badge badge-live">Live</span>
       </div>
       <h3>QTM — Qualtrics Translator Machine</h3>
-      <div class="tc-sub">Survey Translation & Quality</div>
-      <p class="desc">Load the English survey, load the local version, select the language — QTM auto-matches translations, flags mismatches, and exports a clean CSV. No bad characters, no broken pipes. What JB called "not fancy, but going to help a lot from the ground."</p>
-      <div class="tags">
-        <span class="tag">Translation Matching</span>
-        <span class="tag">CSV Export</span>
-        <span class="tag">Multi-Market</span>
-        <span class="tag">Qualtrics</span>
+      <div class="tc-sub">Contextual Insight Engine</div>
+      <p class="desc">A browser-based intelligence engine that takes raw Qualtrics exports (survey, TextIQ, StatsIQ, dashboard, tickets) and strategic context documents (annual reports, C-suite interviews, benchmarks), cross-references them, and produces prioritised advisory recommendations with three AKT-branded PPTX decks tailored to different audiences: C-Level Brief, Operational Playbook, and Webinar.</p>
+
+      <!-- QTM Intelligence Explainer -->
+      <div style="background: rgba(249,161,58,0.06); border: 1px solid rgba(249,161,58,0.15); border-radius: 10px; padding: 18px; margin: 12px 0;">
+        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--eff); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">&#129504; How QTM Builds Intelligence</div>
+        <p style="font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 10px;">The engine classifies uploads into ten analytical buckets (KPI metrics, trends, target gaps, drivers, tickets, verbatims, benchmarks, stakeholder interviews, strategy context, financial data), then <strong style="color: rgba(255,255,255,0.8);">triangulates signals across sources</strong> to build confidence-scored priority pockets.</p>
+        <p style="font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 10px;">Each finding is scored across eight weighted factors: <strong style="color: rgba(255,255,255,0.8);">Customer Impact</strong> (20%), <strong style="color: rgba(255,255,255,0.8);">Business Impact</strong> (18%), <strong style="color: rgba(255,255,255,0.8);">Urgency</strong> (15%), <strong style="color: rgba(255,255,255,0.8);">Strategic Importance</strong> (12%), <strong style="color: rgba(255,255,255,0.8);">Confidence</strong> (10%), <strong style="color: rgba(255,255,255,0.8);">Recurrence</strong> (10%), <strong style="color: rgba(255,255,255,0.8);">Stakeholder Relevance</strong> (8%), and <strong style="color: rgba(255,255,255,0.8);">Effort</strong> (7%).</p>
+        <p style="font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.7;">Zero AI dependency at runtime. All logic is deterministic and rule-based. Every recommendation traces back to a source file and row. No hallucination, no black box, no variable output quality. 30 seconds from upload to insight.</p>
       </div>
-      <a href="https://ottovroeg-afk.github.io/cmx-command-center/QTM_App.html" target="_blank" class="btn btn-eff">Launch QTM &#8599;</a>
+
+      <div class="tags">
+        <span class="tag">10 Analytical Buckets</span>
+        <span class="tag">8-Factor Scoring</span>
+        <span class="tag">3 Branded Decks</span>
+        <span class="tag">Zero AI at Runtime</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+        <a href="https://ottovroeg-afk.github.io/cmx-command-center/QTM_App.html" target="_blank" class="btn btn-eff">Launch QTM &#8599;</a>
+        <a href="https://ottovroeg-afk.github.io/cmx-command-center/QTM_2Pager_1.docx" target="_blank" class="file-card" style="margin: 0;">
+          <span class="file-badge txt" style="background: rgba(249,161,58,0.2); color: #f9c976;">DOCX</span>
+          <span class="file-name">QTM 2-Pager</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Demo: QTM -->
+    <div class="demo-section eff" style="grid-column: 1 / -1;">
+      <details open>
+        <summary>
+          <span style="color: var(--eff);">&#9656;</span>
+          Demo: NovaTel CX Advisory
+        </summary>
+        <div class="demo-content">
+          <div class="demo-title">Demo: NovaTel CX Advisory</div>
+          <div class="demo-desc">A fictitious European telecom with 4.2M subscribers, declining NPS, and a board demanding answers. Download the demo data, upload it into QTM, and watch it produce a prioritised executive deck.</div>
+
+          <div class="demo-steps">
+            <!-- Step 1 -->
+            <div class="demo-step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <div class="step-title">Download Survey Data (Left Panel)</div>
+                <div class="file-list">
+                  <a href="https://ottovroeg-afk.github.io/cmx-command-center/novatel_survey_export.csv" target="_blank" class="file-card">
+                    <span class="file-badge csv">CSV</span>
+                    <span class="file-name">novatel_survey_export.csv</span>
+                    <span style="font-size: 11px; color: rgba(255,255,255,0.25); margin-left: auto;">(528 responses)</span>
+                  </a>
+                  <a href="https://ottovroeg-afk.github.io/cmx-command-center/novatel_dashboard_export.csv" target="_blank" class="file-card">
+                    <span class="file-badge csv">CSV</span>
+                    <span class="file-name">novatel_dashboard_export.csv</span>
+                    <span style="font-size: 11px; color: rgba(255,255,255,0.25); margin-left: auto;">(KPI trends)</span>
+                  </a>
+                  <a href="https://ottovroeg-afk.github.io/cmx-command-center/novatel_driver_analysis.csv" target="_blank" class="file-card">
+                    <span class="file-badge csv">CSV</span>
+                    <span class="file-name">novatel_driver_analysis.csv</span>
+                    <span style="font-size: 11px; color: rgba(255,255,255,0.25); margin-left: auto;">(Key drivers)</span>
+                  </a>
+                  <a href="https://ottovroeg-afk.github.io/cmx-command-center/novatel_textiq_export.csv" target="_blank" class="file-card">
+                    <span class="file-badge csv">CSV</span>
+                    <span class="file-name">novatel_textiq_export.csv</span>
+                    <span style="font-size: 11px; color: rgba(255,255,255,0.25); margin-left: auto;">(Verbatim + sentiment)</span>
+                  </a>
+                  <a href="https://ottovroeg-afk.github.io/cmx-command-center/novatel_tickets_export.csv" target="_blank" class="file-card">
+                    <span class="file-badge csv">CSV</span>
+                    <span class="file-name">novatel_tickets_export.csv</span>
+                    <span style="font-size: 11px; color: rgba(255,255,255,0.25); margin-left: auto;">(Support data)</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="demo-step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <div class="step-title">Download Context Documents (Right Panel)</div>
+                <div class="file-list">
+                  <a href="https://ottovroeg-afk.github.io/cmx-command-center/CX_Research_Briefing_NovaTel.txt" target="_blank" class="file-card">
+                    <span class="file-badge txt">TXT</span>
+                    <span class="file-name">CX_Research_Briefing_NovaTel.txt</span>
+                  </a>
+                  <a href="https://ottovroeg-afk.github.io/cmx-command-center/NovaTel_Annual_Report_2025.txt" target="_blank" class="file-card">
+                    <span class="file-badge txt">TXT</span>
+                    <span class="file-name">NovaTel_Annual_Report_2025.txt</span>
+                  </a>
+                  <a href="https://ottovroeg-afk.github.io/cmx-command-center/Interview_CEO_Erik_van_der_Berg.txt" target="_blank" class="file-card">
+                    <span class="file-badge txt">TXT</span>
+                    <span class="file-name">Interview_CEO_Erik_van_der_Berg.txt</span>
+                  </a>
+                  <a href="https://ottovroeg-afk.github.io/cmx-command-center/Interview_CFO_Maria_Santos.txt" target="_blank" class="file-card">
+                    <span class="file-badge txt">TXT</span>
+                    <span class="file-name">Interview_CFO_Maria_Santos.txt</span>
+                  </a>
+                  <a href="https://ottovroeg-afk.github.io/cmx-command-center/Interview_CMO_Sara_Lindqvist.txt" target="_blank" class="file-card">
+                    <span class="file-badge txt">TXT</span>
+                    <span class="file-name">Interview_CMO_Sara_Lindqvist.txt</span>
+                  </a>
+                  <a href="https://ottovroeg-afk.github.io/cmx-command-center/Interview_COO_Thomas_Mueller.txt" target="_blank" class="file-card">
+                    <span class="file-badge txt">TXT</span>
+                    <span class="file-name">Interview_COO_Thomas_Mueller.txt</span>
+                  </a>
+                  <a href="https://ottovroeg-afk.github.io/cmx-command-center/European_Telecoms_CX_Benchmark_2025.txt" target="_blank" class="file-card">
+                    <span class="file-badge txt">TXT</span>
+                    <span class="file-name">European_Telecoms_CX_Benchmark_2025.txt</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="demo-step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <div class="step-title">Open QTM</div>
+                <a href="https://ottovroeg-afk.github.io/cmx-command-center/QTM_App.html" target="_blank" class="btn btn-eff" style="margin-top: 8px;">Launch QTM &#8599;</a>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="demo-step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <div class="step-title">Instructions</div>
+                <div class="step-instruction">
+                  Upload the 5 CSV files into the left panel (Survey Data). Upload the 7 TXT files into the right panel (Context Documents). Enter 'NovaTel' as the company name. Click Analyse. Review findings. Click Generate Deck.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
     </div>
 
     <!-- Voice Studio -->
     <div class="tool-card eff">
       <div class="tc-top">
         <div class="icon">&#127908;</div>
-        <span class="badge badge-deploy">Needs Deploy</span>
+        <span class="badge badge-live">Live</span>
       </div>
       <h3>AKT Voice Studio</h3>
       <div class="tc-sub">Presentation Narration</div>
@@ -330,28 +622,6 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: #0B0E13; col
       </div>
     </div>
 
-    <!-- Questionnaires -->
-    <div class="tool-card eff">
-      <div class="tc-top">
-        <div class="icon">&#128203;</div>
-        <span class="badge badge-live">Live</span>
-      </div>
-      <h3>Pre-Workshop Questionnaires</h3>
-      <div class="tc-sub">Structured Stakeholder Intake</div>
-      <p class="desc">Four role-branching questionnaires (WS1–WS4) that collect structured stakeholder input before each workshop. Responses feed directly into the Intelligence Engine. Replaces unstructured email chains and ad-hoc interviews.</p>
-      <div class="tags">
-        <span class="tag">WS1–WS4</span>
-        <span class="tag">Role Branching</span>
-        <span class="tag">Qualtrics-Ready</span>
-        <span class="tag">CSV Export</span>
-      </div>
-      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-        <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX%20Pre-Workshop%20Questionnaire.html" target="_blank" class="btn btn-eff" style="padding: 8px 14px; font-size: 12px;">WS1 &#8599;</a>
-        <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX%20WS2%20Pre-Workshop%20Questionnaire.html" target="_blank" class="btn btn-eff" style="padding: 8px 14px; font-size: 12px;">WS2 &#8599;</a>
-        <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX%20WS3%20Pre-Workshop%20Questionnaire.html" target="_blank" class="btn btn-eff" style="padding: 8px 14px; font-size: 12px;">WS3 &#8599;</a>
-        <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX%20WS4%20Pre-Workshop%20Questionnaire.html" target="_blank" class="btn btn-eff" style="padding: 8px 14px; font-size: 12px;">WS4 &#8599;</a>
-      </div>
-    </div>
 
   </div>
 </div>
@@ -378,18 +648,36 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: #0B0E13; col
       </div>
       <h3>CMX Command Center</h3>
       <div class="tc-sub">Program Mission Control</div>
-      <p class="desc">The flagship. Imports Qualtrics survey data, analyses 12+ stakeholders across 4 role types in real time, surfaces consensus gaps and risk signals, tracks 6 program stages, and manages the full workshop pipeline from a single dashboard. One consultant, full program visibility.</p>
-      <div class="tags">
-        <span class="tag">Dashboard</span>
-        <span class="tag">Pipeline</span>
-        <span class="tag">Intelligence</span>
-        <span class="tag">Risk Detection</span>
-        <span class="tag">6-Stage Tracking</span>
-        <span class="tag">Demo Data</span>
+      <p class="desc">A connected automation system that transforms how AKT prepares for and delivers CMX workshops. Collects structured stakeholder input via role-adaptive questionnaires, auto-analyses consensus, divergence, risk signals, and ADKAR readiness across all 8 governance decisions, then generates pre-populated PPTX decks, XLSX trackers, and HTML facilitator briefings — all seeded with real stakeholder data. One consultant, full program visibility across 6 workshop stages.</p>
+
+      <!-- Intelligence Engine Explainer -->
+      <div style="background: rgba(51,102,204,0.06); border: 1px solid rgba(51,102,204,0.15); border-radius: 10px; padding: 18px; margin-bottom: 14px;">
+        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--scale); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">&#129504; How the Intelligence Engine Works</div>
+        <p style="font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 10px;">The engine produces consultant-grade analysis, not just data counts. <strong style="color: rgba(255,255,255,0.8);">Role-weighted consensus</strong>: executive answers weighted 1.5&times; on governance decisions, technical answers weighted 1.5&times; on data decisions — reflecting real influence dynamics.</p>
+        <p style="font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 10px;"><strong style="color: rgba(255,255,255,0.8);">ADKAR stage mapping</strong> identifies where the change journey is weakest. <strong style="color: rgba(255,255,255,0.8);">Divergence detection</strong> surfaces hidden tensions between role pairs (Executive vs Regional, Technical vs Operational). <strong style="color: rgba(255,255,255,0.8);">Six CMX-specific risk categories</strong>: Sponsorship, Fatigue, Capacity, Data, Alignment, Adoption.</p>
+        <p style="font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.7;"><strong style="color: rgba(255,255,255,0.8);">Cascade intelligence</strong>: each workshop's outputs automatically seed the next workshop's inputs. WS1 governance decisions feed into WS2 stakeholder mapping, WS2 shapes survey design, WS3 guides platform configuration, WS4 enables decision workshops. Intelligence compounds across the program.</p>
       </div>
-      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <div class="tags">
+        <span class="tag">Role-Weighted Consensus</span>
+        <span class="tag">ADKAR Mapping</span>
+        <span class="tag">6 Risk Categories</span>
+        <span class="tag">Cascade Intelligence</span>
+        <span class="tag">3 Artifacts per Click</span>
+        <span class="tag">90% Prep Time Reduction</span>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
         <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX%20Command%20Center.html" target="_blank" class="btn btn-scale">Launch Command Center &#8599;</a>
         <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX%20Demo%20Guide.html" target="_blank" class="btn btn-ghost">Demo Guide</a>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px;">
+        <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX%20Intelligence%20Engine%20-%20Senior%20Team%20Introduction.pptx" target="_blank" class="file-card">
+          <span class="file-badge" style="background: rgba(51,102,204,0.2); color: #6b9ff5;">PPTX</span>
+          <span class="file-name">Senior Team Introduction</span>
+        </a>
+        <a href="https://ottovroeg-afk.github.io/cmx-command-center/cmx-one-pager.docx" target="_blank" class="file-card">
+          <span class="file-badge" style="background: rgba(51,102,204,0.2); color: #6b9ff5;">DOCX</span>
+          <span class="file-name">CMX Automation One-Pager</span>
+        </a>
       </div>
       <div class="sub-links">
         <div class="sub-links-title">All Command Center Components</div>
@@ -402,11 +690,85 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: #0B0E13; col
       </div>
     </div>
 
+    <!-- Demo: CMX Command Center -->
+    <div class="demo-section scale" style="grid-column: 1 / -1;">
+      <details open>
+        <summary>
+          <span style="color: var(--scale);">&#9656;</span>
+          Demo: Nextera Energy GMTP
+        </summary>
+        <div class="demo-content">
+          <div class="demo-title">Demo: Nextera Energy GMTP</div>
+          <div class="demo-desc">A grid modernisation program with 12 stakeholders across executive, operational, technical, and regional roles. Demo data is built into the tool.</div>
+
+          <div class="demo-steps">
+            <!-- Step 1 -->
+            <div class="demo-step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <div class="step-title">Open the Command Center</div>
+                <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX%20Command%20Center.html" target="_blank" class="btn btn-scale" style="margin-top: 8px;">Launch Command Center &#8599;</a>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="demo-step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <div class="step-title">Start Intelligence Engine</div>
+                <div class="step-text">Click 'Intelligence Engine' from the Dashboard quick actions.</div>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="demo-step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <div class="step-title">Configure</div>
+                <div class="step-text">In the Configure step, enter any client name. Click Next.</div>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="demo-step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <div class="step-title">Load Demo Data</div>
+                <div class="step-text">Click 'Load Nextera Demo Data (12 respondents)' to import simulated responses.</div>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="demo-step">
+              <div class="step-number">5</div>
+              <div class="step-content">
+                <div class="step-title">Analyze & Generate</div>
+                <div class="step-text">Click 'Analyze Responses' → review stakeholder intelligence → click 'Generate All 3 Artifacts'.</div>
+              </div>
+            </div>
+
+            <!-- Extra: Download data -->
+            <div class="demo-step">
+              <div class="step-number"></div>
+              <div class="step-content">
+                <div class="step-title">Download Raw Data (Optional)</div>
+                <div class="step-text" style="margin-bottom: 8px;">You can also download the raw CSV test data:</div>
+                <a href="https://ottovroeg-afk.github.io/cmx-command-center/Qualtrics%20Test%20Export%20-%20CMX%20WS1.csv" target="_blank" class="file-card">
+                  <span class="file-badge csv">CSV</span>
+                  <span class="file-name">Qualtrics Test Export - CMX WS1.csv</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div>
+
     <!-- EX Survey Intelligence -->
     <div class="tool-card scale">
       <div class="tc-top">
         <div class="icon">&#128200;</div>
-        <span class="badge badge-deploy">Needs Deploy</span>
+        <span class="badge badge-live">Live</span>
       </div>
       <h3>EX Survey Intelligence</h3>
       <div class="tc-sub">Employee Experience Analytics</div>
@@ -419,6 +781,68 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: #0B0E13; col
         <span class="tag">YoY Comparison</span>
       </div>
       <a href="https://ottovroeg-afk.github.io/cmx-command-center/EX_App_Standalone.html" target="_blank" class="btn btn-scale">Launch EX Intelligence &#8599;</a>
+    </div>
+
+    <!-- Demo: EX Survey Intelligence -->
+    <div class="demo-section scale" style="grid-column: 1 / -1;">
+      <details>
+        <summary>
+          <span style="color: var(--scale);">&#9656;</span>
+          Demo: Rivulis Irrigation — EX-25 Employee Engagement
+        </summary>
+        <div class="demo-content">
+          <div class="demo-title">Demo: Rivulis Irrigation EX-25</div>
+          <div class="demo-desc">A global irrigation company with 4,443 employee survey responses across multiple countries, business units, and job families. Full Qualtrics EX-25 format with 40 engagement questions, demographics, and TextiQ sentiment analysis on open-text responses.</div>
+
+          <div class="demo-steps">
+            <!-- Step 1 -->
+            <div class="demo-step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <div class="step-title">Download the Demo Data</div>
+                <div class="file-list">
+                  <a href="https://ottovroeg-afk.github.io/cmx-command-center/Rivulis_EX25_TestData.csv" target="_blank" class="file-card">
+                    <span class="file-badge csv">CSV</span>
+                    <span class="file-name">Rivulis_EX25_TestData.csv</span>
+                    <span style="font-size: 11px; color: rgba(255,255,255,0.25); margin-left: auto;">(4,443 responses)</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="demo-step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <div class="step-title">Open EX Survey Intelligence</div>
+                <a href="https://ottovroeg-afk.github.io/cmx-command-center/EX_App_Standalone.html" target="_blank" class="btn btn-scale" style="margin-top: 8px;">Launch EX Intelligence &#8599;</a>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="demo-step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <div class="step-title">Upload &amp; Configure</div>
+                <div class="step-instruction">
+                  Upload the Rivulis CSV file. The tool auto-detects the Qualtrics EX-25 format (3-row header: display names, variable labels, ImportId). Select demographic dimensions to analyse — try Country, Business Unit, Tenure Group, or Job Family. Set benchmark thresholds if desired.
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="demo-step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <div class="step-title">Explore the Analysis</div>
+                <div class="step-instruction">
+                  Review auto-classified engagement dimensions (strengths, concerns, watch items). Compare scores across countries and business units. Explore the TextiQ sentiment breakdown on open-text questions ("What does the company do well?" and "What should improve?"). Generate the executive report.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
     </div>
 
   </div>
@@ -511,33 +935,13 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: #0B0E13; col
 
 <hr class="divider">
 
-<!-- ====================================================================== -->
-<!-- ACTION REQUIRED -->
-<!-- ====================================================================== -->
-<div style="padding: 48px 0;">
-  <div class="action-box">
-    <h3>&#9888; Action Required: 3 Files Need to be Deployed</h3>
-    <p>Three standalone tools are built and working but not yet pushed to the GitHub repo. Until they're deployed, the launch buttons for QTM, Voice Studio, and EX Intelligence will show a 404. Here's what to do:</p>
-    <code>
-# In your local clone of the cmx-command-center repo:<br>
-cp EX_App_Standalone.html /path/to/cmx-command-center/<br>
-cp QTM_App.html /path/to/cmx-command-center/<br>
-cp akt-voice-studio.html /path/to/cmx-command-center/<br><br>
-git add .<br>
-git commit -m "Add standalone tools: EX, QTM, Voice Studio"<br>
-git push
-    </code>
-    <p style="margin-bottom: 0;">Once pushed, GitHub Pages will serve them within ~60 seconds and all links on this page will work.</p>
-  </div>
-</div>
-
 </div>
 
 <!-- ====== FOOTER ====== -->
 <div class="footer">
   Digital Companions — <a href="https://ottovroeg-afk.github.io/cmx-command-center/" target="_blank">AKT Global</a> — April 2026<br>
   Efficiency &middot; Scale &middot; Innovation — The three layers of AI-enabled advisory.<br>
-  <span style="margin-top: 6px; display: inline-block;">All demo data uses simulated Nextera Energy scenario. No client data is stored or transmitted.</span>
+  <span style="margin-top: 6px; display: inline-block;">Demo data uses simulated scenarios (NovaTel, Nextera, Rivulis). No client data is stored or transmitted.</span>
 </div>
 
 </body>
