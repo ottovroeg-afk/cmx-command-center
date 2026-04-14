@@ -376,18 +376,13 @@
     </div>
 </div>
 
-<section id="pres">
-    <div class="inner">
-        <!-- header moved to stage-header above -->
-        <div class="pbox fi">
-            <div class="ptop"><b>AI Taskforce &mdash; Direction Input</b><span id="pc">1 / 5</span></div>
-            <div class="pstage" id="ps"></div>
-            <div class="pdl"><span>Download the full presentation</span><a href="https://ottovroeg-afk.github.io/cmx-command-center/AKT_AI_Direction_Input.pptx" target="_blank">Download PPTX &darr;</a></div>
-            <div class="pctrl">
-                <button class="pbtn" id="pb" onclick="pn(-1)" disabled>&larr; Back</button>
-                <div class="pdots" id="pdo"></div>
-                <button class="pbtn" id="pf" onclick="pn(1)">Next &rarr;</button>
-            </div>
+<section id="pres" style="padding:2rem 2rem 1rem">
+    <div class="inner" style="max-width:1100px">
+        <div class="fi" style="border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.08);border:1px solid var(--bd)">
+            <iframe src="https://ottovroeg-afk.github.io/cmx-command-center/AKT_Direction_Input.html" style="width:100%;height:85vh;border:none;display:block" loading="lazy"></iframe>
+        </div>
+        <div style="text-align:center;margin-top:.8rem">
+            <a href="https://ottovroeg-afk.github.io/cmx-command-center/AKT_Direction_Input.html" target="_blank" style="font-size:.78rem;color:var(--mu);text-decoration:none;opacity:.6">Open full screen &nearr;</a>
         </div>
     </div>
 </section>
@@ -895,67 +890,7 @@ setTimeout(() => {
     ]);
 }, 100);
 
-// ═══ PRESENTATION — 5 SLIDES ═══
-const slides = [
-    // SLIDE 1: Five forces (bubbles)
-    {t:"Forces",h:"Five forces compressing AKT XM",b:`<p>The XM advisory space is under structural pressure from five directions. The window to act is 12&ndash;18 months.</p>
-        <div class="fbubs">
-            <div class="fbub c1"><div class="ftag">&darr; From Above</div><h4>Research giants automate advisory</h4><p>Ipsos &euro;1.2bn AI commitment. Kantar AI Lab: 50+ R&amp;D workstreams. Both automating the layer AKT sells.</p></div>
-            <div class="fbub c2"><div class="ftag">&nearr; From Below</div><h4>Platforms absorb partner tasks</h4><p>Qualtrics Experience Agents: 346% YoY growth. Survey design, analysis, reporting &mdash; automated.</p></div>
-            <div class="fbub c3"><div class="ftag">&nwarr; From Within</div><h4>Qualtrics captures advisory</h4><p>$6.75bn Press Ganey. QPN Consulting Track takes partner territory.</p></div>
-            <div class="fbub c4"><div class="ftag">&rarr; Shadow AI</div><h4>Ungoverned internal adoption</h4><p>91% of employees use AI; 13% of firms caught up. ~50 people on personal accounts.</p></div>
-            <div class="fbub c5"><div class="ftag">&larr; Regulatory</div><h4>EU AI Act: 2 August 2026</h4><p>Governance is a legal obligation. Not optional.</p></div>
-        </div>`},
-
-    // SLIDE 2: Evidence 1-3
-    {t:"Evidence 1&ndash;3",h:"The market is shifting &mdash; fast",b:`<div class="ev-grid">
-        <div class="ev-card"><h4>1. Where the value is moving</h4><p>AI compresses listening; the market pays for action. Listen drops from 70% to 10%. Act rises to 60-70%. AKT sits in Listen. The gap is existential.</p></div>
-        <div class="ev-card"><h4>2. The decision is speed and ambition</h4><p>Four scenarios tested. Recommended route: <b style="color:var(--o)">Start C &rarr; Pilot D &rarr; Option B at 6 months.</b> The only two levers leadership controls: implementation speed and business model change.</p></div>
-        <div class="ev-card"><h4>3. 46% efficiency &mdash; in delivery, not relationships</h4><p>34 tasks, 7 stages: 252h &rarr; 135.5h. Build/Configure gains 54%. Stakeholder alignment: only 33%. Biggest gains in repetitive production. Client relationships remain human.</p></div>
-    </div>`},
-
-    // SLIDE 3: Evidence 4-6
-    {t:"Evidence 4&ndash;6",h:"The failure patterns &mdash; and the moat",b:`<div class="ev-grid">
-        <div class="ev-card"><h4>4. 87% of AI projects fail to scale</h4><p>42% abandoned in 2025, up from 17%. 95% of gen AI pilots fail (MIT). Dominant failure: no governance, no gates. Governance before experimentation.</p></div>
-        <div class="ev-card"><h4>5. AI produces findings, not insights &mdash; that&rsquo;s the moat</h4><p>CSV in, KPIs out. The contextual judgement is AKT&rsquo;s brain. Defensible &mdash; but only if embedded into tools before someone else does.</p></div>
-        <div class="ev-card"><h4>6. No firm our size has cracked AI adoption</h4><p>85% of failures are strategic, not technical. No 20-person firm has published how they adopted AI. Building without precedent. Harder is the moat.</p></div>
-    </div>`},
-
-    // SLIDE 4: Short-term initiatives (5 cards)
-    {t:"Phase 1",h:"Short-term initiatives: now &rarr; 6 months",b:`<p style="margin-bottom:.8rem">Foundation. Governance first, then capability, then delivery transformation.</p>
-        <div class="init-grid">
-            <div class="init-card"><span class="init-num">1</span><h4>AI Governance Framework</h4><p>Assess &rarr; Pilot &rarr; Approve &rarr; Adopt. Data classification. EU AI Act compliance. Day 1 risk: personal AI accounts.</p></div>
-            <div class="init-card"><span class="init-num">2</span><h4>Team Upskilling</h4><p>7 role-specific programmes. Champions model. 80% adoption by Month 6. Every person builds with AI within 4 weeks.</p></div>
-            <div class="init-card"><span class="init-num">3</span><h4>AI-Augmented Proposals</h4><p>VBR dossiers auto-compiled. Proposals personalised per stakeholder. Quickest visible win: immediate time savings.</p></div>
-            <div class="init-card"><span class="init-num">4</span><h4>Knowledge Management</h4><p>200+ programme insights made AI-accessible. The firm&rsquo;s collective intelligence for every consultant.</p></div>
-            <div class="init-card"><span class="init-num">5</span><h4>Marketing Repositioning</h4><p>Not &lsquo;we plan to use AI&rsquo; &mdash; &lsquo;we already do.&rsquo; Internal tools as proof. New SOW language.</p></div>
-        </div>`},
-
-    // SLIDE 5: Long-term initiatives (5 cards)
-    {t:"Phase 2",h:"Long-term initiatives: 6 &rarr; 12+ months",b:`<p style="margin-bottom:.8rem">Only if Phase 1 foundations are solid. Each initiative has a gate decision.</p>
-        <div class="init-grid">
-            <div class="init-card"><span class="init-num">1</span><h4>Programme Intelligence Product</h4><p>First proprietary AI to market. Agentic programme monitoring. Subscription pricing.</p></div>
-            <div class="init-card"><span class="init-num">2</span><h4>Subscription Client Pilot</h4><p>One strategic client. Continuous intelligence, not project-based. Proves recurring revenue for Scenario B.</p></div>
-            <div class="init-card"><span class="init-num">3</span><h4>AI Governance as Client Offering</h4><p>87% fail. Sell what AKT built internally as structured advisory for clients.</p></div>
-            <div class="init-card"><span class="init-num">4</span><h4>Qualtrics Dual-Track Partner</h4><p>No Platinum partner holds both Consulting and Platform tracks. First-mover window: Q4 2026.</p></div>
-            <div class="init-card"><span class="init-num">5</span><h4>XM Benchmark Programme</h4><p>Cross-client anonymised benchmarks. AKT as XM community hub. Network effects.</p></div>
-        </div>`}
-];
-
-let ci=0;
-function rs(i){
-    const s=slides[i],st=document.getElementById('ps');
-    st.classList.add('fading');
-    setTimeout(()=>{st.innerHTML=`<span class="ptag">${s.t}</span><h3>${s.h}</h3>${s.b}`;st.classList.remove('fading')},220);
-    document.getElementById('pc').textContent=`${i+1} / ${slides.length}`;
-    document.getElementById('pb').disabled=(i===0);
-    document.getElementById('pf').disabled=(i===slides.length-1);
-    document.querySelectorAll('.pd').forEach((d,j)=>d.classList.toggle('on',j===i));
-}
-function pn(d){ci=Math.max(0,Math.min(slides.length-1,ci+d));rs(ci)}
-function gs(i){ci=i;rs(i)}
-(function(){const d=document.getElementById('pdo');slides.forEach((_,i)=>{const e=document.createElement('div');e.className='pd'+(i===0?' on':'');e.onclick=()=>gs(i);d.appendChild(e)});rs(0)})();
-document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')pn(1);if(e.key==='ArrowLeft')pn(-1)});
+// Presentation now links to standalone interactive HTML
 
 // ═══ XVM DEMO DATA ZIP ═══
 async function dlZip(btn){
