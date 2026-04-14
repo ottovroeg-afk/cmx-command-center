@@ -1065,64 +1065,58 @@
     }
 
     // Download QTM Demo Data
-    function downloadQTMDemo() {
-        const zip = new JSZip();
-
-        // Create sample survey data
-        const surveyData = `QuestionID,Question,Option,ResponseCount,Percentage
-Q1,How satisfied are you with our service?,Very Satisfied,450,45%
-Q1,How satisfied are you with our service?,Satisfied,350,35%
-Q1,How satisfied are you with our service?,Neutral,150,15%
-Q1,How satisfied are you with our service?,Dissatisfied,50,5%
-Q2,How likely are you to recommend us?,Very Likely,520,52%
-Q2,How likely are you to recommend us?,Likely,350,35%
-Q2,How likely are you to recommend us?,Unlikely,100,10%
-Q2,How likely are you to recommend us?,Very Unlikely,30,3%`;
-
-        // Create context document
-        const contextDoc = `AI TASKFORCE - QTM DEMO DATA
-========================================
-
-This dataset contains sample Qualtrics survey responses for demonstration purposes.
-
-DIMENSIONS ANALYZED:
-1. Satisfaction Index
-2. Recommendation Likelihood
-3. Engagement Score
-4. Brand Perception
-5. Service Quality
-6. Customer Effort
-7. Trust Index
-8. Value Perception
-9. Retention Risk
-10. Upsell Opportunity
-
-HOW TO USE:
-1. Open QTM application
-2. Drag survey_data.csv to the left input panel
-3. Drag this context file to the right input panel
-4. Click "Run Analysis"
-5. Review 10-dimensional insights and client-ready outputs
-
-EXPECTED OUTPUT:
-- Executive summary
-- Segmentation analysis
-- Trend analysis
-- Client-ready presentation deck`;
-
-        zip.file('survey_data.csv', surveyData);
-        zip.file('QTM_Analysis_Context.txt', contextDoc);
-
-        zip.generateAsync({ type: 'blob' }).then(function(content) {
-            const url = window.URL.createObjectURL(content);
+    async function downloadQTMDemo() {
+        const button = event.target;
+        button.disabled = true;
+        button.textContent = 'Creating ZIP...';
+        try {
+            const zip = new JSZip();
+            const surveyFolder = zip.folder('1_Survey_Data_Left_Panel');
+            const surveyFiles = [
+                'novatel_survey_export.csv',
+                'novatel_dashboard_export.csv',
+                'novatel_driver_analysis.csv',
+                'novatel_textiq_export.csv',
+                'novatel_tickets_export.csv'
+            ];
+            const contextFolder = zip.folder('2_Context_Documents_Right_Panel');
+            const contextFiles = [
+                'CX_Research_Briefing_NovaTel.txt',
+                'NovaTel_Annual_Report_2025.txt',
+                'Interview_CEO_Erik_van_der_Berg.txt',
+                'Interview_CFO_Maria_Santos.txt',
+                'Interview_CMO_Sara_Lindqvist.txt',
+                'Interview_COO_Thomas_Mueller.txt',
+                'European_Telecoms_CX_Benchmark_2025.txt'
+            ];
+            const baseUrl = 'https://ottovroeg-afk.github.io/cmx-command-center/';
+            for (const file of surveyFiles) {
+                try {
+                    const response = await fetch(baseUrl + file);
+                    if (response.ok) { surveyFolder.file(file, await response.blob()); }
+                } catch (e) { console.log('Could not fetch ' + file); }
+            }
+            for (const file of contextFiles) {
+                try {
+                    const response = await fetch(baseUrl + file);
+                    if (response.ok) { contextFolder.file(file, await response.blob()); }
+                } catch (e) { console.log('Could not fetch ' + file); }
+            }
+            const blob = await zip.generateAsync({ type: 'blob' });
+            const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'QTM_Demo_Data.zip';
-            document.body.appendChild(a);
+            a.download = 'NovaTel_QTM_Demo_Data.zip';
             a.click();
-            window.URL.revokeObjectURL(url);
-            document.body.removeChild(a);
-        });
+            URL.revokeObjectURL(url);
+            button.textContent = 'Demo Data ZIP';
+            button.disabled = false;
+        } catch (error) {
+            console.error('ZIP creation error:', error);
+            alert('Error creating ZIP. Check console.');
+            button.textContent = 'Demo Data ZIP';
+            button.disabled = false;
+        }
     }
 
     // Smooth scroll for anchor links
