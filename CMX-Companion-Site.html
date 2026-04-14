@@ -514,17 +514,31 @@
             </div>
         </div>
 
-        <!-- Voice Studio -->
+        <!-- Proposal Architect -->
         <div class="tool-big fi">
-            <div class="tool-img"><canvas id="cvVS" width="640" height="400"></canvas></div>
+            <div class="tool-img"><canvas id="cvPA" width="640" height="400"></canvas></div>
             <div class="tool-info">
                 <span class="tool-badge tbi">Innovation</span>
-                <h3>Voice Studio</h3>
-                <p>Turns static slide decks into interactive, distributable experiences with pre-recorded voice-over that lands the message personally &mdash; with emotion, context, and built-in feedback loops for every stakeholder who wasn&rsquo;t in the room.</p>
+                <h3>Proposal Architect</h3>
+                <p>Feed in an RFP or client brief and Proposal Architect generates a tailored AKT response &mdash; scope, pricing model, team composition, timeline, and risk matrix &mdash; pre-filled with relevant case studies and methodology references.</p>
                 <div class="tool-actions">
-                    <a href="https://ottovroeg-afk.github.io/cmx-command-center/akt-voice-studio.html" class="pill" target="_blank">Launch Voice Studio &rarr;</a>
+                    <span class="pill outline" style="opacity:.6;cursor:default">Coming Q3 2026</span>
                 </div>
-                <p class="tool-fb">Compare this to sending a PDF or slide deck by email. Does the guided voice-over change how the message lands?</p>
+                <p class="tool-fb">Would this change how quickly you respond to RFPs? What sections would you still want to write manually?</p>
+            </div>
+        </div>
+
+        <!-- Client Pulse Monitor -->
+        <div class="tool-big fi">
+            <div class="tool-img"><canvas id="cvCPM" width="640" height="400"></canvas></div>
+            <div class="tool-info">
+                <span class="tool-badge tbi">Innovation</span>
+                <h3>Client Pulse Monitor</h3>
+                <p>Continuous sentiment tracking across active engagements. Aggregates stakeholder feedback, delivery signals, and relationship health into a single risk-scored dashboard &mdash; flagging accounts that need attention before they escalate.</p>
+                <div class="tool-actions">
+                    <span class="pill outline" style="opacity:.6;cursor:default">Coming Q4 2026</span>
+                </div>
+                <p class="tool-fb">If you could see client sentiment in real-time across all your accounts, what would you do differently?</p>
             </div>
         </div>
     </div>
@@ -536,7 +550,7 @@
         <div><div class="sn">108</div><div class="sl">Tasks Stress-Tested</div></div>
         <div><div class="sn">57.6%</div><div class="sl">Delivery Compression</div></div>
         <div><div class="sn">7</div><div class="sl">Roles Mapped</div></div>
-        <div><div class="sn">4</div><div class="sl">Working Prototypes</div></div>
+        <div><div class="sn">5</div><div class="sl">Tools In Development</div></div>
         <div><div class="sn">5+5</div><div class="sl">Key Initiatives</div></div>
     </div>
 </div>
@@ -908,12 +922,18 @@ setTimeout(() => {
         {type:'card', x:175, y:210, w:220, h:90, title:'Gap Analysis', lines:['Development: -1.2 gap','Recognition: -0.9 gap','Workload: -0.7 gap']},
         {type:'card', x:410, y:210, w:220, h:90, title:'Recommendations', lines:['Launch manager coaching','Review career pathways','Introduce spot recognition']},
     ]);
-    drawToolPreview('cvVS', 'Voice Studio', 'NLP Engine', '#7B2DB8', [
-        {type:'sidebar', x:0, y:47, w:160, h:353, items:['Import','Processing','Themes','Sentiment','Entities','Clusters','Export'], active:2},
-        {type:'card', x:175, y:62, w:240, h:120, title:'Theme Extraction', lines:['Communication: 156 mentions','Onboarding: 98 mentions','Management: 87 mentions','Facilities: 45 mentions']},
-        {type:'chart', x:430, y:62, w:200, h:120, title:'Sentiment Distribution', bars:[.8,.3,.6,.2,.7,.5]},
-        {type:'card', x:175, y:200, w:455, h:80, title:'Key Insight', lines:['Strongest negative cluster: "onboarding process"','Linked to first-90-day attrition in 3 business units.','Recommended action: redesign Day 1-30 experience.']},
-        {type:'pill', x:175, y:300, w:120, label:'Export Insights'},
+    drawToolPreview('cvPA', 'Proposal', 'Architect', '#7B2DB8', [
+        {type:'sidebar', x:0, y:47, w:160, h:353, items:['RFP Import','Scope Builder','Team Match','Pricing','Case Studies','Risk Matrix','Export'], active:1},
+        {type:'card', x:175, y:62, w:240, h:120, title:'Auto-Generated Scope', lines:['Phase 1: Discovery (3 weeks)','Phase 2: Design & Build (6 weeks)','Phase 3: Launch & Embed (4 weeks)','Phase 4: Measure & Optimise (ongoing)']},
+        {type:'chart', x:430, y:62, w:200, h:120, title:'Win Probability', bars:[.85,.6,.45,.7,.9,.55]},
+        {type:'card', x:175, y:200, w:455, h:80, title:'Matched Case Studies', lines:['Nextera Energy — CMX Governance (92% match)','Unilever — EX Transformation (87% match)','Auto-populated from AKT knowledge base']},
+        {type:'pill', x:175, y:300, w:140, label:'Generate Proposal'},
+    ]);
+    drawToolPreview('cvCPM', 'Client Pulse', 'Monitor', '#D4513D', [
+        {type:'sidebar', x:0, y:47, w:160, h:353, items:['Portfolio','Accounts','Alerts','Sentiment','Feedback','Trends','Settings'], active:0},
+        {type:'chart', x:175, y:62, w:240, h:130, title:'Account Health (12 clients)', bars:[.9,.85,.7,.6,.45,.8,.75,.65,.5,.88,.72,.55]},
+        {type:'card', x:430, y:62, w:200, h:130, title:'Risk Alerts', lines:['⚠ Nextera: sponsor change','⚠ Unilever: delivery delay','✓ SAP: NPS +12 this quarter','✓ Shell: renewal confirmed']},
+        {type:'card', x:175, y:210, w:455, h:80, title:'Aggregate Pulse', lines:['Portfolio NPS: 62 (+4 QoQ)','At-risk accounts: 2 of 12','Avg engagement health: 7.4 / 10']},
     ]);
 }, 100);
 
