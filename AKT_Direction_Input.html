@@ -497,6 +497,18 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.anim').forEach(el => observer.observe(el));
 
+// Fallback: immediately show elements already in viewport on page load
+function revealVisible() {
+  document.querySelectorAll('.anim:not(.visible)').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('visible');
+    }
+  });
+}
+setTimeout(revealVisible, 100);
+window.addEventListener('load', revealVisible);
+
 // ── Scroll tracking ──
 const slides = document.querySelectorAll('.slide');
 const dots = document.querySelectorAll('.dot');
