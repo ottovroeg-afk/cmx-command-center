@@ -1,0 +1,14 @@
+{
+  "timestamp": "14 Apr 2026, 10:32 CET",
+  "items": [
+    "<b>Shadow AI exploding:</b> 80%+ of workers now use unapproved AI tools. Up from 41% in 2023 to 68% in latest data. Engineering teams at 79%.",
+    "<b>Only 36% of companies</b> have formal AI governance. 47% of employees access AI through personal/unmanaged accounts. AKT\u2019s estimated exposure is consistent with industry.",
+    "<b>Cost of inaction quantified:</b> average shadow AI data breach now $4.2M. Shadow AI-related breaches cost $670K more per incident than other breaches.",
+    "<b>79% of organisations face AI adoption challenges</b> (double-digit increase YoY). 54% of C-suite say AI adoption is \u2018tearing the company apart.\u2019"
+  ],
+  "sources": [
+    {"label": "JumpCloud", "url": "https://jumpcloud.com/blog/11-stats-about-shadow-ai-in-2026"},
+    {"label": "Writer.com", "url": "https://writer.com/blog/enterprise-ai-adoption-2026/"},
+    {"label": "Deloitte AI Report", "url": "https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html"}
+  ]
+}

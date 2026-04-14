@@ -4,1135 +4,998 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Taskforce | AKT Global</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --akt-blue: #1A6BA5;
-            --akt-green: #72982C;
-            --akt-sky: #89C8ED;
-            --akt-teal: #2F5D62;
-            --akt-slate: #5F6B73;
-            --akt-dark: #1B2A3D;
-            --akt-white: #FFFFFF;
-            --akt-light: #F4F7FA;
-            --akt-border: #DDE4EC;
-            --accent-orange: #E8920E;
-            --accent-purple: #7B2DB8;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--akt-light);
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* STICKY NAV BAR */
-        .top-bar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: var(--akt-dark);
-            color: var(--akt-white);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .top-bar-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.3rem;
-            letter-spacing: -0.5px;
-        }
-
-        .top-bar-right {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .top-bar-right a {
-            color: var(--akt-white);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-
-        .top-bar-right a:hover {
-            color: var(--akt-sky);
-        }
-
-        @media (max-width: 768px) {
-            .top-bar {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .top-bar-right {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* HERO SECTION */
-        .hero {
-            background: linear-gradient(135deg, var(--akt-dark) 0%, #243547 100%);
-            color: var(--akt-white);
-            padding: 5rem 2rem;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3.2rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        .hero .subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            color: #ccc;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-
-        .hero-meta {
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-
-        /* TIMELINE SECTION */
-        .section {
-            padding: 3rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--akt-dark);
-        }
-
-        .section-subtitle {
-            font-size: 1rem;
-            color: var(--akt-slate);
-            margin-bottom: 2.5rem;
-        }
-
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .timeline-label {
-            font-weight: 600;
-            color: var(--akt-dark);
-            font-size: 0.95rem;
-        }
-
-        .timeline-line {
-            position: absolute;
-            bottom: -0.25rem;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--akt-dark);
-            z-index: 0;
-        }
-
-        .timeline-marker {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 3px;
-            height: 24px;
-            background: var(--accent-orange);
-            z-index: 10;
-        }
-
-        .timeline-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .timeline-block {
-            padding: 1.8rem;
-            border-radius: 6px;
-            position: relative;
-        }
-
-        .timeline-block.week-1 {
-            background: #D4E8F7;
-        }
-
-        .timeline-block.week-2 {
-            background: #E0EFF9;
-        }
-
-        .timeline-block.week-3 {
-            background: #EBF6FC;
-        }
-
-        .timeline-block.week-4 {
-            background: var(--akt-dark);
-            border-left: 4px solid var(--accent-orange);
-        }
-
-        .timeline-block.week-4 .timeline-week-label {
-            color: var(--accent-orange);
-        }
-
-        .timeline-block.week-4 .timeline-title {
-            color: var(--akt-white);
-        }
-
-        .timeline-block.week-4 .timeline-description {
-            color: #ccc;
-        }
-
-        .timeline-week-label {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--accent-orange);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.6rem;
-        }
-
-        .timeline-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--akt-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-description {
-            font-size: 0.85rem;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        .timeline-note {
-            font-size: 0.9rem;
-            color: var(--akt-slate);
-            font-style: italic;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--akt-border);
-        }
-
-        /* DIGITAL COMPANIONS SECTION */
-        .companions-section {
-            background: var(--akt-white);
-        }
-
-        .category-pills {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .category-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.6rem 1.2rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--akt-white);
-        }
-
-        .category-pill.efficiency {
-            background: var(--akt-green);
-        }
-
-        .category-pill.scale {
-            background: var(--akt-blue);
-        }
-
-        .category-pill.innovation {
-            background: var(--accent-purple);
-        }
-
-        .pill-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-        }
-
-        .category-section {
-            margin-bottom: 3rem;
-        }
-
-        .category-header {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--akt-dark);
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .category-header::before {
-            content: '';
-            width: 4px;
-            height: 24px;
-            background: currentColor;
-            border-radius: 2px;
-        }
-
-        .tool-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .tool-card {
-            background: var(--akt-white);
-            border: 1px solid var(--akt-border);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            transition: box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .tool-card:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-        }
-
-        .tool-card-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--akt-border);
-        }
-
-        .tool-card-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 0.8rem;
-        }
-
-        .tool-card h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--akt-dark);
-        }
-
-        .tool-badge {
-            display: inline-block;
-            padding: 0.35rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--akt-white);
-        }
-
-        .tool-badge.efficiency {
-            background: var(--akt-green);
-        }
-
-        .tool-badge.scale {
-            background: var(--akt-blue);
-        }
-
-        .tool-badge.innovation {
-            background: var(--accent-purple);
-        }
-
-        .tool-description {
-            font-size: 0.9rem;
-            color: var(--akt-slate);
-            line-height: 1.5;
-        }
-
-        .tool-card-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .mockup-screen {
-            background: linear-gradient(135deg, #f5f5f5 0%, #efefef 100%);
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            color: #666;
-        }
-
-        .mockup-header {
-            background: var(--akt-dark);
-            color: var(--akt-white);
-            padding: 0.5rem 0.8rem;
-            border-radius: 3px;
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .mockup-content {
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-
-        .mockup-item {
-            background: rgba(255, 255, 255, 0.7);
-            padding: 0.6rem;
-            border-radius: 3px;
-            border-left: 2px solid var(--akt-blue);
-            font-size: 0.75rem;
-            color: #555;
-        }
-
-        .tool-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: auto;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: all 0.3s;
-            text-decoration: none;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .btn-primary {
-            background: var(--akt-blue);
-            color: var(--akt-white);
-        }
-
-        .btn-primary:hover {
-            background: #165290;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: #f0f0f0;
-            color: var(--akt-dark);
-            border: 1px solid #ddd;
-        }
-
-        .btn-secondary:hover {
-            background: #e8e8e8;
-        }
-
-        .btn-launch {
-            background: var(--akt-green);
-            color: var(--akt-white);
-        }
-
-        .btn-launch:hover {
-            background: #5f7e24;
-            transform: translateY(-2px);
-        }
-
-        .demo-toggle {
-            cursor: pointer;
-            padding: 1rem;
-            background: #f9f9f9;
-            border-top: 1px solid var(--akt-border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            color: var(--akt-dark);
-            user-select: none;
-            transition: background 0.2s;
-        }
-
-        .demo-toggle:hover {
-            background: #f0f0f0;
-        }
-
-        .demo-toggle .arrow {
-            transition: transform 0.3s;
-            display: inline-block;
-            font-size: 1.2rem;
-        }
-
-        .demo-toggle.open .arrow {
-            transform: rotate(90deg);
-        }
-
-        .demo-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            padding: 0 1rem;
-        }
-
-        .demo-content.open {
-            max-height: 600px;
-            padding: 1rem;
-        }
-
-        .demo-steps {
-            list-style: none;
-            padding: 0;
-        }
-
-        .demo-steps li {
-            padding: 0.6rem 0;
-            font-size: 0.9rem;
-            color: #555;
-            padding-left: 2rem;
-            position: relative;
-        }
-
-        .demo-steps li:before {
-            content: attr(data-step);
-            position: absolute;
-            left: 0;
-            font-weight: 700;
-            color: var(--akt-blue);
-            width: 1.5rem;
-        }
-
-        /* INNOVATION SECTION */
-        .innovation-section {
-            background: linear-gradient(to bottom, #f8f9fb 0%, #f2f4f8 100%);
-            border-top: 1px solid var(--akt-border);
-        }
-
-        .future-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .future-card {
-            background: var(--akt-white);
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 1.8rem;
-            transition: all 0.3s;
-        }
-
-        .future-card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .future-card h4 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--akt-dark);
-            margin-bottom: 0.8rem;
-        }
-
-        .future-card p {
-            font-size: 0.9rem;
-            color: #777;
-            line-height: 1.5;
-        }
-
-        .planned-badge {
-            display: inline-block;
-            background: #e8e8e8;
-            color: #666;
-            padding: 0.3rem 0.8rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-        }
-
-        /* STRATEGY LIBRARY SECTION */
-        .strategy-section {
-            background: var(--akt-white);
-        }
-
-        .strategy-intro {
-            margin-bottom: 2.5rem;
-        }
-
-        .deliverables-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .deliverable-card {
-            background: var(--akt-light);
-            border: 1px solid var(--akt-border);
-            border-radius: 8px;
-            padding: 2rem;
-            transition: box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .deliverable-card:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-        }
-
-        .deliverable-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .deliverable-card h4 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--akt-dark);
-            flex: 1;
-        }
-
-        .deliverable-badge {
-            display: inline-block;
-            background: var(--akt-blue);
-            color: var(--akt-white);
-            padding: 0.3rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            white-space: nowrap;
-            margin-left: 0.8rem;
-        }
-
-        .deliverable-badge.origin {
-            background: var(--accent-orange);
-        }
-
-        .deliverable-description {
-            font-size: 0.9rem;
-            color: var(--akt-slate);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-        }
-
-        .deliverable-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
-            color: #888;
-            margin-bottom: 1.2rem;
-        }
-
-        .deliverable-download {
-            align-self: flex-start;
-        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--o:#F59143;--oh:#E07E2F;--dk:#1B2A3D;--w:#FFF;--lt:#F7F8FA;--tx:#262626;--mu:#6B7280;--bd:#E5E7EB;--bl:#1A6BA5;--gr:#72982C;--pu:#7B2DB8;--rd:#DC2626;--ft:#1E3A5C}
+        html{scroll-behavior:smooth}
+        body{font-family:'Manrope',sans-serif;background:var(--w);color:var(--tx);line-height:1.6;overflow-x:hidden}
+
+        /* NAV */
+        .nav{position:sticky;top:0;z-index:900;background:var(--w);padding:.65rem 3rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bd)}
+        .nav-logo{font-weight:800;font-size:1.8rem;color:var(--o);text-decoration:none;letter-spacing:-1px}
+        .nav-r{display:flex;gap:1.8rem;align-items:center}
+        .nav-r a{color:var(--tx);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s}
+        .nav-r a:hover{color:var(--o)}
+        .ncta{background:var(--o)!important;color:var(--w)!important;padding:.5rem 1.3rem;border-radius:50px;font-weight:600!important}
+        .ncta:hover{background:var(--oh)!important}
+        .sbar{position:fixed;top:0;left:0;height:3px;background:var(--o);z-index:1001;transition:width .08s}
+        @media(max-width:768px){.nav{padding:.65rem 1.2rem}.nav-r a:not(.ncta){display:none}}
+
+        /* HERO — intelligence agents */
+        .hero{background:linear-gradient(135deg,var(--dk) 0%,#243B55 50%,var(--ft) 100%);color:var(--w);padding:3.5rem 2rem 2.5rem;min-height:auto;display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden}
+        .hdots{position:absolute;width:260px;height:260px;background-image:radial-gradient(circle,rgba(255,255,255,.06) 2px,transparent 2px);background-size:24px 24px;pointer-events:none}
+        .hdots:nth-child(1){top:20px;right:40px}.hdots:nth-child(2){bottom:20px;left:30px}
+        .hero-top{text-align:center;position:relative;z-index:2;margin-bottom:1.8rem}
+        .hero h1{font-weight:300;font-size:2.4rem;line-height:1.15;margin-bottom:.5rem}
+        .hero h1 span{color:var(--o);font-weight:700}
+        .hero .sub{font-size:.95rem;opacity:.7;line-height:1.7;max-width:620px;margin:0 auto}
+
+        /* Agent panel */
+        .agents-panel{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto}
+        .agents-row{display:flex;justify-content:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+        .agent{display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:all .4s;opacity:.55;filter:grayscale(.4);width:120px}
+        .agent.active{opacity:1;filter:none;transform:translateY(-4px)}
+        .agent:hover{opacity:.85;filter:none}
+        .agent-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;border:3px solid transparent;transition:all .4s;position:relative}
+        .agent.active .agent-avatar{border-color:var(--w);box-shadow:0 0 0 4px rgba(255,255,255,.15),0 4px 20px rgba(0,0,0,.3)}
+        .agent-avatar::after{content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:var(--w);opacity:0;transition:opacity .3s}
+        .agent.active .agent-avatar::after{opacity:1;animation:agent-pulse 1.5s infinite}
+        @keyframes agent-pulse{0%,100%{transform:translateX(-50%) scale(1);opacity:1}50%{transform:translateX(-50%) scale(1.4);opacity:.4}}
+        .agent-name{font-size:.68rem;font-weight:700;margin-top:.5rem;text-transform:uppercase;letter-spacing:.8px;transition:color .3s}
+        .agent.active .agent-name{color:var(--o)}
+        .agent-force{font-size:.58rem;opacity:.5;margin-top:.1rem;transition:opacity .3s}
+        .agent.active .agent-force{opacity:.8}
+
+        /* Agent briefing panel — dual block */
+        .agent-panel{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:0;max-width:880px;margin:0 auto;position:relative;overflow:hidden}
+        .agent-header{display:flex;align-items:center;gap:.8rem;padding:1.4rem 2rem 1rem;border-bottom:1px solid rgba(255,255,255,.06)}
+        .agent-hdr-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+        .agent-hdr-name{font-weight:700;font-size:.95rem}
+        .agent-hdr-role{font-size:.7rem;opacity:.5;margin-top:.1rem}
+        .agent-hdr-status{font-size:.58rem;font-weight:700;padding:.15rem .5rem;border-radius:50px;margin-left:auto;letter-spacing:.5px}
+        .agent-hdr-sched{font-size:.6rem;opacity:.4;margin-left:.6rem;display:flex;align-items:center;gap:.3rem}
+        .agent-hdr-sched::before{content:'';width:6px;height:6px;border-radius:50%;background:#22C55E;display:inline-block;animation:sched-blink 2s infinite}
+        @keyframes sched-blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+        /* Two blocks */
+        .agent-blocks{display:grid;grid-template-columns:1fr 1fr;min-height:240px}
+        .agent-block{padding:1.4rem 1.8rem;transition:opacity .3s}
+        .agent-block:first-child{border-right:1px solid rgba(255,255,255,.06)}
+        .block-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:.8rem;display:flex;align-items:center;gap:.4rem}
+        .block-label .bl-icon{font-size:.7rem}
+        .bl-research{color:#94A3B8}.bl-live{color:#22C55E}
+        .agent-block .item{font-size:.82rem;line-height:1.65;margin-bottom:.6rem;padding-left:.8rem;border-left:2px solid rgba(255,255,255,.08);opacity:.9}
+        .agent-block .item b{color:var(--o);font-weight:600}
+        .agent-block .item.highlight{border-left-color:var(--o)}
+
+        /* Live scan block */
+        .scan-meta{display:flex;align-items:center;gap:.6rem;margin-top:.8rem;padding-top:.6rem;border-top:1px solid rgba(255,255,255,.06)}
+        .scan-ts{font-size:.6rem;opacity:.4}
+        .scan-sources{font-size:.6rem;opacity:.4}
+        .scan-sources a{color:var(--o);text-decoration:none;opacity:.7}
+        .scan-sources a:hover{opacity:1}
+        .scan-loading{font-size:.75rem;opacity:.5;font-style:italic;padding:.8rem 0}
+        .scan-item{font-size:.82rem;line-height:1.65;margin-bottom:.6rem;padding-left:.8rem;border-left:2px solid rgba(34,197,94,.2);opacity:.9}
+        .scan-item b{color:#22C55E;font-weight:600}
+
+        /* Bottom bar */
+        .agent-bottom{display:flex;justify-content:center;gap:.6rem;padding:.8rem 2rem;border-top:1px solid rgba(255,255,255,.06)}
+        .agent-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:all .3s}
+        .agent-dot.on{background:var(--o);transform:scale(1.3)}
+        .agent-dot:hover{background:rgba(255,255,255,.4)}
+        .agent-explain{font-size:.62rem;opacity:.3;text-align:center;padding:.4rem 2rem .8rem}
+
+        .hero-cta{text-align:center;margin-top:1.5rem;position:relative;z-index:2}
+        @media(max-width:768px){.agent-blocks{grid-template-columns:1fr}.agent-block:first-child{border-right:none;border-bottom:1px solid rgba(255,255,255,.06)}}
+        @media(max-width:768px){.hero h1{font-size:1.8rem}.agents-row{gap:.6rem}.agent{width:90px}.agent-avatar{width:44px;height:44px;font-size:1.1rem}}
+        .pill{display:inline-block;background:var(--o);color:var(--w);padding:.8rem 2rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:.95rem;transition:all .2s;border:none;cursor:pointer;font-family:'Manrope',sans-serif}
+        .pill:hover{background:var(--oh);transform:translateY(-1px)}
+
+        /* SECTIONS */
+        section{padding:4.5rem 2rem;position:relative}
+        .inner{max-width:1200px;margin:0 auto}
+        .sh{text-align:center;margin-bottom:2rem}
+        .sh h2{font-weight:300;font-size:2.1rem;margin-bottom:.4rem}
+        .sh h2 span{color:var(--o);font-weight:600}
+        .sh p{color:var(--mu);font-size:.92rem;max-width:520px;margin:0 auto}
+        @media(max-width:768px){section{padding:3rem 1.2rem}.sh h2{font-size:1.6rem}}
+
+        /* PRESENTATION — bigger, wider */
+        #pres{background:var(--lt);padding:4rem 2rem}
+        .pbox{max-width:1100px;margin:0 auto;background:var(--w);border-radius:14px;box-shadow:0 4px 24px rgba(0,0,0,.06);overflow:hidden}
+        .ptop{background:var(--dk);color:var(--w);padding:.7rem 1.5rem;display:flex;justify-content:space-between;font-size:.85rem}
+        .ptop b{font-weight:600}
+        .pstage{min-height:420px;padding:2.5rem 3rem;transition:opacity .3s}
+        .pstage.fading{opacity:0}
+        .ptag{display:inline-block;background:var(--o);color:var(--w);font-size:.65rem;font-weight:700;padding:.15rem .6rem;border-radius:50px;margin-bottom:.7rem;text-transform:uppercase;letter-spacing:.5px}
+        .pstage h3{font-size:1.4rem;font-weight:700;margin-bottom:.6rem;line-height:1.3}
+        .pstage p{color:var(--mu);font-size:.88rem;line-height:1.65;margin-bottom:.45rem}
+        .pq{border-left:3px solid var(--o);padding-left:.9rem;margin:.6rem 0;font-style:italic;color:var(--tx);font-size:.88rem}
+
+        /* Force bubbles inside presentation slide 1 */
+        .fbubs{display:flex;flex-wrap:wrap;gap:.7rem;margin:1.2rem 0;justify-content:center}
+        .fbub{flex:0 0 calc(50% - .4rem);padding:1rem 1.1rem;border-radius:14px;background:var(--w);border:2px solid var(--bd);text-align:center;transition:all .3s}
+        .fbub:nth-child(5){flex:0 0 55%;margin:0 auto}
+        .fbub:hover{border-color:var(--o);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+        .fbub .ftag{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:.3rem}
+        .fbub h4{font-size:.85rem;font-weight:700;margin-bottom:.2rem}
+        .fbub p{font-size:.74rem;color:var(--mu);line-height:1.4}
+        .fbub.c1{border-color:#7C3AED20}.fbub.c1 .ftag{color:#7C3AED}
+        .fbub.c2{border-color:#DC262620}.fbub.c2 .ftag{color:#DC2626}
+        .fbub.c3{border-color:#1A6BA520}.fbub.c3 .ftag{color:#1A6BA5}
+        .fbub.c4{border-color:#D9770620}.fbub.c4 .ftag{color:#D97706}
+        .fbub.c5{border-color:#6B21A820}.fbub.c5 .ftag{color:#6B21A8}
+
+        /* Evidence grid — 3 per slide */
+        .ev-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;margin-top:1rem}
+        .ev-card{border-left:3px solid var(--o);padding:.9rem 1.1rem;background:var(--lt);border-radius:0 10px 10px 0}
+        .ev-card h4{font-size:.92rem;font-weight:700;margin-bottom:.25rem;color:var(--tx)}
+        .ev-card p{font-size:.82rem;color:var(--mu);line-height:1.55;margin:0}
+        .ev-card .ev-q{font-style:italic;color:var(--tx);margin-top:.3rem}
+
+        /* Initiative grid — 5 per slide */
+        .init-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1rem}
+        .init-card{padding:.8rem 1rem;border-radius:10px;background:var(--lt);border:1px solid var(--bd)}
+        .init-card:nth-child(5){grid-column:1/-1;max-width:55%;margin:0 auto}
+        .init-num{display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--o);color:var(--w);font-size:.7rem;font-weight:700;text-align:center;line-height:22px;margin-right:.4rem}
+        .init-card h4{font-size:.85rem;font-weight:700;display:inline;vertical-align:middle}
+        .init-card p{font-size:.76rem;color:var(--mu);line-height:1.45;margin-top:.3rem}
+        @media(max-width:768px){.init-grid{grid-template-columns:1fr}.init-card:nth-child(5){max-width:100%}}
+
+        /* Value shift bars (inside evidence) */
+        .vs{display:grid;grid-template-columns:1fr 28px 1fr;gap:.4rem;align-items:center;margin:.6rem 0}
+        .vc{background:var(--w);border-radius:8px;padding:.6rem;border:1px solid var(--bd)}
+        .vc h4{font-size:.65rem;text-transform:uppercase;letter-spacing:.4px;color:var(--mu);margin-bottom:.35rem}
+        .vb{display:flex;align-items:center;gap:.3rem;margin-bottom:.2rem}
+        .vf{height:6px;border-radius:3px}.vb span{font-size:.64rem;color:var(--mu);white-space:nowrap}
+        .va{text-align:center;font-size:1.1rem;color:var(--o)}
+
+        /* Controls */
+        .pctrl{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.5rem;border-top:1px solid var(--bd);background:var(--lt)}
+        .pbtn{background:var(--dk);color:var(--w);border:none;padding:.45rem 1.2rem;border-radius:50px;font-family:'Manrope',sans-serif;font-weight:600;font-size:.82rem;cursor:pointer;transition:all .2s}
+        .pbtn:hover{background:var(--o)}.pbtn:disabled{opacity:.2;cursor:not-allowed}.pbtn:disabled:hover{background:var(--dk)}
+        .pdots{display:flex;gap:8px;justify-content:center}
+        .pd{width:10px;height:10px;border-radius:50%;background:var(--bd);cursor:pointer;transition:all .2s}
+        .pd.on{background:var(--o);transform:scale(1.3)}.pd:hover{background:var(--o);opacity:.5}
+        .pdl{background:linear-gradient(135deg,var(--dk),#243B55);padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;color:var(--w);font-size:.85rem}
+        .pdl a{display:inline-block;background:var(--o);color:var(--w);padding:.4rem 1.2rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:.82rem;transition:all .2s}
+        .pdl a:hover{background:var(--oh)}
+
+        /* LIBRARY */
+        #lib{background:var(--w)}
+        .lib-part{margin-bottom:2.5rem}
+        .lib-part-label{display:inline-block;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--o);margin-bottom:.8rem;padding:.2rem .7rem;border:1.5px solid var(--o);border-radius:50px}
+        .lib-part-title{font-size:1.2rem;font-weight:700;margin-bottom:1rem;color:var(--dk)}
+        .lgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+        .lcard{border:1px solid var(--bd);border-radius:14px;padding:1.3rem 1.4rem;transition:all .3s;position:relative;overflow:hidden}
+        .lcard:hover{border-color:var(--o);box-shadow:0 6px 20px rgba(0,0,0,.05);transform:translateY(-2px)}
+        .lcard::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--bd);transition:background .3s}
+        .lcard:hover::before{background:var(--o)}
+        .lcard .ch-num{font-size:.6rem;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-bottom:.3rem}
+        .lcard h3{font-size:.92rem;font-weight:700;margin-bottom:.3rem;line-height:1.3}
+        .lcard p{font-size:.78rem;color:var(--mu);line-height:1.5;margin-bottom:.5rem}
+        .lcard .ch-tags{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.5rem}
+        .lcard .ch-tag{font-size:.6rem;padding:.1rem .45rem;border-radius:50px;background:var(--lt);color:var(--mu);font-weight:600}
+        .dlink{color:var(--o);text-decoration:none;font-weight:600;font-size:.82rem;display:inline-flex;align-items:center;gap:.2rem;transition:gap .2s}
+        .dlink:hover{gap:.4rem}
+        .lib-dl-full{text-align:center;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--bd)}
+        .lib-dl-full p{font-size:.85rem;color:var(--mu);margin-bottom:.8rem}
+
+        /* TOOLS — BIG CARDS */
+        #tools{background:var(--lt);padding:5rem 2rem}
+        .tool-big{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center;margin-bottom:3.5rem;max-width:1100px;margin-left:auto;margin-right:auto}
+        .tool-big:nth-child(even){direction:rtl}
+        .tool-big:nth-child(even)>*{direction:ltr}
+        .tool-img{border-radius:14px;overflow:hidden;border:1px solid var(--bd);box-shadow:0 8px 30px rgba(0,0,0,.08);background:var(--dk);aspect-ratio:16/10;position:relative}
+        .tool-img canvas{width:100%;height:100%;display:block}
+        .tool-badge{display:inline-block;font-size:.65rem;font-weight:700;padding:.15rem .55rem;border-radius:50px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.6rem}
+        .tbe{background:rgba(114,152,44,.1);color:var(--gr)}.tbs{background:rgba(26,107,165,.1);color:var(--bl)}.tbi{background:rgba(123,45,184,.1);color:var(--pu)}.tbo{background:rgba(245,145,67,.1);color:var(--o)}
+        .tool-info h3{font-size:1.4rem;font-weight:700;margin-bottom:.5rem}
+        .tool-info p{font-size:.92rem;color:var(--mu);line-height:1.6;margin-bottom:1rem}
+        .tool-actions{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
+        .tool-actions .pill{font-size:.88rem;padding:.6rem 1.6rem}
+        .tool-actions .outline{background:transparent;border:2px solid var(--o);color:var(--o)}
+        .tool-actions .outline:hover{background:var(--o);color:var(--w)}
+        .tool-fb{margin-top:1rem;font-size:.82rem;color:var(--mu);font-style:italic}
+        @media(max-width:768px){.tool-big,.tool-big:nth-child(even){grid-template-columns:1fr;direction:ltr}}
+
+        /* STATS */
+        .stats{background:var(--w);padding:2.2rem 2rem;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
+        .sgrid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;text-align:center}
+        .sn{font-size:1.8rem;font-weight:300;color:var(--o)}.sl{font-size:.72rem;color:var(--mu);margin-top:.15rem}
+        @media(max-width:768px){.sgrid{grid-template-columns:repeat(3,1fr)}}
+
+        /* FEEDBACK */
+        #fb{background:linear-gradient(135deg,var(--dk),#243B55);color:var(--w);padding:4.5rem 2rem;text-align:center}
+        #fb h2{font-weight:300;font-size:2rem;margin-bottom:.6rem}#fb h2 span{color:var(--o);font-weight:600}
+        #fb p{opacity:.7;max-width:440px;margin:0 auto 1.6rem}
 
         /* FOOTER */
-        footer {
-            background: var(--akt-dark);
-            color: var(--akt-white);
-            padding: 2rem;
-            text-align: center;
-            font-size: 0.9rem;
-        }
+        .foot{background:var(--ft);color:var(--w);padding:2.2rem 2rem}
+        .fgrid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2rem}
+        .flogo{font-weight:800;font-size:1.4rem;margin-bottom:.25rem}
+        .foot p{opacity:.5;font-size:.8rem;line-height:1.5}
+        .foot h4{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:.4rem;opacity:.4}
+        .foot a{color:var(--w);text-decoration:none;font-size:.82rem;opacity:.65;display:block;margin-bottom:.25rem}
+        .foot a:hover{opacity:1;color:var(--o)}
+        .fbot{max-width:1100px;margin:1rem auto 0;padding-top:.8rem;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;font-size:.72rem;opacity:.3}
+        @media(max-width:768px){.fgrid{grid-template-columns:1fr;gap:1.5rem}}
 
-        footer p {
-            margin-bottom: 0.5rem;
-        }
-
-        footer a {
-            color: var(--akt-sky);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .timeline-container {
-                grid-template-columns: 1fr;
-            }
-
-            .tool-cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .future-cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .deliverables-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .category-pills {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
+        .fi{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}.fi.vis{opacity:1;transform:translateY(0)}
     </style>
 </head>
 <body>
 
-<!-- STICKY NAV BAR -->
-<div class="top-bar">
-    <div class="top-bar-left">
-        <div class="logo">AI Taskforce</div>
-        <span>AKT Global</span>
+<div class="sbar" id="sbar"></div>
+<nav class="nav">
+    <a href="https://aktglobal.com" class="nav-logo" target="_blank">akt</a>
+    <div class="nav-r">
+        <a href="#pres">Strategy</a><a href="#lib">Library</a><a href="#tools">Companions</a><a href="#fb">Feedback</a>
+        <a href="https://aktglobal.com/contact/" class="ncta" target="_blank">Contact Us</a>
     </div>
-    <div class="top-bar-right">
-        <a href="#companions">Digital Companions</a>
-        <a href="#strategy">Strategy Library</a>
+</nav>
+
+<!-- HERO — five intelligence agents: baseline research + live scanning -->
+<section class="hero" id="home">
+    <div class="hdots"></div><div class="hdots"></div>
+    <div class="hero-top">
+        <h1>Five forces. Five agents.<br>Always <span>scanning</span>.</h1>
+        <p class="sub">Each agent monitors one strategic force compressing AKT&rsquo;s XM practice. The left panel shows baseline intelligence from our research. The right panel shows what the agent found on its latest automated scan.</p>
+    </div>
+
+    <div class="agents-panel">
+        <div class="agents-row" id="agentsRow">
+            <div class="agent active" data-idx="0" onclick="setAgent(0)">
+                <div class="agent-avatar" style="background:linear-gradient(135deg,#7C3AED,#5B21B6)">&#128269;</div>
+                <div class="agent-name">Market Watch</div>
+                <div class="agent-force">Research Giants</div>
+            </div>
+            <div class="agent" data-idx="1" onclick="setAgent(1)">
+                <div class="agent-avatar" style="background:linear-gradient(135deg,#DC2626,#991B1B)">&#9881;</div>
+                <div class="agent-name">Platform Watch</div>
+                <div class="agent-force">XM Platforms</div>
+            </div>
+            <div class="agent" data-idx="2" onclick="setAgent(2)">
+                <div class="agent-avatar" style="background:linear-gradient(135deg,#1A6BA5,#0E4D76)">&#129309;</div>
+                <div class="agent-name">Partner Watch</div>
+                <div class="agent-force">Qualtrics</div>
+            </div>
+            <div class="agent" data-idx="3" onclick="setAgent(3)">
+                <div class="agent-avatar" style="background:linear-gradient(135deg,#D97706,#92400E)">&#128065;</div>
+                <div class="agent-name">Internal Watch</div>
+                <div class="agent-force">Shadow AI</div>
+            </div>
+            <div class="agent" data-idx="4" onclick="setAgent(4)">
+                <div class="agent-avatar" style="background:linear-gradient(135deg,#6B21A8,#4C1D95)">&#9878;</div>
+                <div class="agent-name">Compliance Watch</div>
+                <div class="agent-force">EU AI Act</div>
+            </div>
+        </div>
+
+        <!-- Agent briefing panel -->
+        <div class="agent-panel" id="agentPanel">
+            <div class="agent-header" id="agentHeader"></div>
+            <div class="agent-blocks" id="agentBlocks"></div>
+            <div class="agent-bottom" id="agentDots"></div>
+        </div>
+        <div class="agent-explain">Each agent runs a scheduled scan via Claude &mdash; searching the web for the latest signals on its assigned force. Baseline intelligence is fixed from the AI Futures Scenario Model.</div>
+    </div>
+
+    <div class="hero-cta">
+        <button class="pill" onclick="document.getElementById('pres').scrollIntoView({behavior:'smooth'})">See the evidence &darr;</button>
+    </div>
+</section>
+
+<!-- PRESENTATION — 5 slides only -->
+<section id="pres">
+    <div class="inner">
+        <div class="sh fi"><h2>The <span>Strategy</span></h2><p>Five forces. Six evidence points. Ten initiatives. Five slides.</p></div>
+        <div class="pbox fi">
+            <div class="ptop"><b>AI Taskforce &mdash; Direction Input</b><span id="pc">1 / 5</span></div>
+            <div class="pstage" id="ps"></div>
+            <div class="pdl"><span>Download the full presentation</span><a href="https://ottovroeg-afk.github.io/cmx-command-center/AKT_AI_Direction_Input_Updated.pptx" target="_blank">Download PPTX &darr;</a></div>
+            <div class="pctrl">
+                <button class="pbtn" id="pb" onclick="pn(-1)" disabled>&larr; Back</button>
+                <div class="pdots" id="pdo"></div>
+                <button class="pbtn" id="pf" onclick="pn(1)">Next &rarr;</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LIBRARY -->
+<section id="lib">
+    <div class="inner">
+        <div class="sh fi"><h2>XM AI <span>Library</span></h2><p>The AI Futures Scenario Model &mdash; 15 chapters of market intelligence, competitive analysis, scenarios, and roadmap. Explore each chapter below.</p></div>
+
+        <!-- EXECUTIVE SUMMARY -->
+        <div class="lib-part fi">
+            <div class="lgrid">
+                <div class="lcard" style="grid-column:1/-1;max-width:680px;margin:0 auto">
+                    <div class="ch-num">Overview</div>
+                    <h3>Executive Summary</h3>
+                    <p>The XM advisory market is shifting faster than most firms have acknowledged. AI is compressing the value chain from intake to insight. This document helps leadership make a grounded, informed decision about AI adoption. Four scenarios, one recommendation: Start C, Pilot D, Option B at 6 months.</p>
+                    <div class="ch-tags"><span class="ch-tag">4 Scenarios</span><span class="ch-tag">108 Tasks</span><span class="ch-tag">7 Roles</span><span class="ch-tag">5 Workstreams</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PART I -->
+        <div class="lib-part fi">
+            <span class="lib-part-label">Part I</span>
+            <div class="lib-part-title">Where the World Is Going</div>
+            <div class="lgrid">
+                <div class="lcard">
+                    <div class="ch-num">Chapter 1</div>
+                    <h3>The XM Industry + AI in 18 Months</h3>
+                    <p>Market sizing (CXM $15&ndash;22bn, EXM $6.7bn, VoC $9.5bn), how AI restructures the TAM, buyer behaviour shifts, and the pilot-to-production gap that kills 87% of projects.</p>
+                    <div class="ch-tags"><span class="ch-tag">Market Sizing</span><span class="ch-tag">TAM Shift</span><span class="ch-tag">Buyer Trends</span></div>
+                </div>
+                <div class="lcard">
+                    <div class="ch-num">Chapter 2</div>
+                    <h3>Competitor Deep Dive</h3>
+                    <p>Five competitors across AI investment, product portfolio, market positioning, and Qualtrics relationship. Ipsos (&euro;1.2bn AI), Kantar (AI Lab), Zill, Farlinium, and lessons for AKT.</p>
+                    <div class="ch-tags"><span class="ch-tag">Ipsos</span><span class="ch-tag">Kantar</span><span class="ch-tag">Zill</span><span class="ch-tag">Farlinium</span></div>
+                </div>
+                <div class="lcard">
+                    <div class="ch-num">Chapter 3</div>
+                    <h3>The Qualtrics Platform &mdash; Now and Next</h3>
+                    <p>Partner Summit 2026 intelligence. Experience Agents in production (346% YoY). QPN partner tracks. Where partners create value vs. where Qualtrics commoditises it.</p>
+                    <div class="ch-tags"><span class="ch-tag">Experience Agents</span><span class="ch-tag">QPN</span><span class="ch-tag">Partner Value</span></div>
+                </div>
+                <div class="lcard">
+                    <div class="ch-num">Chapter 4</div>
+                    <h3>What AI Training Actually Delivers</h3>
+                    <p>The evidence on training ROI, the execution gap between investment and capability, and what this means for AKT&rsquo;s 50-person team where poor adoption by 3&ndash;4 people creates meaningful drag.</p>
+                    <div class="ch-tags"><span class="ch-tag">Training ROI</span><span class="ch-tag">Adoption</span></div>
+                </div>
+                <div class="lcard">
+                    <div class="ch-num">Chapter 5</div>
+                    <h3>What AKT Does Today &mdash; CX &amp; EX Baseline</h3>
+                    <p>The 108-task stress test: 7 roles, 5 workstreams, 252 hours modelled. 30 tasks rated Transformative, 62 High Impact, 16 Moderate. Where value concentrates and where it is vulnerable.</p>
+                    <div class="ch-tags"><span class="ch-tag">108 Tasks</span><span class="ch-tag">Stress Test</span><span class="ch-tag">7 Roles</span></div>
+                </div>
+                <div class="lcard">
+                    <div class="ch-num">Chapter 5A</div>
+                    <h3>The Human Layer &mdash; Why Change Activation Is the Strategic Asset</h3>
+                    <p>Why 87% of AI projects fail. The CMX&trade; evolution from tracking to activation. Four adoption patterns in AKT&rsquo;s team. Wellbeing scenarios. The case that activation &mdash; not analysis &mdash; is AKT&rsquo;s moat.</p>
+                    <div class="ch-tags"><span class="ch-tag">CMX&trade;</span><span class="ch-tag">Adoption</span><span class="ch-tag">Wellbeing</span><span class="ch-tag">Moat</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PART II -->
+        <div class="lib-part fi">
+            <span class="lib-part-label">Part II</span>
+            <div class="lib-part-title">Four Scenarios</div>
+            <div class="lgrid">
+                <div class="lcard">
+                    <div class="ch-num">Chapter 6</div>
+                    <h3>The 2&times;2 Matrix &mdash; Design and Logic</h3>
+                    <p>Two axes: transformation speed (governed &harr; aggressive) and revenue model (time-based &harr; outcome-based). Why these axes separate the only two decisions leadership can make.</p>
+                    <div class="ch-tags"><span class="ch-tag">Matrix</span><span class="ch-tag">Speed</span><span class="ch-tag">Revenue Model</span></div>
+                </div>
+                <div class="lcard">
+                    <div class="ch-num">Chapter 7</div>
+                    <h3>Scenario A &mdash; Accelerated Practice</h3>
+                    <p>Aggressive speed + time-based billing. All 7 roles get AI in 60 days. Delivery doubles. But pricing pressure follows: if you deliver in half the time, clients ask why they pay the same.</p>
+                    <div class="ch-tags"><span class="ch-tag">Fast</span><span class="ch-tag">Same Model</span><span class="ch-tag">Risk: Pricing</span></div>
+                </div>
+                <div class="lcard">
+                    <div class="ch-num">Chapter 8</div>
+                    <h3>Scenario B &mdash; New Company</h3>
+                    <p>Aggressive speed + new revenue model. 108 tasks restructured around the human layer. CMX&trade; gains predictive capability. Subscription pricing. High reward, high risk.</p>
+                    <div class="ch-tags"><span class="ch-tag">Reinvention</span><span class="ch-tag">Subscription</span><span class="ch-tag">High Risk</span></div>
+                </div>
+                <div class="lcard">
+                    <div class="ch-num">Chapter 9</div>
+                    <h3>Scenario C &mdash; Smarter Practice</h3>
+                    <p>Governed pace + time-based. AI phased with quality gates. CMX&trade; applied internally. The foundation that every other scenario depends on.</p>
+                    <div class="ch-tags"><span class="ch-tag">Foundation</span><span class="ch-tag">Governed</span><span class="ch-tag">Low Risk</span></div>
+                </div>
+                <div class="lcard">
+                    <div class="ch-num">Chapter 10</div>
+                    <h3>Scenario D &mdash; Quiet Transition</h3>
+                    <p>Governed pace + outcome-based pilot. Everything in C plus one real client on outcome-based pricing. The proof point that unlocks B.</p>
+                    <div class="ch-tags"><span class="ch-tag">Pilot</span><span class="ch-tag">Proof Point</span><span class="ch-tag">C &rarr; D &rarr; B</span></div>
+                </div>
+                <div class="lcard">
+                    <div class="ch-num">Chapter 11</div>
+                    <h3>Cross-Scenario Comparison</h3>
+                    <p>Side-by-side analysis across all four scenarios. Mapping to the original S0&ndash;S3 model used in the interactive deck.</p>
+                    <div class="ch-tags"><span class="ch-tag">Comparison</span><span class="ch-tag">S0&ndash;S3 Map</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PART III -->
+        <div class="lib-part fi">
+            <span class="lib-part-label">Part III</span>
+            <div class="lib-part-title">Validation &amp; Decision Framework</div>
+            <div class="lgrid">
+                <div class="lcard">
+                    <div class="ch-num">Chapter 12</div>
+                    <h3>Questions for the Board</h3>
+                    <p>The questions leadership must answer before a scenario can be selected: speed &amp; risk appetite, commercial model, Qualtrics relationship, people &amp; governance.</p>
+                    <div class="ch-tags"><span class="ch-tag">Board Questions</span><span class="ch-tag">Decision Gates</span></div>
+                </div>
+                <div class="lcard">
+                    <div class="ch-num">Chapter 13</div>
+                    <h3>Investment Scenarios per Role</h3>
+                    <p>What changes per role under each scenario. Role-by-role impact mapping across the four strategic paths.</p>
+                    <div class="ch-tags"><span class="ch-tag">Role Impact</span><span class="ch-tag">Investment</span></div>
+                </div>
+                <div class="lcard">
+                    <div class="ch-num">Chapter 14</div>
+                    <h3>The AI Governance Curve</h3>
+                    <p>The fixed governance team, pilot-to-production criteria, and EU AI Act regulatory context (2 August 2026). The operational backbone for all scenarios.</p>
+                    <div class="ch-tags"><span class="ch-tag">Governance</span><span class="ch-tag">EU AI Act</span><span class="ch-tag">Gates</span></div>
+                </div>
+                <div class="lcard">
+                    <div class="ch-num">Chapter 15</div>
+                    <h3>Decision Pack</h3>
+                    <p>Three-page executive summary. The matrix, one-paragraph scenario summaries, top 10 validation questions, and recommended next steps.</p>
+                    <div class="ch-tags"><span class="ch-tag">Decision</span><span class="ch-tag">Exec Summary</span><span class="ch-tag">Next Steps</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download full document -->
+        <div class="lib-dl-full fi">
+            <p>Want the complete document? Download the full 15-chapter scenario model.</p>
+            <a href="https://ottovroeg-afk.github.io/cmx-command-center/AKT_AI_Futures_Scenario_Model.docx" class="pill" target="_blank">Download Full DOCX &darr;</a>
+        </div>
+    </div>
+</section>
+
+<!-- TOOLS — BIG FORMAT WITH SCREENSHOTS -->
+<section id="tools">
+    <div class="inner">
+        <div class="sh fi"><h2>Digital <span>Companions</span></h2><p>Four AI-powered tools built by the Taskforce. Try them. Break them. Tell us what works.</p></div>
+
+        <div class="cat-legend fi" style="display:flex;gap:1.5rem;justify-content:center;margin-bottom:2.5rem;flex-wrap:wrap">
+            <div style="text-align:center;max-width:220px">
+                <span class="tool-badge tbo" style="font-size:.72rem;padding:.2rem .7rem">Efficiency</span>
+                <p style="font-size:.78rem;color:var(--mu);margin-top:.35rem;line-height:1.45">Compresses analyst hours into minutes. Same quality, fraction of the time.</p>
+            </div>
+            <div style="text-align:center;max-width:220px">
+                <span class="tool-badge tbs" style="font-size:.72rem;padding:.2rem .7rem">Scale</span>
+                <p style="font-size:.78rem;color:var(--mu);margin-top:.35rem;line-height:1.45">Turns single-project tools into multi-programme intelligence platforms.</p>
+            </div>
+            <div style="text-align:center;max-width:220px">
+                <span class="tool-badge tbi" style="font-size:.72rem;padding:.2rem .7rem">Innovation</span>
+                <p style="font-size:.78rem;color:var(--mu);margin-top:.35rem;line-height:1.45">New capabilities that didn&rsquo;t exist before AI. Net-new value for clients.</p>
+            </div>
+        </div>
+
+        <!-- XVM -->
+        <div class="tool-big fi">
+            <div class="tool-img"><canvas id="cvXVM" width="640" height="400"></canvas></div>
+            <div class="tool-info">
+                <span class="tool-badge tbo">Efficiency</span>
+                <h3>XVM &mdash; Experience Value Mining</h3>
+                <p>Upload your Qualtrics survey exports and context documents. XVM produces executive-ready thematic analysis, driver models, and strategic recommendations &mdash; in minutes instead of days.</p>
+                <div class="tool-actions">
+                    <a href="https://ottovroeg-afk.github.io/cmx-command-center/QTM.html" class="pill" target="_blank">Launch XVM &rarr;</a>
+                    <button class="pill outline" onclick="dlZip(this)">Download Demo Data</button>
+                </div>
+                <p class="tool-fb">Try it with the NovaTel demo dataset, then tell us: does the output match what an analyst would produce?</p>
+            </div>
+        </div>
+
+        <!-- CMX -->
+        <div class="tool-big fi">
+            <div class="tool-img"><canvas id="cvCMX" width="640" height="400"></canvas></div>
+            <div class="tool-info">
+                <span class="tool-badge tbs">Scale</span>
+                <h3>CMX Command Center</h3>
+                <p>The unified change management intelligence layer. Connects ADKAR assessments, Change Favourability Index, and stakeholder sentiment into a single decision-making dashboard.</p>
+                <div class="tool-actions">
+                    <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX-Command-Center.html" class="pill" target="_blank">Launch CMX &rarr;</a>
+                </div>
+                <p class="tool-fb">Does this give you better visibility into change readiness than your current toolkit?</p>
+            </div>
+        </div>
+
+        <!-- EX App -->
+        <div class="tool-big fi">
+            <div class="tool-img"><canvas id="cvEX" width="640" height="400"></canvas></div>
+            <div class="tool-info">
+                <span class="tool-badge tbe">Scale</span>
+                <h3>EX Intelligence App</h3>
+                <p>Employee experience analytics with AI-powered gap detection, trend forecasting, and automated stakeholder reporting across the full engagement lifecycle.</p>
+                <div class="tool-actions">
+                    <a href="https://ottovroeg-afk.github.io/cmx-command-center/EX-App.html" class="pill" target="_blank">Launch EX App &rarr;</a>
+                </div>
+                <p class="tool-fb">Could this replace or supplement the EX reporting you currently deliver to clients?</p>
+            </div>
+        </div>
+
+        <!-- Voice Studio -->
+        <div class="tool-big fi">
+            <div class="tool-img"><canvas id="cvVS" width="640" height="400"></canvas></div>
+            <div class="tool-info">
+                <span class="tool-badge tbi">Innovation</span>
+                <h3>Voice Studio</h3>
+                <p>Turns static slide decks into interactive, distributable experiences with pre-recorded voice-over that lands the message personally &mdash; with emotion, context, and built-in feedback loops for every stakeholder who wasn&rsquo;t in the room.</p>
+                <div class="tool-actions">
+                    <a href="https://ottovroeg-afk.github.io/cmx-command-center/Voice-Studio.html" class="pill" target="_blank">Launch Voice Studio &rarr;</a>
+                </div>
+                <p class="tool-fb">Compare this to sending a PDF or slide deck by email. Does the guided voice-over change how the message lands?</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<div class="stats fi">
+    <div class="sgrid">
+        <div><div class="sn">108</div><div class="sl">Tasks Stress-Tested</div></div>
+        <div><div class="sn">57.6%</div><div class="sl">Delivery Compression</div></div>
+        <div><div class="sn">7</div><div class="sl">Roles Mapped</div></div>
+        <div><div class="sn">4</div><div class="sl">Working Prototypes</div></div>
+        <div><div class="sn">5+5</div><div class="sl">Key Initiatives</div></div>
     </div>
 </div>
 
-<!-- HERO SECTION -->
-<section class="hero">
-    <h1>AI Taskforce</h1>
-    <p class="subtitle">How AI reshapes our Qualtrics partnership, delivery model, and revenue.</p>
-    <p class="hero-meta">April 2026 · Prepared for AKT Leadership</p>
-</section>
-
-<!-- TIMELINE SECTION -->
-<section class="section">
-    <h2 class="section-title">Four-Week Delivery Timeline</h2>
-    <p class="section-subtitle">From use-case mapping to decision-ready roadmap</p>
-
-    <div class="timeline-header">
-        <span class="timeline-label">March 2026</span>
-        <span class="timeline-label">April</span>
-        <div class="timeline-line"></div>
-        <div class="timeline-marker"></div>
-    </div>
-
-    <div class="timeline-container">
-        <div class="timeline-block week-1">
-            <div class="timeline-week-label">Week 1</div>
-            <div class="timeline-title">Use case mapping</div>
-            <div class="timeline-description">AI tool audit · all AKT roles</div>
-        </div>
-        <div class="timeline-block week-2">
-            <div class="timeline-week-label">Week 2</div>
-            <div class="timeline-title">Guardrail framework</div>
-            <div class="timeline-description">Infrastructure decisions</div>
-        </div>
-        <div class="timeline-block week-3">
-            <div class="timeline-week-label">Week 3</div>
-            <div class="timeline-title">IP + commercial + scenarios</div>
-            <div class="timeline-description">6-12 month futures</div>
-        </div>
-        <div class="timeline-block week-4">
-            <div class="timeline-week-label">Week 4 · 1 Apr</div>
-            <div class="timeline-title">Roadmap + MVP scope</div>
-            <div class="timeline-description">Decision-ready set to COO</div>
-        </div>
-    </div>
-
-    <p class="timeline-note">See the Strategy Library below for the full evidence base and deliverables.</p>
-</section>
-
-<!-- DIGITAL COMPANIONS SECTION -->
-<section class="section companions-section" id="companions">
-    <h2 class="section-title">Digital Companions</h2>
-    <p class="section-subtitle">Single-file HTML apps · Zero server dependency · Privacy by design</p>
-
-    <div class="category-pills">
-        <div class="category-pill efficiency">
-            <span class="pill-dot"></span> Efficiency
-        </div>
-        <div class="category-pill scale">
-            <span class="pill-dot"></span> Scale
-        </div>
-        <div class="category-pill innovation">
-            <span class="pill-dot"></span> Innovation
-        </div>
-    </div>
-
-    <!-- EFFICIENCY TOOLS -->
-    <div class="category-section">
-        <h3 class="category-header" style="color: var(--akt-green);">Efficiency Tools</h3>
-        <div class="tool-cards-grid">
-            <!-- QTM -->
-            <div class="tool-card">
-                <div class="tool-card-header">
-                    <div class="tool-card-title">
-                        <h3>QTM — Qualtrics Translator Machine</h3>
-                        <span class="tool-badge efficiency">Efficiency</span>
-                    </div>
-                    <p class="tool-description">Transforms raw Qualtrics exports into strategic client-ready insights across 10 analytical dimensions</p>
-                </div>
-                <div class="tool-card-content">
-                    <div class="mockup-screen">
-                        <div class="mockup-header">QTM Workflow</div>
-                        <div class="mockup-content">
-                            <div class="mockup-item">📤 Upload Data — CSV, XLS, TXT</div>
-                            <div class="mockup-item">⚙️ Analyzing — 10D analytical engine</div>
-                            <div class="mockup-item">📊 Outputs — Client-ready decks</div>
-                        </div>
-                    </div>
-                    <div class="tool-actions">
-                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/QTM_App.html" class="btn btn-launch">Launch QTM</a>
-                        <button class="btn btn-secondary" onclick="downloadQTMDemo()">Demo Data ZIP</button>
-                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/QTM_2Pager_1.docx" class="btn btn-secondary">Download 2-Pager</a>
-                    </div>
-                    <div class="demo-toggle" onclick="toggleDemo(event)">
-                        <span>Demo Guide</span>
-                        <span class="arrow">→</span>
-                    </div>
-                    <div class="demo-content">
-                        <ul class="demo-steps">
-                            <li data-step="1">Download Demo Data ZIP from above</li>
-                            <li data-step="2">Unzip the file to your desktop</li>
-                            <li data-step="3">Open QTM application</li>
-                            <li data-step="4">Drag CSV files to left panel, TXT files to right</li>
-                            <li data-step="5">Click "Run Analysis" and wait for outputs</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AKT Voice Studio -->
-            <div class="tool-card">
-                <div class="tool-card-header">
-                    <div class="tool-card-title">
-                        <h3>AKT Voice Studio</h3>
-                        <span class="tool-badge efficiency">Efficiency</span>
-                    </div>
-                    <p class="tool-description">Record personal narration over 'The Four Realities' presentation — creates self-contained HTML decks with your voice baked in</p>
-                </div>
-                <div class="tool-card-content">
-                    <div class="mockup-screen">
-                        <div class="mockup-header">Voice Studio Interface</div>
-                        <div class="mockup-content">
-                            <div class="mockup-item">📑 Slides — 'Four Realities' deck</div>
-                            <div class="mockup-item">🎙️ Record — Built-in teleprompter</div>
-                            <div class="mockup-item">💾 Export — Self-contained HTML</div>
-                        </div>
-                    </div>
-                    <div class="tool-actions">
-                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/akt-voice-studio.html" class="btn btn-launch">Launch Voice Studio</a>
-                    </div>
-                    <div class="demo-toggle" onclick="toggleDemo(event)">
-                        <span>Demo Guide</span>
-                        <span class="arrow">→</span>
-                    </div>
-                    <div class="demo-content">
-                        <ul class="demo-steps">
-                            <li data-step="1">Open Voice Studio application</li>
-                            <li data-step="2">Select a slide from the presentation</li>
-                            <li data-step="3">Read the teleprompter text at your own pace</li>
-                            <li data-step="4">Record your narration using the mic button</li>
-                            <li data-step="5">Review and export as self-contained HTML deck</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCALE TOOLS -->
-    <div class="category-section">
-        <h3 class="category-header" style="color: var(--akt-blue);">Scale Tools</h3>
-        <div class="tool-cards-grid">
-            <!-- CMX Command Center -->
-            <div class="tool-card">
-                <div class="tool-card-header">
-                    <div class="tool-card-title">
-                        <h3>CMX Command Center</h3>
-                        <span class="tool-badge scale">Scale</span>
-                    </div>
-                    <p class="tool-description">Stakeholder intelligence platform — imports Qualtrics data, runs consensus analysis, generates 31-slide PPTX workshop decks</p>
-                </div>
-                <div class="tool-card-content">
-                    <div class="mockup-screen">
-                        <div class="mockup-header">CMX Platform</div>
-                        <div class="mockup-content">
-                            <div class="mockup-item">📈 Dashboard — Real-time KPIs</div>
-                            <div class="mockup-item">🧠 Wizard — 4-step intelligence engine</div>
-                            <div class="mockup-item">📊 Deck Engine — 31-slide PPTX output</div>
-                        </div>
-                    </div>
-                    <div class="tool-actions">
-                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX-Command-Center.html" class="btn btn-launch">Launch CMX</a>
-                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/cmx-one-pager.docx" class="btn btn-secondary">One-Pager</a>
-                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX_Intelligence_Engine_Senior_Team_Introduction.pptx" class="btn btn-secondary">Senior Intro</a>
-                    </div>
-                    <div class="demo-toggle" onclick="toggleDemo(event)">
-                        <span>Demo Guide</span>
-                        <span class="arrow">→</span>
-                    </div>
-                    <div class="demo-content">
-                        <ul class="demo-steps">
-                            <li data-step="1">Open CMX Command Center</li>
-                            <li data-step="2">Import your Qualtrics dataset (CSV or XLS)</li>
-                            <li data-step="3">Run consensus analysis through 4-step wizard</li>
-                            <li data-step="4">Generate 31-slide workshop deck</li>
-                            <li data-step="5">Export as presentation-ready PPTX</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- EX Survey Intelligence -->
-            <div class="tool-card">
-                <div class="tool-card-header">
-                    <div class="tool-card-title">
-                        <h3>EX Survey Intelligence</h3>
-                        <span class="tool-badge scale">Scale</span>
-                    </div>
-                    <p class="tool-description">Analyzes Qualtrics EX-25 employee engagement surveys — uploads CSV/XLS, runs pattern detection, produces executive reports</p>
-                </div>
-                <div class="tool-card-content">
-                    <div class="mockup-screen">
-                        <div class="mockup-header">EX Intelligence Suite</div>
-                        <div class="mockup-content">
-                            <div class="mockup-item">📤 Upload — CSV, XLS files</div>
-                            <div class="mockup-item">📊 Dashboard — Engagement metrics</div>
-                            <div class="mockup-item">🔥 Heatmap — Pattern detection</div>
-                        </div>
-                    </div>
-                    <div class="tool-actions">
-                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/EX_App_Standalone.html" class="btn btn-launch">Launch EX Intelligence</a>
-                        <a href="https://ottovroeg-afk.github.io/cmx-command-center/Rivulis_EX25_TestData.csv" class="btn btn-secondary">Rivulis Demo CSV</a>
-                    </div>
-                    <div class="demo-toggle" onclick="toggleDemo(event)">
-                        <span>Demo Guide</span>
-                        <span class="arrow">→</span>
-                    </div>
-                    <div class="demo-content">
-                        <ul class="demo-steps">
-                            <li data-step="1">Open EX Survey Intelligence application</li>
-                            <li data-step="2">Upload EX-25 CSV or XLS file</li>
-                            <li data-step="3">Wait for pattern detection to complete</li>
-                            <li data-step="4">Review engagement heatmap and findings</li>
-                            <li data-step="5">Generate executive summary report</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- INNOVATION SECTION -->
-    <div class="category-section innovation-section">
-        <h3 class="category-header" style="color: var(--accent-purple);">Innovation — On the Horizon</h3>
-        <p class="section-subtitle">Potential AI companions being explored for future development</p>
-        <div class="future-cards-grid">
-            <div class="future-card">
-                <div class="planned-badge">Planned</div>
-                <h4>AI Narrative Engine</h4>
-                <p>Automated report writing from structured data. Transform analysis outputs into client-ready narrative decks with section headings, executive summaries, and context-aware insights.</p>
-            </div>
-            <div class="future-card">
-                <div class="planned-badge">Planned</div>
-                <h4>MCP Data Agents</h4>
-                <p>Intelligent agents connecting directly to client data lakes. Real-time analysis of live data sources, automated insights generation, and continuous monitoring dashboards.</p>
-            </div>
-            <div class="future-card">
-                <div class="planned-badge">Planned</div>
-                <h4>Client Portal</h4>
-                <p>Self-service dashboard for clients to access insights. Custom branding, role-based permissions, and real-time collaboration features built into a single-page application.</p>
-            </div>
-            <div class="future-card">
-                <div class="planned-badge">Planned</div>
-                <h4>Predictive Risk Engine</h4>
-                <p>Early warning system for programme risk signals. Monitors engagement trends and flags potential issues before they escalate into major challenges.</p>
-            </div>
-            <div class="future-card">
-                <div class="planned-badge">Planned</div>
-                <h4>Metadata Manager</h4>
-                <p>Centralized management of survey and programme metadata. Maintains authoritative single source of truth for all project context, taxonomies, and historical analysis.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- STRATEGY LIBRARY SECTION -->
-<section class="section strategy-section" id="strategy">
-    <h2 class="section-title">Strategy Library</h2>
-    <p class="section-subtitle">The evidence base, scenario models, and strategic recommendations produced by the AI Taskforce</p>
-
-    <div class="deliverables-grid">
-        <!-- AI Futures Scenario Model -->
-        <div class="deliverable-card">
-            <div class="deliverable-header">
-                <h4>AI Futures Scenario Model</h4>
-            </div>
-            <p class="deliverable-description">Reference-grade strategy document. Four scenarios on Speed × Ambition axes. Competitor deep-dive (Ipsos, Kantar, Zill, Farlinium). Qualtrics platform analysis. 108-task delivery model stress test. Recommended route: C→D→B.</p>
-            <div class="deliverable-meta">
-                <span>DOCX · ~103 KB</span>
-            </div>
-            <a href="https://ottovroeg-afk.github.io/cmx-command-center/AKT_AI_Futures_Scenario_Model.docx" class="btn btn-primary deliverable-download">Download</a>
-        </div>
-
-        <!-- AI Direction Input -->
-        <div class="deliverable-card">
-            <div class="deliverable-header">
-                <h4>AI Direction Input</h4>
-            </div>
-            <p class="deliverable-description">Direction-validation deck for leadership. Ten evidence-based findings. Service portfolio (Spotlight→Blueprint→Pulse→Ignite→Orbit). Short-term and long-term initiatives. Investment case.</p>
-            <div class="deliverable-meta">
-                <span>PPTX · ~573 KB</span>
-            </div>
-            <a href="https://ottovroeg-afk.github.io/cmx-command-center/AKT_AI_Direction_Input.pptx" class="btn btn-primary deliverable-download">Download</a>
-        </div>
-
-        <!-- AI Taskforce Approval ASK -->
-        <div class="deliverable-card">
-            <div class="deliverable-header">
-                <h4>AI Taskforce Approval ASK</h4>
-                <span class="deliverable-badge origin">Origin</span>
-            </div>
-            <p class="deliverable-description">The original 60-hour approval request. Seven strategic answers framework. Four-week timeline. El Corte Inglés market evidence. The document that started it all.</p>
-            <div class="deliverable-meta">
-                <span>PPTX · ~6.6 MB</span>
-            </div>
-            <a href="https://ottovroeg-afk.github.io/cmx-command-center/AKT_AI_Taskforce_Approval_ASK.pptx" class="btn btn-primary deliverable-download">Download</a>
-        </div>
-    </div>
+<!-- FEEDBACK -->
+<section id="fb">
+    <h2>Share Your <span>Feedback</span></h2>
+    <p>Tried the tools? Challenge our assumptions? Have a better idea? We want to hear it.</p>
+    <a href="mailto:otto.vroegop@aktglobal.com?subject=AI%20Taskforce%20Feedback" class="pill">Email Otto Vroegop &rarr;</a>
 </section>
 
 <!-- FOOTER -->
-<footer>
-    <p><strong>AI Taskforce · AKT Global · April 2026</strong></p>
-    <p>Questions? Email <a href="mailto:otto.vroegop@aktglobal.com">otto.vroegop@aktglobal.com</a></p>
+<footer class="foot">
+    <div class="fgrid">
+        <div><div class="flogo">akt</div><p>We Orchestrate Success. People. Organizations. Technology.</p></div>
+        <div><h4>Company</h4><a href="https://aktglobal.com/who-we-are/" target="_blank">About AKT</a><a href="https://aktglobal.com/journeys/" target="_blank">Journeys</a><a href="https://aktglobal.com/customers/" target="_blank">Customers</a><a href="https://aktglobal.com/contact/" target="_blank">Contact</a></div>
+        <div><h4>Partners</h4><a href="https://aktglobal.com/partners/qualtrics/" target="_blank">Qualtrics</a><a href="https://aktglobal.com/partners/sap-successfactors/" target="_blank">SAP SuccessFactors</a><a href="https://aktglobal.com/partners/sap-fieldglass/" target="_blank">SAP Fieldglass</a><a href="https://aktglobal.com/partners/mercer/" target="_blank">Mercer</a></div>
+    </div>
+    <div class="fbot"><span>&copy; 2026 AKT Global. All rights reserved.</span><span>AI Taskforce &mdash; Internal Platform</span></div>
 </footer>
 
 <script>
-    // Toggle demo guides
-    function toggleDemo(event) {
-        const toggle = event.currentTarget;
-        const content = toggle.nextElementSibling;
-
-        toggle.classList.toggle('open');
-        content.classList.toggle('open');
+// ═══ INTELLIGENCE AGENTS — Baseline Research + Live Scanning ═══
+const agents = [
+    {
+        name: 'Market Watch',
+        role: 'Scanning competitor AI investments and research giant moves',
+        icon: '\uD83D\uDD0D',
+        color: '#7C3AED',
+        force: 'From Above \u2014 Research giants automate advisory',
+        status: 'ELEVATED',
+        schedule: 'Scans daily \u2014 07:00',
+        baseline: [
+            {text: '<b>Ipsos</b> committed \u20AC1.2 billion to AI. Synthetic panels replace 30\u201340% of traditional fieldwork. Acquired a Qualtrics Marketplace partner in 2025.', highlight: true},
+            {text: '<b>Kantar</b> launched AI Lab with 50+ R&D workstreams. Marketplace insights product competes with boutique advisory at platform pricing.'},
+            {text: '<b>Zill Consulting</b> upgraded to Qualtrics Platinum Partner 2026. Gold in 33 markets. Forces of CX on the Qualtrics Marketplace.'},
+            {text: '<b>Bottom line:</b> These aren\u2019t future threats. Ipsos\u2019s AI is in production. Kantar\u2019s lab is shipping.', highlight: true}
+        ],
+        scanKey: 'market-watch'
+    },
+    {
+        name: 'Platform Watch',
+        role: 'Tracking XM platform automation and partner task displacement',
+        icon: '\u2699',
+        color: '#DC2626',
+        force: 'From Below \u2014 Platforms absorb partner tasks',
+        status: 'CRITICAL',
+        schedule: 'Scans daily \u2014 07:15',
+        baseline: [
+            {text: '<b>Qualtrics Experience Agents</b> grew 346% YoY. Now handle survey design, text analysis, driver modelling, automated reporting \u2014 core AKT delivery tasks.', highlight: true},
+            {text: '<b>Medallia</b>\u2019s AI summarisation and SAP Joule integration moving upstream from different angles. The whole platform layer is absorbing advisory.'},
+            {text: '<b>68% of proposal teams</b> already use generative AI (Loopio/APMP 2025). Clients expect AI-augmented delivery as standard.'},
+            {text: '<b>Bottom line:</b> Every quarter, more of what AKT charges hourly for becomes a platform feature included in a licence.', highlight: true}
+        ],
+        scanKey: 'platform-watch'
+    },
+    {
+        name: 'Partner Watch',
+        role: 'Monitoring Qualtrics partner ecosystem and strategy shifts',
+        icon: '\uD83E\uDD1D',
+        color: '#1A6BA5',
+        force: 'From Within \u2014 Qualtrics captures advisory territory',
+        status: 'ELEVATED',
+        schedule: 'Scans daily \u2014 07:30',
+        baseline: [
+            {text: '<b>Press Ganey ($6.75bn)</b> brought 41,000 healthcare providers, benchmarking data, and advisory services onto the platform. Qualtrics competes with its own partners.', highlight: true},
+            {text: '<b>QPN Consulting Track</b> formalises it: Qualtrics wants partners who source revenue, not partners who advise.'},
+            {text: '<b>Partner Summit 2026</b> (Seattle, March): weight on sourced revenue, account ownership, PSP attach. QLLM mentioned once. Message: bring deals, not insights.'},
+            {text: '<b>Bottom line:</b> Is AKT\u2019s AI strategy aligned with what Qualtrics values (revenue sourcing) or what AKT assumes they want (technical depth)?', highlight: true}
+        ],
+        scanKey: 'partner-watch'
+    },
+    {
+        name: 'Internal Watch',
+        role: 'Monitoring ungoverned AI adoption across AKT\u2019s 50-person team',
+        icon: '\uD83D\uDC41',
+        color: '#D97706',
+        force: 'Shadow AI \u2014 Ungoverned internal adoption',
+        status: 'HIGH',
+        schedule: 'Scans daily \u2014 07:45',
+        baseline: [
+            {text: '<b>91% of employees</b> globally use AI at work. Only 13% of firms have governance. AKT has ~50 people on personal AI accounts with no framework.', highlight: true},
+            {text: '<b>Four adoption patterns</b> in AKT: Enthusiastic Adopters, Cautious Experimenters, Resistant Sceptics, Overwhelmed Bystanders. Each needs different intervention.'},
+            {text: '<b>3\u20134 poor adopters</b> in a 50-person firm create meaningful drag. Analyst role: 12 of 18 tasks rated Transformative \u2014 highest AI exposure.'},
+            {text: '<b>Bottom line:</b> Ungoverned AI creates compliance risk, inconsistent deliverables, and a two-speed workforce.', highlight: true}
+        ],
+        scanKey: 'internal-watch'
+    },
+    {
+        name: 'Compliance Watch',
+        role: 'Tracking EU AI Act deadlines and governance requirements',
+        icon: '\u2696',
+        color: '#6B21A8',
+        force: 'Regulatory \u2014 EU AI Act enforcement from 2 August 2026',
+        status: 'URGENT',
+        schedule: 'Scans daily \u2014 08:00',
+        baseline: [
+            {text: '<b>EU AI Act applies 2 August 2026.</b> AI in employment decisions (EX), customer profiling (CX), or automated reporting needs classification, documentation, human oversight.', highlight: true},
+            {text: '<b>Client expectations shifting:</b> Enterprise clients will require AI governance evidence from advisory partners. RFPs in H2 2026 will include AI compliance as procurement criterion.'},
+            {text: '<b>The opportunity:</b> 87% of AI projects fail to scale. If AKT builds governance and survives, that methodology becomes sellable advisory.'},
+            {text: '<b>Bottom line:</b> ~110 days until enforcement. Each week without a framework is accumulating compliance debt.', highlight: true}
+        ],
+        scanKey: 'compliance-watch'
     }
+];
 
-    // Download QTM Demo Data
-    async function downloadQTMDemo() {
-        const button = event.target;
-        button.disabled = true;
-        button.textContent = 'Creating ZIP...';
-        try {
-            const zip = new JSZip();
-            const surveyFolder = zip.folder('1_Survey_Data_Left_Panel');
-            const surveyFiles = [
-                'novatel_survey_export.csv',
-                'novatel_dashboard_export.csv',
-                'novatel_driver_analysis.csv',
-                'novatel_textiq_export.csv',
-                'novatel_tickets_export.csv'
-            ];
-            const contextFolder = zip.folder('2_Context_Documents_Right_Panel');
-            const contextFiles = [
-                'CX_Research_Briefing_NovaTel.txt',
-                'NovaTel_Annual_Report_2025.txt',
-                'Interview_CEO_Erik_van_der_Berg.txt',
-                'Interview_CFO_Maria_Santos.txt',
-                'Interview_CMO_Sara_Lindqvist.txt',
-                'Interview_COO_Thomas_Mueller.txt',
-                'European_Telecoms_CX_Benchmark_2025.txt'
-            ];
-            const baseUrl = 'https://ottovroeg-afk.github.io/cmx-command-center/';
-            for (const file of surveyFiles) {
-                try {
-                    const response = await fetch(baseUrl + file);
-                    if (response.ok) { surveyFolder.file(file, await response.blob()); }
-                } catch (e) { console.log('Could not fetch ' + file); }
-            }
-            for (const file of contextFiles) {
-                try {
-                    const response = await fetch(baseUrl + file);
-                    if (response.ok) { contextFolder.file(file, await response.blob()); }
-                } catch (e) { console.log('Could not fetch ' + file); }
-            }
-            const blob = await zip.generateAsync({ type: 'blob' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'NovaTel_QTM_Demo_Data.zip';
-            a.click();
-            URL.revokeObjectURL(url);
-            button.textContent = 'Demo Data ZIP';
-            button.disabled = false;
-        } catch (error) {
-            console.error('ZIP creation error:', error);
-            alert('Error creating ZIP. Check console.');
-            button.textContent = 'Demo Data ZIP';
-            button.disabled = false;
-        }
-    }
+// Days until EU AI Act
+const euDate = new Date('2026-08-02');
+const daysLeft = Math.ceil((euDate - new Date()) / (1000*60*60*24));
 
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+let currentAgent = 0;
+let autoPlay = null;
+
+function setAgent(idx) {
+    currentAgent = idx;
+    if (autoPlay) { clearInterval(autoPlay); autoPlay = null; }
+    renderAgent(idx);
+}
+
+function renderAgent(idx) {
+    const a = agents[idx];
+    // Active states
+    document.querySelectorAll('.agent').forEach((el, i) => el.classList.toggle('active', i === idx));
+    document.querySelectorAll('.agent-dot').forEach((d, i) => d.classList.toggle('on', i === idx));
+
+    const statusColors = { CRITICAL: '#DC2626', URGENT: '#D97706', ELEVATED: '#7C3AED', HIGH: '#D97706' };
+    const sc = statusColors[a.status] || a.color;
+
+    // Header
+    document.getElementById('agentHeader').innerHTML = `
+        <div class="agent-hdr-icon" style="background:${a.color}">${a.icon}</div>
+        <div>
+            <div class="agent-hdr-name">${a.name}</div>
+            <div class="agent-hdr-role">${a.force}</div>
+        </div>
+        <span class="agent-hdr-status" style="background:${sc}22;color:${sc}">${a.status}</span>
+        <span class="agent-hdr-sched">${a.schedule}</span>`;
+
+    // Blocks — fade transition
+    const blocks = document.getElementById('agentBlocks');
+    blocks.style.opacity = '0';
+    setTimeout(() => {
+        // Left: baseline research
+        let baselineHtml = `<div class="agent-block">
+            <div class="block-label bl-research"><span class="bl-icon">\uD83D\uDCCB</span> Baseline Intelligence</div>`;
+        a.baseline.forEach(item => {
+            baselineHtml += `<div class="item${item.highlight ? ' highlight' : ''}">${item.text}</div>`;
         });
-    });
-</script>
+        baselineHtml += `</div>`;
 
+        // Right: latest scan
+        const scanData = window.agentScans && window.agentScans[a.scanKey];
+        let scanHtml = `<div class="agent-block">
+            <div class="block-label bl-live"><span class="bl-icon">\uD83D\uDCE1</span> Latest Scan</div>`;
+
+        if (scanData && scanData.items && scanData.items.length > 0) {
+            scanData.items.forEach(item => {
+                scanHtml += `<div class="scan-item">${item}</div>`;
+            });
+            scanHtml += `<div class="scan-meta">
+                <span class="scan-ts">\u23F1 ${scanData.timestamp}</span>
+                ${scanData.sources ? `<span class="scan-sources">&nbsp;\u2014&nbsp;${scanData.sources.map(s => `<a href="${s.url}" target="_blank">${s.label}</a>`).join(', ')}</span>` : ''}
+            </div>`;
+        } else {
+            scanHtml += `<div class="scan-loading">\u23F3 Agent is scheduled. First scan results will appear here after the next run.</div>
+                <div style="font-size:.7rem;opacity:.3;margin-top:.4rem">This agent searches the web daily using Claude. Results are written to a JSON file and loaded here automatically.</div>`;
+        }
+        scanHtml += `</div>`;
+
+        blocks.innerHTML = baselineHtml + scanHtml;
+        blocks.style.opacity = '1';
+    }, 180);
+}
+
+// Build dots + init
+(function() {
+    const nav = document.getElementById('agentDots');
+    agents.forEach((_, i) => {
+        const d = document.createElement('div');
+        d.className = 'agent-dot' + (i === 0 ? ' on' : '');
+        d.onclick = () => setAgent(i);
+        nav.appendChild(d);
+    });
+    renderAgent(0);
+    autoPlay = setInterval(() => {
+        currentAgent = (currentAgent + 1) % agents.length;
+        renderAgent(currentAgent);
+    }, 8000);
+})();
+
+// ═══ SCAN DATA — embedded baseline + live fetch overlay ═══
+window.agentScans = {
+    'market-watch': {
+        timestamp: '14 Apr 2026, 10:32 CET',
+        items: [
+            '<b>Ipsos \u20ac1bn AI bet under scrutiny</b> \u2014 investors reacting to leadership transition as Chairman Truchot steps down. Execution timeline for AI programme questioned.',
+            '<b>Synthetic panels expanding:</b> Ipsos now uses AI-generated persona bots and synthetic audiences at scale for creative testing and product development.',
+            '<b>Kantar + Ipsos both automating admin-heavy research:</b> survey building, top-level analysis, fieldwork quality \u2014 freeing humans for strategy and storytelling.',
+            '<b>Stanford AI Index 2026:</b> enterprise AI spending continues to accelerate. Research giants outspending boutique firms by 100x+.'
+        ],
+        sources: [
+            {label: 'Yahoo Finance', url: 'https://finance.yahoo.com/news/investors-reacting-ipsos-enxtpa-ips-062219952.html'},
+            {label: 'Ipsos Data Council', url: 'https://ipsos-insight-llc.foleon.com/data-council/ipsos-data-council-report-2025/ai-and-automation'},
+            {label: 'IEEE Spectrum', url: 'https://spectrum.ieee.org/state-of-ai-index-2026'}
+        ]
+    },
+    'platform-watch': {
+        timestamp: '14 Apr 2026, 10:32 CET',
+        items: [
+            '<b>Qualtrics Experience Agents expanding:</b> now intercept friction in-survey, guide customers, save sales, deliver personalised recovery to high-value segments.',
+            '<b>1/3 of Qualtrics customer base</b> upgraded to AI capabilities within one year of launch. Momentum accelerating through expanded Experience Agents access.',
+            '<b>New CX automation tools (March 2026):</b> omnichannel listening, automated text analytics, AI-powered agents responding to issues in real time.',
+            '<b>Synthetic panels going international:</b> Qualtrics extending synthetic panel capabilities to UK, Ireland, Canada, Australia, NZ in H1 2026.'
+        ],
+        sources: [
+            {label: 'Qualtrics Newsroom', url: 'https://www.qualtrics.com/articles/news/qualtrics-accelerates-ai-leadership-and-value-with-experience-agents/'},
+            {label: 'CX Today', url: 'https://www.cxtoday.com/contact-center/qualtrics-customer-feedback-management-ai-cx/'},
+            {label: 'BizFortune', url: 'https://bizfortune.com/2026/03/business-fortune-qualtrics-cx-automation-tools'}
+        ]
+    },
+    'partner-watch': {
+        timestamp: '14 Apr 2026, 10:32 CET',
+        items: [
+            '<b>QPN Platform Track launching 2026:</b> new track for ISVs building on Qualtrics Developer Platform. Consulting Track now formally separated.',
+            '<b>New tiering model:</b> Platinum, Gold, Silver, Member. Recognition based on commercial impact and customer success, not technical depth.',
+            '<b>Qualtrics targeting $2bn ARR</b> through partner programme. New co-sell and lead-gen opportunities. Message: partners drive revenue.',
+            '<b>X4 2026 (Seattle, 17\u201319 March):</b> partner programme restructured around shared growth. APAC partner expansion accelerating.'
+        ],
+        sources: [
+            {label: 'Channel Futures', url: 'https://www.channelfutures.com/channel-sales-marketing/qualtrics-unveils-partner-program-updates'},
+            {label: 'Qualtrics Blog', url: 'https://www.qualtrics.com/blog/qualtrics-doubles-down-on-global-partner-community-to-accelerate-shared-growth/'},
+            {label: 'CRN Asia', url: 'https://www.crnasia.com/news/2025/partners/qualtrics-doubles-down-on-apac-partner-growth-ahead'}
+        ]
+    },
+    'internal-watch': {
+        timestamp: '14 Apr 2026, 10:32 CET',
+        items: [
+            '<b>Shadow AI exploding:</b> 80%+ of workers now use unapproved AI tools. Up from 41% in 2023 to 68% in latest data. Engineering teams at 79%.',
+            '<b>Only 36% of companies</b> have formal AI governance. 47% of employees access AI through personal/unmanaged accounts.',
+            '<b>Cost of inaction quantified:</b> average shadow AI data breach now $4.2M. Shadow AI-related breaches cost $670K more per incident.',
+            '<b>79% of organisations face AI adoption challenges</b> (double-digit increase YoY). 54% of C-suite say AI adoption is \u2018tearing the company apart.\u2019'
+        ],
+        sources: [
+            {label: 'JumpCloud', url: 'https://jumpcloud.com/blog/11-stats-about-shadow-ai-in-2026'},
+            {label: 'Writer.com', url: 'https://writer.com/blog/enterprise-ai-adoption-2026/'},
+            {label: 'Deloitte AI Report', url: 'https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html'}
+        ]
+    },
+    'compliance-watch': {
+        timestamp: '14 Apr 2026, 10:32 CET',
+        items: [
+            '<b>110 days to enforcement.</b> Full high-risk AI requirements activate 2 August 2026: risk management, data governance, documentation, human oversight, cybersecurity.',
+            '<b>Penalty structure confirmed:</b> up to \u20ac35M or 7% global turnover for prohibited AI. \u20ac15M / 3% for high-risk non-compliance.',
+            '<b>72-hour incident reporting:</b> organisations must define response protocols with 72h/15-day reporting windows. Automated guardrails required at runtime.',
+            '<b>High-risk scope includes AKT\u2019s work:</b> employment decisions (EX), biometrics, essential services. Advisory partners need compliance evidence in RFPs.'
+        ],
+        sources: [
+            {label: 'EU AI Act Portal', url: 'https://artificialintelligenceact.eu/'},
+            {label: 'Kennedys Law', url: 'https://www.kennedyslaw.com/en/thought-leadership/article/2026/the-eu-ai-act-implementation-timeline-understanding-the-next-deadline-for-compliance/'},
+            {label: 'Baker Botts', url: 'https://www.bakerbotts.com/thought-leadership/publications/2026/march/the-eu-ai-act'}
+        ]
+    }
+};
+
+// Try to fetch newer scan data from GitHub Pages — overwrites embedded data if found
+(async function loadFreshScans() {
+    const base = 'https://ottovroeg-afk.github.io/cmx-command-center/scans/';
+    for (const a of agents) {
+        try {
+            const r = await fetch(base + a.scanKey + '.json', {cache: 'no-store'});
+            if (r.ok) {
+                window.agentScans[a.scanKey] = await r.json();
+            }
+        } catch(e) { /* keep embedded data */ }
+    }
+    renderAgent(currentAgent);
+})();
+
+// ═══ TOOL SCREENSHOTS (canvas-rendered previews) ═══
+function drawToolPreview(id, title, subtitle, color, elements) {
+    const cv = document.getElementById(id);
+    if (!cv) return;
+    const ctx = cv.getContext('2d');
+    const w = cv.width, h = cv.height;
+    ctx.fillStyle = '#1B2A3D';
+    ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = '#243B55';
+    ctx.fillRect(0, 0, w, 44);
+    ctx.fillStyle = '#F59143';
+    ctx.font = 'bold 14px Manrope, sans-serif';
+    ctx.fillText('akt', 16, 28);
+    ctx.fillStyle = '#fff';
+    ctx.font = '600 13px Manrope, sans-serif';
+    ctx.fillText(title, 56, 28);
+    ctx.fillStyle = 'rgba(255,255,255,.4)';
+    ctx.font = '11px Manrope, sans-serif';
+    ctx.fillText(subtitle, w - ctx.measureText(subtitle).width - 16, 28);
+    ctx.fillStyle = color;
+    ctx.fillRect(0, 44, w, 3);
+    ctx.fillStyle = '#F7F8FA';
+    ctx.fillRect(0, 47, w, h - 47);
+    elements.forEach(el => {
+        if (el.type === 'card') {
+            ctx.fillStyle = '#fff';
+            roundRect(ctx, el.x, el.y, el.w, el.h, 8, true, false);
+            ctx.strokeStyle = '#E5E7EB';
+            ctx.lineWidth = 1;
+            roundRect(ctx, el.x, el.y, el.w, el.h, 8, false, true);
+            if (el.title) { ctx.fillStyle = '#262626'; ctx.font = 'bold 11px Manrope, sans-serif'; ctx.fillText(el.title, el.x + 12, el.y + 22); }
+            if (el.lines) { el.lines.forEach((line, i) => { ctx.fillStyle = '#6B7280'; ctx.font = '10px Manrope, sans-serif'; ctx.fillText(line, el.x + 12, el.y + 40 + i * 16); }); }
+        }
+        if (el.type === 'chart') {
+            ctx.fillStyle = '#fff';
+            roundRect(ctx, el.x, el.y, el.w, el.h, 8, true, false);
+            ctx.strokeStyle = '#E5E7EB';
+            roundRect(ctx, el.x, el.y, el.w, el.h, 8, false, true);
+            const bars = el.bars || [.7, .5, .85, .3, .6, .45, .75];
+            const bw = (el.w - 40) / bars.length;
+            bars.forEach((v, i) => { const bh = (el.h - 50) * v; ctx.fillStyle = i % 2 === 0 ? color : '#1A6BA5'; roundRect(ctx, el.x + 15 + i * bw + 4, el.y + el.h - 20 - bh, bw - 8, bh, 3, true, false); });
+            if (el.title) { ctx.fillStyle = '#262626'; ctx.font = 'bold 10px Manrope, sans-serif'; ctx.fillText(el.title, el.x + 12, el.y + 18); }
+        }
+        if (el.type === 'sidebar') {
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(el.x, el.y, el.w, el.h);
+            ctx.strokeStyle = '#E5E7EB';
+            ctx.strokeRect(el.x, el.y, el.w, el.h);
+            if (el.items) { el.items.forEach((item, i) => { const iy = el.y + 15 + i * 28; if (i === el.active) { ctx.fillStyle = 'rgba(245,145,67,.08)'; ctx.fillRect(el.x + 4, iy - 8, el.w - 8, 24); } ctx.fillStyle = i === el.active ? '#F59143' : '#6B7280'; ctx.font = (i === el.active ? '600 ' : '') + '10px Manrope, sans-serif'; ctx.fillText(item, el.x + 14, iy + 6); }); }
+        }
+        if (el.type === 'pill') {
+            ctx.fillStyle = color;
+            roundRect(ctx, el.x, el.y, el.w, 28, 14, true, false);
+            ctx.fillStyle = '#fff';
+            ctx.font = '600 10px Manrope, sans-serif';
+            ctx.fillText(el.label, el.x + 12, el.y + 18);
+        }
+    });
+}
+
+function roundRect(ctx, x, y, w, h, r, fill, stroke) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y); ctx.closePath();
+    if (fill) ctx.fill(); if (stroke) ctx.stroke();
+}
+
+setTimeout(() => {
+    drawToolPreview('cvXVM', 'XVM', 'Experience Value Mining', '#F59143', [
+        {type:'sidebar', x:0, y:47, w:160, h:353, items:['Upload Data','Survey Files','Context Docs','Analysis','Themes','Drivers','Export'], active:3},
+        {type:'card', x:175, y:62, w:220, h:120, title:'Thematic Analysis', lines:['Service Quality: 34%','Digital Experience: 28%','Staff Interaction: 22%','Pricing: 16%']},
+        {type:'chart', x:410, y:62, w:215, h:120, title:'Driver Impact', bars:[.85,.6,.45,.7,.35,.55,.8]},
+        {type:'card', x:175, y:200, w:450, h:80, title:'Strategic Recommendation', lines:['Focus investment on digital self-service channels.','NPS improvement potential: +12 points in 6 months.','Priority: mobile app experience redesign.']},
+        {type:'card', x:175, y:296, w:220, h:90, title:'Sentiment Overview', lines:['Positive: 52%','Neutral: 31%','Negative: 17%']},
+        {type:'pill', x:410, y:300, w:130, label:'Export Report'},
+    ]);
+    drawToolPreview('cvCMX', 'CMX', 'Command Center', '#1A6BA5', [
+        {type:'sidebar', x:0, y:47, w:160, h:353, items:['Dashboard','ADKAR','CFI Score','Stakeholders','Interventions','Timeline','Reports'], active:0},
+        {type:'chart', x:175, y:62, w:240, h:130, title:'Change Readiness by Phase', bars:[.4,.55,.7,.85,.65,.5]},
+        {type:'card', x:430, y:62, w:200, h:130, title:'CFI Score', lines:['Overall: 7.2 / 10','Awareness: 8.1','Desire: 6.4','Knowledge: 7.5','Ability: 6.8']},
+        {type:'card', x:175, y:210, w:240, h:90, title:'Active Interventions', lines:['Leadership alignment workshop','Peer coaching rollout','Comms cascade: Wave 3']},
+        {type:'card', x:430, y:210, w:200, h:90, title:'Risk Indicators', lines:['Resistance: Medium','Fatigue: Low','Sponsor Gap: High']},
+        {type:'pill', x:175, y:320, w:140, label:'Generate Report'},
+    ]);
+    drawToolPreview('cvEX', 'EX App', 'Intelligence', '#72982C', [
+        {type:'sidebar', x:0, y:47, w:160, h:353, items:['Overview','Engagement','Drivers','Trends','Gaps','Benchmarks','Export'], active:1},
+        {type:'chart', x:175, y:62, w:240, h:130, title:'Engagement Trend (12m)', bars:[.6,.62,.58,.65,.7,.68,.72,.75,.71,.78,.8,.82]},
+        {type:'card', x:430, y:62, w:200, h:130, title:'Top Drivers', lines:['1. Manager relationship','2. Career development','3. Recognition','4. Work-life balance','5. Team collaboration']},
+        {type:'card', x:175, y:210, w:220, h:90, title:'Gap Analysis', lines:['Development: -1.2 gap','Recognition: -0.9 gap','Workload: -0.7 gap']},
+        {type:'card', x:410, y:210, w:220, h:90, title:'Recommendations', lines:['Launch manager coaching','Review career pathways','Introduce spot recognition']},
+    ]);
+    drawToolPreview('cvVS', 'Voice Studio', 'NLP Engine', '#7B2DB8', [
+        {type:'sidebar', x:0, y:47, w:160, h:353, items:['Import','Processing','Themes','Sentiment','Entities','Clusters','Export'], active:2},
+        {type:'card', x:175, y:62, w:240, h:120, title:'Theme Extraction', lines:['Communication: 156 mentions','Onboarding: 98 mentions','Management: 87 mentions','Facilities: 45 mentions']},
+        {type:'chart', x:430, y:62, w:200, h:120, title:'Sentiment Distribution', bars:[.8,.3,.6,.2,.7,.5]},
+        {type:'card', x:175, y:200, w:455, h:80, title:'Key Insight', lines:['Strongest negative cluster: "onboarding process"','Linked to first-90-day attrition in 3 business units.','Recommended action: redesign Day 1-30 experience.']},
+        {type:'pill', x:175, y:300, w:120, label:'Export Insights'},
+    ]);
+}, 100);
+
+// ═══ PRESENTATION — 5 SLIDES ═══
+const slides = [
+    // SLIDE 1: Five forces (bubbles)
+    {t:"Forces",h:"Five forces compressing AKT XM",b:`<p>The XM advisory space is under structural pressure from five directions. The window to act is 12&ndash;18 months.</p>
+        <div class="fbubs">
+            <div class="fbub c1"><div class="ftag">&darr; From Above</div><h4>Research giants automate advisory</h4><p>Ipsos &euro;1.2bn AI commitment. Kantar AI Lab: 50+ R&amp;D workstreams. Both automating the layer AKT sells.</p></div>
+            <div class="fbub c2"><div class="ftag">&nearr; From Below</div><h4>Platforms absorb partner tasks</h4><p>Qualtrics Experience Agents: 346% YoY growth. Survey design, analysis, reporting &mdash; automated.</p></div>
+            <div class="fbub c3"><div class="ftag">&nwarr; From Within</div><h4>Qualtrics captures advisory</h4><p>$6.75bn Press Ganey. QPN Consulting Track takes partner territory.</p></div>
+            <div class="fbub c4"><div class="ftag">&rarr; Shadow AI</div><h4>Ungoverned internal adoption</h4><p>91% of employees use AI; 13% of firms caught up. ~50 people on personal accounts.</p></div>
+            <div class="fbub c5"><div class="ftag">&larr; Regulatory</div><h4>EU AI Act: 2 August 2026</h4><p>Governance is a legal obligation. Not optional.</p></div>
+        </div>`},
+
+    // SLIDE 2: Evidence 1-3
+    {t:"Evidence 1&ndash;3",h:"The market is shifting &mdash; fast",b:`<div class="ev-grid">
+        <div class="ev-card"><h4>1. Where the value is moving</h4><p>AI compresses listening; the market pays for action. Listen drops from 70% to 10%. Act rises to 60-70%. AKT sits in Listen. The gap is existential.</p></div>
+        <div class="ev-card"><h4>2. The decision is speed and ambition</h4><p>Four scenarios tested. Recommended route: <b style="color:var(--o)">Start C &rarr; Pilot D &rarr; Option B at 6 months.</b> The only two levers leadership controls: implementation speed and business model change.</p></div>
+        <div class="ev-card"><h4>3. 46% efficiency &mdash; in delivery, not relationships</h4><p>34 tasks, 7 stages: 252h &rarr; 135.5h. Build/Configure gains 54%. Stakeholder alignment: only 33%. Biggest gains in repetitive production. Client relationships remain human.</p></div>
+    </div>`},
+
+    // SLIDE 3: Evidence 4-6
+    {t:"Evidence 4&ndash;6",h:"The failure patterns &mdash; and the moat",b:`<div class="ev-grid">
+        <div class="ev-card"><h4>4. 87% of AI projects fail to scale</h4><p>42% abandoned in 2025, up from 17%. 95% of gen AI pilots fail (MIT). Dominant failure: no governance, no gates. Governance before experimentation.</p></div>
+        <div class="ev-card"><h4>5. AI produces findings, not insights &mdash; that&rsquo;s the moat</h4><p>CSV in, KPIs out. The contextual judgement is AKT&rsquo;s brain. Defensible &mdash; but only if embedded into tools before someone else does.</p></div>
+        <div class="ev-card"><h4>6. No firm our size has cracked AI adoption</h4><p>85% of failures are strategic, not technical. No 20-person firm has published how they adopted AI. Building without precedent. Harder is the moat.</p></div>
+    </div>`},
+
+    // SLIDE 4: Short-term initiatives (5 cards)
+    {t:"Phase 1",h:"Short-term initiatives: now &rarr; 6 months",b:`<p style="margin-bottom:.8rem">Foundation. Governance first, then capability, then delivery transformation.</p>
+        <div class="init-grid">
+            <div class="init-card"><span class="init-num">1</span><h4>AI Governance Framework</h4><p>Assess &rarr; Pilot &rarr; Approve &rarr; Adopt. Data classification. EU AI Act compliance. Day 1 risk: personal AI accounts.</p></div>
+            <div class="init-card"><span class="init-num">2</span><h4>Team Upskilling</h4><p>7 role-specific programmes. Champions model. 80% adoption by Month 6. Every person builds with AI within 4 weeks.</p></div>
+            <div class="init-card"><span class="init-num">3</span><h4>AI-Augmented Proposals</h4><p>VBR dossiers auto-compiled. Proposals personalised per stakeholder. Quickest visible win: immediate time savings.</p></div>
+            <div class="init-card"><span class="init-num">4</span><h4>Knowledge Management</h4><p>200+ programme insights made AI-accessible. The firm&rsquo;s collective intelligence for every consultant.</p></div>
+            <div class="init-card"><span class="init-num">5</span><h4>Marketing Repositioning</h4><p>Not &lsquo;we plan to use AI&rsquo; &mdash; &lsquo;we already do.&rsquo; Internal tools as proof. New SOW language.</p></div>
+        </div>`},
+
+    // SLIDE 5: Long-term initiatives (5 cards)
+    {t:"Phase 2",h:"Long-term initiatives: 6 &rarr; 12+ months",b:`<p style="margin-bottom:.8rem">Only if Phase 1 foundations are solid. Each initiative has a gate decision.</p>
+        <div class="init-grid">
+            <div class="init-card"><span class="init-num">1</span><h4>Programme Intelligence Product</h4><p>First proprietary AI to market. Agentic programme monitoring. Subscription pricing.</p></div>
+            <div class="init-card"><span class="init-num">2</span><h4>Subscription Client Pilot</h4><p>One strategic client. Continuous intelligence, not project-based. Proves recurring revenue for Scenario B.</p></div>
+            <div class="init-card"><span class="init-num">3</span><h4>AI Governance as Client Offering</h4><p>87% fail. Sell what AKT built internally as structured advisory for clients.</p></div>
+            <div class="init-card"><span class="init-num">4</span><h4>Qualtrics Dual-Track Partner</h4><p>No Platinum partner holds both Consulting and Platform tracks. First-mover window: Q4 2026.</p></div>
+            <div class="init-card"><span class="init-num">5</span><h4>XM Benchmark Programme</h4><p>Cross-client anonymised benchmarks. AKT as XM community hub. Network effects.</p></div>
+        </div>`}
+];
+
+let ci=0;
+function rs(i){
+    const s=slides[i],st=document.getElementById('ps');
+    st.classList.add('fading');
+    setTimeout(()=>{st.innerHTML=`<span class="ptag">${s.t}</span><h3>${s.h}</h3>${s.b}`;st.classList.remove('fading')},220);
+    document.getElementById('pc').textContent=`${i+1} / ${slides.length}`;
+    document.getElementById('pb').disabled=(i===0);
+    document.getElementById('pf').disabled=(i===slides.length-1);
+    document.querySelectorAll('.pd').forEach((d,j)=>d.classList.toggle('on',j===i));
+}
+function pn(d){ci=Math.max(0,Math.min(slides.length-1,ci+d));rs(ci)}
+function gs(i){ci=i;rs(i)}
+(function(){const d=document.getElementById('pdo');slides.forEach((_,i)=>{const e=document.createElement('div');e.className='pd'+(i===0?' on':'');e.onclick=()=>gs(i);d.appendChild(e)});rs(0)})();
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')pn(1);if(e.key==='ArrowLeft')pn(-1)});
+
+// ═══ XVM DEMO DATA ZIP ═══
+async function dlZip(btn){
+    btn.disabled=true;btn.textContent='Creating ZIP...';
+    try{
+        const z=new JSZip(),sf=z.folder('1_Survey_Data_Left_Panel'),cf=z.folder('2_Context_Documents_Right_Panel');
+        const base='https://ottovroeg-afk.github.io/cmx-command-center/';
+        for(const f of['novatel_survey_export.csv','novatel_dashboard_export.csv','novatel_driver_analysis.csv','novatel_textiq_export.csv','novatel_tickets_export.csv']){try{const r=await fetch(base+f);if(r.ok)sf.file(f,await r.blob())}catch(e){}}
+        for(const f of['CX_Research_Briefing_NovaTel.txt','NovaTel_Annual_Report_2025.txt','Interview_CEO_Erik_van_der_Berg.txt','Interview_CFO_Maria_Santos.txt','Interview_CMO_Sara_Lindqvist.txt','Interview_COO_Thomas_Mueller.txt','European_Telecoms_CX_Benchmark_2025.txt']){try{const r=await fetch(base+f);if(r.ok)cf.file(f,await r.blob())}catch(e){}}
+        const b=await z.generateAsync({type:'blob'}),a=document.createElement('a');
+        a.href=URL.createObjectURL(b);a.download='NovaTel_XVM_Demo_Data.zip';a.click();URL.revokeObjectURL(a.href);
+    }catch(e){alert('ZIP error: '+e.message)}
+    btn.textContent='Download Demo Data';btn.disabled=false;
+}
+
+// ═══ SCROLL BAR + FADE IN ═══
+window.addEventListener('scroll',()=>{document.getElementById('sbar').style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100+'%'});
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.1});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+</script>
 </body>
 </html>

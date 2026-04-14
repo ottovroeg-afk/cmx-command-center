@@ -1,0 +1,14 @@
+{
+  "timestamp": "14 Apr 2026, 10:32 CET",
+  "items": [
+    "<b>110 days to enforcement.</b> Full high-risk AI requirements activate 2 August 2026: risk management, data governance, documentation, human oversight, accuracy, robustness, cybersecurity.",
+    "<b>Penalty structure confirmed:</b> up to \u20ac35M or 7% global turnover for prohibited AI. \u20ac15M / 3% for high-risk non-compliance. \u20ac7.5M / 1.5% for incorrect information.",
+    "<b>72-hour incident reporting:</b> organisations must define response protocols with 72h/15-day reporting windows to authorities. Automated guardrails required at runtime.",
+    "<b>High-risk scope includes AKT\u2019s work:</b> employment decisions (EX), biometrics, essential services. Advisory partners will need compliance evidence in RFPs."
+  ],
+  "sources": [
+    {"label": "EU AI Act Portal", "url": "https://artificialintelligenceact.eu/"},
+    {"label": "Kennedys Law", "url": "https://www.kennedyslaw.com/en/thought-leadership/article/2026/the-eu-ai-act-implementation-timeline-understanding-the-next-deadline-for-compliance/"},
+    {"label": "Baker Botts", "url": "https://www.bakerbotts.com/thought-leadership/publications/2026/march/the-eu-ai-act"}
+  ]
+}

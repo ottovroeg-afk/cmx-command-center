@@ -1,0 +1,14 @@
+{
+  "timestamp": "14 Apr 2026, 10:32 CET",
+  "items": [
+    "<b>Ipsos \u20ac1bn AI bet under scrutiny</b> \u2014 investors reacting to leadership transition as Chairman Truchot steps down. Execution timeline for AI programme questioned.",
+    "<b>Synthetic panels expanding:</b> Ipsos now uses AI-generated persona bots and synthetic audiences at scale for creative testing and product development.",
+    "<b>Kantar + Ipsos both automating admin-heavy research:</b> survey building, top-level analysis, fieldwork quality \u2014 freeing humans for strategy and storytelling. This is the advisory layer AKT sells.",
+    "<b>Stanford AI Index 2026:</b> enterprise AI spending continues to accelerate. Research giants outspending boutique firms by 100x+."
+  ],
+  "sources": [
+    {"label": "Yahoo Finance", "url": "https://finance.yahoo.com/news/investors-reacting-ipsos-enxtpa-ips-062219952.html"},
+    {"label": "Ipsos Data Council", "url": "https://ipsos-insight-llc.foleon.com/data-council/ipsos-data-council-report-2025/ai-and-automation"},
+    {"label": "IEEE Spectrum", "url": "https://spectrum.ieee.org/state-of-ai-index-2026"}
+  ]
+}
