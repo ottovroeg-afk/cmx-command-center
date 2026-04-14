@@ -24,7 +24,7 @@
         @media(max-width:768px){.nav{padding:.65rem 1.2rem}.nav-r a:not(.ncta){display:none}}
 
         /* HERO — intelligence agents */
-        .hero{background:linear-gradient(135deg,var(--dk) 0%,#243B55 50%,var(--ft) 100%);color:var(--w);padding:3.5rem 2rem 2.5rem;min-height:auto;display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden}
+        .hero{background:linear-gradient(135deg,var(--dk) 0%,#243B55 50%,var(--ft) 100%);color:var(--w);padding:1.5rem 2rem 2.5rem;min-height:auto;display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden}
         .hdots{position:absolute;width:260px;height:260px;background-image:radial-gradient(circle,rgba(255,255,255,.06) 2px,transparent 2px);background-size:24px 24px;pointer-events:none}
         .hdots:nth-child(1){top:20px;right:40px}.hdots:nth-child(2){bottom:20px;left:30px}
         .hero-top{text-align:center;position:relative;z-index:2;margin-bottom:1.8rem}
@@ -34,18 +34,18 @@
 
         /* Agent panel */
         .agents-panel{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto}
-        .agents-row{display:flex;justify-content:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
-        .agent{display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:all .4s;opacity:.55;filter:grayscale(.4);width:120px}
-        .agent.active{opacity:1;filter:none;transform:translateY(-4px)}
-        .agent:hover{opacity:.85;filter:none}
-        .agent-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;border:3px solid transparent;transition:all .4s;position:relative}
-        .agent.active .agent-avatar{border-color:var(--w);box-shadow:0 0 0 4px rgba(255,255,255,.15),0 4px 20px rgba(0,0,0,.3)}
-        .agent-avatar::after{content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:var(--w);opacity:0;transition:opacity .3s}
+        .agents-row{display:flex;justify-content:center;gap:.6rem;margin-bottom:1.5rem;flex-wrap:wrap}
+        .agent{display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:all .4s;opacity:.5;filter:grayscale(.4);width:130px;padding:.6rem .4rem;border-radius:12px;text-align:center}
+        .agent.active{opacity:1;filter:none;transform:translateY(-4px);background:rgba(255,255,255,.06)}
+        .agent:hover{opacity:.85;filter:none;background:rgba(255,255,255,.03)}
+        .agent-avatar{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;border:2px solid transparent;transition:all .4s;position:relative}
+        .agent.active .agent-avatar{border-color:rgba(255,255,255,.25);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+        .agent-avatar::after{content:'';position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:var(--o);opacity:0;transition:opacity .3s}
         .agent.active .agent-avatar::after{opacity:1;animation:agent-pulse 1.5s infinite}
         @keyframes agent-pulse{0%,100%{transform:translateX(-50%) scale(1);opacity:1}50%{transform:translateX(-50%) scale(1.4);opacity:.4}}
-        .agent-name{font-size:.68rem;font-weight:700;margin-top:.5rem;text-transform:uppercase;letter-spacing:.8px;transition:color .3s}
+        .agent-name{font-size:.7rem;font-weight:700;margin-top:.5rem;text-transform:uppercase;letter-spacing:.6px;transition:color .3s;text-align:center;line-height:1.2}
         .agent.active .agent-name{color:var(--o)}
-        .agent-force{font-size:.58rem;opacity:.5;margin-top:.1rem;transition:opacity .3s}
+        .agent-force{font-size:.6rem;opacity:.5;margin-top:.2rem;transition:opacity .3s;text-align:center}
         .agent.active .agent-force{opacity:.8}
 
         /* Agent briefing panel — dual block */
@@ -201,11 +201,6 @@
         .tool-fb{margin-top:1rem;font-size:.82rem;color:var(--mu);font-style:italic}
         @media(max-width:768px){.tool-big,.tool-big:nth-child(even){grid-template-columns:1fr;direction:ltr}}
 
-        /* STATS */
-        .stats{background:var(--w);padding:2.2rem 2rem;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
-        .sgrid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;text-align:center}
-        .sn{font-size:1.8rem;font-weight:300;color:var(--o)}.sl{font-size:.72rem;color:var(--mu);margin-top:.15rem}
-        @media(max-width:768px){.sgrid{grid-template-columns:repeat(3,1fr)}}
 
         /* FEEDBACK */
         #fb{background:linear-gradient(135deg,var(--dk),#243B55);color:var(--w);padding:4.5rem 2rem;text-align:center}
@@ -225,6 +220,42 @@
 
         .fi{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}.fi.vis{opacity:1;transform:translateY(0)}
         .fi.no-anim{opacity:1;transform:none}
+
+        /* ═══ 3-STAGE FRAMEWORK ═══ */
+        .stage-header{padding:3.5rem 3rem 2rem;position:relative;overflow:hidden}
+        .stage-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:end}
+        .stage-left{position:relative}
+        .stage-num-bg{position:absolute;top:-30px;left:-10px;font-size:8rem;font-weight:900;line-height:1;opacity:.06;letter-spacing:-6px;pointer-events:none;user-select:none}
+        .stage-label{display:inline-flex;align-items:center;gap:.5rem;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--o);margin-bottom:.6rem}
+        .stage-label::before{content:'';width:28px;height:2px;background:var(--o);display:inline-block}
+        .stage-header h2{font-weight:300;font-size:2.2rem;line-height:1.2;margin-bottom:0}
+        .stage-header h2 span{color:var(--o);font-weight:700}
+        .stage-right{padding-bottom:.3rem}
+        .stage-right p{font-size:.92rem;line-height:1.65;opacity:.7;margin:0}
+        .stage-right .stage-kpi{display:flex;gap:1.5rem;margin-top:1rem}
+        .stage-kpi-item{text-align:left}
+        .stage-kpi-item .kn{font-size:1.6rem;font-weight:300;color:var(--o);line-height:1}
+        .stage-kpi-item .kl{font-size:.65rem;color:inherit;opacity:.5;margin-top:.15rem}
+        /* Dark variant */
+        .stage-header.dark{background:linear-gradient(135deg,var(--dk) 0%,#243B55 100%);color:var(--w)}
+        .stage-header.dark .stage-right p{opacity:.6}
+        .stage-header.dark .stage-num-bg{color:var(--w)}
+        /* Light variant */
+        .stage-header.light{background:var(--w)}
+        .stage-header.light .stage-num-bg{color:var(--tx)}
+        /* Alt-light variant (on grey bg) */
+        .stage-header.light-alt{background:var(--lt)}
+        .stage-header.light-alt .stage-num-bg{color:var(--tx)}
+
+        @media(max-width:768px){.stage-inner{grid-template-columns:1fr;gap:1rem}.stage-header{padding:2.5rem 1.5rem 1.5rem}.stage-header h2{font-size:1.7rem}.stage-num-bg{font-size:5rem}}
+
+        /* Stage transition connector */
+        .stage-transition{text-align:center;padding:2.5rem 2rem 1.5rem;position:relative}
+        .stage-transition .st-line{width:2px;height:48px;background:linear-gradient(180deg,var(--bd),var(--o));margin:0 auto .8rem}
+        .stage-flow{display:inline-block;font-size:.72rem;font-weight:600;color:var(--o);letter-spacing:.5px;padding:.4rem 1.4rem;border:1.5px solid var(--o);border-radius:50px;background:rgba(245,145,67,.04)}
+
+        /* Remove old section headers that are replaced by stage headers */
+        #intelligence .sh, #strategy .sh, #capability .sh{display:none}
     </style>
 </head>
 <body>
@@ -233,18 +264,31 @@
 <nav class="nav">
     <a href="https://aktglobal.com" class="nav-logo" target="_blank">akt</a>
     <div class="nav-r">
-        <a href="#pres">Strategy</a><a href="#lib">Library</a><a href="#tools">Companions</a><a href="#fb">Feedback</a>
+        <a href="#intelligence">Intelligence</a><a href="#strategy">Strategy</a><a href="#capability">Capability</a><a href="#fb">Feedback</a>
         <a href="https://aktglobal.com/contact/" class="ncta" target="_blank">Contact Us</a>
     </div>
 </nav>
 
-<!-- HERO — five intelligence agents: baseline research + live scanning -->
-<section class="hero" id="home">
-    <div class="hdots"></div><div class="hdots"></div>
-    <div class="hero-top">
-        <h1>Five forces. Five agents.<br>Always <span>scanning</span>.</h1>
-        <p class="sub">Each agent monitors one strategic force compressing AKT&rsquo;s XM practice. The left panel shows baseline intelligence from our research. The right panel shows what the agent found on its latest automated scan.</p>
+<!-- ═══ STAGE 01: INTELLIGENCE ═══ -->
+<div id="intelligence" class="stage-header dark fi">
+    <div class="stage-inner">
+        <div class="stage-left">
+            <div class="stage-num-bg">01</div>
+            <div class="stage-label">Stage One</div>
+            <h2>What&rsquo;s <span>Changing</span>?</h2>
+        </div>
+        <div class="stage-right">
+            <p>Five AI agents scan the forces compressing AKT&rsquo;s XM practice. Baseline intelligence from the scenario model, live signals from the web.</p>
+            <div class="stage-kpi">
+                <div class="stage-kpi-item"><div class="kn">5</div><div class="kl">Active Agents</div></div>
+                <div class="stage-kpi-item"><div class="kn">Daily</div><div class="kl">Scan Frequency</div></div>
+                <div class="stage-kpi-item"><div class="kn" id="daysKpi"></div><div class="kl">Days to EU AI Act</div></div>
+            </div>
+        </div>
     </div>
+</div>
+<section class="hero" style="padding-top:1.5rem">
+    <div class="hdots"></div><div class="hdots"></div>
 
     <div class="agents-panel">
         <div class="agents-row" id="agentsRow">
@@ -284,15 +328,36 @@
         <div class="agent-explain">Each agent runs a scheduled scan via Claude &mdash; searching the web for the latest signals on its assigned force. Baseline intelligence is fixed from the AI Futures Scenario Model.</div>
     </div>
 
-    <div class="hero-cta">
-        <button class="pill" onclick="document.getElementById('pres').scrollIntoView({behavior:'smooth'})">See the evidence &darr;</button>
-    </div>
 </section>
 
-<!-- PRESENTATION — 5 slides only -->
+<!-- Stage transition: Intelligence → Strategy -->
+<div class="stage-transition fi">
+    <div class="st-line"></div>
+    <div class="stage-flow">Intelligence feeds Strategy &darr;</div>
+</div>
+
+<!-- ═══ STAGE 02: STRATEGY ═══ -->
+<div id="strategy" class="stage-header light fi">
+    <div class="stage-inner">
+        <div class="stage-left">
+            <div class="stage-num-bg">02</div>
+            <div class="stage-label">Stage Two</div>
+            <h2>What Are Our <span>Options</span>?</h2>
+        </div>
+        <div class="stage-right">
+            <p>The intelligence shapes a strategic direction. Five slides distil the evidence. Fifteen chapters provide the full scenario model.</p>
+            <div class="stage-kpi">
+                <div class="stage-kpi-item"><div class="kn">4</div><div class="kl">Scenarios Tested</div></div>
+                <div class="stage-kpi-item"><div class="kn">15</div><div class="kl">Chapters</div></div>
+                <div class="stage-kpi-item"><div class="kn">C&rarr;D&rarr;B</div><div class="kl">Recommended Path</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <section id="pres">
     <div class="inner">
-        <div class="sh fi"><h2>The <span>Strategy</span></h2><p>Five forces. Six evidence points. Ten initiatives. Five slides.</p></div>
+        <!-- header moved to stage-header above -->
         <div class="pbox fi">
             <div class="ptop"><b>AI Taskforce &mdash; Direction Input</b><span id="pc">1 / 5</span></div>
             <div class="pstage" id="ps"></div>
@@ -309,7 +374,7 @@
 <!-- LIBRARY -->
 <section id="lib">
     <div class="inner">
-        <div class="sh fi"><h2>XM AI <span>Library</span></h2><p>The AI Futures Scenario Model &mdash; 15 chapters of market intelligence, competitive analysis, scenarios, and roadmap. Explore each chapter below.</p></div>
+        <div class="sh fi" style="display:block"><h2>The Full <span>Scenario Model</span></h2><p>15 chapters of market intelligence, competitive analysis, scenarios, and roadmap.</p></div>
 
         <!-- EXECUTIVE SUMMARY -->
         <div class="lib-part fi">
@@ -451,10 +516,34 @@
     </div>
 </section>
 
-<!-- TOOLS — BIG FORMAT WITH SCREENSHOTS -->
+<!-- Stage transition: Strategy → Capability -->
+<div class="stage-transition fi">
+    <div class="st-line"></div>
+    <div class="stage-flow">Strategy shapes what we Build &darr;</div>
+</div>
+
+<!-- ═══ STAGE 03: CAPABILITY ═══ -->
+<div id="capability" class="stage-header light-alt fi">
+    <div class="stage-inner">
+        <div class="stage-left">
+            <div class="stage-num-bg">03</div>
+            <div class="stage-label">Stage Three</div>
+            <h2>What Can We Already <span>Do</span>?</h2>
+        </div>
+        <div class="stage-right">
+            <p>Working prototypes built by the Taskforce. Three live, two in development. Try them, break them, tell us what works.</p>
+            <div class="stage-kpi">
+                <div class="stage-kpi-item"><div class="kn">3</div><div class="kl">Live Tools</div></div>
+                <div class="stage-kpi-item"><div class="kn">2</div><div class="kl">In Development</div></div>
+                <div class="stage-kpi-item"><div class="kn">0</div><div class="kl">Servers Required</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <section id="tools">
     <div class="inner">
-        <div class="sh fi"><h2>Digital <span>Companions</span></h2><p>Four AI-powered tools built by the Taskforce. Try them. Break them. Tell us what works.</p></div>
+        <!-- header moved to stage-header above -->
 
         <div class="cat-legend fi" style="display:flex;gap:1.5rem;justify-content:center;margin-bottom:2.5rem;flex-wrap:wrap">
             <div style="text-align:center;max-width:220px">
@@ -544,16 +633,6 @@
     </div>
 </section>
 
-<!-- STATS -->
-<div class="stats fi">
-    <div class="sgrid">
-        <div><div class="sn">108</div><div class="sl">Tasks Stress-Tested</div></div>
-        <div><div class="sn">57.6%</div><div class="sl">Delivery Compression</div></div>
-        <div><div class="sn">7</div><div class="sl">Roles Mapped</div></div>
-        <div><div class="sn">5</div><div class="sl">Tools In Development</div></div>
-        <div><div class="sn">5+5</div><div class="sl">Key Initiatives</div></div>
-    </div>
-</div>
 
 <!-- FEEDBACK -->
 <section id="fb">
@@ -660,6 +739,8 @@ const agents = [
 // Days until EU AI Act
 const euDate = new Date('2026-08-02');
 const daysLeft = Math.ceil((euDate - new Date()) / (1000*60*60*24));
+const daysKpiEl = document.getElementById('daysKpi');
+if (daysKpiEl) daysKpiEl.textContent = daysLeft > 0 ? daysLeft : '0';
 
 let currentAgent = 0;
 let autoPlay = null;
