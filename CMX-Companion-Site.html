@@ -224,6 +224,7 @@
         @media(max-width:768px){.fgrid{grid-template-columns:1fr;gap:1.5rem}}
 
         .fi{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}.fi.vis{opacity:1;transform:translateY(0)}
+        .fi.no-anim{opacity:1;transform:none}
     </style>
 </head>
 <body>
@@ -295,7 +296,7 @@
         <div class="pbox fi">
             <div class="ptop"><b>AI Taskforce &mdash; Direction Input</b><span id="pc">1 / 5</span></div>
             <div class="pstage" id="ps"></div>
-            <div class="pdl"><span>Download the full presentation</span><a href="https://ottovroeg-afk.github.io/cmx-command-center/AKT_AI_Direction_Input_Updated.pptx" target="_blank">Download PPTX &darr;</a></div>
+            <div class="pdl"><span>Download the full presentation</span><a href="https://ottovroeg-afk.github.io/cmx-command-center/AKT_AI_Direction_Input.pptx" target="_blank">Download PPTX &darr;</a></div>
             <div class="pctrl">
                 <button class="pbtn" id="pb" onclick="pn(-1)" disabled>&larr; Back</button>
                 <div class="pdots" id="pdo"></div>
@@ -490,8 +491,8 @@
             <div class="tool-img"><canvas id="cvCMX" width="640" height="400"></canvas></div>
             <div class="tool-info">
                 <span class="tool-badge tbs">Scale</span>
-                <h3>CMX Intelligence Engine</h3>
-                <p>The AI-powered intelligence layer behind CMX. Connects ADKAR assessments, Change Favourability Index, and stakeholder sentiment into structured analysis that feeds dashboards and reports.</p>
+                <h3>CMX Command Center</h3>
+                <p>The unified change management intelligence layer. Connects ADKAR assessments, Change Favourability Index, and stakeholder sentiment into a single decision-making dashboard.</p>
                 <div class="tool-actions">
                     <a href="https://ottovroeg-afk.github.io/cmx-command-center/CMX-Command-Center.html" class="pill" target="_blank">Launch CMX &rarr;</a>
                 </div>
@@ -892,7 +893,7 @@ setTimeout(() => {
         {type:'card', x:175, y:296, w:220, h:90, title:'Sentiment Overview', lines:['Positive: 52%','Neutral: 31%','Negative: 17%']},
         {type:'pill', x:410, y:300, w:130, label:'Export Report'},
     ]);
-    drawToolPreview('cvCMX', 'CMX', 'Intelligence Engine', '#1A6BA5', [
+    drawToolPreview('cvCMX', 'CMX', 'Command Center', '#1A6BA5', [
         {type:'sidebar', x:0, y:47, w:160, h:353, items:['Dashboard','ADKAR','CFI Score','Stakeholders','Interventions','Timeline','Reports'], active:0},
         {type:'chart', x:175, y:62, w:240, h:130, title:'Change Readiness by Phase', bars:[.4,.55,.7,.85,.65,.5]},
         {type:'card', x:430, y:62, w:200, h:130, title:'CFI Score', lines:['Overall: 7.2 / 10','Awareness: 8.1','Desire: 6.4','Knowledge: 7.5','Ability: 6.8']},
@@ -994,8 +995,12 @@ async function dlZip(btn){
 
 // ═══ SCROLL BAR + FADE IN ═══
 window.addEventListener('scroll',()=>{document.getElementById('sbar').style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100+'%'});
-const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.1});
-document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+try {
+    const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.05,rootMargin:'50px'});
+    document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+} catch(e) {}
+// Fallback: if elements still not visible after 1.5s, force them
+setTimeout(()=>{document.querySelectorAll('.fi:not(.vis)').forEach(el=>el.classList.add('vis'))},1500);
 </script>
 </body>
 </html>
