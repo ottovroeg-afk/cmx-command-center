@@ -78,6 +78,8 @@ select:focus, input:focus { border-color: var(--amber); }
       Drop survey CSV/XLS here or click to browse
     </div>
     <div class="file-list" id="dataFileList"></div>
+    <div style="margin-top:12px;text-align:center;color:var(--gray);font-size:12px;margin-bottom:8px">or</div>
+    <button class="btn btn-outline" id="btnLoadDemo" onclick="loadDemoData()" style="width:100%;text-align:center;justify-content:center">Load Rivulis Demo Data</button>
   </div>
 
   <div class="card">
@@ -341,6 +343,79 @@ function removeFile(idx, listId, which) {
   target.splice(idx, 1);
   renderFileList(target, listId);
   document.getElementById('btnAnalyse').disabled = S.dataFiles.length === 0;
+}
+
+// ===== LOAD DEMO DATA =====
+async function loadDemoData() {
+  const btn = document.getElementById('btnLoadDemo');
+  btn.disabled = true;
+  btn.textContent = 'Loading...';
+  try {
+    // Fetch the Rivulis test CSV
+    const response = await fetch('https://ottovroeg-afk.github.io/cmx-command-center/Rivulis_EX25_TestData.csv');
+    if (!response.ok) throw new Error('Failed to fetch demo data: ' + response.statusText);
+    const csvText = await response.text();
+
+    // Add CSV to data files
+    const csvFile = {
+      name: 'Rivulis_EX25_TestData.csv',
+      type: 'csv',
+      text: csvText
+    };
+    S.dataFiles.push(csvFile);
+    renderFileList(S.dataFiles, 'dataFileList');
+
+    // Set company name and survey period
+    document.getElementById('companyName').value = 'Rivulis';
+    document.getElementById('surveyPeriod').value = '2025';
+
+    // Add Rivulis context document as embedded JSON
+    const rivulisContext = {
+      name: 'Rivulis_Context.json',
+      type: 'json',
+      text: JSON.stringify({
+        company: 'Rivulis',
+        industry: 'Irrigation & Agricultural Technology',
+        description: 'Global leader in intelligent irrigation solutions',
+        surveySample: {
+          total: 4400,
+          regions: ['EMEA', 'Americas', 'APAC', 'Other'],
+          businessUnits: ['Smart Agriculture', 'Industrial Irrigation', 'Residential', 'Services'],
+          countries: 'Multiple (global presence)',
+          completionRate: '68-72%'
+        },
+        surveyType: 'EX-25 Employee Engagement Survey',
+        keyObjectives: [
+          'Measure overall employee engagement and experience',
+          'Identify key drivers of engagement across organization',
+          'Benchmark performance against industry standards',
+          'Uncover insights by region, business unit, and role',
+          'Assess progress on strategic initiatives'
+        ],
+        respondentGroups: [
+          'Manufacturing & Operations',
+          'Engineering & Product Development',
+          'Sales & Marketing',
+          'Support Services',
+          'Corporate Functions'
+        ]
+      }, null, 2)
+    };
+    S.ctxFiles.push(rivulisContext);
+    renderFileList(S.ctxFiles, 'ctxFileList');
+
+    // Enable Run Analysis button
+    document.getElementById('btnAnalyse').disabled = false;
+
+    toast('Demo data loaded! Click Run Analysis to begin.');
+    btn.textContent = 'Load Rivulis Demo Data';
+  } catch (error) {
+    toast('Error loading demo data: ' + error.message);
+    console.error(error);
+    btn.textContent = 'Load Rivulis Demo Data';
+  } finally {
+    btn.disabled = false;
+  }
 }
 
 wireUpload('dataZone', 'dataInput', 'dataFileList', S.dataFiles);

@@ -606,7 +606,7 @@ const agents = [
         baseline: [
             {text: '<b>EU AI Act applies 2 August 2026.</b> AI in employment decisions (EX), customer profiling (CX), or automated reporting needs classification, documentation, human oversight.', highlight: true},
             {text: '<b>The opportunity:</b> 87% of AI projects fail to scale. If AKT builds governance and survives, that methodology becomes sellable advisory.'},
-            {text: '<b>Bottom line:</b> ~110 days until enforcement. Each week without a framework is accumulating compliance debt.', highlight: true}
+            {text: '<b>Bottom line:</b> ~109 days until enforcement. Each week without a framework is accumulating compliance debt.', highlight: true}
         ],
         scanKey: 'compliance-watch'
     }
@@ -682,22 +682,10 @@ function renderAgent(idx) {
     }, 180);
 }
 
-// Build dots + init
-(function() {
-    const nav = document.getElementById('agentDots');
-    agents.forEach((_, i) => {
-        const d = document.createElement('div');
-        d.className = 'agent-dot' + (i === 0 ? ' on' : '');
-        d.onclick = () => setAgent(i);
-        nav.appendChild(d);
-    });
-    renderAgent(0);
-})();
-
 // ═══ SCAN DATA — embedded baseline + live fetch overlay ═══
 window.agentScans = {
     'market-watch': {
-        timestamp: '14 Apr 2026, 10:32 CET',
+        timestamp: '15 Apr 2026, 07:15 CET',
         items: [
             '<b>Ipsos \u20ac1bn AI bet under scrutiny</b> \u2014 investors reacting to leadership transition as Chairman Truchot steps down. Execution timeline for AI programme questioned.',
             '<b>Synthetic panels expanding:</b> Ipsos now uses AI-generated persona bots and synthetic audiences at scale for creative testing and product development.',
@@ -711,7 +699,7 @@ window.agentScans = {
         ]
     },
     'platform-watch': {
-        timestamp: '14 Apr 2026, 10:32 CET',
+        timestamp: '15 Apr 2026, 07:15 CET',
         items: [
             '<b>Qualtrics Experience Agents expanding:</b> now intercept friction in-survey, guide customers, save sales, deliver personalised recovery to high-value segments.',
             '<b>1/3 of Qualtrics customer base</b> upgraded to AI capabilities within one year of launch. Momentum accelerating through expanded Experience Agents access.',
@@ -725,7 +713,7 @@ window.agentScans = {
         ]
     },
     'partner-watch': {
-        timestamp: '14 Apr 2026, 10:32 CET',
+        timestamp: '15 Apr 2026, 07:15 CET',
         items: [
             '<b>QPN Platform Track launching 2026:</b> new track for ISVs building on Qualtrics Developer Platform. Consulting Track now formally separated.',
             '<b>New tiering model:</b> Platinum, Gold, Silver, Member. Recognition based on commercial impact and customer success, not technical depth.',
@@ -739,7 +727,7 @@ window.agentScans = {
         ]
     },
     'internal-watch': {
-        timestamp: '14 Apr 2026, 10:32 CET',
+        timestamp: '15 Apr 2026, 07:15 CET',
         items: [
             '<b>Shadow AI exploding:</b> 80%+ of workers now use unapproved AI tools. Up from 41% in 2023 to 68% in latest data. Engineering teams at 79%.',
             '<b>Only 36% of companies</b> have formal AI governance. 47% of employees access AI through personal/unmanaged accounts.',
@@ -753,9 +741,9 @@ window.agentScans = {
         ]
     },
     'compliance-watch': {
-        timestamp: '14 Apr 2026, 10:32 CET',
+        timestamp: '15 Apr 2026, 07:15 CET',
         items: [
-            '<b>110 days to enforcement.</b> Full high-risk AI requirements activate 2 August 2026: risk management, data governance, documentation, human oversight, cybersecurity.',
+            '<b>109 days to enforcement.</b> Full high-risk AI requirements activate 2 August 2026: risk management, data governance, documentation, human oversight, cybersecurity.',
             '<b>Penalty structure confirmed:</b> up to \u20ac35M or 7% global turnover for prohibited AI. \u20ac15M / 3% for high-risk non-compliance.',
             '<b>72-hour incident reporting:</b> organisations must define response protocols with 72h/15-day reporting windows. Automated guardrails required at runtime.',
             '<b>High-risk scope includes AKT\u2019s work:</b> employment decisions (EX), biometrics, essential services. Advisory partners need compliance evidence in RFPs.'
@@ -780,6 +768,18 @@ window.agentScans = {
         } catch(e) { /* keep embedded data */ }
     }
     renderAgent(currentAgent);
+})();
+
+// Build dots + init (must come after agentScans is defined)
+(function() {
+    const nav = document.getElementById('agentDots');
+    agents.forEach((_, i) => {
+        const d = document.createElement('div');
+        d.className = 'agent-dot' + (i === 0 ? ' on' : '');
+        d.onclick = () => setAgent(i);
+        nav.appendChild(d);
+    });
+    renderAgent(0);
 })();
 
 // ═══ TOOL SCREENSHOTS (canvas-rendered previews) ═══
