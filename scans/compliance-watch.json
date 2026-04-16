@@ -1,0 +1,19 @@
+{
+  "timestamp": "16 Apr 2026, 09:00 CET",
+  "items": [
+    "<b>108 days until 2 August 2026 deadline</b> — Full enforcement of Annex III high-risk AI rules begins. Conformity assessments, technical documentation, CE marking, and EU database registration must all be complete.",
+    "<b>Employment AI confirmed high-risk</b> — AI used for CV screening, candidate ranking, performance evaluation, promotion decisions, and dismissals is explicitly classified high-risk under Annex III. Non-compliance carries fines up to 3% of global turnover.",
+    "<b>Customer profiling triggers high-risk by default</b> — Any Annex III AI system that profiles natural persons (assessing preferences, behaviour, economic situation) automatically qualifies as high-risk, removing standard exemptions. Directly relevant to CX personalisation tools.",
+    "<b>Transparency Code of Practice nearing finalisation</b> — Draft Code on AI-generated content marking published Dec 2025; Commission expects final version by June 2026. Requires machine-readable marking of all AI-generated or manipulated content.",
+    "<b>Notified body capacity severely limited</b> — Most EU Member States still unprepared for conformity assessment infrastructure. Competition for assessment slots will intensify sharply in coming months — advisory opportunity for AKT to offer pre-assessment readiness services."
+  ],
+  "sources": [
+    {"label": "EU AI Act Implementation Timeline", "url": "https://artificialintelligenceact.eu/implementation-timeline/"},
+    {"label": "Orrick — 6 Steps Before 2 August 2026", "url": "https://www.orrick.com/en/Insights/2025/11/The-EU-AI-Act-6-Steps-to-Take-Before-2-August-2026"},
+    {"label": "Kennedys Law — AI Act Implementation Timeline", "url": "https://www.kennedyslaw.com/en/thought-leadership/article/2026/the-eu-ai-act-implementation-timeline-understanding-the-next-deadline-for-compliance/"},
+    {"label": "EU Commission — General-Purpose AI Code of Practice", "url": "https://digital-strategy.ec.europa.eu/en/policies/contents-code-gpai"},
+    {"label": "LegalNodes — EU AI Act 2026 Compliance", "url": "https://www.legalnodes.com/article/eu-ai-act-2026-updates-compliance-requirements-and-business-risks"},
+    {"label": "SecurePrivacy — EU AI Act 2026 Guide", "url": "https://secureprivacy.ai/blog/eu-ai-act-2026-compliance"},
+    {"label": "Bird & Bird — Draft Transparency Code of Practice", "url": "https://www.twobirds.com/en/insights/2026/taking-the-eu-ai-act-to-practice-understanding-the-draft-transparency-code-of-practice"}
+  ]
+}
